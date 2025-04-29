@@ -11,7 +11,6 @@ import DisplaySettings from "../components/Settings/DisplaySettings";
 import PaymentSettings from "../components/Settings/PaymentSettings";
 import UserAccessSettings from "../components/Settings/UserAccessSettings";
 import SystemSettings from "../components/Settings/SystemSettings";
-import SetupWizard from "../components/Settings/SetupWizard";
 import StoreSettings from "../components/Settings/StoreSettings";
 import EmployeeSettings from "../components/Settings/EmployeeSettings";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -62,7 +61,6 @@ const SettingsPage = () => {
           <TabsTrigger value="payments">Платежи</TabsTrigger>
           <TabsTrigger value="access">Доступ</TabsTrigger>
           <TabsTrigger value="integrations">Интеграции</TabsTrigger>
-          <TabsTrigger value="wizard">Мастер настройки</TabsTrigger>
           <TabsTrigger value="stores">Торговые точки</TabsTrigger>
           <TabsTrigger value="employees">Сотрудники</TabsTrigger>
           <TabsTrigger value="system">Системные настройки</TabsTrigger>
@@ -98,10 +96,6 @@ const SettingsPage = () => {
 
         <TabsContent value="integrations">
           <IntegrationSettings />
-        </TabsContent>
-
-        <TabsContent value="wizard">
-          <SetupWizard />
         </TabsContent>
 
         <TabsContent value="stores">
