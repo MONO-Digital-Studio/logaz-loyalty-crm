@@ -20,9 +20,17 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   };
 
   // Create a modified version of navigationItems with "CRM" changed to "Клиенты"
+  // and add "Аудитории" as a child item
   const modifiedNavigationItems = navigationItems.map(item => {
     if (item.id === 'crm') {
-      return { ...item, title: 'Клиенты' };
+      return { 
+        ...item, 
+        title: 'Клиенты',
+        children: [
+          ...(item.children || []),
+          { id: 'audiences', title: 'Аудитории', path: '/crm/audiences' }
+        ]
+      };
     }
     return item;
   });

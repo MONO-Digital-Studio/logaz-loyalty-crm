@@ -19,6 +19,7 @@ import ContactCenterPage from "./pages/ContactCenterPage";
 import DialogsPage from "./pages/ContactCenter/DialogsPage";
 import AgentsPage from "./pages/ContactCenter/AgentsPage";
 import StatsPage from "./pages/ContactCenter/StatsPage";
+import AudiencesPage from "./pages/AudiencesPage";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/crm" element={<CrmPage />} />
             <Route path="/crm/clients" element={<ClientsPage />} />
             <Route path="/crm/clients/:id" element={<ClientDetailsPage />} />
+            <Route path="/crm/audiences" element={<AudiencesPage />} />
             <Route path="/loyalty" element={<LoyaltyProgramPage />} />
             <Route path="/products/*" element={<ProductsPage />} />
             <Route path="/content" element={<ContentPage />} />
