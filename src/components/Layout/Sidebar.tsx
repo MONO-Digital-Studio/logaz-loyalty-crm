@@ -2,7 +2,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { navigationItems } from '../../data/mockData';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import { 
+  ChevronDown, 
+  ChevronRight, 
+  LayoutDashboard, 
+  Users, 
+  ShoppingBag, 
+  FileText, 
+  HeadphonesIcon, 
+  Settings, 
+  Heart,
+  BarChart
+} from 'lucide-react';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -17,6 +28,28 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
         ? prev.filter(item => item !== id) 
         : [...prev, id]
     );
+  };
+
+  // Map icons to navigation items based on their id
+  const getIconForItem = (id: string) => {
+    switch (id) {
+      case 'dashboard':
+        return <LayoutDashboard size={18} />;
+      case 'crm':
+        return <Users size={18} />;
+      case 'products':
+        return <ShoppingBag size={18} />;
+      case 'content':
+        return <FileText size={18} />;
+      case 'contact_center':
+        return <HeadphonesIcon size={18} />;
+      case 'loyalty':
+        return <Heart size={18} />;
+      case 'analytics':
+        return <BarChart size={18} />;
+      default:
+        return <ChevronRight size={18} />;
+    }
   };
 
   // Create a modified version of navigationItems with "CRM" changed to "Клиенты"
@@ -60,7 +93,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
                     !isOpen ? 'justify-center' : ''
                   }`}
                 >
-                  <span className="text-xl">{item.icon && '●'}</span>
+                  <span className="text-sidebar-foreground">
+                    {getIconForItem(item.id)}
+                  </span>
                   {isOpen && (
                     <span className="ml-4 flex-1">{item.title}</span>
                   )}
@@ -109,7 +144,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
             isOpen ? 'w-full flex items-center' : 'w-10 h-10 flex items-center justify-center'
           }`}
         >
-          <span className="text-xl">⚙️</span>
+          <Settings size={18} className="text-sidebar-foreground" />
           {isOpen && <span className="ml-3">Настройки</span>}
         </Link>
       </div>
