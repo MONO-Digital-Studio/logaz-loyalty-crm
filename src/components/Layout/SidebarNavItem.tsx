@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown, ChevronRight } from 'lucide-react';
@@ -60,7 +59,7 @@ const SidebarNavItem: React.FC<NavItemProps> = ({
             </button>
           )}
         </Link>
-
+        
         {isOpen && item.children && expandedItems.includes(item.id) && (
           <ul className="pl-8 bg-sidebar-accent/30 animate-fade-in">
             {item.children.map((child) => (
