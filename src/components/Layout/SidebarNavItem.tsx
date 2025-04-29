@@ -43,7 +43,7 @@ const SidebarNavItem: React.FC<NavItemProps> = ({
         
         {isOpen && item.children && expandedItems.includes(item.id) && <ul className="pl-8 bg-sidebar-accent/30 animate-fade-in">
             {item.children.map(child => <li key={child.id}>
-                <Link to={child.path} className="flex items-center px-4 py-2 hover:bg-sidebar-accent transition-colors">
+                <Link to={child.path} className="flex items-center py-2 hover:bg-sidebar-accent transition-colors px-0">
                   {getIconForSubItem(item.id, child.id) ? getIconForSubItem(item.id, child.id) : <span className="text-xs"></span>}
                   <span className="ml-4">{child.title}</span>
                 </Link>
