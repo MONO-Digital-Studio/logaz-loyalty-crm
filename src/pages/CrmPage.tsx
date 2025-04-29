@@ -18,7 +18,7 @@ const CrmPage: React.FC = () => {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 gap-6">
         <Card className="hover:bg-accent/50 transition-colors cursor-pointer" 
               onClick={() => navigate('/crm/clients')}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
@@ -28,24 +28,6 @@ const CrmPage: React.FC = () => {
           <CardContent>
             <p className="text-sm text-muted-foreground">
               Управление базой клиентов, история заказов и коммуникаций
-            </p>
-            <div className="flex justify-end mt-4">
-              <Button variant="ghost" size="sm" className="text-xs">
-                Перейти <ChevronRight className="ml-1 h-3 w-3" />
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="hover:bg-accent/50 transition-colors cursor-pointer" 
-              onClick={() => navigate('/loyalty')}>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-lg font-medium">Программа лояльности</CardTitle>
-            <span className="text-xl">🎁</span>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm text-muted-foreground">
-              Настройка и управление программами лояльности для клиентов
             </p>
             <div className="flex justify-end mt-4">
               <Button variant="ghost" size="sm" className="text-xs">
