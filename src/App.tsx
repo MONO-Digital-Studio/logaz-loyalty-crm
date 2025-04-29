@@ -7,6 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import DashboardPage from "./pages/DashboardPage";
 import ClientsPage from "./pages/ClientsPage";
+import ClientDetailsPage from "./pages/ClientDetailsPage";
+import LoyaltyProgramPage from "./pages/LoyaltyProgramPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,7 +23,8 @@ const App = () => (
           <Routes>
             <Route path="/" element={<DashboardPage />} />
             <Route path="/crm/clients" element={<ClientsPage />} />
-            {/* Здесь будут добавлены другие маршруты по мере разработки приложения */}
+            <Route path="/crm/clients/:id" element={<ClientDetailsPage />} />
+            <Route path="/loyalty" element={<LoyaltyProgramPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>

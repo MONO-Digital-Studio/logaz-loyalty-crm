@@ -1,193 +1,214 @@
 
-import React, { useState } from 'react';
-import { clients } from '../data/mockData';
-import { Search, Filter, UserPlus, Download, Mail, MoreHorizontal } from 'lucide-react';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const ClientsPage: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showFilters, setShowFilters] = useState(false);
+const clientsData = [
+  { 
+    id: "1",
+    name: "Иванов Иван Иванович", 
+    phone: "+7 (912) 345-67-89", 
+    email: "ivanov@example.com", 
+    level: "Серебряный", 
+    points: 284, 
+    visits: 27,
+    lastVisit: "15.06.2023"
+  },
+  { 
+    id: "2",
+    name: "Петрова Анна Сергеевна", 
+    phone: "+7 (926) 765-43-21", 
+    email: "petrova@example.com", 
+    level: "Золотой", 
+    points: 685, 
+    visits: 42,
+    lastVisit: "18.06.2023" 
+  },
+  { 
+    id: "3",
+    name: "Сидоров Алексей Петрович", 
+    phone: "+7 (905) 123-45-67", 
+    email: "sidorov@example.com", 
+    level: "Стандарт", 
+    points: 125, 
+    visits: 15,
+    lastVisit: "10.06.2023" 
+  },
+  { 
+    id: "4",
+    name: "Козлова Елена Владимировна", 
+    phone: "+7 (909) 876-54-32", 
+    email: "kozlova@example.com", 
+    level: "Платиновый", 
+    points: 1250, 
+    visits: 78,
+    lastVisit: "20.06.2023" 
+  },
+  { 
+    id: "5",
+    name: "Николаев Дмитрий Александрович", 
+    phone: "+7 (916) 543-21-98", 
+    email: "nikolaev@example.com", 
+    level: "Серебряный", 
+    points: 348, 
+    visits: 32,
+    lastVisit: "12.06.2023" 
+  },
+];
 
-  const filteredClients = clients.filter(
-    client => 
-      client.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      client.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      client.phone.includes(searchQuery)
-  );
+const rfmDistributionData = [
+  { name: 'VIP', value: 24 },
+  { name: 'Активные', value: 35 },
+  { name: 'Стабильные', value: 42 },
+  { name: 'Новые', value: 18 },
+  { name: 'Спящие', value: 15 },
+  { name: 'Ушедшие', value: 8 },
+];
+
+const ClientsPage = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredClients, setFilteredClients] = useState(clientsData);
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+    
+    if (query) {
+      const filtered = clientsData.filter(client => 
+        client.name.toLowerCase().includes(query) || 
+        client.phone.includes(query) || 
+        client.email.toLowerCase().includes(query)
+      );
+      setFilteredClients(filtered);
+    } else {
+      setFilteredClients(clientsData);
+    }
+  };
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-syncopate font-bold">Клиенты</h1>
-        <div className="flex space-x-2">
-          <button className="btn-secondary flex items-center">
-            <Mail size={16} className="mr-2" />
-            Рассылка
-          </button>
-          <button className="btn-primary flex items-center">
-            <UserPlus size={16} className="mr-2" />
-            Добавить клиента
-          </button>
-        </div>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold">Клиенты CRM</h1>
+        <Button variant="default" className="bg-logaz-blue">
+          Добавить клиента
+        </Button>
       </div>
-
-      <div className="stats-card p-6 flex flex-col md:flex-row md:items-center justify-between">
-        <div className="flex flex-wrap gap-4 mb-4 md:mb-0">
-          <div className="space-y-1">
-            <div className="text-sm text-gray-500">Всего клиентов</div>
-            <div className="text-xl font-bold">{clients.length}</div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card className="stats-card">
+          <div className="flex flex-col p-4">
+            <span className="text-sm text-gray-500">Всего клиентов</span>
+            <span className="text-2xl font-bold text-logaz-blue">2,845</span>
           </div>
-          <div className="space-y-1">
-            <div className="text-sm text-gray-500">Активных</div>
-            <div className="text-xl font-bold">
-              {clients.filter(c => c.status === 'active').length}
-            </div>
+        </Card>
+        <Card className="stats-card">
+          <div className="flex flex-col p-4">
+            <span className="text-sm text-gray-500">Активных за месяц</span>
+            <span className="text-2xl font-bold text-logaz-blue">1,256</span>
           </div>
-          <div className="space-y-1">
-            <div className="text-sm text-gray-500">Новых за месяц</div>
-            <div className="text-xl font-bold">
-              {clients.filter(c => c.status === 'new').length}
-            </div>
+        </Card>
+        <Card className="stats-card">
+          <div className="flex flex-col p-4">
+            <span className="text-sm text-gray-500">Новых за месяц</span>
+            <span className="text-2xl font-bold text-logaz-blue">142</span>
           </div>
-        </div>
-        <button className="btn-secondary flex items-center">
-          <Download size={16} className="mr-2" />
-          Экспорт
-        </button>
+        </Card>
+        <Card className="stats-card">
+          <div className="flex flex-col p-4">
+            <span className="text-sm text-gray-500">Средний чек</span>
+            <span className="text-2xl font-bold text-logaz-blue">1,850 ₽</span>
+          </div>
+        </Card>
       </div>
-
-      <div className="stats-card p-6">
-        <div className="flex flex-col md:flex-row justify-between space-y-4 md:space-y-0 md:space-x-4 mb-4">
-          <div className="relative flex-1">
-            <input
-              type="text"
-              placeholder="Поиск клиентов..."
-              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-logaz-blue focus:border-transparent"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Search size={18} className="absolute left-3 top-2.5 text-gray-400" />
-          </div>
-          <button 
-            className={`btn-secondary flex items-center ${showFilters ? 'bg-logaz-blue/5' : ''}`}
-            onClick={() => setShowFilters(!showFilters)}
-          >
-            <Filter size={16} className="mr-2" />
-            Фильтры
-          </button>
-        </div>
-
-        {showFilters && (
-          <div className="mb-6 p-4 bg-gray-50 border border-gray-200 rounded-lg animate-fade-in">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label className="text-sm font-medium text-gray-600 block mb-1">Сегмент</label>
-                <select className="border border-gray-300 rounded-md px-3 py-1.5 w-full focus:outline-none focus:ring-2 focus:ring-logaz-blue focus:border-transparent">
-                  <option value="">Все сегменты</option>
-                  <option value="vip">VIP</option>
-                  <option value="active">Активный</option>
-                  <option value="new">Новый</option>
-                </select>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-gray-600 block mb-1">Статус</label>
-                <select className="border border-gray-300 rounded-md px-3 py-1.5 w-full focus:outline-none focus:ring-2 focus:ring-logaz-blue focus:border-transparent">
-                  <option value="">Все статусы</option>
-                  <option value="active">Активный</option>
-                  <option value="inactive">Неактивный</option>
-                  <option value="new">Новый</option>
-                </select>
-              </div>
-              <div>
-                <label className="text-sm font-medium text-gray-600 block mb-1">Дата регистрации</label>
-                <select className="border border-gray-300 rounded-md px-3 py-1.5 w-full focus:outline-none focus:ring-2 focus:ring-logaz-blue focus:border-transparent">
-                  <option value="">За все время</option>
-                  <option value="30days">Последние 30 дней</option>
-                  <option value="90days">Последние 90 дней</option>
-                  <option value="year">Этот год</option>
-                </select>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <Card className="col-span-2">
+          <CardHeader>
+            <CardTitle>Список клиентов</CardTitle>
+            <div className="flex justify-between items-center">
+              <CardDescription>Управление клиентами и их профилями</CardDescription>
+              <div className="w-64">
+                <Input 
+                  placeholder="Поиск клиентов..." 
+                  value={searchQuery}
+                  onChange={handleSearch}
+                />
               </div>
             </div>
-            <div className="flex justify-end mt-4 space-x-2">
-              <button className="btn-cancel">Сбросить</button>
-              <button className="btn-primary">Применить</button>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Имя</TableHead>
+                  <TableHead>Телефон</TableHead>
+                  <TableHead>Уровень</TableHead>
+                  <TableHead>Баллы</TableHead>
+                  <TableHead>Визитов</TableHead>
+                  <TableHead>Последний визит</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredClients.map((client) => (
+                  <TableRow key={client.id}>
+                    <TableCell>
+                      <Link 
+                        to={`/crm/clients/${client.id}`} 
+                        className="font-medium text-logaz-blue hover:underline"
+                      >
+                        {client.name}
+                      </Link>
+                    </TableCell>
+                    <TableCell>{client.phone}</TableCell>
+                    <TableCell>{client.level}</TableCell>
+                    <TableCell>{client.points}</TableCell>
+                    <TableCell>{client.visits}</TableCell>
+                    <TableCell>{client.lastVisit}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+            <div className="flex justify-between items-center mt-4">
+              <div className="text-sm text-gray-500">
+                Показано {filteredClients.length} из {clientsData.length} клиентов
+              </div>
+              <div className="flex space-x-2">
+                <Button variant="outline" size="sm" disabled>Предыдущая</Button>
+                <Button variant="outline" size="sm" disabled>Следующая</Button>
+              </div>
             </div>
-          </div>
-        )}
-
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-gray-200">
-                <th className="text-left p-3 font-semibold">ФИО</th>
-                <th className="text-left p-3 font-semibold">Телефон</th>
-                <th className="text-left p-3 font-semibold">Email</th>
-                <th className="text-left p-3 font-semibold">Регистрация</th>
-                <th className="text-left p-3 font-semibold">Последняя покупка</th>
-                <th className="text-left p-3 font-semibold">Сумма покупок</th>
-                <th className="text-left p-3 font-semibold">Баллы</th>
-                <th className="text-left p-3 font-semibold">Статус</th>
-                <th className="text-left p-3 font-semibold"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredClients.map((client) => (
-                <tr 
-                  key={client.id} 
-                  className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-                >
-                  <td className="p-3">
-                    <div className="font-medium">{client.name}</div>
-                    <div className="text-xs text-gray-500">{client.segment}</div>
-                  </td>
-                  <td className="p-3">{client.phone}</td>
-                  <td className="p-3">{client.email}</td>
-                  <td className="p-3">{new Date(client.registrationDate).toLocaleDateString('ru-RU')}</td>
-                  <td className="p-3">{new Date(client.lastPurchaseDate).toLocaleDateString('ru-RU')}</td>
-                  <td className="p-3">{client.totalPurchases} покупок</td>
-                  <td className="p-3">{client.loyaltyPoints}</td>
-                  <td className="p-3">
-                    <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                      client.status === 'active' ? 'bg-green-100 text-green-800' :
-                      client.status === 'inactive' ? 'bg-gray-100 text-gray-800' : 
-                      'bg-blue-100 text-blue-800'
-                    }`}>
-                      {client.status === 'active' ? 'Активный' : 
-                       client.status === 'inactive' ? 'Неактивный' : 'Новый'}
-                    </span>
-                  </td>
-                  <td className="p-3">
-                    <button className="p-1 rounded hover:bg-gray-200">
-                      <MoreHorizontal size={20} />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <div className="mt-4 flex items-center justify-between">
-          <div className="text-sm text-gray-500">
-            Показано {filteredClients.length} из {clients.length} клиентов
-          </div>
-          <div className="flex space-x-1">
-            <button className="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100 disabled:opacity-50">
-              Назад
-            </button>
-            <button className="px-3 py-1 bg-logaz-blue text-white rounded-md hover:bg-logaz-blue/90">
-              1
-            </button>
-            <button className="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100">
-              2
-            </button>
-            <button className="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100">
-              3
-            </button>
-            <button className="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100">
-              Вперед
-            </button>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader>
+            <CardTitle>RFM-сегментация</CardTitle>
+            <CardDescription>Распределение клиентов по сегментам</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ResponsiveContainer width="100%" height={250}>
+              <BarChart data={rfmDistributionData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Bar dataKey="value" fill="#3B55A2" />
+              </BarChart>
+            </ResponsiveContainer>
+            <div className="grid grid-cols-2 gap-2 mt-4">
+              <Button variant="outline" size="sm" className="w-full">
+                Экспорт данных
+              </Button>
+              <Button variant="default" size="sm" className="w-full bg-logaz-blue">
+                Аналитика RFM
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
