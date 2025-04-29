@@ -12,7 +12,11 @@ import {
   HeadphonesIcon, 
   Settings, 
   Heart,
-  BarChart
+  BarChart,
+  MessageSquare,
+  UserCheck,
+  LineChart,
+  FileCheck
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -50,6 +54,27 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
       default:
         return <ChevronRight size={18} />;
     }
+  };
+
+  // Get icons for submenu items
+  const getIconForSubItem = (parentId: string, childId: string) => {
+    if (parentId === 'contact_center') {
+      switch (childId) {
+        case 'dialogs':
+          return <MessageSquare size={14} />;
+        case 'agents':
+          return <UserCheck size={14} />;
+        case 'stats':
+          return <LineChart size={14} />;
+        case 'templates':
+          return <FileCheck size={14} />;
+        case 'analytics':
+          return <BarChart size={14} />;
+        default:
+          return <ChevronRight size={14} />;
+      }
+    }
+    return null;
   };
 
   // Create a modified version of navigationItems with "CRM" changed to "Клиенты"
@@ -124,7 +149,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
                           to={child.path}
                           className="flex items-center px-4 py-2 hover:bg-sidebar-accent transition-colors"
                         >
-                          <span className="text-xs">●</span>
+                          {getIconForSubItem(item.id, child.id) ? (
+                            getIconForSubItem(item.id, child.id)
+                          ) : (
+                            <span className="text-xs">●</span>
+                          )}
                           <span className="ml-4">{child.title}</span>
                         </Link>
                       </li>
