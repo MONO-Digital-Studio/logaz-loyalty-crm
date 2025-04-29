@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { FileText } from "lucide-react";
 import ClientStats from "@/components/Clients/ClientStats";
 import ClientsTable from "@/components/Clients/ClientsTable";
-import RfmDistribution from "@/components/Clients/RfmDistribution";
 
 const clientsData = [
   { 
@@ -59,15 +58,6 @@ const clientsData = [
   },
 ];
 
-const rfmDistributionData = [
-  { name: 'VIP', value: 24 },
-  { name: 'Активные', value: 35 },
-  { name: 'Стабильные', value: 42 },
-  { name: 'Новые', value: 18 },
-  { name: 'Спящие', value: 15 },
-  { name: 'Ушедшие', value: 8 },
-];
-
 const ClientsPage = () => {
   return (
     <div className="space-y-6">
@@ -91,9 +81,8 @@ const ClientsPage = () => {
         averageCheck={1850}
       />
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="w-full">
         <ClientsTable clients={clientsData} />
-        <RfmDistribution data={rfmDistributionData} />
       </div>
     </div>
   );
