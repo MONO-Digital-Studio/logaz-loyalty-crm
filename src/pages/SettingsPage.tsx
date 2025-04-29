@@ -7,6 +7,9 @@ import SecuritySettings from "../components/Settings/SecuritySettings";
 import NotificationSettings from "../components/Settings/NotificationSettings";
 import CompanySettings from "../components/Settings/CompanySettings";
 import IntegrationSettings from "../components/Settings/IntegrationSettings";
+import DisplaySettings from "../components/Settings/DisplaySettings";
+import PaymentSettings from "../components/Settings/PaymentSettings";
+import UserAccessSettings from "../components/Settings/UserAccessSettings";
 
 const SettingsPage = () => {
   useEffect(() => {
@@ -23,11 +26,14 @@ const SettingsPage = () => {
       </div>
 
       <Tabs defaultValue="profile" className="w-full">
-        <TabsList className="mb-4">
+        <TabsList className="mb-4 flex flex-wrap gap-2">
           <TabsTrigger value="profile">Профиль</TabsTrigger>
           <TabsTrigger value="security">Безопасность</TabsTrigger>
           <TabsTrigger value="notifications">Уведомления</TabsTrigger>
           <TabsTrigger value="company">Компания</TabsTrigger>
+          <TabsTrigger value="display">Отображение</TabsTrigger>
+          <TabsTrigger value="payments">Платежи</TabsTrigger>
+          <TabsTrigger value="access">Доступ</TabsTrigger>
           <TabsTrigger value="integrations">Интеграции</TabsTrigger>
         </TabsList>
 
@@ -45,6 +51,18 @@ const SettingsPage = () => {
 
         <TabsContent value="company">
           <CompanySettings />
+        </TabsContent>
+
+        <TabsContent value="display">
+          <DisplaySettings />
+        </TabsContent>
+
+        <TabsContent value="payments">
+          <PaymentSettings />
+        </TabsContent>
+
+        <TabsContent value="access">
+          <UserAccessSettings />
         </TabsContent>
 
         <TabsContent value="integrations">
