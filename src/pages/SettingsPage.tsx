@@ -10,8 +10,19 @@ import IntegrationSettings from "../components/Settings/IntegrationSettings";
 import DisplaySettings from "../components/Settings/DisplaySettings";
 import PaymentSettings from "../components/Settings/PaymentSettings";
 import UserAccessSettings from "../components/Settings/UserAccessSettings";
+import SystemSettings from "../components/Settings/SystemSettings";
+import SetupWizard from "../components/Settings/SetupWizard";
+import StoreSettings from "../components/Settings/StoreSettings";
+import EmployeeSettings from "../components/Settings/EmployeeSettings";
+import { useLocation } from "react-router-dom";
 
 const SettingsPage = () => {
+  const location = useLocation();
+  const pathname = location.pathname;
+  const currentTab = pathname.includes('/settings/') 
+    ? pathname.split('/settings/')[1] 
+    : 'profile';
+
   useEffect(() => {
     document.title = "Настройки | ЛОГАЗ SV";
   }, []);
@@ -25,7 +36,7 @@ const SettingsPage = () => {
         </p>
       </div>
 
-      <Tabs defaultValue="profile" className="w-full">
+      <Tabs defaultValue={currentTab} value={currentTab} className="w-full">
         <TabsList className="mb-4 flex flex-wrap gap-2">
           <TabsTrigger value="profile">Профиль</TabsTrigger>
           <TabsTrigger value="security">Безопасность</TabsTrigger>
@@ -35,6 +46,10 @@ const SettingsPage = () => {
           <TabsTrigger value="payments">Платежи</TabsTrigger>
           <TabsTrigger value="access">Доступ</TabsTrigger>
           <TabsTrigger value="integrations">Интеграции</TabsTrigger>
+          <TabsTrigger value="wizard">Мастер настройки</TabsTrigger>
+          <TabsTrigger value="stores">Торговые точки</TabsTrigger>
+          <TabsTrigger value="employees">Сотрудники</TabsTrigger>
+          <TabsTrigger value="system">Системные настройки</TabsTrigger>
         </TabsList>
 
         <TabsContent value="profile">
@@ -67,6 +82,22 @@ const SettingsPage = () => {
 
         <TabsContent value="integrations">
           <IntegrationSettings />
+        </TabsContent>
+
+        <TabsContent value="wizard">
+          <SetupWizard />
+        </TabsContent>
+
+        <TabsContent value="stores">
+          <StoreSettings />
+        </TabsContent>
+
+        <TabsContent value="employees">
+          <EmployeeSettings />
+        </TabsContent>
+
+        <TabsContent value="system">
+          <SystemSettings />
         </TabsContent>
       </Tabs>
     </div>
