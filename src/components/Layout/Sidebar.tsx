@@ -16,7 +16,8 @@ import {
   MessageSquare,
   UserCheck,
   LineChart,
-  FileCheck
+  FileCheck,
+  Bot
 } from 'lucide-react';
 
 interface SidebarProps {
@@ -168,13 +169,13 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
 
       <div className="p-4 border-t border-sidebar-border flex justify-center">
         <Link 
-          to="/settings" 
+          to="/ai-assistant" 
           className={`hover:bg-sidebar-accent p-2 rounded transition-colors ${
             isOpen ? 'w-full flex items-center' : 'w-10 h-10 flex items-center justify-center'
           }`}
         >
-          <Settings size={18} className="text-sidebar-foreground" />
-          {isOpen && <span className="ml-3">Настройки</span>}
+          <Bot size={18} className="text-sidebar-foreground" />
+          {isOpen && <span className="ml-3">AI ассистент</span>}
         </Link>
       </div>
     </aside>
