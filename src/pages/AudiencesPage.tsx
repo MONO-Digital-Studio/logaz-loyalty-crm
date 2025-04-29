@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Input } from '@/components/ui/input';
 import { Plus, Filter, Download, CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
-import AudienceDistribution from '@/components/Audiences/AudienceDistribution';
 import AudienceStats from '@/components/Audiences/AudienceStats';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
@@ -55,16 +54,6 @@ const audiencesData = [
     createdAt: "30.05.2023",
     lastUpdated: "20.06.2023" 
   }
-];
-
-// Данные для распределения аудиторий
-const distributionData = [
-  { name: 'VIP клиенты', value: 12 },
-  { name: 'Новые клиенты', value: 23 },
-  { name: 'Спящие клиенты', value: 28 },
-  { name: 'Активные', value: 17 },
-  { name: 'Потенциальные лояльные', value: 14 },
-  { name: 'Другие', value: 6 }
 ];
 
 const AudiencesPage: React.FC = () => {
@@ -216,8 +205,8 @@ const AudiencesPage: React.FC = () => {
         averageSize={227}
       />
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="col-span-2">
+      <div className="grid grid-cols-1 gap-6">
+        <Card>
           <CardHeader className="pb-3">
             <CardTitle>Аудитории</CardTitle>
             <CardDescription>Управление сегментами клиентов</CardDescription>
@@ -269,8 +258,6 @@ const AudiencesPage: React.FC = () => {
             </Table>
           </CardContent>
         </Card>
-        
-        <AudienceDistribution data={distributionData} />
       </div>
     </div>
   );
