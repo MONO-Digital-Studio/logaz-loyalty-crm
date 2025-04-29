@@ -1,6 +1,6 @@
 
 import React, { useEffect } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProfileSettings from "../components/Settings/ProfileSettings";
 import SecuritySettings from "../components/Settings/SecuritySettings";
@@ -10,7 +10,6 @@ import IntegrationSettings from "../components/Settings/IntegrationSettings";
 import DisplaySettings from "../components/Settings/DisplaySettings";
 import PaymentSettings from "../components/Settings/PaymentSettings";
 import UserAccessSettings from "../components/Settings/UserAccessSettings";
-import SystemSettings from "../components/Settings/SystemSettings";
 import StoreSettings from "../components/Settings/StoreSettings";
 import EmployeeSettings from "../components/Settings/EmployeeSettings";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -22,11 +21,6 @@ const SettingsPage = () => {
   const currentTab = pathname.includes('/settings/') 
     ? pathname.split('/settings/')[1].split('/')[0] 
     : 'profile';
-  
-  // Get system subtab if on system tab
-  const systemSubtab = pathname.includes('/settings/system/') 
-    ? pathname.split('/settings/system/')[1]
-    : '';
 
   useEffect(() => {
     document.title = "Настройки | ЛОГАЗ SV";
@@ -40,21 +34,6 @@ const SettingsPage = () => {
   // Define subtabs for each main tab
   const getSubtabs = () => {
     switch (currentTab) {
-      case 'system':
-        return (
-          <Tabs
-            defaultValue={systemSubtab || 'general'}
-            value={systemSubtab || 'general'}
-            onValueChange={(value) => navigate(`/settings/system/${value}`)}
-          >
-            <TabsList className="mb-4">
-              <TabsTrigger value="general">Основные</TabsTrigger>
-              <TabsTrigger value="backup">Резервное копирование</TabsTrigger>
-              <TabsTrigger value="logs">Логи и мониторинг</TabsTrigger>
-              <TabsTrigger value="maintenance">Обслуживание</TabsTrigger>
-            </TabsList>
-          </Tabs>
-        );
       case 'access':
         return (
           <Tabs
@@ -133,7 +112,6 @@ const SettingsPage = () => {
           <TabsTrigger value="integrations">Интеграции</TabsTrigger>
           <TabsTrigger value="locations">Торговые точки</TabsTrigger>
           <TabsTrigger value="employees">Сотрудники</TabsTrigger>
-          <TabsTrigger value="system">Системные настройки</TabsTrigger>
         </TabsList>
 
         {/* Show subtabs only for the active section */}
@@ -180,10 +158,6 @@ const SettingsPage = () => {
 
         <TabsContent value="employees">
           <EmployeeSettings />
-        </TabsContent>
-
-        <TabsContent value="system">
-          <SystemSettings currentSubtab={systemSubtab} />
         </TabsContent>
       </Tabs>
     </div>
