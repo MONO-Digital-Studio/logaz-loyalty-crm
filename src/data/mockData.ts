@@ -74,6 +74,23 @@ export const navigationItems = [
     title: "Лояльность",
     path: "/loyalty",
   },
+  {
+    id: "settings",
+    title: "Настройки",
+    path: "/settings",
+    children: [
+      {
+        id: "profile",
+        title: "Профиль",
+        path: "/settings/profile",
+      },
+      {
+        id: "system",
+        title: "Система",
+        path: "/settings/system",
+      },
+    ],
+  },
 ];
 
 // Добавляем данные для StatsSummary.tsx

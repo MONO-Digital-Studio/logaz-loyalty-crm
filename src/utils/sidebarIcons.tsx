@@ -40,6 +40,8 @@ export const getIconForItem = (id: string) => {
       return <Map size={18} />;
     case 'campaigns':
       return <Mail size={18} />;
+    case 'settings':
+      return <Settings size={18} />;
     default:
       return <ChevronRight size={18} />;
   }
@@ -65,6 +67,15 @@ export const getIconForSubItem = (parentId: string, childId: string) => {
     switch (childId) {
       case 'stores':
         return <Store size={14} />;
+      default:
+        return <ChevronRight size={14} />;
+    }
+  } else if (parentId === 'settings') {
+    switch (childId) {
+      case 'profile':
+        return <Users size={14} />;
+      case 'system':
+        return <Settings size={14} />;
       default:
         return <ChevronRight size={14} />;
     }
