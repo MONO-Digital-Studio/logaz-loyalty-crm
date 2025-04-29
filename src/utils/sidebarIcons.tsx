@@ -15,7 +15,9 @@ import {
   FileCheck,
   ChevronRight,
   Map,
-  Store
+  Store,
+  Send,
+  Mail
 } from 'lucide-react';
 
 export const getIconForItem = (id: string) => {
@@ -36,6 +38,8 @@ export const getIconForItem = (id: string) => {
       return <BarChart size={18} />;
     case 'locations':
       return <Map size={18} />;
+    case 'campaigns':
+      return <Mail size={18} />;
     default:
       return <ChevronRight size={18} />;
   }
