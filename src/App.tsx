@@ -11,6 +11,7 @@ import ClientDetailsPage from "./pages/ClientDetailsPage";
 import LoyaltyProgramPage from "./pages/LoyaltyProgramPage";
 import ProductsPage from "./pages/ProductsPage";
 import SettingsPage from "./pages/SettingsPage";
+import ContentPage from "./pages/ContentPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -28,6 +29,7 @@ const App = () => (
             <Route path="/crm/clients/:id" element={<ClientDetailsPage />} />
             <Route path="/loyalty" element={<LoyaltyProgramPage />} />
             <Route path="/products/*" element={<ProductsPage />} />
+            <Route path="/content/*" element={<ContentPage />} />
             <Route path="/settings/*" element={<SettingsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
