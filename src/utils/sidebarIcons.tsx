@@ -21,7 +21,9 @@ import {
   Database,
   FileArchive,
   AlertCircle,
-  Cog
+  Cog,
+  ShieldCheck,
+  User
 } from 'lucide-react';
 
 export const getIconForItem = (id: string) => {
@@ -54,8 +56,12 @@ export const getIconForItem = (id: string) => {
 };
 
 export const getIconForSubItem = (parentId: string, childId: string) => {
-  if (parentId === 'contact_center') {
-    switch (childId) {
+  // Для вложенных элементов убираем точку из id
+  const actualParentId = parentId.split('.')[0];
+  const actualChildId = childId.split('.')[0];
+  
+  if (actualParentId === 'contact_center') {
+    switch (actualChildId) {
       case 'dialogs':
         return <MessageSquare size={14} />;
       case 'agents':
@@ -69,22 +75,33 @@ export const getIconForSubItem = (parentId: string, childId: string) => {
       default:
         return <ChevronRight size={14} />;
     }
-  } else if (parentId === 'locations') {
-    switch (childId) {
+  } else if (actualParentId === 'locations') {
+    switch (actualChildId) {
       case 'stores':
         return <Store size={14} />;
       default:
         return <ChevronRight size={14} />;
     }
-  } else if (parentId === 'settings') {
-    switch (childId) {
+  } else if (actualParentId === 'settings') {
+    switch (actualChildId) {
       case 'profile':
-        return <Users size={14} />;
+        return <User size={14} />;
+      case 'access':
+        return <ShieldCheck size={14} />;
       default:
         return <ChevronRight size={14} />;
     }
-  } else if (parentId === 'system') {
-    switch (childId) {
+  } else if (actualParentId === 'settings.access') {
+    switch (actualChildId) {
+      case 'users':
+        return <Users size={14} />;
+      case 'roles':
+        return <ShieldCheck size={14} />;
+      default:
+        return <ChevronRight size={14} />;
+    }
+  } else if (actualParentId === 'system') {
+    switch (actualChildId) {
       case 'general':
         return <Settings size={14} />;
       case 'backup':

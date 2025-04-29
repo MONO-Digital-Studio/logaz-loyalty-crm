@@ -110,6 +110,23 @@ export const navigationItems = [
         id: "profile",
         title: "Профиль",
         path: "/settings/profile",
+      },
+      {
+        id: "access",
+        title: "Доступ",
+        path: "/settings/access",
+        children: [
+          {
+            id: "users",
+            title: "Пользователи",
+            path: "/settings/access/users",
+          },
+          {
+            id: "roles",
+            title: "Роли",
+            path: "/settings/access/roles",
+          }
+        ]
       }
     ],
   },

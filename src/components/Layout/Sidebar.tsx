@@ -20,22 +20,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     );
   };
 
-  // Create a modified version of navigationItems with "CRM" changed to "Клиенты"
-  // Make sure there's only one "Аудитории" item
-  const modifiedNavigationItems = navigationItems.map(item => {
-    if (item.id === 'crm') {
-      return { 
-        ...item, 
-        title: 'Клиенты',
-        children: [
-          ...(item.children || []).filter(child => child.id !== 'audiences'),
-          { id: 'audiences', title: 'Аудитории', path: '/crm/audiences' }
-        ]
-      };
-    }
-    return item;
-  });
-
   return (
     <aside
       className={`bg-sidebar text-sidebar-foreground transition-all duration-300 overflow-hidden ${
@@ -52,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
 
       <nav className="flex-1 overflow-y-auto py-4">
         <ul className="space-y-1">
-          {modifiedNavigationItems.map((item) => (
+          {navigationItems.map((item) => (
             <SidebarNavItem
               key={item.id}
               item={item}
