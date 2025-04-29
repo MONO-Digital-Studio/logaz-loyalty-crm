@@ -48,6 +48,7 @@ export function AreaChart({
   showYAxis = false,
   showLegend = true,
   showGradient = false,
+  showTooltip = true,
   height = "300px",
   width = "100%",
   className = "",
@@ -63,7 +64,7 @@ export function AreaChart({
         {showXAxis && <XAxis dataKey={index} />}
         {showYAxis && <YAxis />}
         <CartesianGrid strokeDasharray="3 3" />
-        {showTooltip !== false && (
+        {showTooltip && (
           <ChartTooltip 
             content={({ active, payload }) => (
               <ChartTooltipContent 
@@ -101,6 +102,7 @@ export function BarChart({
   showYAxis = false,
   showLegend = true,
   layout = "vertical",
+  showTooltip = true,
   height = "300px",
   width = "100%",
   className = "",
@@ -119,15 +121,17 @@ export function BarChart({
         {showXAxis && <XAxis dataKey={layout === "horizontal" ? index : undefined} type={layout === "horizontal" ? "category" : "number"} />}
         {showYAxis && <YAxis dataKey={layout === "vertical" ? index : undefined} type={layout === "vertical" ? "category" : "number"} />}
         <CartesianGrid strokeDasharray="3 3" />
-        <ChartTooltip 
-          content={({ active, payload }) => (
-            <ChartTooltipContent 
-              active={active} 
-              payload={payload} 
-              formatter={(value) => valueFormatter(Number(value))}
-            />
-          )}
-        />
+        {showTooltip && (
+          <ChartTooltip 
+            content={({ active, payload }) => (
+              <ChartTooltipContent 
+                active={active} 
+                payload={payload} 
+                formatter={(value) => valueFormatter(Number(value))}
+              />
+            )}
+          />
+        )}
         {showLegend && <Legend />}
         {categories.map((category, i) => (
           <Bar
