@@ -3,18 +3,25 @@ import React, { useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
-import EmployeeSettings from "../components/Settings/EmployeeSettings";
+import EmployeeList from "../components/Employees/EmployeeList";
+import EmployeeStructure from "../components/Employees/EmployeeStructure";
 
 const EmployeesPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { tab } = useParams();
   
+  // Default to 'list' if no tab is specified or if we're at /employees/list
   const currentTab = tab || 'list';
 
   useEffect(() => {
     document.title = "Сотрудники | ЛОГАЗ SV";
   }, []);
+
+  // Handle tab change and update URL
+  const handleTabChange = (value: string) => {
+    navigate(`/employees/${value}`);
+  };
 
   return (
     <div className="space-y-6">
@@ -31,7 +38,7 @@ const EmployeesPage = () => {
             defaultValue={currentTab} 
             value={currentTab} 
             className="w-full"
-            onValueChange={(value) => navigate(`/employees/${value}`)}
+            onValueChange={handleTabChange}
           >
             <TabsList className="mb-4">
               <TabsTrigger value="list">Сотрудники</TabsTrigger>
@@ -39,11 +46,11 @@ const EmployeesPage = () => {
             </TabsList>
 
             <TabsContent value="list">
-              <EmployeeSettings currentSubtab="list" />
+              <EmployeeList />
             </TabsContent>
 
             <TabsContent value="structure">
-              <EmployeeSettings currentSubtab="structure" />
+              <EmployeeStructure />
             </TabsContent>
           </Tabs>
         </CardContent>
