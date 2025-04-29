@@ -1,7 +1,7 @@
 
 import React from 'react';
 import StatsCard from '../components/UI/StatsCard';
-import Chart from '../components/UI/Chart';
+import Chart from '../components/ui/Chart';
 import { 
   summaryStats, 
   monthlySales, 
