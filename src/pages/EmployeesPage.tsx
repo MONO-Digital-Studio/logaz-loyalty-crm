@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { Card, CardContent } from "@/components/ui/card";
 import EmployeeList from "../components/Employees/EmployeeList";
 import EmployeeStructure from "../components/Employees/EmployeeStructure";
 
@@ -11,7 +10,7 @@ const EmployeesPage = () => {
   const navigate = useNavigate();
   const { tab } = useParams();
   
-  // Default to 'list' if no tab is specified or if we're at /employees/list
+  // Use the tab from params, or default to 'list' if not specified
   const currentTab = tab || 'list';
 
   useEffect(() => {
@@ -32,29 +31,25 @@ const EmployeesPage = () => {
         </p>
       </div>
 
-      <Card>
-        <CardContent className="pt-6">
-          <Tabs 
-            defaultValue={currentTab} 
-            value={currentTab} 
-            className="w-full"
-            onValueChange={handleTabChange}
-          >
-            <TabsList className="mb-4">
-              <TabsTrigger value="list">Сотрудники</TabsTrigger>
-              <TabsTrigger value="structure">Структура</TabsTrigger>
-            </TabsList>
+      <Tabs 
+        defaultValue={currentTab} 
+        value={currentTab} 
+        className="w-full"
+        onValueChange={handleTabChange}
+      >
+        <TabsList className="mb-4">
+          <TabsTrigger value="list">Сотрудники</TabsTrigger>
+          <TabsTrigger value="structure">Структура</TabsTrigger>
+        </TabsList>
 
-            <TabsContent value="list">
-              <EmployeeList />
-            </TabsContent>
+        <TabsContent value="list">
+          <EmployeeList />
+        </TabsContent>
 
-            <TabsContent value="structure">
-              <EmployeeStructure />
-            </TabsContent>
-          </Tabs>
-        </CardContent>
-      </Card>
+        <TabsContent value="structure">
+          <EmployeeStructure />
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
