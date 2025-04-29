@@ -66,6 +66,24 @@ const SettingsPage = () => {
           <TabsTrigger value="system">Системные настройки</TabsTrigger>
         </TabsList>
 
+        {/* Display sub-tabs for System Settings when system tab is active */}
+        {currentTab === 'system' && (
+          <div className="mb-6">
+            <Tabs
+              defaultValue={systemSubtab || 'general'}
+              value={systemSubtab || 'general'}
+              onValueChange={(value) => navigate(`/settings/system/${value}`)}
+            >
+              <TabsList className="mb-4">
+                <TabsTrigger value="general">Основные</TabsTrigger>
+                <TabsTrigger value="backup">Резервное копирование</TabsTrigger>
+                <TabsTrigger value="logs">Логи и мониторинг</TabsTrigger>
+                <TabsTrigger value="maintenance">Обслуживание</TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </div>
+        )}
+
         <TabsContent value="profile">
           <ProfileSettings />
         </TabsContent>
