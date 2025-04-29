@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { id } from "date-fns/locale";
 
 // Client data type
 interface Client {
@@ -61,6 +62,7 @@ const ClientsTable: React.FC<ClientsTableProps> = ({ clients }) => {
         <Table>
           <TableHeader>
             <TableRow>
+              <TableHead>ID</TableHead>
               <TableHead>Имя</TableHead>
               <TableHead>Телефон</TableHead>
               <TableHead>Уровень</TableHead>
@@ -72,6 +74,9 @@ const ClientsTable: React.FC<ClientsTableProps> = ({ clients }) => {
           <TableBody>
             {filteredClients.map((client) => (
               <TableRow key={client.id}>
+                <TableCell className="font-mono text-sm text-muted-foreground">
+                  {client.id}
+                </TableCell>
                 <TableCell>
                   <Link 
                     to={`/crm/clients/${client.id}`} 
