@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -196,9 +195,7 @@ const EmployeeList = () => {
                     <TableCell>
                       <div className="flex items-center gap-3">
                         <Avatar className="h-8 w-8">
-                          <div className="bg-logaz-blue text-white text-xs flex items-center justify-center h-full">
-                            {employee.initials}
-                          </div>
+                          {employee.initials}
                         </Avatar>
                         <span>{employee.name}</span>
                       </div>
