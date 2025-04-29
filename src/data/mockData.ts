@@ -183,3 +183,73 @@ export const navigationItems = [
     ]
   }
 ];
+
+// Данные для панели управления
+export const summaryStats = {
+  totalClients: 4832,
+  activeClients: 2735,
+  totalRevenue: 14623500,
+  averageCheck: 1850,
+};
+
+export const monthlySales = [
+  { date: "2023-01-15", revenue: 1265000, transactions: 687 },
+  { date: "2023-02-15", revenue: 1345000, transactions: 723 },
+  { date: "2023-03-15", revenue: 1187000, transactions: 645 },
+  { date: "2023-04-15", revenue: 1420000, transactions: 768 },
+  { date: "2023-05-15", revenue: 1580000, transactions: 834 },
+  { date: "2023-06-15", revenue: 1690000, transactions: 904 },
+];
+
+export const loyaltyStats = [
+  { period: "Янв", pointsEarned: 245000, pointsSpent: 182000, pointsExpired: 12500 },
+  { period: "Фев", pointsEarned: 267000, pointsSpent: 198000, pointsExpired: 15800 },
+  { period: "Мар", pointsEarned: 234000, pointsSpent: 187000, pointsExpired: 10200 },
+  { period: "Апр", pointsEarned: 278000, pointsSpent: 213000, pointsExpired: 14300 },
+  { period: "Май", pointsEarned: 312000, pointsSpent: 245000, pointsExpired: 18500 },
+  { period: "Июн", pointsEarned: 345000, pointsSpent: 275000, pointsExpired: 21200 },
+];
+
+export const demographicData = [
+  { age: "18-24", percentage: 8 },
+  { age: "25-34", percentage: 27 },
+  { age: "35-44", percentage: 33 },
+  { age: "45-54", percentage: 20 },
+  { age: "55+", percentage: 12 },
+];
+
+export const genderData = [
+  { gender: "Мужчины", percentage: 0.67 },
+  { gender: "Женщины", percentage: 0.33 },
+];
+
+// Теперь добавим новые страницы для расширения функциональности
+
+// Данные для страницы настроек
+export const settingsCategories = [
+  { id: "general", name: "Общие настройки", icon: "⚙️" },
+  { id: "appearance", name: "Внешний вид", icon: "🎨" },
+  { id: "notifications", name: "Уведомления", icon: "🔔" },
+  { id: "security", name: "Безопасность", icon: "🔒" },
+  { id: "api", name: "API и интеграции", icon: "🔌" },
+];
+
+// Данные для страницы аналитики по топливу
+export const fuelSalesData = [
+  { date: "2023-01", diesel: 342500, gasoline92: 256800, gasoline95: 189700, propane: 98500 },
+  { date: "2023-02", diesel: 356700, gasoline92: 245600, gasoline95: 192300, propane: 104200 },
+  { date: "2023-03", diesel: 378900, gasoline92: 267800, gasoline95: 203500, propane: 112800 },
+  { date: "2023-04", diesel: 402300, gasoline92: 289400, gasoline95: 215700, propane: 118500 },
+  { date: "2023-05", diesel: 423500, gasoline92: 312600, gasoline95: 228900, propane: 124300 },
+  { date: "2023-06", diesel: 445700, gasoline92: 335800, gasoline95: 243200, propane: 135700 },
+];
+
+// Данные для страницы товаров
+export const productCategories = [
+  { id: 1, name: "Топливо", productCount: 5 },
+  { id: 2, name: "Автомобильные масла", productCount: 28 },
+  { id: 3, name: "Автохимия", productCount: 42 },
+  { id: 4, name: "Автоаксессуары", productCount: 56 },
+  { id: 5, name: "Продукты питания", productCount: 63 },
+  { id: 6, name: "Напитки", productCount: 37 },
+];

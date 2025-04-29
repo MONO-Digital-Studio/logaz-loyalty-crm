@@ -9,6 +9,8 @@ import DashboardPage from "./pages/DashboardPage";
 import ClientsPage from "./pages/ClientsPage";
 import ClientDetailsPage from "./pages/ClientDetailsPage";
 import LoyaltyProgramPage from "./pages/LoyaltyProgramPage";
+import ProductsPage from "./pages/ProductsPage";
+import SettingsPage from "./pages/SettingsPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +27,8 @@ const App = () => (
             <Route path="/crm/clients" element={<ClientsPage />} />
             <Route path="/crm/clients/:id" element={<ClientDetailsPage />} />
             <Route path="/loyalty" element={<LoyaltyProgramPage />} />
+            <Route path="/products/*" element={<ProductsPage />} />
+            <Route path="/settings/*" element={<SettingsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>

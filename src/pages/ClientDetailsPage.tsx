@@ -3,9 +3,11 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { 
   Tabs, TabsContent, TabsList, TabsTrigger,
+} from "@/components/ui/tabs";
+import {
   Card, CardContent, CardDescription, CardHeader, CardTitle,
-  Button
-} from "@/components/ui/";
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
