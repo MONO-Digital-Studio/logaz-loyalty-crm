@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { FileExport } from "lucide-react";
+import { FileText } from "lucide-react";
 import ClientStats from "@/components/Clients/ClientStats";
 import ClientsTable from "@/components/Clients/ClientsTable";
 import RfmDistribution from "@/components/Clients/RfmDistribution";
@@ -75,7 +75,7 @@ const ClientsPage = () => {
         <h1 className="text-3xl font-bold">Клиенты CRM</h1>
         <div className="flex gap-2">
           <Button variant="outline" size="default" className="flex items-center gap-2">
-            <FileExport size={18} />
+            <FileText size={18} />
             Экспорт данных
           </Button>
           <Button variant="default" className="bg-logaz-blue">
