@@ -5,6 +5,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ProfileSettings from "../components/Settings/ProfileSettings";
 import SecuritySettings from "../components/Settings/SecuritySettings";
 import NotificationSettings from "../components/Settings/NotificationSettings";
+import CompanySettings from "../components/Settings/CompanySettings";
 
 const SettingsPage = () => {
   useEffect(() => {
@@ -41,19 +42,7 @@ const SettingsPage = () => {
         </TabsContent>
 
         <TabsContent value="company">
-          <Card>
-            <CardHeader>
-              <CardTitle>Информация о компании</CardTitle>
-              <CardDescription>Управление информацией о вашей компании</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center justify-center h-64">
-                <p className="text-muted-foreground">
-                  Настройки компании будут доступны в следующем обновлении.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
+          <CompanySettings />
         </TabsContent>
       </Tabs>
     </div>
