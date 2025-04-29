@@ -30,10 +30,7 @@ const RfmDistribution: React.FC<RfmDistributionProps> = ({ data }) => {
             <Bar dataKey="value" fill="#3B55A2" />
           </BarChart>
         </ResponsiveContainer>
-        <div className="grid grid-cols-2 gap-2 mt-4">
-          <Button variant="outline" size="sm" className="w-full">
-            Экспорт данных
-          </Button>
+        <div className="mt-4">
           <Button variant="default" size="sm" className="w-full bg-logaz-blue">
             Аналитика RFM
           </Button>
