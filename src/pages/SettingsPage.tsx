@@ -37,6 +37,64 @@ const SettingsPage = () => {
     navigate(`/settings/${value}`);
   };
 
+  // Define subtabs for each main tab
+  const getSubtabs = () => {
+    switch (currentTab) {
+      case 'system':
+        return (
+          <Tabs
+            defaultValue={systemSubtab || 'general'}
+            value={systemSubtab || 'general'}
+            onValueChange={(value) => navigate(`/settings/system/${value}`)}
+          >
+            <TabsList className="mb-4">
+              <TabsTrigger value="general">Основные</TabsTrigger>
+              <TabsTrigger value="backup">Резервное копирование</TabsTrigger>
+              <TabsTrigger value="logs">Логи и мониторинг</TabsTrigger>
+              <TabsTrigger value="maintenance">Обслуживание</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        );
+      case 'access':
+        return (
+          <Tabs
+            defaultValue="users"
+            onValueChange={(value) => navigate(`/settings/access/${value}`)}
+          >
+            <TabsList className="mb-4">
+              <TabsTrigger value="users">Пользователи</TabsTrigger>
+              <TabsTrigger value="roles">Роли и разрешения</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        );
+      case 'employees':
+        return (
+          <Tabs
+            defaultValue="list"
+            onValueChange={(value) => navigate(`/settings/employees/${value}`)}
+          >
+            <TabsList className="mb-4">
+              <TabsTrigger value="list">Сотрудники</TabsTrigger>
+              <TabsTrigger value="structure">Структура</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        );
+      case 'integrations':
+        return (
+          <Tabs
+            defaultValue="services"
+            onValueChange={(value) => navigate(`/settings/integrations/${value}`)}
+          >
+            <TabsList className="mb-4">
+              <TabsTrigger value="services">Интеграции</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div>
@@ -66,24 +124,12 @@ const SettingsPage = () => {
           <TabsTrigger value="system">Системные настройки</TabsTrigger>
         </TabsList>
 
-        {/* Display sub-tabs for System Settings when system tab is active */}
-        {currentTab === 'system' && (
-          <div className="mb-6">
-            <Tabs
-              defaultValue={systemSubtab || 'general'}
-              value={systemSubtab || 'general'}
-              onValueChange={(value) => navigate(`/settings/system/${value}`)}
-            >
-              <TabsList className="mb-4">
-                <TabsTrigger value="general">Основные</TabsTrigger>
-                <TabsTrigger value="backup">Резервное копирование</TabsTrigger>
-                <TabsTrigger value="logs">Логи и мониторинг</TabsTrigger>
-                <TabsTrigger value="maintenance">Обслуживание</TabsTrigger>
-              </TabsList>
-            </Tabs>
-          </div>
-        )}
+        {/* Show subtabs only for the active section */}
+        <div className="mb-6">
+          {getSubtabs()}
+        </div>
 
+        {/* Display the content for the selected main tab */}
         <TabsContent value="profile">
           <ProfileSettings />
         </TabsContent>

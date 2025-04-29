@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,7 +13,6 @@ import {
   SelectTrigger, 
   SelectValue 
 } from "@/components/ui/select";
-import { useNavigate, useLocation } from "react-router-dom";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -42,21 +40,12 @@ interface SystemSettingsProps {
 }
 
 const SystemSettings = ({ currentSubtab = "" }: SystemSettingsProps) => {
-  const navigate = useNavigate();
-  const location = useLocation();
   const [maintenanceMode, setMaintenanceMode] = useState(false);
   const [debugMode, setDebugMode] = useState(false);
   const [autoBackup, setAutoBackup] = useState(true);
 
-  // Default to "general" if no subtab is selected
+  // Default to "general" if no subtab is specified
   const activeTab = currentSubtab || "general";
-
-  // Effect to set default tab if none specified
-  useEffect(() => {
-    if (location.pathname === "/settings/system" || location.pathname === "/settings/system/") {
-      navigate("/settings/system/general", { replace: true });
-    }
-  }, [location.pathname, navigate]);
 
   const handleClearCache = () => {
     toast.success("Кеш успешно очищен");
