@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { navigationItems } from '../../data/mockData';
@@ -167,15 +166,25 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
         </ul>
       </nav>
 
-      <div className="p-4 border-t border-sidebar-border flex justify-center">
+      <div className="p-4 border-t border-sidebar-border flex justify-center gap-2">
         <Link 
           to="/ai-assistant" 
           className={`hover:bg-sidebar-accent p-2 rounded transition-colors ${
-            isOpen ? 'w-full flex items-center' : 'w-10 h-10 flex items-center justify-center'
+            isOpen ? 'flex items-center flex-1' : 'w-10 h-10 flex items-center justify-center'
           }`}
         >
           <Bot size={18} className="text-sidebar-foreground" />
           {isOpen && <span className="ml-3">AI ассистент</span>}
+        </Link>
+        
+        <Link 
+          to="/settings" 
+          className={`hover:bg-sidebar-accent p-2 rounded transition-colors ${
+            isOpen ? 'flex items-center' : 'w-10 h-10 flex items-center justify-center'
+          }`}
+        >
+          <Settings size={18} className="text-sidebar-foreground" />
+          {isOpen && <span className="ml-3">Настройки</span>}
         </Link>
       </div>
     </aside>
