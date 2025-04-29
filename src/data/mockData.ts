@@ -75,6 +75,33 @@ export const navigationItems = [
     path: "/loyalty",
   },
   {
+    id: "system",
+    title: "Система",
+    path: "/system",
+    children: [
+      {
+        id: "general",
+        title: "Основные",
+        path: "/system/general",
+      },
+      {
+        id: "backup",
+        title: "Резервное копирование",
+        path: "/system/backup",
+      },
+      {
+        id: "logs",
+        title: "Логи и мониторинг",
+        path: "/system/logs",
+      },
+      {
+        id: "maintenance",
+        title: "Обслуживание",
+        path: "/system/maintenance",
+      }
+    ]
+  },
+  {
     id: "settings",
     title: "Настройки",
     path: "/settings",
@@ -83,12 +110,7 @@ export const navigationItems = [
         id: "profile",
         title: "Профиль",
         path: "/settings/profile",
-      },
-      {
-        id: "system",
-        title: "Система",
-        path: "/settings/system",
-      },
+      }
     ],
   },
 ];

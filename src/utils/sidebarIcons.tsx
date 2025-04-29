@@ -17,7 +17,11 @@ import {
   Map,
   Store,
   Send,
-  Mail
+  Mail,
+  Database,
+  FileArchive,
+  AlertCircle,
+  Cog
 } from 'lucide-react';
 
 export const getIconForItem = (id: string) => {
@@ -42,6 +46,8 @@ export const getIconForItem = (id: string) => {
       return <Mail size={18} />;
     case 'settings':
       return <Settings size={18} />;
+    case 'system':
+      return <Cog size={18} />;
     default:
       return <ChevronRight size={18} />;
   }
@@ -74,8 +80,19 @@ export const getIconForSubItem = (parentId: string, childId: string) => {
     switch (childId) {
       case 'profile':
         return <Users size={14} />;
-      case 'system':
+      default:
+        return <ChevronRight size={14} />;
+    }
+  } else if (parentId === 'system') {
+    switch (childId) {
+      case 'general':
         return <Settings size={14} />;
+      case 'backup':
+        return <FileArchive size={14} />;
+      case 'logs':
+        return <AlertCircle size={14} />;
+      case 'maintenance':
+        return <Cog size={14} />;
       default:
         return <ChevronRight size={14} />;
     }
