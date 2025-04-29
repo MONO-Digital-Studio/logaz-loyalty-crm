@@ -26,3 +26,27 @@ export interface Agent {
   activeDialogs: number;
   skills: string[];
 }
+
+export interface ContactStats {
+  totalDialogs: number;
+  avgResponseTime: string;
+  avgResolutionTime: string;
+  satisfaction: number;
+}
+
+export interface ChannelDistribution {
+  channel: string;
+  percentage: number;
+}
+
+export interface AgentPerformance {
+  agentName: string;
+  responseTime: number;
+  resolutionTime: number;
+  satisfaction: number;
+}
+
+export interface TopicDistribution {
+  topic: string;
+  percentage: number;
+}
