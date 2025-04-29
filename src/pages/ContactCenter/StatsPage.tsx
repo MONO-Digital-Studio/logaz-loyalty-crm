@@ -2,7 +2,7 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { AreaChart, BarChart, PieChart } from '@/components/ui/chart';
+import { AreaChart, BarChart, PieChart } from '@/components/ui/charts';
 
 const StatsPage: React.FC = () => {
   return (
@@ -60,7 +60,6 @@ const StatsPage: React.FC = () => {
               showYAxis
               showGradient
               showLegend={false}
-              height="300px"
             />
           </CardContent>
         </Card>
@@ -82,7 +81,6 @@ const StatsPage: React.FC = () => {
               valueFormatter={(value) => `${value}%`}
               showTooltip
               showLegend
-              height="300px"
             />
           </CardContent>
         </Card>
@@ -106,7 +104,6 @@ const StatsPage: React.FC = () => {
               showXAxis
               showYAxis
               showLegend={false}
-              height="300px"
             />
           </CardContent>
         </Card>
@@ -132,7 +129,6 @@ const StatsPage: React.FC = () => {
               showXAxis
               showYAxis
               showLegend={false}
-              height="300px"
             />
           </CardContent>
         </Card>
