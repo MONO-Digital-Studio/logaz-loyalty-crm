@@ -28,7 +28,18 @@ const SettingsPage = () => {
 
   // Handle tab change and update URL
   const handleTabChange = (value: string) => {
-    navigate(`/settings/${value}`);
+    // For access tab, navigate to users subtab by default
+    if (value === 'access') {
+      navigate(`/settings/${value}/users`);
+    } else if (value === 'employees') {
+      navigate(`/settings/${value}/list`);
+    } else if (value === 'integrations') {
+      navigate(`/settings/${value}/services`);
+    } else if (value === 'locations') {
+      navigate(`/settings/${value}/stores`);
+    } else {
+      navigate(`/settings/${value}`);
+    }
   };
 
   // Define subtabs for each main tab
@@ -37,7 +48,8 @@ const SettingsPage = () => {
       case 'access':
         return (
           <Tabs
-            defaultValue="users"
+            defaultValue={pathname.includes('/access/roles') ? 'roles' : 'users'}
+            value={pathname.includes('/access/roles') ? 'roles' : 'users'}
             onValueChange={(value) => navigate(`/settings/access/${value}`)}
           >
             <TabsList className="mb-4">
