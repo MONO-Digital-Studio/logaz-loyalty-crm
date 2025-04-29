@@ -19,6 +19,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     );
   };
 
+  // Create a modified version of navigationItems with "CRM" changed to "Клиенты"
+  const modifiedNavigationItems = navigationItems.map(item => {
+    if (item.id === 'crm') {
+      return { ...item, title: 'Клиенты' };
+    }
+    return item;
+  });
+
   return (
     <aside
       className={`bg-sidebar text-sidebar-foreground transition-all duration-300 overflow-hidden ${
@@ -35,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
 
       <nav className="flex-1 overflow-y-auto py-4">
         <ul className="space-y-1">
-          {navigationItems.map((item) => (
+          {modifiedNavigationItems.map((item) => (
             <li key={item.id}>
               <div className="relative">
                 <Link
