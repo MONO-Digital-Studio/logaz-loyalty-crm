@@ -30,8 +30,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 
-// Примерные данные для отображения
-const contentItems = [
+// Sample data for news
+const newsItems = [
   {
     id: 1,
     title: "Новые функции ЛОГАЗ SV",
@@ -43,15 +43,6 @@ const contentItems = [
   },
   {
     id: 2,
-    title: "Руководство по интеграции с CRM",
-    category: "Руководства",
-    status: "Черновик",
-    author: "Александр Домрачев",
-    date: "2025-04-20",
-    views: 45,
-  },
-  {
-    id: 3,
     title: "Обновление системы лояльности",
     category: "Новости",
     status: "Опубликовано",
@@ -61,8 +52,8 @@ const contentItems = [
   },
   {
     id: 4,
-    title: "Как повысить конверсию",
-    category: "Статьи",
+    title: "Запуск новой версии платформы",
+    category: "Новости",
     status: "Запланировано",
     author: "Александр Домрачев",
     date: "2025-05-01",
@@ -70,9 +61,56 @@ const contentItems = [
   }
 ];
 
-const ContentList = () => {
+// Sample data for text pages
+const pageItems = [
+  {
+    id: 3,
+    title: "О компании",
+    category: "Информация",
+    status: "Опубликовано",
+    author: "Александр Домрачев",
+    date: "2025-03-10",
+    views: 342,
+  },
+  {
+    id: 5,
+    title: "Контактная информация",
+    category: "Контакты",
+    status: "Опубликовано",
+    author: "Александр Домрачев",
+    date: "2025-03-15",
+    views: 271,
+  },
+  {
+    id: 6,
+    title: "Условия использования",
+    category: "Правовая информация",
+    status: "Черновик",
+    author: "Александр Домрачев",
+    date: "2025-04-20",
+    views: 45,
+  },
+  {
+    id: 7,
+    title: "Руководство по интеграции с CRM",
+    category: "Руководства",
+    status: "Черновик",
+    author: "Александр Домрачев",
+    date: "2025-04-20",
+    views: 45,
+  }
+];
+
+interface ContentListProps {
+  contentType: "news" | "pages";
+}
+
+const ContentList: React.FC<ContentListProps> = ({ contentType }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+  
+  // Select content based on type
+  const contentItems = contentType === "news" ? newsItems : pageItems;
   
   const getStatusColor = (status: string) => {
     switch(status) {
@@ -98,7 +136,7 @@ const ContentList = () => {
 
   const handleDelete = (id: number) => {
     // In a real app, this would call an API to delete the item
-    toast.success("Публикация удалена");
+    toast.success(contentType === "news" ? "Новость удалена" : "Страница удалена");
   };
 
   const handleView = (id: number) => {
@@ -112,7 +150,7 @@ const ContentList = () => {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Поиск публикаций..."
+              placeholder={contentType === "news" ? "Поиск новостей..." : "Поиск страниц..."}
               className="pl-10"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -125,6 +163,7 @@ const ContentList = () => {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead>ID</TableHead>
                 <TableHead>Название</TableHead>
                 <TableHead>Категория</TableHead>
                 <TableHead>Статус</TableHead>
@@ -142,6 +181,9 @@ const ContentList = () => {
                     className="cursor-pointer hover:bg-muted/50"
                     onClick={() => handleEdit(item.id)}
                   >
+                    <TableCell className="font-mono text-sm text-muted-foreground">
+                      {item.id}
+                    </TableCell>
                     <TableCell className="font-medium">{item.title}</TableCell>
                     <TableCell>{item.category}</TableCell>
                     <TableCell>
@@ -184,7 +226,7 @@ const ContentList = () => {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={7} className="h-24 text-center">
+                  <TableCell colSpan={8} className="h-24 text-center">
                     По вашему запросу ничего не найдено.
                   </TableCell>
                 </TableRow>
