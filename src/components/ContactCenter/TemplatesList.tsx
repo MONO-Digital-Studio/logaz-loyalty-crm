@@ -132,12 +132,12 @@ const TemplatesList: React.FC = () => {
             />
           </div>
           
-          <Select onValueChange={(value) => setSelectedCategory(value || null)}>
+          <Select onValueChange={(value) => setSelectedCategory(value === "all" ? null : value)}>
             <SelectTrigger className="w-[180px]">
               <SelectValue placeholder="Все категории" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">Все категории</SelectItem>
+              <SelectItem value="all">Все категории</SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category} value={category}>
                   {category}
@@ -185,7 +185,7 @@ const TemplatesList: React.FC = () => {
                           {category}
                         </SelectItem>
                       ))}
-                      <SelectItem value="new">Новая категория...</SelectItem>
+                      <SelectItem value="new_category">Новая категория...</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
