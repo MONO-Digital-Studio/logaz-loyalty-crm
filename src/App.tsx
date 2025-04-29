@@ -19,6 +19,8 @@ import ContactCenterPage from "./pages/ContactCenterPage";
 import DialogsPage from "./pages/ContactCenter/DialogsPage";
 import AgentsPage from "./pages/ContactCenter/AgentsPage";
 import StatsPage from "./pages/ContactCenter/StatsPage";
+import TemplatesPage from "./pages/ContactCenter/TemplatesPage";
+import AnalyticsPage from "./pages/ContactCenter/AnalyticsPage";
 import AudiencesPage from "./pages/AudiencesPage";
 
 const queryClient = new QueryClient();
@@ -45,6 +47,8 @@ const App = () => (
             <Route path="/contact-center/dialogs" element={<DialogsPage />} />
             <Route path="/contact-center/agents" element={<AgentsPage />} />
             <Route path="/contact-center/stats" element={<StatsPage />} />
+            <Route path="/contact-center/templates" element={<TemplatesPage />} />
+            <Route path="/contact-center/analytics" element={<AnalyticsPage />} />
             <Route path="/settings/*" element={<SettingsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

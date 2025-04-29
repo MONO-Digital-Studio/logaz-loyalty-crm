@@ -25,6 +25,8 @@ const ContactCenterPage: React.FC = () => {
     if (currentPath.includes('/dialogs')) return 'dialogs';
     if (currentPath.includes('/agents')) return 'agents';
     if (currentPath.includes('/stats')) return 'stats';
+    if (currentPath.includes('/templates')) return 'templates';
+    if (currentPath.includes('/analytics')) return 'analytics';
     return 'dialogs'; // По умолчанию
   };
 
@@ -42,7 +44,9 @@ const ContactCenterPage: React.FC = () => {
         <TabsList className="mb-6">
           <TabsTrigger value="dialogs">Диалоги</TabsTrigger>
           <TabsTrigger value="agents">Операторы</TabsTrigger>
+          <TabsTrigger value="templates">Шаблоны ответов</TabsTrigger>
           <TabsTrigger value="stats">Статистика</TabsTrigger>
+          <TabsTrigger value="analytics">Аналитика</TabsTrigger>
         </TabsList>
 
         <TabsContent value={getActiveTab()}>
