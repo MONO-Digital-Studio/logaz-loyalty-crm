@@ -90,6 +90,18 @@ const SettingsPage = () => {
             </TabsList>
           </Tabs>
         );
+      case 'locations':
+        return (
+          <Tabs
+            defaultValue="stores"
+            onValueChange={(value) => navigate(`/settings/locations/${value}`)}
+          >
+            <TabsList className="mb-4">
+              <TabsTrigger value="stores">Торговые точки</TabsTrigger>
+              <TabsTrigger value="warehouses">Склады</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        );
       default:
         return null;
     }
@@ -119,7 +131,7 @@ const SettingsPage = () => {
           <TabsTrigger value="payments">Платежи</TabsTrigger>
           <TabsTrigger value="access">Доступ</TabsTrigger>
           <TabsTrigger value="integrations">Интеграции</TabsTrigger>
-          <TabsTrigger value="stores">Торговые точки</TabsTrigger>
+          <TabsTrigger value="locations">Торговые точки</TabsTrigger>
           <TabsTrigger value="employees">Сотрудники</TabsTrigger>
           <TabsTrigger value="system">Системные настройки</TabsTrigger>
         </TabsList>
@@ -162,7 +174,7 @@ const SettingsPage = () => {
           <IntegrationSettings />
         </TabsContent>
 
-        <TabsContent value="stores">
+        <TabsContent value="locations">
           <StoreSettings />
         </TabsContent>
 

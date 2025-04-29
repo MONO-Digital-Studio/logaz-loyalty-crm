@@ -13,7 +13,9 @@ import {
   UserCheck,
   LineChart,
   FileCheck,
-  ChevronRight
+  ChevronRight,
+  Map,
+  Store
 } from 'lucide-react';
 
 export const getIconForItem = (id: string) => {
@@ -32,6 +34,8 @@ export const getIconForItem = (id: string) => {
       return <Heart size={18} />;
     case 'analytics':
       return <BarChart size={18} />;
+    case 'locations':
+      return <Map size={18} />;
     default:
       return <ChevronRight size={18} />;
   }
@@ -50,6 +54,13 @@ export const getIconForSubItem = (parentId: string, childId: string) => {
         return <FileCheck size={14} />;
       case 'analytics':
         return <BarChart size={14} />;
+      default:
+        return <ChevronRight size={14} />;
+    }
+  } else if (parentId === 'locations') {
+    switch (childId) {
+      case 'stores':
+        return <Store size={14} />;
       default:
         return <ChevronRight size={14} />;
     }
