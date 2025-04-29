@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import SystemSettings from "../components/Settings/SystemSettings";
+import IntegrationSettings from "../components/Settings/IntegrationSettings";
+import StoreSettings from "../components/Settings/StoreSettings";
 import { Card, CardContent } from "@/components/ui/card";
 
 const SystemPage = () => {
@@ -33,11 +35,13 @@ const SystemPage = () => {
             className="w-full"
             onValueChange={(value) => navigate(`/system/${value}`)}
           >
-            <TabsList className="mb-4">
+            <TabsList className="mb-4 flex flex-wrap gap-2">
               <TabsTrigger value="general">Основные</TabsTrigger>
               <TabsTrigger value="backup">Резервное копирование</TabsTrigger>
               <TabsTrigger value="logs">Логи и мониторинг</TabsTrigger>
               <TabsTrigger value="maintenance">Обслуживание</TabsTrigger>
+              <TabsTrigger value="integrations">Интеграции</TabsTrigger>
+              <TabsTrigger value="locations">Торговые точки</TabsTrigger>
             </TabsList>
 
             <TabsContent value="general">
@@ -54,6 +58,14 @@ const SystemPage = () => {
 
             <TabsContent value="maintenance">
               <SystemSettings currentSubtab="maintenance" />
+            </TabsContent>
+
+            <TabsContent value="integrations">
+              <IntegrationSettings />
+            </TabsContent>
+
+            <TabsContent value="locations">
+              <StoreSettings />
             </TabsContent>
           </Tabs>
         </CardContent>

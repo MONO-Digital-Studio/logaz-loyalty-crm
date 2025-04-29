@@ -23,7 +23,8 @@ import {
   AlertCircle,
   Cog,
   ShieldCheck,
-  User
+  User,
+  Link
 } from 'lucide-react';
 
 export const getIconForItem = (id: string) => {
@@ -110,6 +111,10 @@ export const getIconForSubItem = (parentId: string, childId: string) => {
         return <AlertCircle size={14} />;
       case 'maintenance':
         return <Cog size={14} />;
+      case 'integrations':
+        return <Link size={14} />;
+      case 'locations':
+        return <Store size={14} />;
       default:
         return <ChevronRight size={14} />;
     }

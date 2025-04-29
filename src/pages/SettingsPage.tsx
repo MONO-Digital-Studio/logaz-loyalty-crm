@@ -6,11 +6,9 @@ import ProfileSettings from "../components/Settings/ProfileSettings";
 import SecuritySettings from "../components/Settings/SecuritySettings";
 import NotificationSettings from "../components/Settings/NotificationSettings";
 import CompanySettings from "../components/Settings/CompanySettings";
-import IntegrationSettings from "../components/Settings/IntegrationSettings";
 import DisplaySettings from "../components/Settings/DisplaySettings";
 import PaymentSettings from "../components/Settings/PaymentSettings";
 import UserAccessSettings from "../components/Settings/UserAccessSettings";
-import StoreSettings from "../components/Settings/StoreSettings";
 import EmployeeSettings from "../components/Settings/EmployeeSettings";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -33,10 +31,6 @@ const SettingsPage = () => {
       navigate(`/settings/${value}/users`);
     } else if (value === 'employees') {
       navigate(`/settings/${value}/list`);
-    } else if (value === 'integrations') {
-      navigate(`/settings/${value}/services`);
-    } else if (value === 'locations') {
-      navigate(`/settings/${value}/stores`);
     } else {
       navigate(`/settings/${value}`);
     }
@@ -71,29 +65,6 @@ const SettingsPage = () => {
             </TabsList>
           </Tabs>
         );
-      case 'integrations':
-        return (
-          <Tabs
-            defaultValue="services"
-            onValueChange={(value) => navigate(`/settings/integrations/${value}`)}
-          >
-            <TabsList className="mb-4">
-              <TabsTrigger value="services">Интеграции</TabsTrigger>
-            </TabsList>
-          </Tabs>
-        );
-      case 'locations':
-        return (
-          <Tabs
-            defaultValue="stores"
-            onValueChange={(value) => navigate(`/settings/locations/${value}`)}
-          >
-            <TabsList className="mb-4">
-              <TabsTrigger value="stores">Торговые точки</TabsTrigger>
-              <TabsTrigger value="warehouses">Склады</TabsTrigger>
-            </TabsList>
-          </Tabs>
-        );
       default:
         return null;
     }
@@ -122,8 +93,6 @@ const SettingsPage = () => {
           <TabsTrigger value="display">Отображение</TabsTrigger>
           <TabsTrigger value="payments">Платежи</TabsTrigger>
           <TabsTrigger value="access">Доступ</TabsTrigger>
-          <TabsTrigger value="integrations">Интеграции</TabsTrigger>
-          <TabsTrigger value="locations">Торговые точки</TabsTrigger>
           <TabsTrigger value="employees">Сотрудники</TabsTrigger>
         </TabsList>
 
@@ -159,14 +128,6 @@ const SettingsPage = () => {
 
         <TabsContent value="access">
           <UserAccessSettings />
-        </TabsContent>
-
-        <TabsContent value="integrations">
-          <IntegrationSettings />
-        </TabsContent>
-
-        <TabsContent value="locations">
-          <StoreSettings />
         </TabsContent>
 
         <TabsContent value="employees">

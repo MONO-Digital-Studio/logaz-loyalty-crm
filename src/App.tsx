@@ -59,8 +59,6 @@ const App = () => (
             <Route path="/settings/:tab" element={<SettingsPage />} />
             <Route path="/settings/access/:subtab" element={<SettingsPage />} />
             <Route path="/settings/employees/:subtab" element={<SettingsPage />} />
-            <Route path="/settings/integrations/:subtab" element={<SettingsPage />} />
-            <Route path="/settings/locations/:subtab" element={<SettingsPage />} />
             <Route path="/system" element={<SystemPage />} />
             <Route path="/system/:tab" element={<SystemPage />} />
             <Route path="*" element={<NotFound />} />
