@@ -14,18 +14,29 @@ import SystemSettings from "../components/Settings/SystemSettings";
 import SetupWizard from "../components/Settings/SetupWizard";
 import StoreSettings from "../components/Settings/StoreSettings";
 import EmployeeSettings from "../components/Settings/EmployeeSettings";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SettingsPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const pathname = location.pathname;
   const currentTab = pathname.includes('/settings/') 
-    ? pathname.split('/settings/')[1] 
+    ? pathname.split('/settings/')[1].split('/')[0] 
     : 'profile';
+  
+  // Get system subtab if on system tab
+  const systemSubtab = pathname.includes('/settings/system/') 
+    ? pathname.split('/settings/system/')[1]
+    : '';
 
   useEffect(() => {
     document.title = "Настройки | ЛОГАЗ SV";
   }, []);
+
+  // Handle tab change and update URL
+  const handleTabChange = (value: string) => {
+    navigate(`/settings/${value}`);
+  };
 
   return (
     <div className="space-y-6">
@@ -36,7 +47,12 @@ const SettingsPage = () => {
         </p>
       </div>
 
-      <Tabs defaultValue={currentTab} value={currentTab} className="w-full">
+      <Tabs 
+        defaultValue={currentTab} 
+        value={currentTab} 
+        className="w-full"
+        onValueChange={handleTabChange}
+      >
         <TabsList className="mb-4 flex flex-wrap gap-2">
           <TabsTrigger value="profile">Профиль</TabsTrigger>
           <TabsTrigger value="security">Безопасность</TabsTrigger>
@@ -97,7 +113,7 @@ const SettingsPage = () => {
         </TabsContent>
 
         <TabsContent value="system">
-          <SystemSettings />
+          <SystemSettings currentSubtab={systemSubtab} />
         </TabsContent>
       </Tabs>
     </div>

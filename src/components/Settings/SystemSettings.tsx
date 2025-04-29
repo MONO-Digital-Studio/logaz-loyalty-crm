@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +15,7 @@ import {
   SelectValue 
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -37,10 +38,31 @@ import {
   RefreshCw
 } from "lucide-react";
 
-const SystemSettings = () => {
+interface SystemSettingsProps {
+  currentSubtab?: string;
+}
+
+const SystemSettings = ({ currentSubtab = "" }: SystemSettingsProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [maintenanceMode, setMaintenanceMode] = useState(false);
   const [debugMode, setDebugMode] = useState(false);
   const [autoBackup, setAutoBackup] = useState(true);
+
+  // Default to "general" if no subtab is selected
+  const activeTab = currentSubtab || "general";
+
+  // Handle tab change and update URL
+  const handleTabChange = (value: string) => {
+    navigate(`/settings/system/${value}`);
+  };
+
+  // Effect to set default tab if none specified
+  useEffect(() => {
+    if (location.pathname === "/settings/system" || location.pathname === "/settings/system/") {
+      navigate("/settings/system/general", { replace: true });
+    }
+  }, [location.pathname, navigate]);
 
   const handleClearCache = () => {
     toast.success("Кеш успешно очищен");
@@ -57,7 +79,11 @@ const SystemSettings = () => {
 
   return (
     <div className="space-y-6">
-      <Tabs defaultValue="general">
+      <Tabs 
+        defaultValue={activeTab} 
+        value={activeTab} 
+        onValueChange={handleTabChange}
+      >
         <TabsList>
           <TabsTrigger value="general">Основные</TabsTrigger>
           <TabsTrigger value="backup">Резервное копирование</TabsTrigger>

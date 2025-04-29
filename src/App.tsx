@@ -49,7 +49,9 @@ const App = () => (
             <Route path="/contact-center/stats" element={<StatsPage />} />
             <Route path="/contact-center/templates" element={<TemplatesPage />} />
             <Route path="/contact-center/analytics" element={<AnalyticsPage />} />
-            <Route path="/settings/*" element={<SettingsPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/settings/:tab" element={<SettingsPage />} />
+            <Route path="/settings/:tab/:subtab" element={<SettingsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
