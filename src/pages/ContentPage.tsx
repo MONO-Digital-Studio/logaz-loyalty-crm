@@ -6,8 +6,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PlusIcon } from "lucide-react";
 import ContentList from "@/components/Content/ContentList";
 import ContentCategories from "@/components/Content/ContentCategories";
+import { useNavigate } from "react-router-dom";
 
 const ContentPage = () => {
+  const navigate = useNavigate();
+
   useEffect(() => {
     document.title = "Контент | ЛОГАЗ SV";
   }, []);
@@ -21,7 +24,10 @@ const ContentPage = () => {
             Создание и редактирование публикаций, статей и материалов
           </p>
         </div>
-        <Button className="bg-logaz-blue">
+        <Button 
+          className="bg-logaz-blue"
+          onClick={() => navigate("/content/editor")}
+        >
           <PlusIcon className="mr-2" size={18} />
           Создать публикацию
         </Button>

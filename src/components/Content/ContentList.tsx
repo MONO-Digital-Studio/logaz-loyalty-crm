@@ -1,5 +1,6 @@
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { 
   Table, 
   TableBody, 
@@ -27,6 +28,7 @@ import {
   Eye 
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
 
 // Примерные данные для отображения
 const contentItems = [
@@ -70,6 +72,7 @@ const contentItems = [
 
 const ContentList = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
   
   const getStatusColor = (status: string) => {
     switch(status) {
@@ -88,6 +91,19 @@ const ContentList = () => {
     item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
     item.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
+
+  const handleEdit = (id: number) => {
+    navigate(`/content/editor/${id}`);
+  };
+
+  const handleDelete = (id: number) => {
+    // In a real app, this would call an API to delete the item
+    toast.success("Публикация удалена");
+  };
+
+  const handleView = (id: number) => {
+    toast.info("Просмотр публикации (функция в разработке)");
+  };
 
   return (
     <Card>
@@ -121,7 +137,11 @@ const ContentList = () => {
             <TableBody>
               {filteredContent.length > 0 ? (
                 filteredContent.map((item) => (
-                  <TableRow key={item.id}>
+                  <TableRow 
+                    key={item.id}
+                    className="cursor-pointer hover:bg-muted/50"
+                    onClick={() => handleEdit(item.id)}
+                  >
                     <TableCell className="font-medium">{item.title}</TableCell>
                     <TableCell>{item.category}</TableCell>
                     <TableCell>
@@ -132,7 +152,7 @@ const ContentList = () => {
                     <TableCell>{item.author}</TableCell>
                     <TableCell>{new Date(item.date).toLocaleDateString('ru-RU')}</TableCell>
                     <TableCell>{item.views}</TableCell>
-                    <TableCell>
+                    <TableCell onClick={(e) => e.stopPropagation()}>
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button variant="ghost" className="h-8 w-8 p-0">
@@ -141,16 +161,19 @@ const ContentList = () => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                           <DropdownMenuLabel>Действия</DropdownMenuLabel>
-                          <DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handleEdit(item.id)}>
                             <Edit className="mr-2 h-4 w-4" />
                             <span>Редактировать</span>
                           </DropdownMenuItem>
-                          <DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handleView(item.id)}>
                             <Eye className="mr-2 h-4 w-4" />
                             <span>Просмотр</span>
                           </DropdownMenuItem>
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem className="text-destructive">
+                          <DropdownMenuItem 
+                            className="text-destructive" 
+                            onClick={() => handleDelete(item.id)}
+                          >
                             <Trash2 className="mr-2 h-4 w-4" />
                             <span>Удалить</span>
                           </DropdownMenuItem>
