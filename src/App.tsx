@@ -14,6 +14,8 @@ import SettingsPage from "./pages/SettingsPage";
 import ContentPage from "./pages/ContentPage";
 import ContentEditorPage from "./pages/ContentEditorPage";
 import NotFound from "./pages/NotFound";
+import ContactCenterPage from "./pages/ContactCenterPage";
+import DialogsPage from "./pages/ContactCenter/DialogsPage";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,8 @@ const App = () => (
             <Route path="/content" element={<ContentPage />} />
             <Route path="/content/editor" element={<ContentEditorPage />} />
             <Route path="/content/editor/:id" element={<ContentEditorPage />} />
+            <Route path="/contact-center" element={<ContactCenterPage />} />
+            <Route path="/contact-center/dialogs" element={<DialogsPage />} />
             <Route path="/settings/*" element={<SettingsPage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
