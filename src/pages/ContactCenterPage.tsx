@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -9,6 +9,13 @@ const ContactCenterPage: React.FC = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   
+  useEffect(() => {
+    // Автоматически перенаправлять на страницу диалогов, если открыта базовая страница
+    if (currentPath === '/contact-center') {
+      navigate('/contact-center/dialogs');
+    }
+  }, [currentPath, navigate]);
+
   const handleTabChange = (value: string) => {
     navigate(`/contact-center/${value}`);
   };
