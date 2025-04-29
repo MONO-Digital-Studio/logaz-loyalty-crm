@@ -9,7 +9,6 @@ import CompanySettings from "../components/Settings/CompanySettings";
 import DisplaySettings from "../components/Settings/DisplaySettings";
 import PaymentSettings from "../components/Settings/PaymentSettings";
 import UserAccessSettings from "../components/Settings/UserAccessSettings";
-import EmployeeSettings from "../components/Settings/EmployeeSettings";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const SettingsPage = () => {
@@ -29,8 +28,6 @@ const SettingsPage = () => {
     // For tabs with subtabs, navigate to the default subtab
     if (value === 'access') {
       navigate(`/settings/${value}/users`);
-    } else if (value === 'employees') {
-      navigate(`/settings/${value}/list`);
     } else {
       navigate(`/settings/${value}`);
     }
@@ -49,19 +46,6 @@ const SettingsPage = () => {
             <TabsList className="mb-4">
               <TabsTrigger value="users">Пользователи</TabsTrigger>
               <TabsTrigger value="roles">Роли и разрешения</TabsTrigger>
-            </TabsList>
-          </Tabs>
-        );
-      case 'employees':
-        return (
-          <Tabs
-            defaultValue={pathname.includes('/employees/structure') ? 'structure' : 'list'}
-            value={pathname.includes('/employees/structure') ? 'structure' : 'list'}
-            onValueChange={(value) => navigate(`/settings/employees/${value}`)}
-          >
-            <TabsList className="mb-4">
-              <TabsTrigger value="list">Сотрудники</TabsTrigger>
-              <TabsTrigger value="structure">Структура</TabsTrigger>
             </TabsList>
           </Tabs>
         );
@@ -93,7 +77,6 @@ const SettingsPage = () => {
           <TabsTrigger value="display">Отображение</TabsTrigger>
           <TabsTrigger value="payments">Платежи</TabsTrigger>
           <TabsTrigger value="access">Доступ</TabsTrigger>
-          <TabsTrigger value="employees">Сотрудники</TabsTrigger>
         </TabsList>
 
         {/* Show subtabs only for the active section */}
@@ -128,10 +111,6 @@ const SettingsPage = () => {
 
         <TabsContent value="access">
           <UserAccessSettings />
-        </TabsContent>
-
-        <TabsContent value="employees">
-          <EmployeeSettings />
         </TabsContent>
       </Tabs>
     </div>

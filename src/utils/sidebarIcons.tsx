@@ -24,7 +24,8 @@ import {
   Cog,
   ShieldCheck,
   User,
-  Link
+  Link,
+  UserRound
 } from 'lucide-react';
 
 export const getIconForItem = (id: string) => {
@@ -47,6 +48,8 @@ export const getIconForItem = (id: string) => {
       return <Map size={18} />;
     case 'campaigns':
       return <Mail size={18} />;
+    case 'employees':
+      return <UserRound size={18} />;
     case 'settings':
       return <Settings size={18} />;
     case 'system':
@@ -80,6 +83,15 @@ export const getIconForSubItem = (parentId: string, childId: string) => {
     switch (actualChildId) {
       case 'stores':
         return <Store size={14} />;
+      default:
+        return <ChevronRight size={14} />;
+    }
+  } else if (actualParentId === 'employees') {
+    switch (actualChildId) {
+      case 'list':
+        return <Users size={14} />;
+      case 'structure':
+        return <UserCheck size={14} />;
       default:
         return <ChevronRight size={14} />;
     }
