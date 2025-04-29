@@ -6,6 +6,7 @@ import ProfileSettings from "../components/Settings/ProfileSettings";
 import SecuritySettings from "../components/Settings/SecuritySettings";
 import NotificationSettings from "../components/Settings/NotificationSettings";
 import CompanySettings from "../components/Settings/CompanySettings";
+import IntegrationSettings from "../components/Settings/IntegrationSettings";
 
 const SettingsPage = () => {
   useEffect(() => {
@@ -27,6 +28,7 @@ const SettingsPage = () => {
           <TabsTrigger value="security">Безопасность</TabsTrigger>
           <TabsTrigger value="notifications">Уведомления</TabsTrigger>
           <TabsTrigger value="company">Компания</TabsTrigger>
+          <TabsTrigger value="integrations">Интеграции</TabsTrigger>
         </TabsList>
 
         <TabsContent value="profile">
@@ -43,6 +45,10 @@ const SettingsPage = () => {
 
         <TabsContent value="company">
           <CompanySettings />
+        </TabsContent>
+
+        <TabsContent value="integrations">
+          <IntegrationSettings />
         </TabsContent>
       </Tabs>
     </div>
