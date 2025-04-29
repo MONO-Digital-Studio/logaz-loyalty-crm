@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
 import { productCategories } from "../data/mockData";
-import { Search } from "lucide-react";
+import { Search, Plus, FileText, ArrowUpDown } from "lucide-react";
+import ProductDetailsModal from "../components/Products/ProductDetailsModal";
+import CategoryForm from "../components/Products/CategoryForm";
 
 const mockProducts = [
   { id: 1, name: "Дизельное топливо", category: "Топливо", price: 58.50, inStock: true },
@@ -24,25 +26,82 @@ const mockProducts = [
 const ProductsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(mockProducts);
+  const [selectedProduct, setSelectedProduct] = useState<typeof mockProducts[0] | undefined>(undefined);
+  const [selectedCategory, setSelectedCategory] = useState<typeof productCategories[0] | undefined>(undefined);
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+  const [sortConfig, setSortConfig] = useState<{
+    key: string;
+    direction: 'ascending' | 'descending';
+  } | null>(null);
 
   useEffect(() => {
     document.title = "Товары и категории | ЛОГАЗ SV";
-    setFilteredProducts(
-      mockProducts.filter(
-        (product) =>
-          product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          product.category.toLowerCase().includes(searchQuery.toLowerCase())
-      )
+    
+    let sorted = [...mockProducts];
+    
+    if (sortConfig) {
+      sorted.sort((a, b) => {
+        if (a[sortConfig.key as keyof typeof a] < b[sortConfig.key as keyof typeof b]) {
+          return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (a[sortConfig.key as keyof typeof a] > b[sortConfig.key as keyof typeof b]) {
+          return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    
+    const filtered = sorted.filter(
+      (product) =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.category.toLowerCase().includes(searchQuery.toLowerCase())
     );
-  }, [searchQuery]);
+    
+    setFilteredProducts(filtered);
+  }, [searchQuery, sortConfig]);
+
+  const requestSort = (key: string) => {
+    let direction: 'ascending' | 'descending' = 'ascending';
+    if (sortConfig && sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+  };
+
+  const handleAddProduct = () => {
+    setSelectedProduct(undefined);
+    setIsProductModalOpen(true);
+  };
+
+  const handleEditProduct = (product: typeof mockProducts[0]) => {
+    setSelectedProduct(product);
+    setIsProductModalOpen(true);
+  };
+
+  const handleAddCategory = () => {
+    setSelectedCategory(undefined);
+    setIsCategoryModalOpen(true);
+  };
+
+  const handleEditCategory = (category: typeof productCategories[0]) => {
+    setSelectedCategory(category);
+    setIsCategoryModalOpen(true);
+  };
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Товары и категории</h1>
         <div className="flex space-x-2">
-          <Button variant="default" className="bg-logaz-blue">Добавить товар</Button>
-          <Button variant="outline">Экспорт</Button>
+          <Button variant="default" className="bg-logaz-blue" onClick={handleAddProduct}>
+            <Plus className="mr-2 h-4 w-4" />
+            Добавить товар
+          </Button>
+          <Button variant="outline">
+            <FileText className="mr-2 h-4 w-4" />
+            Экспорт
+          </Button>
         </div>
       </div>
 
@@ -74,9 +133,24 @@ const ProductsPage = () => {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Наименование</TableHead>
-                    <TableHead>Категория</TableHead>
-                    <TableHead>Цена</TableHead>
+                    <TableHead onClick={() => requestSort('name')} className="cursor-pointer">
+                      <div className="flex items-center">
+                        Наименование
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                      </div>
+                    </TableHead>
+                    <TableHead onClick={() => requestSort('category')} className="cursor-pointer">
+                      <div className="flex items-center">
+                        Категория
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                      </div>
+                    </TableHead>
+                    <TableHead onClick={() => requestSort('price')} className="cursor-pointer">
+                      <div className="flex items-center">
+                        Цена
+                        <ArrowUpDown className="ml-2 h-4 w-4" />
+                      </div>
+                    </TableHead>
                     <TableHead>Наличие</TableHead>
                     <TableHead>Действия</TableHead>
                   </TableRow>
@@ -96,7 +170,13 @@ const ProductsPage = () => {
                       </TableCell>
                       <TableCell>
                         <div className="flex space-x-2">
-                          <Button variant="outline" size="sm">Редактировать</Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            onClick={() => handleEditProduct(product)}
+                          >
+                            Редактировать
+                          </Button>
                           <Button variant="destructive" size="sm">Удалить</Button>
                         </div>
                       </TableCell>
@@ -104,6 +184,12 @@ const ProductsPage = () => {
                   ))}
                 </TableBody>
               </Table>
+              
+              {filteredProducts.length === 0 && (
+                <div className="text-center py-8">
+                  <p className="text-muted-foreground">Товары не найдены</p>
+                </div>
+              )}
             </CardContent>
           </Card>
         </TabsContent>
@@ -130,7 +216,13 @@ const ProductsPage = () => {
                       <TableCell>{category.productCount}</TableCell>
                       <TableCell>
                         <div className="flex space-x-2">
-                          <Button variant="outline" size="sm">Редактировать</Button>
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            onClick={() => handleEditCategory(category)}
+                          >
+                            Редактировать
+                          </Button>
                           <Button variant="destructive" size="sm">Удалить</Button>
                         </div>
                       </TableCell>
@@ -138,11 +230,32 @@ const ProductsPage = () => {
                   ))}
                 </TableBody>
               </Table>
-              <Button variant="outline" className="mt-4">Добавить категорию</Button>
+              <Button 
+                variant="outline" 
+                className="mt-4"
+                onClick={handleAddCategory}
+              >
+                <Plus className="mr-2 h-4 w-4" />
+                Добавить категорию
+              </Button>
             </CardContent>
           </Card>
         </TabsContent>
       </Tabs>
+      
+      {/* Modals */}
+      <ProductDetailsModal 
+        isOpen={isProductModalOpen}
+        onClose={() => setIsProductModalOpen(false)}
+        product={selectedProduct}
+        isEditing={Boolean(selectedProduct)}
+      />
+      
+      <CategoryForm 
+        isOpen={isCategoryModalOpen}
+        onClose={() => setIsCategoryModalOpen(false)}
+        category={selectedCategory}
+      />
     </div>
   );
 };
