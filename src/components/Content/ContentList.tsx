@@ -236,7 +236,6 @@ const ContentList: React.FC<ContentListProps> = ({ contentType }) => {
                 <TableHead>Название</TableHead>
                 <TableHead>Категория</TableHead>
                 <TableHead>Статус</TableHead>
-                <TableHead>Автор</TableHead>
                 <TableHead>Дата</TableHead>
                 <TableHead>Просмотры</TableHead>
                 <TableHead className="w-[80px]"></TableHead>
@@ -260,7 +259,6 @@ const ContentList: React.FC<ContentListProps> = ({ contentType }) => {
                         {item.status}
                       </Badge>
                     </TableCell>
-                    <TableCell>{item.author}</TableCell>
                     <TableCell>{new Date(item.date).toLocaleDateString('ru-RU')}</TableCell>
                     <TableCell>{item.views}</TableCell>
                     <TableCell onClick={(e) => e.stopPropagation()}>
@@ -295,7 +293,7 @@ const ContentList: React.FC<ContentListProps> = ({ contentType }) => {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={8} className="h-24 text-center">
+                  <TableCell colSpan={7} className="h-24 text-center">
                     По вашему запросу ничего не найдено.
                   </TableCell>
                 </TableRow>
