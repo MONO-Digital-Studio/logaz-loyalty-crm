@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { PlusIcon, FileText, Newspaper } from "lucide-react";
+import { PlusIcon, FileText, Newspaper, BadgePercent } from "lucide-react";
 import ContentList from "@/components/Content/ContentList";
 import ContentCategories from "@/components/Content/ContentCategories";
 import { useNavigate } from "react-router-dom";
@@ -42,6 +42,10 @@ const ContentPage = () => {
             <FileText size={16} />
             Текстовые страницы
           </TabsTrigger>
+          <TabsTrigger value="promotions" className="flex items-center gap-2">
+            <BadgePercent size={16} />
+            Акции
+          </TabsTrigger>
           <TabsTrigger value="categories">Категории</TabsTrigger>
         </TabsList>
 
@@ -51,6 +55,10 @@ const ContentPage = () => {
         
         <TabsContent value="pages">
           <ContentList contentType="pages" />
+        </TabsContent>
+        
+        <TabsContent value="promotions">
+          <ContentList contentType="promotions" />
         </TabsContent>
         
         <TabsContent value="categories">

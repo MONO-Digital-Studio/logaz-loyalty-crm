@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { 
@@ -101,8 +100,39 @@ const pageItems = [
   }
 ];
 
+// Sample data for promotions
+const promotionItems = [
+  {
+    id: 8,
+    title: "Скидка 20% на все услуги",
+    category: "Акции",
+    status: "Активно",
+    author: "Александр Домрачев",
+    date: "2025-04-20",
+    views: 245,
+  },
+  {
+    id: 9,
+    title: "Летняя распродажа",
+    category: "Акции",
+    status: "Запланировано",
+    author: "Александр Домрачев",
+    date: "2025-05-15",
+    views: 0,
+  },
+  {
+    id: 10,
+    title: "Черная пятница",
+    category: "Акции",
+    status: "Черновик",
+    author: "Александр Домрачев",
+    date: "2025-11-20",
+    views: 0,
+  }
+];
+
 interface ContentListProps {
-  contentType: "news" | "pages";
+  contentType: "news" | "pages" | "promotions";
 }
 
 const ContentList: React.FC<ContentListProps> = ({ contentType }) => {
@@ -110,11 +140,25 @@ const ContentList: React.FC<ContentListProps> = ({ contentType }) => {
   const navigate = useNavigate();
   
   // Select content based on type
-  const contentItems = contentType === "news" ? newsItems : pageItems;
+  let contentItems;
+  switch (contentType) {
+    case "news":
+      contentItems = newsItems;
+      break;
+    case "pages":
+      contentItems = pageItems;
+      break;
+    case "promotions":
+      contentItems = promotionItems;
+      break;
+    default:
+      contentItems = [];
+  }
   
   const getStatusColor = (status: string) => {
     switch(status) {
       case "Опубликовано":
+      case "Активно":
         return "bg-green-100 text-green-800";
       case "Черновик":
         return "bg-gray-100 text-gray-800";
@@ -136,11 +180,36 @@ const ContentList: React.FC<ContentListProps> = ({ contentType }) => {
 
   const handleDelete = (id: number) => {
     // In a real app, this would call an API to delete the item
-    toast.success(contentType === "news" ? "Новость удалена" : "Страница удалена");
+    let message = "";
+    switch (contentType) {
+      case "news":
+        message = "Новость удалена";
+        break;
+      case "pages":
+        message = "Страница удалена";
+        break;
+      case "promotions":
+        message = "Акция удалена";
+        break;
+    }
+    toast.success(message);
   };
 
   const handleView = (id: number) => {
     toast.info("Просмотр публикации (функция в разработке)");
+  };
+
+  const getContentTypeName = () => {
+    switch (contentType) {
+      case "news":
+        return "новостей";
+      case "pages":
+        return "страниц";
+      case "promotions":
+        return "акций";
+      default:
+        return "";
+    }
   };
 
   return (
@@ -150,7 +219,7 @@ const ContentList: React.FC<ContentListProps> = ({ contentType }) => {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder={contentType === "news" ? "Поиск новостей..." : "Поиск страниц..."}
+              placeholder={`Поиск ${getContentTypeName()}...`}
               className="pl-10"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
