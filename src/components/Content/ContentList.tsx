@@ -19,6 +19,7 @@ interface ContentListProps {
 
 const ContentList: React.FC<ContentListProps> = ({ contentType }) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeFilters, setActiveFilters] = useState<string[]>([]);
   const navigate = useNavigate();
   
   // Select content based on type
@@ -37,17 +38,50 @@ const ContentList: React.FC<ContentListProps> = ({ contentType }) => {
   
   const contentItems = getContentItems();
   
-  const filteredContent = contentItems.filter(item =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    item.category.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  // Get unique categories for filter options
+  const filterOptions = Array.from(new Set(contentItems.map(item => item.category)))
+    .map(category => ({
+      value: category,
+      label: category
+    }));
+
+  // Add status filter options
+  const statusOptions = Array.from(new Set(contentItems.map(item => item.status)))
+    .map(status => ({
+      value: `status:${status}`,
+      label: `Статус: ${status}`
+    }));
+
+  const allFilterOptions = [...filterOptions, ...statusOptions];
+  
+  // Filter content based on search query and active filters
+  const filteredContent = contentItems.filter(item => {
+    // Search filter
+    const matchesSearch = searchQuery === "" || 
+      item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      item.category.toLowerCase().includes(searchQuery.toLowerCase());
+    
+    // Category filters
+    const categoryFilters = activeFilters.filter(f => !f.startsWith('status:'));
+    const matchesCategory = categoryFilters.length === 0 || 
+      categoryFilters.includes(item.category);
+    
+    // Status filters
+    const statusFilters = activeFilters
+      .filter(f => f.startsWith('status:'))
+      .map(f => f.replace('status:', ''));
+    const matchesStatus = statusFilters.length === 0 || 
+      statusFilters.includes(item.status);
+    
+    return matchesSearch && matchesCategory && matchesStatus;
+  });
 
   const handleEdit = (id: number) => {
     navigate(`/content/editor/${id}`);
   };
 
   const handleDelete = (id: number) => {
-    // In a real app, this would call an API to delete the item
+    // В реальном приложении, здесь был бы вызов API для удаления элемента
     let message = "";
     switch (contentType) {
       case "news":
@@ -70,6 +104,10 @@ const ContentList: React.FC<ContentListProps> = ({ contentType }) => {
   const handleSearchChange = (query: string) => {
     setSearchQuery(query);
   };
+  
+  const handleFilterChange = (filters: string[]) => {
+    setActiveFilters(filters);
+  };
 
   const searchPlaceholder = `Поиск ${getContentTypeName(contentType)}...`;
 
@@ -80,6 +118,8 @@ const ContentList: React.FC<ContentListProps> = ({ contentType }) => {
           placeholder={searchPlaceholder}
           searchQuery={searchQuery}
           onSearchChange={handleSearchChange}
+          onFilterChange={handleFilterChange}
+          filterOptions={allFilterOptions}
         />
 
         <ContentTable
