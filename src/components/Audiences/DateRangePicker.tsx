@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -7,11 +6,7 @@ import { addDays, format } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
 import { CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
-
-interface DateRange {
-  from: Date;
-  to?: Date;
-}
+import { DateRange } from '@/hooks/useDateRangeSelection';
 
 interface DateRangePickerProps {
   date: DateRange;

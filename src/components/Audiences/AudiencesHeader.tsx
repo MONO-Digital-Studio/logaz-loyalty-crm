@@ -3,11 +3,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import DateRangePicker from './DateRangePicker';
-
-interface DateRange {
-  from: Date;
-  to?: Date;
-}
+import { DateRange } from '@/hooks/useDateRangeSelection';
 
 interface AudiencesHeaderProps {
   date: DateRange;

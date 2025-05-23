@@ -1,39 +1,16 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import AudienceStats from '@/components/Audiences/AudienceStats';
 import AudiencesHeader from '@/components/Audiences/AudiencesHeader';
 import AudiencesTable from '@/components/Audiences/AudiencesTable';
-import { audiencesData, getAudienceStats } from '@/data/audiencesData';
+import { getAudienceStats } from '@/data/audiencesData';
+import { useAudienceSearch } from '@/hooks/useAudienceSearch';
+import { useDateRangeSelection } from '@/hooks/useDateRangeSelection';
 
 const AudiencesPage: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filteredAudiences, setFilteredAudiences] = useState(audiencesData);
-  
-  const today = new Date();
-  const [date, setDate] = useState<{
-    from: Date;
-    to?: Date;
-  }>({
-    from: today,
-    to: today,
-  });
-  
+  const { date, setDate } = useDateRangeSelection();
+  const { searchQuery, filteredAudiences, handleSearch } = useAudienceSearch();
   const stats = getAudienceStats();
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value.toLowerCase();
-    setSearchQuery(query);
-    
-    if (query) {
-      const filtered = audiencesData.filter(audience => 
-        audience.name.toLowerCase().includes(query) || 
-        audience.description.toLowerCase().includes(query)
-      );
-      setFilteredAudiences(filtered);
-    } else {
-      setFilteredAudiences(audiencesData);
-    }
-  };
 
   return (
     <div className="space-y-6">
