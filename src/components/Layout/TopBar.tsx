@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Bell, Search, X } from 'lucide-react';
-import { notifications } from '../../data/mockData';
+import { useNotifications } from '@/hooks/useNotifications';
 
 interface TopBarProps {
   toggleSidebar: () => void;
@@ -9,9 +9,13 @@ interface TopBarProps {
 
 const TopBar: React.FC<TopBarProps> = ({ toggleSidebar }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [showNotifications, setShowNotifications] = useState(false);
-
-  const unreadNotifications = notifications.filter(n => !n.read).length;
+  const { 
+    notifications, 
+    showNotifications, 
+    unreadCount, 
+    toggleNotifications, 
+    closeNotifications 
+  } = useNotifications();
 
   return (
     <header className="bg-white border-b border-gray-200 flex items-center justify-between p-4 h-16">
@@ -32,12 +36,12 @@ const TopBar: React.FC<TopBarProps> = ({ toggleSidebar }) => {
         <div className="relative">
           <button 
             className="p-2 rounded-full hover:bg-gray-100 relative"
-            onClick={() => setShowNotifications(!showNotifications)}
+            onClick={toggleNotifications}
           >
             <Bell size={20} />
-            {unreadNotifications > 0 && (
+            {unreadCount > 0 && (
               <span className="absolute top-0 right-0 bg-logaz-orange text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
-                {unreadNotifications}
+                {unreadCount}
               </span>
             )}
           </button>
@@ -48,7 +52,7 @@ const TopBar: React.FC<TopBarProps> = ({ toggleSidebar }) => {
                 <h3 className="font-semibold">Уведомления</h3>
                 <button 
                   className="p-1 rounded-full hover:bg-gray-100"
-                  onClick={() => setShowNotifications(false)}
+                  onClick={closeNotifications}
                 >
                   <X size={16} />
                 </button>

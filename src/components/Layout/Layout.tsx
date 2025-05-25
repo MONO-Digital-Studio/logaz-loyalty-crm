@@ -2,9 +2,7 @@
 import React from 'react';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
-import AIPanel from '../ai-assistant/shared/AIPanel';
-import AIAssistantPanel from '../individuals/ai-assistant/AIAssistantPanel';
-import LegalEntitiesAIPanel from '../legal-entities/ai-assistant/LegalEntitiesAIPanel';
+import AIPanelsContainer from './AIPanelsContainer';
 import { 
   SidebarProvider, 
   SidebarInset
@@ -12,17 +10,14 @@ import {
 import { AIProvider } from '@/contexts/AIContext';
 import { IndividualsAIProvider } from '@/contexts/IndividualsAIContext';
 import { LegalEntitiesAIProvider } from '@/contexts/LegalEntitiesAIContext';
+import { useSidebarState } from '@/hooks/useSidebarState';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const [sidebarOpen, setSidebarOpen] = React.useState(true);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+  const { isOpen: sidebarOpen, toggle: toggleSidebar } = useSidebarState(true);
 
   return (
     <SidebarProvider defaultOpen={true}>
@@ -37,9 +32,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   {children}
                 </main>
               </SidebarInset>
-              <AIPanel />
-              <AIAssistantPanel />
-              <LegalEntitiesAIPanel />
+              <AIPanelsContainer />
             </div>
           </LegalEntitiesAIProvider>
         </IndividualsAIProvider>
