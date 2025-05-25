@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   LayoutDashboard, 
@@ -31,7 +30,6 @@ import {
   Receipt,
   Activity,
   Phone,
-  Bot,
   TrendingUp,
   Fuel,
   DollarSign
@@ -59,7 +57,7 @@ export const getIconForItem = (id: string) => {
     case 'le-analytics':
       return <TrendingUp size={18} />;
     case 'le-ai-assistant':
-      return <Bot size={18} />;
+      return <MessageSquare size={18} />;
     case 'le-settings':
       return <Settings size={18} />;
     case 'products':
