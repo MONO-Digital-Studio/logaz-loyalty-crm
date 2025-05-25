@@ -2,9 +2,10 @@
 import React from 'react';
 import { mainIconMap, subIconMappings, defaultIcon } from './iconMappings';
 
-export const getIconForItem = (id: string) => {
+export const getIconForItem = (id: string, isCollapsed: boolean = false) => {
   const IconComponent = mainIconMap[id as keyof typeof mainIconMap];
-  return IconComponent ? React.createElement(IconComponent, { size: 18 }) : React.createElement(defaultIcon, { size: 18 });
+  const size = isCollapsed ? 24 : 18;
+  return IconComponent ? React.createElement(IconComponent, { size }) : React.createElement(defaultIcon, { size });
 };
 
 export const getIconForSubItem = (parentId: string, childId: string) => {

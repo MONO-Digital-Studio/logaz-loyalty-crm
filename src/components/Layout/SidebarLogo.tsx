@@ -16,9 +16,9 @@ const SidebarLogo: React.FC<SidebarLogoProps> = ({ isOpen }) => {
         />
       ) : (
         <img 
-          src="/lovable-uploads/57c42d09-8af7-4d89-b6d3-69515b834828.png" 
+          src="/lovable-uploads/943c1851-114c-432d-8498-cdadc4b2b112.png" 
           alt="ЛС" 
-          className="h-8 w-8 object-contain"
+          className="h-10 w-10 object-contain"
         />
       )}
     </div>

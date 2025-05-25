@@ -23,6 +23,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     );
   };
 
+  const getIconForItemWithCollapse = (id: string) => {
+    return getIconForItem(id, !isOpen);
+  };
+
   return (
     <aside
       className={`bg-sidebar text-sidebar-foreground transition-all duration-300 flex flex-col h-full ${
@@ -43,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
                 isOpen={isOpen}
                 expandedItems={expandedItems}
                 toggleItem={toggleItem}
-                getIconForItem={getIconForItem}
+                getIconForItem={getIconForItemWithCollapse}
                 getIconForSubItem={getIconForSubItem}
               />
             ))}
