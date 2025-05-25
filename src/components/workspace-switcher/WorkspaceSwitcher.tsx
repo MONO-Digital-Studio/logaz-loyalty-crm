@@ -12,18 +12,17 @@ const WorkspaceSwitcher: React.FC = () => {
     switchWorkspace(value);
   };
 
+  const getWorkspaceName = (workspace: WorkspaceType) => {
+    return workspace === 'individuals' ? 'Физические лица' : 'Юридические лица';
+  };
+
   return (
     <div className="workspace-switcher mb-6 p-4 border-b border-sidebar-border">
       <Select value={currentWorkspace} onValueChange={handleWorkspaceChange} disabled={isLoading}>
         <SelectTrigger className="w-full bg-sidebar-accent/50 border-sidebar-border">
-          <div className="flex items-center">
-            {currentWorkspace === 'individuals' ? (
-              <Users className="w-4 h-4 mr-2 text-sidebar-foreground" />
-            ) : (
-              <Building2 className="w-4 h-4 mr-2 text-sidebar-foreground" />
-            )}
-            <SelectValue placeholder="Выберите рабочее пространство" />
-          </div>
+          <SelectValue placeholder="Выберите рабочее пространство">
+            {getWorkspaceName(currentWorkspace)}
+          </SelectValue>
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="individuals" className="cursor-pointer">
