@@ -33,20 +33,22 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
 
       {isOpen && <WorkspaceSwitcher />}
 
-      <nav className="flex-1 overflow-y-auto py-4">
-        <ul className="space-y-1">
-          {navigationItems.map((item) => (
-            <SidebarNavItem
-              key={item.id}
-              item={item}
-              isOpen={isOpen}
-              expandedItems={expandedItems}
-              toggleItem={toggleItem}
-              getIconForItem={getIconForItem}
-              getIconForSubItem={getIconForSubItem}
-            />
-          ))}
-        </ul>
+      <nav className="flex-1 overflow-hidden py-4">
+        <div className="h-full overflow-y-auto scrollbar-hide">
+          <ul className="space-y-1">
+            {navigationItems.map((item) => (
+              <SidebarNavItem
+                key={item.id}
+                item={item}
+                isOpen={isOpen}
+                expandedItems={expandedItems}
+                toggleItem={toggleItem}
+                getIconForItem={getIconForItem}
+                getIconForSubItem={getIconForSubItem}
+              />
+            ))}
+          </ul>
+        </div>
       </nav>
 
       <SidebarAISection isOpen={isOpen} />

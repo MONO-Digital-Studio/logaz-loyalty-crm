@@ -137,4 +137,14 @@
   .btn-cancel {
     @apply bg-logaz-gray text-logaz-dark-gray px-4 py-2 rounded hover:bg-opacity-90 transition-colors;
   }
+
+  /* Скрыть полосу прокрутки */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
