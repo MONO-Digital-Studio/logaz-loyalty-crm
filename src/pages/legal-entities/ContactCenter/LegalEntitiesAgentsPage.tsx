@@ -64,12 +64,12 @@ const LegalEntitiesAgentsPage: React.FC = () => {
   const allSkills = Array.from(new Set(agents.flatMap(agent => agent.skills)));
 
   return (
-    <div className="flex h-[calc(100vh-12rem)]">
+    <div className="flex h-[calc(100vh-10rem)]">
       {/* Левая панель с фильтрами и списком операторов */}
-      <div className="w-1/3 pr-4 flex flex-col">
-        <Card className="mb-4">
-          <CardContent className="pt-4">
-            <div className="flex gap-2 mb-4">
+      <div className="w-1/3 pr-3 flex flex-col">
+        <Card className="mb-3">
+          <CardContent className="pt-3">
+            <div className="flex gap-2 mb-3">
               <div className="relative flex-1">
                 <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -113,7 +113,7 @@ const LegalEntitiesAgentsPage: React.FC = () => {
         </Card>
         
         <Card className="flex-1 overflow-hidden">
-          <CardHeader className="py-3 flex justify-between items-center">
+          <CardHeader className="py-2 flex justify-between items-center">
             <CardTitle className="text-lg">
               Операторы ЮЛ
               <span className="text-sm font-normal text-muted-foreground ml-2">
@@ -124,7 +124,7 @@ const LegalEntitiesAgentsPage: React.FC = () => {
               <Plus className="h-4 w-4 mr-1" /> Добавить
             </Button>
           </CardHeader>
-          <CardContent className="p-0 h-[calc(100%-4rem)] overflow-y-auto">
+          <CardContent className="p-0 h-[calc(100%-3rem)] overflow-y-auto">
             <AgentsList 
               agents={filteredAgents}
               selectedId={selectedAgent?.id}
@@ -135,7 +135,7 @@ const LegalEntitiesAgentsPage: React.FC = () => {
       </div>
       
       {/* Правая панель с деталями оператора */}
-      <div className="w-2/3 pl-4">
+      <div className="w-2/3 pl-3">
         {selectedAgent ? (
           <AgentDetails agent={selectedAgent} />
         ) : (

@@ -18,7 +18,7 @@ const TopBar: React.FC<TopBarProps> = ({ toggleSidebar }) => {
   } = useNotifications();
 
   return (
-    <header className="bg-white border-b border-gray-200 flex items-center justify-between p-4 h-16">
+    <header className="bg-white border-b border-gray-200 flex items-center justify-between px-4 py-2 h-14">
       <div className="flex items-center">
         <div className="relative hidden md:block">
           <input

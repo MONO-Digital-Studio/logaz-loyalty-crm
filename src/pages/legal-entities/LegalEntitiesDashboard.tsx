@@ -23,11 +23,11 @@ const LegalEntitiesDashboard: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Аналитика юридических лиц</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Аналитика юридических лиц</h1>
           <p className="text-muted-foreground text-sm">
             Обзор ключевых показателей и метрик корпоративных клиентов
           </p>
@@ -45,8 +45,8 @@ const LegalEntitiesDashboard: React.FC = () => {
       </div>
 
       {/* Metrics Cards */}
-      <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="p-4">
+      <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
+        <Card className="p-3">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
             <CardTitle className="text-sm font-medium">Общий баланс</CardTitle>
             <DollarSign className="h-4 w-4 text-muted-foreground" />
@@ -61,7 +61,7 @@ const LegalEntitiesDashboard: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card className="p-4">
+        <Card className="p-3">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
             <CardTitle className="text-sm font-medium">Активные карты</CardTitle>
             <CreditCard className="h-4 w-4 text-muted-foreground" />
@@ -76,7 +76,7 @@ const LegalEntitiesDashboard: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card className="p-4">
+        <Card className="p-3">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
             <CardTitle className="text-sm font-medium">Объем топлива</CardTitle>
             <Fuel className="h-4 w-4 text-muted-foreground" />
@@ -91,7 +91,7 @@ const LegalEntitiesDashboard: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card className="p-4">
+        <Card className="p-3">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
             <CardTitle className="text-sm font-medium">Транзакции сегодня</CardTitle>
             <Activity className="h-4 w-4 text-muted-foreground" />
@@ -109,7 +109,7 @@ const LegalEntitiesDashboard: React.FC = () => {
 
       {/* Warning Cards */}
       {dashboardMetrics.blockedCards > 0 && (
-        <Card className="border-red-200 bg-red-50 p-4">
+        <Card className="border-red-200 bg-red-50 p-3">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
             <CardTitle className="text-sm font-medium text-red-800">Заблокированные карты</CardTitle>
             <AlertTriangle className="h-4 w-4 text-red-600" />
@@ -126,13 +126,13 @@ const LegalEntitiesDashboard: React.FC = () => {
       )}
 
       {/* Recent Activity */}
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-3 md:grid-cols-2">
         <Card>
-          <CardHeader className="pb-3">
+          <CardHeader className="pb-2">
             <CardTitle className="text-lg">Последние клиенты</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="space-y-3">
+            <div className="space-y-2">
               {legalEntities.slice(0, 5).map((entity) => (
                 <div key={entity.id} className="flex items-center space-x-3">
                   <div className="w-8 h-8 rounded-lg bg-logaz-blue/10 flex items-center justify-center">
@@ -156,11 +156,11 @@ const LegalEntitiesDashboard: React.FC = () => {
         </Card>
 
         <Card>
-          <CardHeader className="pb-3">
+          <CardHeader className="pb-2">
             <CardTitle className="text-lg">Топ карты по балансу</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="space-y-3">
+            <div className="space-y-2">
               {fuelCards
                 .sort((a, b) => b.balance - a.balance)
                 .slice(0, 5)
