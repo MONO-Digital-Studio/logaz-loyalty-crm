@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { 
   Table, 
@@ -32,361 +31,34 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-
-// Образец данных для рассылок
-const campaignsData = {
-  email: [
-    {
-      id: 1,
-      title: "Новые функции платформы",
-      status: "Отправлена",
-      recipients: 1250,
-      openRate: "24%",
-      clickRate: "8%",
-      sentDate: "2025-04-15",
-    },
-    {
-      id: 2,
-      title: "Специальное предложение апреля",
-      status: "Черновик",
-      recipients: 0,
-      openRate: "0%",
-      clickRate: "0%",
-      sentDate: "",
-    },
-    {
-      id: 3,
-      title: "Обновление системы лояльности",
-      status: "Запланирована",
-      recipients: 1500,
-      openRate: "0%",
-      clickRate: "0%",
-      sentDate: "2025-05-01",
-    },
-  ],
-  push: [
-    {
-      id: 4,
-      title: "Акция выходного дня",
-      status: "Отправлена",
-      recipients: 2500,
-      openRate: "15%",
-      clickRate: "5%",
-      sentDate: "2025-04-20",
-    },
-    {
-      id: 5,
-      title: "Напоминание о заправке",
-      status: "Запланирована",
-      recipients: 1800,
-      openRate: "0%",
-      clickRate: "0%",
-      sentDate: "2025-05-05",
-    },
-  ],
-  telegram: [
-    {
-      id: 6,
-      title: "Уведомление о бонусах",
-      status: "Отправлена",
-      recipients: 890,
-      openRate: "32%",
-      clickRate: "12%",
-      sentDate: "2025-04-18",
-    },
-    {
-      id: 7,
-      title: "Новости компании",
-      status: "Черновик",
-      recipients: 0,
-      openRate: "0%",
-      clickRate: "0%",
-      sentDate: "",
-    },
-  ],
-  sms: [
-    {
-      id: 8,
-      title: "SMS подтверждение операции",
-      status: "Отправлена",
-      recipients: 345,
-      openRate: "98%",
-      clickRate: "3%",
-      sentDate: "2025-04-22",
-    },
-    {
-      id: 9,
-      title: "Код подтверждения",
-      status: "Запланирована",
-      recipients: 150,
-      openRate: "0%",
-      clickRate: "0%",
-      sentDate: "2025-05-03",
-    },
-  ],
-  templates: [
-    // Email шаблоны
-    {
-      id: 101,
-      title: "Приветственное письмо",
-      status: "Активен",
-      channel: "Email",
-      usedIn: 5,
-      lastUsed: "2025-04-20",
-      createdDate: "2025-01-10",
-    },
-    {
-      id: 102,
-      title: "Ежемесячный отчет",
-      status: "Активен",
-      channel: "Email",
-      usedIn: 12,
-      lastUsed: "2025-04-01",
-      createdDate: "2025-01-15",
-    },
-    {
-      id: 103,
-      title: "Напоминание о товаре в корзине",
-      status: "Активен",
-      channel: "Email",
-      usedIn: 8,
-      lastUsed: "2025-04-25",
-      createdDate: "2025-02-10",
-    },
-    // PUSH шаблоны
-    {
-      id: 104,
-      title: "Акция дня",
-      status: "Активен",
-      channel: "PUSH",
-      usedIn: 15,
-      lastUsed: "2025-04-23",
-      createdDate: "2025-02-05",
-    },
-    {
-      id: 105,
-      title: "Напоминание о заправке",
-      status: "Активен",
-      channel: "PUSH",
-      usedIn: 22,
-      lastUsed: "2025-04-24",
-      createdDate: "2025-01-20",
-    },
-    {
-      id: 106,
-      title: "Бонусные баллы начислены",
-      status: "Активен",
-      channel: "PUSH",
-      usedIn: 18,
-      lastUsed: "2025-04-22",
-      createdDate: "2025-02-12",
-    },
-    // Telegram шаблоны
-    {
-      id: 107,
-      title: "Уведомление о статусе заказа",
-      status: "Активен",
-      channel: "Telegram",
-      usedIn: 9,
-      lastUsed: "2025-04-21",
-      createdDate: "2025-03-01",
-    },
-    {
-      id: 108,
-      title: "Персональные предложения",
-      status: "Активен",
-      channel: "Telegram",
-      usedIn: 7,
-      lastUsed: "2025-04-19",
-      createdDate: "2025-03-05",
-    },
-    {
-      id: 109,
-      title: "Новости и обновления",
-      status: "Активен",
-      channel: "Telegram",
-      usedIn: 13,
-      lastUsed: "2025-04-20",
-      createdDate: "2025-02-28",
-    },
-    // SMS шаблоны
-    {
-      id: 110,
-      title: "Код подтверждения",
-      status: "Активен",
-      channel: "SMS",
-      usedIn: 45,
-      lastUsed: "2025-04-25",
-      createdDate: "2025-01-01",
-    },
-    {
-      id: 111,
-      title: "Уведомление о платеже",
-      status: "Активен",
-      channel: "SMS",
-      usedIn: 28,
-      lastUsed: "2025-04-24",
-      createdDate: "2025-01-15",
-    },
-    {
-      id: 112,
-      title: "Напоминание о записи",
-      status: "Активен",
-      channel: "SMS",
-      usedIn: 12,
-      lastUsed: "2025-04-18",
-      createdDate: "2025-02-20",
-    },
-  ],
-  automated: [
-    // Email автоматические рассылки
-    {
-      id: 201,
-      title: "Приветственная серия",
-      status: "Запущена",
-      channel: "Email",
-      recipients: 523,
-      completionRate: "78%",
-      createdDate: "2025-03-01",
-    },
-    {
-      id: 202,
-      title: "Возврат брошенной корзины",
-      status: "Запущена",
-      channel: "Email",
-      recipients: 214,
-      completionRate: "45%",
-      createdDate: "2025-03-15",
-    },
-    {
-      id: 203,
-      title: "Повторная активация клиентов",
-      status: "Приостановлена",
-      channel: "Email",
-      recipients: 1892,
-      completionRate: "62%",
-      createdDate: "2025-02-10",
-    },
-    // PUSH автоматические рассылки
-    {
-      id: 204,
-      title: "Напоминание о заправке",
-      status: "Запущена",
-      channel: "PUSH",
-      recipients: 1456,
-      completionRate: "85%",
-      createdDate: "2025-03-05",
-    },
-    {
-      id: 205,
-      title: "Геолокационные предложения",
-      status: "Запущена",
-      channel: "PUSH",
-      recipients: 892,
-      completionRate: "67%",
-      createdDate: "2025-03-12",
-    },
-    {
-      id: 206,
-      title: "Уведомления о бонусах",
-      status: "Приостановлена",
-      channel: "PUSH",
-      recipients: 2341,
-      completionRate: "72%",
-      createdDate: "2025-02-20",
-    },
-    // Telegram автоматические рассылки
-    {
-      id: 207,
-      title: "Персональные рекомендации",
-      status: "Запущена",
-      channel: "Telegram",
-      recipients: 678,
-      completionRate: "89%",
-      createdDate: "2025-03-08",
-    },
-    {
-      id: 208,
-      title: "Статус заказа в реальном времени",
-      status: "Запущена",
-      channel: "Telegram",
-      recipients: 445,
-      completionRate: "94%",
-      createdDate: "2025-03-18",
-    },
-    {
-      id: 209,
-      title: "Еженедельные новости",
-      status: "Приостановлена",
-      channel: "Telegram",
-      recipients: 1234,
-      completionRate: "56%",
-      createdDate: "2025-02-25",
-    },
-    // SMS автоматические рассылки
-    {
-      id: 210,
-      title: "Двухфакторная аутентификация",
-      status: "Запущена",
-      channel: "SMS",
-      recipients: 3456,
-      completionRate: "98%",
-      createdDate: "2025-01-15",
-    },
-    {
-      id: 211,
-      title: "Уведомления о платежах",
-      status: "Запущена",
-      channel: "SMS",
-      recipients: 2789,
-      completionRate: "96%",
-      createdDate: "2025-02-01",
-    },
-    {
-      id: 212,
-      title: "Напоминания о встречах",
-      status: "Приостановлена",
-      channel: "SMS",
-      recipients: 567,
-      completionRate: "82%",
-      createdDate: "2025-03-10",
-    },
-  ],
-};
+import { useTableData } from "@/hooks/useTableData";
+import { campaignsData } from "@/data/campaignsData";
 
 interface CampaignsListProps {
   campaignType: "email" | "push" | "telegram" | "sms" | "templates" | "automated";
 }
 
 const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
-  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-  
-  // Выбор данных в зависимости от типа
   const campaigns = campaignsData[campaignType] || [];
   
-  const getStatusColor = (status: string) => {
-    switch(status) {
-      case "Отправлена":
-        return "bg-green-100 text-green-800";
-      case "Черновик":
-        return "bg-gray-100 text-gray-800";
-      case "Запланирована":
-        return "bg-blue-100 text-blue-800";
-      case "Запущена":
-        return "bg-green-100 text-green-800";
-      case "Приостановлена":
-        return "bg-orange-100 text-orange-800";
-      case "Активен":
-        return "bg-green-100 text-green-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
+  const {
+    data: filteredCampaigns,
+    updateFilter,
+    filters
+  } = useTableData(campaigns, ['title']);
   
-  const filteredCampaigns = campaigns.filter(item =>
-    item.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const getStatusColor = (status: string) => {
+    const statusColors = {
+      "Отправлена": "bg-green-100 text-green-800",
+      "Черновик": "bg-gray-100 text-gray-800",
+      "Запланирована": "bg-blue-100 text-blue-800",
+      "Запущена": "bg-green-100 text-green-800",
+      "Приостановлена": "bg-orange-100 text-orange-800",
+      "Активен": "bg-green-100 text-green-800",
+    };
+    return statusColors[status as keyof typeof statusColors] || "bg-gray-100 text-gray-800";
+  };
 
   const handleEdit = (id: number) => {
     navigate(`/contact-center/campaigns/editor/${id}`);
@@ -405,14 +77,10 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
   };
 
   const handleTogglePause = (id: number, status: string) => {
-    if (status === "Приостановлена") {
-      toast.success("Рассылка возобновлена");
-    } else {
-      toast.success("Рассылка приостановлена");
-    }
+    const message = status === "Приостановлена" ? "Рассылка возобновлена" : "Рассылка приостановлена";
+    toast.success(message);
   };
 
-  // Различные заголовки и колонки в зависимости от типа
   const renderTableHeaders = () => {
     switch(campaignType) {
       case "email":
@@ -650,8 +318,8 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
             <Input
               placeholder="Поиск рассылок..."
               className="pl-10"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              value={filters.search}
+              onChange={(e) => updateFilter('search', e.target.value)}
             />
           </div>
           <Button variant="outline">Фильтры</Button>

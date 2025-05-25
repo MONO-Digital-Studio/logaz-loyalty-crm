@@ -3,53 +3,21 @@ import React from 'react';
 import { Brain, MessageCircle, Sparkles } from 'lucide-react';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
-import { useWorkspace } from '@/contexts/WorkspaceContext';
-import { useAI } from '@/contexts/AIContext';
-import { useIndividualsAI } from '@/contexts/IndividualsAIContext';
-import { useLegalEntitiesAI } from '@/contexts/LegalEntitiesAIContext';
+import { useWorkspaceAI } from '@/hooks/useWorkspaceAI';
 
 interface SidebarAISectionProps {
   isOpen: boolean;
 }
 
 const SidebarAISection: React.FC<SidebarAISectionProps> = ({ isOpen }) => {
-  const { currentWorkspace } = useWorkspace();
-  const { isEnabled: isAIEnabled, toggleAI, openPanel, metrics } = useAI();
-  const { 
-    openPanel: openIndividualsPanel, 
-    insights: individualsInsights 
-  } = useIndividualsAI();
   const {
-    openPanel: openLegalEntitiesPanel,
-    metrics: legalEntitiesMetrics
-  } = useLegalEntitiesAI();
+    currentAI,
+    openCurrentPanel,
+    getCriticalAlerts,
+    getWorkspaceDisplayName,
+  } = useWorkspaceAI();
 
-  const criticalAlerts = currentWorkspace === 'individuals' 
-    ? individualsInsights.filter(i => i.priority === 'critical').length
-    : currentWorkspace === 'legal-entities'
-    ? legalEntitiesMetrics.criticalAlerts
-    : metrics.criticalAlerts;
-
-  const handleOpenPanel = () => {
-    if (currentWorkspace === 'individuals') {
-      openIndividualsPanel();
-    } else if (currentWorkspace === 'legal-entities') {
-      openLegalEntitiesPanel();
-    } else {
-      openPanel();
-    }
-  };
-
-  const getWorkspaceDisplayName = () => {
-    switch (currentWorkspace) {
-      case 'individuals':
-        return 'Физические лица';
-      case 'legal-entities':
-        return 'Юридические лица';
-      default:
-        return 'Общий';
-    }
-  };
+  const criticalAlerts = getCriticalAlerts();
 
   if (!isOpen) return null;
 
@@ -60,16 +28,16 @@ const SidebarAISection: React.FC<SidebarAISectionProps> = ({ isOpen }) => {
           <Brain className="w-4 h-4 text-logaz-orange mr-2" />
           <span className="text-sm font-medium">ИИ-ассистент</span>
         </div>
-        <Switch checked={isAIEnabled} onCheckedChange={toggleAI} />
+        <Switch checked={currentAI.isEnabled} onCheckedChange={currentAI.toggleAI} />
       </div>
       
-      {isAIEnabled && (
+      {currentAI.isEnabled && (
         <div className="space-y-2">
           <Button 
             variant="ghost" 
             size="sm" 
             className="w-full justify-start h-8 text-xs"
-            onClick={handleOpenPanel}
+            onClick={openCurrentPanel}
           >
             <MessageCircle className="w-3 h-3 mr-2" />
             Открыть ассистента
