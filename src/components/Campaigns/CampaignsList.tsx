@@ -239,10 +239,12 @@ const campaignsData = {
     },
   ],
   automated: [
+    // Email автоматические рассылки
     {
       id: 201,
       title: "Приветственная серия",
       status: "Запущена",
+      channel: "Email",
       recipients: 523,
       completionRate: "78%",
       createdDate: "2025-03-01",
@@ -251,6 +253,7 @@ const campaignsData = {
       id: 202,
       title: "Возврат брошенной корзины",
       status: "Запущена",
+      channel: "Email",
       recipients: 214,
       completionRate: "45%",
       createdDate: "2025-03-15",
@@ -259,9 +262,94 @@ const campaignsData = {
       id: 203,
       title: "Повторная активация клиентов",
       status: "Приостановлена",
+      channel: "Email",
       recipients: 1892,
       completionRate: "62%",
       createdDate: "2025-02-10",
+    },
+    // PUSH автоматические рассылки
+    {
+      id: 204,
+      title: "Напоминание о заправке",
+      status: "Запущена",
+      channel: "PUSH",
+      recipients: 1456,
+      completionRate: "85%",
+      createdDate: "2025-03-05",
+    },
+    {
+      id: 205,
+      title: "Геолокационные предложения",
+      status: "Запущена",
+      channel: "PUSH",
+      recipients: 892,
+      completionRate: "67%",
+      createdDate: "2025-03-12",
+    },
+    {
+      id: 206,
+      title: "Уведомления о бонусах",
+      status: "Приостановлена",
+      channel: "PUSH",
+      recipients: 2341,
+      completionRate: "72%",
+      createdDate: "2025-02-20",
+    },
+    // Telegram автоматические рассылки
+    {
+      id: 207,
+      title: "Персональные рекомендации",
+      status: "Запущена",
+      channel: "Telegram",
+      recipients: 678,
+      completionRate: "89%",
+      createdDate: "2025-03-08",
+    },
+    {
+      id: 208,
+      title: "Статус заказа в реальном времени",
+      status: "Запущена",
+      channel: "Telegram",
+      recipients: 445,
+      completionRate: "94%",
+      createdDate: "2025-03-18",
+    },
+    {
+      id: 209,
+      title: "Еженедельные новости",
+      status: "Приостановлена",
+      channel: "Telegram",
+      recipients: 1234,
+      completionRate: "56%",
+      createdDate: "2025-02-25",
+    },
+    // SMS автоматические рассылки
+    {
+      id: 210,
+      title: "Двухфакторная аутентификация",
+      status: "Запущена",
+      channel: "SMS",
+      recipients: 3456,
+      completionRate: "98%",
+      createdDate: "2025-01-15",
+    },
+    {
+      id: 211,
+      title: "Уведомления о платежах",
+      status: "Запущена",
+      channel: "SMS",
+      recipients: 2789,
+      completionRate: "96%",
+      createdDate: "2025-02-01",
+    },
+    {
+      id: 212,
+      title: "Напоминания о встречах",
+      status: "Приостановлена",
+      channel: "SMS",
+      recipients: 567,
+      completionRate: "82%",
+      createdDate: "2025-03-10",
     },
   ],
 };
@@ -361,6 +449,7 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
           <TableRow>
             <TableHead className="w-[60px]">ID</TableHead>
             <TableHead>Название</TableHead>
+            <TableHead>Канал</TableHead>
             <TableHead>Статус</TableHead>
             <TableHead>Получатели</TableHead>
             <TableHead>Завершаемость</TableHead>
@@ -495,6 +584,9 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
               {item.id}
             </TableCell>
             <TableCell className="font-medium">{item.title}</TableCell>
+            <TableCell>
+              <Badge variant="secondary">{item.channel}</Badge>
+            </TableCell>
             <TableCell>
               <Badge className={getStatusColor(item.status)} variant="outline">
                 {item.status}
