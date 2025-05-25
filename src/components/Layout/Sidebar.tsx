@@ -66,7 +66,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
         <div className="ai-section border-t border-sidebar-border px-4 py-3">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center">
-              <Brain className="w-4 h-4 text-blue-500 mr-2" />
+              <Brain className="w-4 h-4 text-logaz-orange mr-2" />
               <span className="text-sm font-medium">ИИ-Ассистент</span>
             </div>
             <Switch checked={isAIEnabled} onCheckedChange={toggleAI} />
