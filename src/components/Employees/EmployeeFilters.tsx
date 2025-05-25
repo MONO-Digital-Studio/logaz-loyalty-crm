@@ -9,6 +9,7 @@ import {
   SelectTrigger, 
   SelectValue 
 } from "@/components/ui/select";
+import { EmployeeStatus } from "@/types/employees";
 
 interface EmployeeFiltersProps {
   searchQuery: string;
@@ -16,6 +17,8 @@ interface EmployeeFiltersProps {
   filter: string | null;
   setFilter: (filter: string | null) => void;
   departments: string[];
+  statusFilter?: EmployeeStatus | null;
+  setStatusFilter?: (status: EmployeeStatus | null) => void;
 }
 
 const EmployeeFilters: React.FC<EmployeeFiltersProps> = ({
@@ -23,8 +26,17 @@ const EmployeeFilters: React.FC<EmployeeFiltersProps> = ({
   setSearchQuery,
   filter,
   setFilter,
-  departments
+  departments,
+  statusFilter,
+  setStatusFilter
 }) => {
+  const statusOptions = [
+    { value: "active", label: "Активный" },
+    { value: "vacation", label: "В отпуске" },
+    { value: "onboarding", label: "Адаптация" },
+    { value: "fired", label: "Уволен" }
+  ];
+
   return (
     <div className="flex gap-4 flex-wrap">
       <div className="flex-1">
@@ -38,6 +50,7 @@ const EmployeeFilters: React.FC<EmployeeFiltersProps> = ({
           />
         </div>
       </div>
+      
       <Select value={filter || "all"} onValueChange={setFilter}>
         <SelectTrigger className="w-[200px]">
           <SelectValue placeholder="Все отделы" />
@@ -49,6 +62,22 @@ const EmployeeFilters: React.FC<EmployeeFiltersProps> = ({
           ))}
         </SelectContent>
       </Select>
+
+      {setStatusFilter && (
+        <Select value={statusFilter || "all"} onValueChange={(value) => setStatusFilter(value === "all" ? null : value as EmployeeStatus)}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Все статусы" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Все статусы</SelectItem>
+            {statusOptions.map((status) => (
+              <SelectItem key={status.value} value={status.value}>
+                {status.label}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      )}
     </div>
   );
 };
