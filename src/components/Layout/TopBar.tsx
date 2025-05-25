@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Bell, Search, Menu, X } from 'lucide-react';
+import { Bell, Search, X } from 'lucide-react';
 import { notifications } from '../../data/mockData';
 
 interface TopBarProps {
@@ -16,9 +16,6 @@ const TopBar: React.FC<TopBarProps> = ({ toggleSidebar }) => {
   return (
     <header className="bg-white border-b border-gray-200 flex items-center justify-between p-4 h-16">
       <div className="flex items-center">
-        <button onClick={toggleSidebar} className="p-2 rounded-full hover:bg-gray-100 mr-4">
-          <Menu size={20} />
-        </button>
         <div className="relative hidden md:block">
           <input
             type="text"
