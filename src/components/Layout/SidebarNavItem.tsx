@@ -49,7 +49,7 @@ const SidebarNavItem: React.FC<NavItemProps> = ({
       <span className="text-sidebar-foreground">
         {level === 0 ? getIconForItem(item.id) : getIconForSubItem(item.id.split('.')[0], item.id.split('.')[1])}
       </span>
-      {isOpen && <span className="ml-4 flex-1">{item.title}</span>}
+      {isOpen && <span className="ml-4 flex-1 text-left">{item.title}</span>}
       {isOpen && hasChildren && (
         <span className="p-1">
           {expandedItems.includes(item.id) ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
@@ -64,14 +64,14 @@ const SidebarNavItem: React.FC<NavItemProps> = ({
         {hasPath ? (
           <Link 
             to={item.path!} 
-            className={`flex items-center px-4 py-3 hover:bg-sidebar-accent transition-colors ${!isOpen ? 'justify-center' : ''}`}
+            className={`flex items-center px-4 py-3 hover:bg-sidebar-accent transition-colors ${!isOpen ? 'justify-center' : 'justify-start'}`}
             onClick={handleClick}
           >
             {content}
           </Link>
         ) : (
           <button
-            className={`w-full flex items-center px-4 py-3 hover:bg-sidebar-accent transition-colors ${!isOpen ? 'justify-center' : ''}`}
+            className={`w-full flex items-center px-4 py-3 hover:bg-sidebar-accent transition-colors ${!isOpen ? 'justify-center' : 'justify-start'}`}
             onClick={handleClick}
           >
             {content}
@@ -104,18 +104,18 @@ const SidebarNavItem: React.FC<NavItemProps> = ({
               return (
                 <li key={childId}>
                   {child.path ? (
-                    <Link to={child.path} className="flex items-center py-2 hover:bg-sidebar-accent transition-colors px-4">
+                    <Link to={child.path} className="flex items-center justify-start py-2 hover:bg-sidebar-accent transition-colors px-4">
                       {getIconForSubItem(item.id, child.id) && (
                         <span className="text-xs">{getIconForSubItem(item.id, child.id)}</span>
                       )}
-                      <span className="ml-4">{child.title}</span>
+                      <span className="ml-4 text-left">{child.title}</span>
                     </Link>
                   ) : (
-                    <button className="w-full flex items-center py-2 hover:bg-sidebar-accent transition-colors px-4">
+                    <button className="w-full flex items-center justify-start py-2 hover:bg-sidebar-accent transition-colors px-4">
                       {getIconForSubItem(item.id, child.id) && (
                         <span className="text-xs">{getIconForSubItem(item.id, child.id)}</span>
                       )}
-                      <span className="ml-4">{child.title}</span>
+                      <span className="ml-4 text-left">{child.title}</span>
                     </button>
                   )}
                 </li>
