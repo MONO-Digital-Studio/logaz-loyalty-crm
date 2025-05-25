@@ -1,39 +1,38 @@
 
 import React from 'react';
 import StatsCard from '../UI/StatsCard';
-import { summaryStats } from '@/data/mockData';
-import { Activity, Users, ShoppingBag, Banknote } from 'lucide-react';
+import { Users, CreditCard, TrendingUp, Activity } from 'lucide-react';
 
 const StatsSummary: React.FC = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
       <StatsCard 
         title="Всего клиентов" 
-        value={summaryStats.totalClients} 
+        value="2845" 
         change={12}
         changeText="за 30 дней" 
         icon={<Users size={24} className="text-logaz-blue" />} 
       />
       <StatsCard 
         title="Активных клиентов" 
-        value={summaryStats.activeClients} 
+        value="1256" 
         change={8}
         changeText="за 30 дней" 
-        icon={<Activity size={24} className="text-logaz-blue" />} 
+        icon={<Activity size={24} className="text-logaz-green" />} 
       />
       <StatsCard 
         title="Выручка" 
-        value={`${(summaryStats.totalRevenue / 1000000).toFixed(2)} млн ₽`} 
-        change={15}
+        value="12.45 мл" 
+        change={-15}
         changeText="за 30 дней" 
-        icon={<Banknote size={24} className="text-logaz-blue" />} 
+        icon={<TrendingUp size={24} className="text-logaz-orange" />} 
       />
       <StatsCard 
         title="Средний чек" 
-        value={`${summaryStats.averageCheck} ₽`} 
-        change={-3}
+        value="₽1,234" 
+        change={5.2}
         changeText="за 30 дней" 
-        icon={<ShoppingBag size={24} className="text-logaz-blue" />} 
+        icon={<CreditCard size={24} className="text-purple-600" />} 
       />
     </div>
   );
