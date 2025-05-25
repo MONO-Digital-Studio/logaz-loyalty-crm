@@ -29,9 +29,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <AIProvider>
         <IndividualsAIProvider>
           <LegalEntitiesAIProvider>
-            <div className="flex h-screen w-full bg-logaz-light-gray">
+            <div className="min-h-screen flex w-full bg-logaz-light-gray">
               <Sidebar isOpen={sidebarOpen} />
-              <SidebarInset className="flex flex-col flex-1 overflow-hidden w-full">
+              <SidebarInset className="flex-1 flex flex-col w-full">
                 <TopBar toggleSidebar={toggleSidebar} />
                 <main className="flex-1 p-4 md:p-6 overflow-auto">
                   {children}
