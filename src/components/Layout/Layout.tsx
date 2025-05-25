@@ -33,7 +33,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div className="flex-1 flex flex-col overflow-hidden">
               <TopBar toggleSidebar={toggleSidebar} />
               
-              <main className="flex-1 overflow-auto bg-gray-50/50">
+              <main className="flex-1 overflow-auto bg-gray-50/50 p-6">
                 {children}
               </main>
             </div>
