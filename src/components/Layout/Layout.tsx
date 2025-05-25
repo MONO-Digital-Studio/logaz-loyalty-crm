@@ -31,12 +31,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <LegalEntitiesAIProvider>
             <div className="flex h-screen w-full bg-logaz-light-gray">
               <Sidebar isOpen={sidebarOpen} />
-              <div className="flex flex-col flex-1 overflow-hidden">
+              <SidebarInset className="flex flex-col flex-1 overflow-hidden w-full">
                 <TopBar toggleSidebar={toggleSidebar} />
-                <SidebarInset className="p-4 md:p-6">
+                <main className="flex-1 p-4 md:p-6 overflow-auto">
                   {children}
-                </SidebarInset>
-              </div>
+                </main>
+              </SidebarInset>
               <AIPanel />
               <AIAssistantPanel />
               <LegalEntitiesAIPanel />
