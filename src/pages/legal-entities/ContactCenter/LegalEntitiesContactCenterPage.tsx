@@ -33,9 +33,9 @@ const LegalEntitiesContactCenterPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold tracking-tight">Контакт-центр</h1>
+    <div className="p-4 lg:p-6 space-y-6 min-h-full">
+      <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
+        <h1 className="text-2xl lg:text-3xl font-syncopate font-bold">Контакт-центр</h1>
       </div>
 
       <Tabs 
@@ -43,7 +43,7 @@ const LegalEntitiesContactCenterPage: React.FC = () => {
         onValueChange={handleTabChange}
         className="w-full"
       >
-        <TabsList className="mb-4">
+        <TabsList className="mb-6">
           <TabsTrigger value="dialogs">Диалоги</TabsTrigger>
           <TabsTrigger value="agents">Операторы</TabsTrigger>
           <TabsTrigger value="campaigns">Рассылки</TabsTrigger>

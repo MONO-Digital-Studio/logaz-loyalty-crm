@@ -60,12 +60,12 @@ const DialogsContainer: React.FC = () => {
   const selectedDialog = mockDialogs.find(d => d.id === selectedDialogId);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[600px]">
-      <div className="bg-card rounded-lg border">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-0">
+      <div className="bg-card rounded-lg border flex flex-col">
         <div className="p-4 border-b">
           <h2 className="text-lg font-semibold">Активные диалоги</h2>
         </div>
-        <div className="overflow-y-auto max-h-[500px]">
+        <div className="flex-1 overflow-y-auto">
           <DialogsList 
             dialogs={mockDialogs}
             selectedId={selectedDialogId}
@@ -74,13 +74,13 @@ const DialogsContainer: React.FC = () => {
         </div>
       </div>
 
-      <div className="bg-card rounded-lg border">
+      <div className="bg-card rounded-lg border flex flex-col">
         <div className="p-4 border-b">
           <h2 className="text-lg font-semibold">
             {selectedDialog ? `Диалог с ${selectedDialog.clientName}` : 'Выберите диалог'}
           </h2>
         </div>
-        <div className="h-[500px]">
+        <div className="flex-1 overflow-hidden">
           {selectedDialog ? (
             <DialogDetails dialog={selectedDialog} />
           ) : (

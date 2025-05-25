@@ -16,8 +16,8 @@ const LegalEntitiesEmailCampaignsPage: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-semibold">Управление рассылками ЮЛ</h1>
+      <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
+        <h1 className="text-2xl lg:text-3xl font-syncopate font-bold">Управление рассылками ЮЛ</h1>
         <Button onClick={handleCreateCampaign} className="bg-logaz-blue">
           <Plus className="h-4 w-4 mr-2" />
           Создать рассылку
