@@ -46,9 +46,25 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
 
       {isOpen && <WorkspaceSwitcher />}
 
-      {/* AI Assistant Section */}
+      <nav className="flex-1 overflow-y-auto py-4">
+        <ul className="space-y-1">
+          {navigationItems.map((item) => (
+            <SidebarNavItem
+              key={item.id}
+              item={item}
+              isOpen={isOpen}
+              expandedItems={expandedItems}
+              toggleItem={toggleItem}
+              getIconForItem={getIconForItem}
+              getIconForSubItem={getIconForSubItem}
+            />
+          ))}
+        </ul>
+      </nav>
+
+      {/* AI Assistant Section - moved down */}
       {isOpen && (
-        <div className="ai-section border-b border-sidebar-border px-4 py-3">
+        <div className="ai-section border-t border-sidebar-border px-4 py-3">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center">
               <Brain className="w-4 h-4 text-blue-500 mr-2" />
@@ -84,22 +100,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
           )}
         </div>
       )}
-
-      <nav className="flex-1 overflow-y-auto py-4">
-        <ul className="space-y-1">
-          {navigationItems.map((item) => (
-            <SidebarNavItem
-              key={item.id}
-              item={item}
-              isOpen={isOpen}
-              expandedItems={expandedItems}
-              toggleItem={toggleItem}
-              getIconForItem={getIconForItem}
-              getIconForSubItem={getIconForSubItem}
-            />
-          ))}
-        </ul>
-      </nav>
 
       <SidebarFooter isOpen={isOpen} />
     </aside>
