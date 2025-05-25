@@ -1,4 +1,3 @@
-
 import { 
   LayoutDashboard, 
   Users, 
@@ -69,7 +68,7 @@ export const subIconMappings = {
     'le-cards-blocked': CreditCard
   },
   'le-payments': {
-    'le-payments-invoices': Receipt,
+    'le-payments-invoices': Calculator,
     'le-payments-history': BadgeRussianRuble
   },
   'le-communications': {
