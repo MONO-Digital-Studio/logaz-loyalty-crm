@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import EmailCampaignsPage from './EmailCampaignsPage';
 
 const ContactCenterPage: React.FC = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const ContactCenterPage: React.FC = () => {
   const getActiveTab = () => {
     if (currentPath.includes('/dialogs')) return 'dialogs';
     if (currentPath.includes('/agents')) return 'agents';
+    if (currentPath.includes('/campaigns')) return 'campaigns';
     if (currentPath.includes('/stats')) return 'stats';
     if (currentPath.includes('/templates')) return 'templates';
     if (currentPath.includes('/analytics')) return 'analytics';
@@ -44,6 +46,7 @@ const ContactCenterPage: React.FC = () => {
         <TabsList className="mb-6">
           <TabsTrigger value="dialogs">Диалоги</TabsTrigger>
           <TabsTrigger value="agents">Операторы</TabsTrigger>
+          <TabsTrigger value="campaigns">Рассылки</TabsTrigger>
           <TabsTrigger value="templates">Шаблоны ответов</TabsTrigger>
           <TabsTrigger value="stats">Статистика</TabsTrigger>
           <TabsTrigger value="analytics">Аналитика</TabsTrigger>
@@ -60,6 +63,8 @@ const ContactCenterPage: React.FC = () => {
               </CardContent>
             </Card>
           )}
+          
+          {currentPath.includes('/campaigns') && <EmailCampaignsPage />}
         </TabsContent>
       </Tabs>
     </div>

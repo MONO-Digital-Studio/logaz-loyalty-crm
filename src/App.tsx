@@ -56,12 +56,12 @@ const App = () => (
                 <Route path="/content" element={<ContentPage />} />
                 <Route path="/content/editor" element={<ContentEditorPage />} />
                 <Route path="/content/editor/:id" element={<ContentEditorPage />} />
-                <Route path="/campaigns" element={<EmailCampaignsPage />} />
-                <Route path="/campaigns/editor" element={<CampaignEditorPage />} />
-                <Route path="/campaigns/editor/:id" element={<CampaignEditorPage />} />
                 <Route path="/contact-center" element={<ContactCenterPage />} />
                 <Route path="/contact-center/dialogs" element={<DialogsPage />} />
                 <Route path="/contact-center/agents" element={<AgentsPage />} />
+                <Route path="/contact-center/campaigns" element={<EmailCampaignsPage />} />
+                <Route path="/contact-center/campaigns/editor" element={<CampaignEditorPage />} />
+                <Route path="/contact-center/campaigns/editor/:id" element={<CampaignEditorPage />} />
                 <Route path="/contact-center/stats" element={<StatsPage />} />
                 <Route path="/contact-center/templates" element={<TemplatesPage />} />
                 <Route path="/contact-center/analytics" element={<AnalyticsPage />} />

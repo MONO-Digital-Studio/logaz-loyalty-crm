@@ -1,3 +1,4 @@
+
 import { WorkspaceType } from '@/types/legal-entities';
 
 interface NavigationItem {
@@ -55,6 +56,11 @@ export const individualsNavigation: NavigationItem[] = [
         path: '/contact-center/agents',
       },
       {
+        id: 'campaigns',
+        title: 'Рассылки',
+        path: '/contact-center/campaigns',
+      },
+      {
         id: 'stats',
         title: 'Статистика',
         path: '/contact-center/stats',
@@ -75,11 +81,6 @@ export const individualsNavigation: NavigationItem[] = [
     id: 'products',
     title: 'Товары и категории',
     path: '/products',
-  },
-  {
-    id: 'campaigns',
-    title: 'Рассылки',
-    path: '/campaigns',
   },
   {
     id: 'employees',

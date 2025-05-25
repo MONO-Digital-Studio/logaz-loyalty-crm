@@ -24,7 +24,7 @@ const EmailCampaignsPage = () => {
         </div>
         <Button 
           className="bg-logaz-blue"
-          onClick={() => navigate("/campaigns/editor")}
+          onClick={() => navigate("/contact-center/campaigns/editor")}
         >
           <PlusIcon className="mr-2" size={18} />
           Создать рассылку

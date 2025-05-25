@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { 
@@ -153,7 +152,7 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
   );
 
   const handleEdit = (id: number) => {
-    navigate(`/campaigns/editor/${id}`);
+    navigate(`/contact-center/campaigns/editor/${id}`);
   };
 
   const handleDelete = (id: number) => {
@@ -309,7 +308,7 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
                     <Edit className="mr-2 h-4 w-4" />
                     <span>Редактировать</span>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate("/campaigns/editor?template=" + item.id)}>
+                  <DropdownMenuItem onClick={() => navigate("/contact-center/campaigns/editor?template=" + item.id)}>
                     <Send className="mr-2 h-4 w-4" />
                     <span>Создать рассылку</span>
                   </DropdownMenuItem>
