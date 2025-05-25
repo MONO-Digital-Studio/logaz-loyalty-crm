@@ -4,12 +4,14 @@ import Sidebar from './Sidebar';
 import TopBar from './TopBar';
 import AIPanel from '../ai-assistant/shared/AIPanel';
 import AIAssistantPanel from '../individuals/ai-assistant/AIAssistantPanel';
+import LegalEntitiesAIPanel from '../legal-entities/ai-assistant/LegalEntitiesAIPanel';
 import { 
   SidebarProvider, 
   SidebarInset
 } from '@/components/ui/sidebar';
 import { AIProvider } from '@/contexts/AIContext';
 import { IndividualsAIProvider } from '@/contexts/IndividualsAIContext';
+import { LegalEntitiesAIProvider } from '@/contexts/LegalEntitiesAIContext';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -26,17 +28,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <SidebarProvider defaultOpen={true}>
       <AIProvider>
         <IndividualsAIProvider>
-          <div className="flex h-screen w-full bg-logaz-light-gray">
-            <Sidebar isOpen={sidebarOpen} />
-            <div className="flex flex-col flex-1 overflow-hidden">
-              <TopBar toggleSidebar={toggleSidebar} />
-              <SidebarInset className="p-4 md:p-6">
-                {children}
-              </SidebarInset>
+          <LegalEntitiesAIProvider>
+            <div className="flex h-screen w-full bg-logaz-light-gray">
+              <Sidebar isOpen={sidebarOpen} />
+              <div className="flex flex-col flex-1 overflow-hidden">
+                <TopBar toggleSidebar={toggleSidebar} />
+                <SidebarInset className="p-4 md:p-6">
+                  {children}
+                </SidebarInset>
+              </div>
+              <AIPanel />
+              <AIAssistantPanel />
+              <LegalEntitiesAIPanel />
             </div>
-            <AIPanel />
-            <AIAssistantPanel />
-          </div>
+          </LegalEntitiesAIProvider>
         </IndividualsAIProvider>
       </AIProvider>
     </SidebarProvider>

@@ -3,13 +3,14 @@ import React, { useState } from 'react';
 import { useWorkspace } from '@/contexts/WorkspaceContext';
 import { useAI } from '@/contexts/AIContext';
 import { useIndividualsAI } from '@/contexts/IndividualsAIContext';
+import { useLegalEntitiesAI } from '@/contexts/LegalEntitiesAIContext';
 import { getNavigationForWorkspace } from '../../data/navigationData';
 import SidebarNavItem from './SidebarNavItem';
 import WorkspaceSwitcher from '../workspace-switcher/WorkspaceSwitcher';
 import { getIconForItem, getIconForSubItem } from '../../utils/sidebarIcons';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
-import { Brain, MessageCircle, Sparkles } from 'lucide-react';
+import { Brain, MessageCircle, Sparkles, Building2 } from 'lucide-react';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -22,6 +23,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     openPanel: openIndividualsPanel, 
     insights: individualsInsights 
   } = useIndividualsAI();
+  const {
+    openPanel: openLegalEntitiesPanel,
+    metrics: legalEntitiesMetrics
+  } = useLegalEntitiesAI();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   const navigationItems = getNavigationForWorkspace(currentWorkspace);
@@ -37,13 +42,37 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   // Определяем критичные alerts в зависимости от workspace
   const criticalAlerts = currentWorkspace === 'individuals' 
     ? individualsInsights.filter(i => i.priority === 'critical').length
+    : currentWorkspace === 'legal-entities'
+    ? legalEntitiesMetrics.criticalAlerts
     : metrics.criticalAlerts;
 
   const handleOpenPanel = () => {
     if (currentWorkspace === 'individuals') {
       openIndividualsPanel();
+    } else if (currentWorkspace === 'legal-entities') {
+      openLegalEntitiesPanel();
     } else {
       openPanel();
+    }
+  };
+
+  const getAssistantTitle = () => {
+    switch (currentWorkspace) {
+      case 'individuals':
+        return 'ИИ-Ассистент ФЛ';
+      case 'legal-entities':
+        return 'Корпоративный ИИ';
+      default:
+        return 'ИИ-Ассистент';
+    }
+  };
+
+  const getAssistantIcon = () => {
+    switch (currentWorkspace) {
+      case 'legal-entities':
+        return <Building2 className="w-4 h-4 text-logaz-orange mr-2" />;
+      default:
+        return <Brain className="w-4 h-4 text-logaz-orange mr-2" />;
     }
   };
 
@@ -84,8 +113,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
         <div className="ai-section border-t border-sidebar-border px-4 py-3">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center">
-              <Brain className="w-4 h-4 text-logaz-orange mr-2" />
-              <span className="text-sm font-medium">ИИ-Ассистент</span>
+              {getAssistantIcon()}
+              <span className="text-sm font-medium">{getAssistantTitle()}</span>
             </div>
             <Switch checked={isAIEnabled} onCheckedChange={toggleAI} />
           </div>
@@ -114,11 +143,10 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
                 </div>
               )}
               
-              {currentWorkspace === 'individuals' && (
-                <div className="text-xs text-gray-600 dark:text-gray-400 bg-orange-50 dark:bg-orange-900/20 px-2 py-1 rounded">
-                  Режим: Физические лица
-                </div>
-              )}
+              <div className="text-xs text-gray-600 dark:text-gray-400 bg-blue-50 dark:bg-blue-900/20 px-2 py-1 rounded">
+                Режим: {currentWorkspace === 'individuals' ? 'Физические лица' : 
+                       currentWorkspace === 'legal-entities' ? 'Юридические лица' : 'Общий'}
+              </div>
             </div>
           )}
         </div>
