@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { 
@@ -124,10 +125,12 @@ const campaignsData = {
     },
   ],
   templates: [
+    // Email шаблоны
     {
       id: 101,
       title: "Приветственное письмо",
       status: "Активен",
+      channel: "Email",
       usedIn: 5,
       lastUsed: "2025-04-20",
       createdDate: "2025-01-10",
@@ -136,6 +139,7 @@ const campaignsData = {
       id: 102,
       title: "Ежемесячный отчет",
       status: "Активен",
+      channel: "Email",
       usedIn: 12,
       lastUsed: "2025-04-01",
       createdDate: "2025-01-15",
@@ -144,9 +148,94 @@ const campaignsData = {
       id: 103,
       title: "Напоминание о товаре в корзине",
       status: "Активен",
+      channel: "Email",
       usedIn: 8,
       lastUsed: "2025-04-25",
       createdDate: "2025-02-10",
+    },
+    // PUSH шаблоны
+    {
+      id: 104,
+      title: "Акция дня",
+      status: "Активен",
+      channel: "PUSH",
+      usedIn: 15,
+      lastUsed: "2025-04-23",
+      createdDate: "2025-02-05",
+    },
+    {
+      id: 105,
+      title: "Напоминание о заправке",
+      status: "Активен",
+      channel: "PUSH",
+      usedIn: 22,
+      lastUsed: "2025-04-24",
+      createdDate: "2025-01-20",
+    },
+    {
+      id: 106,
+      title: "Бонусные баллы начислены",
+      status: "Активен",
+      channel: "PUSH",
+      usedIn: 18,
+      lastUsed: "2025-04-22",
+      createdDate: "2025-02-12",
+    },
+    // Telegram шаблоны
+    {
+      id: 107,
+      title: "Уведомление о статусе заказа",
+      status: "Активен",
+      channel: "Telegram",
+      usedIn: 9,
+      lastUsed: "2025-04-21",
+      createdDate: "2025-03-01",
+    },
+    {
+      id: 108,
+      title: "Персональные предложения",
+      status: "Активен",
+      channel: "Telegram",
+      usedIn: 7,
+      lastUsed: "2025-04-19",
+      createdDate: "2025-03-05",
+    },
+    {
+      id: 109,
+      title: "Новости и обновления",
+      status: "Активен",
+      channel: "Telegram",
+      usedIn: 13,
+      lastUsed: "2025-04-20",
+      createdDate: "2025-02-28",
+    },
+    // SMS шаблоны
+    {
+      id: 110,
+      title: "Код подтверждения",
+      status: "Активен",
+      channel: "SMS",
+      usedIn: 45,
+      lastUsed: "2025-04-25",
+      createdDate: "2025-01-01",
+    },
+    {
+      id: 111,
+      title: "Уведомление о платеже",
+      status: "Активен",
+      channel: "SMS",
+      usedIn: 28,
+      lastUsed: "2025-04-24",
+      createdDate: "2025-01-15",
+    },
+    {
+      id: 112,
+      title: "Напоминание о записи",
+      status: "Активен",
+      channel: "SMS",
+      usedIn: 12,
+      lastUsed: "2025-04-18",
+      createdDate: "2025-02-20",
     },
   ],
   automated: [
@@ -259,6 +348,7 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
           <TableRow>
             <TableHead className="w-[60px]">ID</TableHead>
             <TableHead>Название</TableHead>
+            <TableHead>Канал</TableHead>
             <TableHead>Статус</TableHead>
             <TableHead>Используется в</TableHead>
             <TableHead>Последнее использование</TableHead>
@@ -353,6 +443,9 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
               {item.id}
             </TableCell>
             <TableCell className="font-medium">{item.title}</TableCell>
+            <TableCell>
+              <Badge variant="secondary">{item.channel}</Badge>
+            </TableCell>
             <TableCell>
               <Badge className={getStatusColor(item.status)} variant="outline">
                 {item.status}
