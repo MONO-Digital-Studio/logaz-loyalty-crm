@@ -64,9 +64,17 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     >
       <div className="p-4 flex items-center justify-center border-b border-sidebar-border">
         {isOpen ? (
-          <h1 className="text-xl font-syncopate font-bold tracking-wide">ЛОГАЗ SV</h1>
+          <img 
+            src="/lovable-uploads/57c42d09-8af7-4d89-b6d3-69515b834828.png" 
+            alt="ЛОГАЗ SV" 
+            className="h-8 w-auto"
+          />
         ) : (
-          <h1 className="text-xl font-syncopate font-bold">ЛС</h1>
+          <img 
+            src="/lovable-uploads/57c42d09-8af7-4d89-b6d3-69515b834828.png" 
+            alt="ЛС" 
+            className="h-8 w-8 object-contain"
+          />
         )}
       </div>
 
