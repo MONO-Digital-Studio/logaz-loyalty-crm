@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import StatsSummary from '@/components/Dashboard/StatsSummary';
 import SalesChart from '@/components/Dashboard/SalesChart';
@@ -59,10 +58,10 @@ const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full">
-      <div className="p-3 sm:p-4 lg:p-6 space-y-4 lg:space-y-6 w-full max-w-none">
-        <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between lg:gap-4">
-          <h1 className="text-xl sm:text-2xl lg:text-3xl font-syncopate font-bold">Аналитика</h1>
+    <div className="h-full overflow-auto">
+      <div className="p-4 lg:p-6 space-y-6 min-h-full">
+        <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
+          <h1 className="text-2xl lg:text-3xl font-syncopate font-bold">Аналитика</h1>
           <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:gap-3">
             <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
               <PopoverTrigger asChild>
@@ -138,12 +137,12 @@ const DashboardPage: React.FC = () => {
 
         <StatsSummary />
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <SalesChart />
           <LoyaltyPointsChart />
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <RfmAnalysis />
           <CustomerDemographics />
         </div>

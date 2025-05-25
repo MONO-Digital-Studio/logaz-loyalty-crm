@@ -23,26 +23,24 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <LegalEntitiesAIProvider>
           <div className="h-screen w-screen overflow-hidden bg-logaz-light-gray flex">
             {/* Sidebar */}
-            <div className={`flex-shrink-0 ${isMobile && !sidebarOpen ? 'hidden' : 'block'}`}>
-              <Sidebar isOpen={sidebarOpen} />
-            </div>
+            {(!isMobile || sidebarOpen) && (
+              <div className="flex-shrink-0">
+                <Sidebar isOpen={sidebarOpen} />
+              </div>
+            )}
             
             {/* Main content area - takes all remaining space */}
-            <div className="flex-1 flex flex-col min-w-0">
+            <div className="flex-1 flex flex-col overflow-hidden">
               <TopBar toggleSidebar={toggleSidebar} />
               
               <main className="flex-1 overflow-auto bg-gray-50/50">
-                <div className="w-full h-full">
-                  {children}
-                </div>
+                {children}
               </main>
             </div>
             
-            {/* AI панели только на очень больших экранах и когда они действительно нужны */}
+            {/* AI панели только на очень больших экранах */}
             {!isMobile && (
-              <div className="hidden 2xl:block flex-shrink-0">
-                <AIPanelsContainer />
-              </div>
+              <AIPanelsContainer />
             )}
           </div>
         </LegalEntitiesAIProvider>
