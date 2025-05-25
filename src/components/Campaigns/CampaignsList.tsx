@@ -34,7 +34,7 @@ import { toast } from "sonner";
 
 // Образец данных для рассылок
 const campaignsData = {
-  regular: [
+  email: [
     {
       id: 1,
       title: "Новые функции платформы",
@@ -61,6 +61,66 @@ const campaignsData = {
       openRate: "0%",
       clickRate: "0%",
       sentDate: "2025-05-01",
+    },
+  ],
+  push: [
+    {
+      id: 4,
+      title: "Акция выходного дня",
+      status: "Отправлена",
+      recipients: 2500,
+      openRate: "15%",
+      clickRate: "5%",
+      sentDate: "2025-04-20",
+    },
+    {
+      id: 5,
+      title: "Напоминание о заправке",
+      status: "Запланирована",
+      recipients: 1800,
+      openRate: "0%",
+      clickRate: "0%",
+      sentDate: "2025-05-05",
+    },
+  ],
+  telegram: [
+    {
+      id: 6,
+      title: "Уведомление о бонусах",
+      status: "Отправлена",
+      recipients: 890,
+      openRate: "32%",
+      clickRate: "12%",
+      sentDate: "2025-04-18",
+    },
+    {
+      id: 7,
+      title: "Новости компании",
+      status: "Черновик",
+      recipients: 0,
+      openRate: "0%",
+      clickRate: "0%",
+      sentDate: "",
+    },
+  ],
+  sms: [
+    {
+      id: 8,
+      title: "SMS подтверждение операции",
+      status: "Отправлена",
+      recipients: 345,
+      openRate: "98%",
+      clickRate: "3%",
+      sentDate: "2025-04-22",
+    },
+    {
+      id: 9,
+      title: "Код подтверждения",
+      status: "Запланирована",
+      recipients: 150,
+      openRate: "0%",
+      clickRate: "0%",
+      sentDate: "2025-05-03",
     },
   ],
   templates: [
@@ -118,7 +178,7 @@ const campaignsData = {
 };
 
 interface CampaignsListProps {
-  campaignType: "regular" | "templates" | "automated";
+  campaignType: "email" | "push" | "telegram" | "sms" | "templates" | "automated";
 }
 
 const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
@@ -126,7 +186,7 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
   const navigate = useNavigate();
   
   // Выбор данных в зависимости от типа
-  const campaigns = campaignsData[campaignType];
+  const campaigns = campaignsData[campaignType] || [];
   
   const getStatusColor = (status: string) => {
     switch(status) {
@@ -178,7 +238,10 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
   // Различные заголовки и колонки в зависимости от типа
   const renderTableHeaders = () => {
     switch(campaignType) {
-      case "regular":
+      case "email":
+      case "push":
+      case "telegram":
+      case "sms":
         return (
           <TableRow>
             <TableHead className="w-[60px]">ID</TableHead>
@@ -220,7 +283,10 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
 
   const renderTableRow = (item: any) => {
     switch(campaignType) {
-      case "regular":
+      case "email":
+      case "push":
+      case "telegram":
+      case "sms":
         return (
           <TableRow 
             key={item.id}
