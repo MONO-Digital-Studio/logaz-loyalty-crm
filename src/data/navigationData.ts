@@ -1,4 +1,3 @@
-
 import { WorkspaceType } from '@/types/legal-entities';
 
 interface NavigationItem {
