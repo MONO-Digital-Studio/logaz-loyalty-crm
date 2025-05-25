@@ -16,7 +16,13 @@ const clientsData = [{
   level: "Серебряный",
   points: 284,
   visits: 27,
-  lastVisit: "15.06.2023"
+  lastVisit: "15.06.2023",
+  communicationChannels: {
+    email: true,
+    sms: true,
+    telegram: false,
+    push: false
+  }
 }, {
   id: "2",
   name: "Петрова Анна Сергеевна",
@@ -25,7 +31,13 @@ const clientsData = [{
   level: "Золотой",
   points: 685,
   visits: 42,
-  lastVisit: "18.06.2023"
+  lastVisit: "18.06.2023",
+  communicationChannels: {
+    email: true,
+    sms: true,
+    telegram: true,
+    push: true
+  }
 }, {
   id: "3",
   name: "Сидоров Алексей Петрович",
@@ -34,7 +46,13 @@ const clientsData = [{
   level: "Стандарт",
   points: 125,
   visits: 15,
-  lastVisit: "10.06.2023"
+  lastVisit: "10.06.2023",
+  communicationChannels: {
+    email: true,
+    sms: false,
+    telegram: false,
+    push: false
+  }
 }, {
   id: "4",
   name: "Козлова Елена Владимировна",
@@ -43,7 +61,13 @@ const clientsData = [{
   level: "Платиновый",
   points: 1250,
   visits: 78,
-  lastVisit: "20.06.2023"
+  lastVisit: "20.06.2023",
+  communicationChannels: {
+    email: true,
+    sms: true,
+    telegram: true,
+    push: false
+  }
 }, {
   id: "5",
   name: "Николаев Дмитрий Александрович",
@@ -52,7 +76,13 @@ const clientsData = [{
   level: "Серебряный",
   points: 348,
   visits: 32,
-  lastVisit: "12.06.2023"
+  lastVisit: "12.06.2023",
+  communicationChannels: {
+    email: true,
+    sms: true,
+    telegram: false,
+    push: true
+  }
 }];
 const ClientsPage = () => {
   const today = new Date();

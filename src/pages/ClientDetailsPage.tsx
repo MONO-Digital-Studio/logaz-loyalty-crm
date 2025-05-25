@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -6,6 +5,7 @@ import ClientHeader from "@/components/ClientDetails/ClientHeader";
 import ClientSummary from "@/components/ClientDetails/ClientSummary";
 import ClientInfo from "@/components/ClientDetails/ClientInfo";
 import ClientActivity from "@/components/ClientDetails/ClientActivity";
+import ClientCommunicationChannels from "@/components/ClientDetails/ClientCommunicationChannels";
 import PurchaseHistory from "@/components/ClientDetails/PurchaseHistory";
 import PointsHistory from "@/components/ClientDetails/PointsHistory";
 
@@ -32,6 +32,13 @@ const activityData = [
   { month: 'Апр', расходы: 2630, визиты: 3 },
   { month: 'Май', расходы: 3625, визиты: 4 },
   { month: 'Июн', расходы: 5280, визиты: 6 },
+];
+
+const communicationChannels = [
+  { type: 'email' as const, status: 'active' as const, value: 'ivanov@example.com', lastActivity: '2 дня назад' },
+  { type: 'sms' as const, status: 'active' as const, value: '+7 (912) 345-67-89', lastActivity: '1 неделю назад' },
+  { type: 'telegram' as const, status: 'pending' as const, value: '@ivanov_user', lastActivity: 'Не подключен' },
+  { type: 'push' as const, status: 'blocked' as const, value: 'Мобильное приложение', lastActivity: '1 месяц назад' },
 ];
 
 const ClientDetailsPage = () => {
@@ -76,6 +83,11 @@ const ClientDetailsPage = () => {
         />
 
         <ClientActivity data={activityData} />
+      </div>
+
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <ClientCommunicationChannels channels={communicationChannels} />
+        <div></div>
       </div>
 
       <Tabs defaultValue="purchases" className="w-full">

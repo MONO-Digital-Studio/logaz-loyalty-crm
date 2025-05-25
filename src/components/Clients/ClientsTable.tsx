@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { id } from "date-fns/locale";
+import { Badge } from "@/components/ui/badge";
+import { Mail, MessageSquare, Phone, Bell } from "lucide-react";
 
 // Client data type
 interface Client {
@@ -17,6 +18,12 @@ interface Client {
   points: number;
   visits: number;
   lastVisit: string;
+  communicationChannels?: {
+    email: boolean;
+    sms: boolean;
+    telegram: boolean;
+    push: boolean;
+  };
 }
 
 interface ClientsTableProps {
@@ -41,6 +48,35 @@ const ClientsTable: React.FC<ClientsTableProps> = ({ clients }) => {
     } else {
       setFilteredClients(clients);
     }
+  };
+
+  const renderCommunicationChannels = (channels?: Client['communicationChannels']) => {
+    if (!channels) return <span className="text-gray-400">Нет данных</span>;
+    
+    return (
+      <div className="flex space-x-1">
+        {channels.email && (
+          <Badge variant="outline" className="p-1">
+            <Mail className="h-3 w-3" />
+          </Badge>
+        )}
+        {channels.sms && (
+          <Badge variant="outline" className="p-1">
+            <Phone className="h-3 w-3" />
+          </Badge>
+        )}
+        {channels.telegram && (
+          <Badge variant="outline" className="p-1">
+            <MessageSquare className="h-3 w-3" />
+          </Badge>
+        )}
+        {channels.push && (
+          <Badge variant="outline" className="p-1">
+            <Bell className="h-3 w-3" />
+          </Badge>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -68,6 +104,7 @@ const ClientsTable: React.FC<ClientsTableProps> = ({ clients }) => {
               <TableHead>Уровень</TableHead>
               <TableHead>Баллы</TableHead>
               <TableHead>Визитов</TableHead>
+              <TableHead>Каналы связи</TableHead>
               <TableHead>Последний визит</TableHead>
             </TableRow>
           </TableHeader>
@@ -89,6 +126,9 @@ const ClientsTable: React.FC<ClientsTableProps> = ({ clients }) => {
                 <TableCell>{client.level}</TableCell>
                 <TableCell>{client.points}</TableCell>
                 <TableCell>{client.visits}</TableCell>
+                <TableCell>
+                  {renderCommunicationChannels(client.communicationChannels)}
+                </TableCell>
                 <TableCell>{client.lastVisit}</TableCell>
               </TableRow>
             ))}
