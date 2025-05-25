@@ -4,7 +4,6 @@ import { useWorkspace } from '@/contexts/WorkspaceContext';
 import { useAI } from '@/contexts/AIContext';
 import { getNavigationForWorkspace } from '../../data/navigationData';
 import SidebarNavItem from './SidebarNavItem';
-import SidebarFooter from './SidebarFooter';
 import WorkspaceSwitcher from '../workspace-switcher/WorkspaceSwitcher';
 import { getIconForItem, getIconForSubItem } from '../../utils/sidebarIcons';
 import { Switch } from '@/components/ui/switch';
@@ -62,7 +61,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
         </ul>
       </nav>
 
-      {/* AI Assistant Section - moved down */}
+      {/* AI Assistant Section - at the bottom */}
       {isOpen && (
         <div className="ai-section border-t border-sidebar-border px-4 py-3">
           <div className="flex items-center justify-between mb-3">
@@ -100,8 +99,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
           )}
         </div>
       )}
-
-      <SidebarFooter isOpen={isOpen} />
     </aside>
   );
 };
