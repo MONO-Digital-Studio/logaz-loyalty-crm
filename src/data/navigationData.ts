@@ -1,4 +1,3 @@
-
 import { WorkspaceType } from '@/types/legal-entities';
 
 interface NavigationItem {
@@ -176,27 +175,6 @@ export const legalEntitiesNavigation: NavigationItem[] = [
     ],
   },
   {
-    id: 'le-communications',
-    title: 'Коммуникации',
-    children: [
-      {
-        id: 'le-comm-email',
-        title: 'Email рассылки',
-        path: '/legal-entities/communications/email',
-      },
-      {
-        id: 'le-comm-telegram',
-        title: 'Telegram',
-        path: '/legal-entities/communications/telegram',
-      },
-      {
-        id: 'le-comm-sms',
-        title: 'SMS',
-        path: '/legal-entities/communications/sms',
-      },
-    ],
-  },
-  {
     id: 'le-contact-center',
     title: 'Контакт-центр',
     children: [
@@ -213,7 +191,23 @@ export const legalEntitiesNavigation: NavigationItem[] = [
       {
         id: 'le-contact-campaigns',
         title: 'Рассылки',
-        path: '/legal-entities/contact-center/campaigns',
+        children: [
+          {
+            id: 'le-comm-email',
+            title: 'Email рассылки',
+            path: '/legal-entities/contact-center/campaigns/email',
+          },
+          {
+            id: 'le-comm-telegram',
+            title: 'Telegram',
+            path: '/legal-entities/contact-center/campaigns/telegram',
+          },
+          {
+            id: 'le-comm-sms',
+            title: 'SMS',
+            path: '/legal-entities/contact-center/campaigns/sms',
+          },
+        ],
       },
       {
         id: 'le-contact-stats',
