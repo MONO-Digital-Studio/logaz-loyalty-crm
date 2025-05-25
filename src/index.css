@@ -115,4 +115,13 @@
   .btn-cancel {
     @apply bg-logaz-gray text-logaz-dark-gray px-4 py-2 rounded hover:bg-opacity-90 transition-colors;
   }
+  
+  /* Отступ для основного контента когда сайдбар открыт */
+  .sidebar-open {
+    margin-left: 16rem; /* 64 * 0.25rem = 16rem (w-64) */
+  }
+  
+  .sidebar-collapsed {
+    margin-left: 5rem; /* 20 * 0.25rem = 5rem (w-20) */
+  }
 }

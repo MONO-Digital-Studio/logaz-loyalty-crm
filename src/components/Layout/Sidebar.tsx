@@ -27,7 +27,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     <aside
       className={`bg-sidebar text-sidebar-foreground transition-all duration-300 overflow-hidden ${
         isOpen ? 'w-64' : 'w-20'
-      } flex flex-col`}
+      } flex flex-col fixed left-0 top-0 h-full z-40`}
     >
       <SidebarLogo isOpen={isOpen} />
 
