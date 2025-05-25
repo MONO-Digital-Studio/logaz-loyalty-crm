@@ -119,7 +119,7 @@
   }
   
   .stats-card {
-    @apply bg-white rounded-lg p-4 card-shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-logaz-light-gray/40 w-full;
+    @apply bg-white rounded-lg p-3 sm:p-4 card-shadow hover:shadow-lg transition-shadow duration-300 border border-logaz-light-gray/40 w-full;
   }
   
   .btn-primary {
@@ -136,19 +136,5 @@
   
   .btn-cancel {
     @apply bg-logaz-gray text-logaz-dark-gray px-4 py-2 rounded hover:bg-opacity-90 transition-colors;
-  }
-
-  /* Улучшенная адаптивность для малых экранов */
-  @media (max-width: 640px) {
-    .stats-card {
-      @apply p-3;
-    }
-  }
-
-  /* Улучшенная адаптивность для очень малых экранов */
-  @media (max-width: 480px) {
-    .stats-card {
-      @apply p-2;
-    }
   }
 }

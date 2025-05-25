@@ -28,19 +28,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
             
             {/* Main content area - takes all remaining space */}
-            <div className="flex-1 flex flex-col min-w-0 w-full">
+            <div className="flex-1 flex flex-col min-w-0">
               <TopBar toggleSidebar={toggleSidebar} />
               
-              <main className="flex-1 overflow-auto bg-gray-50/50 w-full">
+              <main className="flex-1 overflow-auto bg-gray-50/50">
                 <div className="w-full h-full">
                   {children}
                 </div>
               </main>
             </div>
             
-            {/* AI панели только на больших экранах */}
+            {/* AI панели только на очень больших экранах и когда они действительно нужны */}
             {!isMobile && (
-              <div className="hidden xl:block flex-shrink-0">
+              <div className="hidden 2xl:block flex-shrink-0">
                 <AIPanelsContainer />
               </div>
             )}
