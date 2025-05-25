@@ -21,12 +21,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <LegalEntitiesAIProvider>
           <div className="h-screen w-screen overflow-hidden bg-logaz-light-gray flex">
             <Sidebar isOpen={sidebarOpen} />
-            <div 
-              className="flex-1 flex flex-col h-full overflow-hidden transition-all duration-300"
-              style={{ 
-                marginLeft: sidebarOpen ? '256px' : '80px'
-              }}
-            >
+            <div className="flex-1 flex flex-col h-full overflow-hidden">
               <TopBar toggleSidebar={toggleSidebar} />
               <main className="flex-1 overflow-auto bg-gray-50/50 w-full">
                 {children}
