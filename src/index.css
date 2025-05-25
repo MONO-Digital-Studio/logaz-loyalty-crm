@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap');
 
 @tailwind base;
@@ -135,5 +136,19 @@
   
   .btn-cancel {
     @apply bg-logaz-gray text-logaz-dark-gray px-4 py-2 rounded hover:bg-opacity-90 transition-colors;
+  }
+
+  /* Улучшенная адаптивность для малых экранов */
+  @media (max-width: 640px) {
+    .stats-card {
+      @apply p-3;
+    }
+  }
+
+  /* Улучшенная адаптивность для очень малых экранов */
+  @media (max-width: 480px) {
+    .stats-card {
+      @apply p-2;
+    }
   }
 }

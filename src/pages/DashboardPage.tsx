@@ -59,9 +59,9 @@ const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="flex-1 p-3 sm:p-4 lg:p-6 space-y-4 lg:space-y-6 overflow-y-auto">
-        <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between lg:gap-4">
+    <div className="w-full h-full flex flex-col">
+      <div className="flex-1 p-3 sm:p-4 lg:p-6 space-y-4 lg:space-y-6 overflow-y-auto w-full">
+        <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between lg:gap-4 w-full">
           <h1 className="text-xl sm:text-2xl lg:text-3xl font-syncopate font-bold">Аналитика</h1>
           <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:gap-3">
             <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
@@ -136,19 +136,23 @@ const DashboardPage: React.FC = () => {
           </div>
         </div>
 
-        <StatsSummary />
+        <div className="w-full">
+          <StatsSummary />
+        </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6 w-full">
           <SalesChart />
           <LoyaltyPointsChart />
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 lg:gap-6 w-full">
           <RfmAnalysis />
           <CustomerDemographics />
         </div>
         
-        <PerformanceMetrics />
+        <div className="w-full">
+          <PerformanceMetrics />
+        </div>
       </div>
     </div>
   );
