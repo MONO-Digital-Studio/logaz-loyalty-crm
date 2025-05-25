@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import StatsSummary from '@/components/Dashboard/StatsSummary';
 import SalesChart from '@/components/Dashboard/SalesChart';
@@ -58,8 +59,8 @@ const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="h-full w-full p-6 overflow-auto">
-      <div className="max-w-none w-full space-y-6">
+    <div className="h-full w-full">
+      <div className="max-w-none w-full p-6 space-y-6">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <h1 className="text-3xl font-syncopate font-bold">Аналитика</h1>
           <div className="flex flex-col sm:flex-row gap-3">
@@ -137,12 +138,12 @@ const DashboardPage: React.FC = () => {
 
         <StatsSummary />
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 w-full">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <SalesChart />
           <LoyaltyPointsChart />
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 w-full">
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <RfmAnalysis />
           <CustomerDemographics />
         </div>
