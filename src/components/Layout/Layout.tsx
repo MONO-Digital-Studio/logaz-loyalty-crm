@@ -6,7 +6,7 @@ import AIPanelsContainer from './AIPanelsContainer';
 import { AIProvider } from '@/contexts/AIContext';
 import { IndividualsAIProvider } from '@/contexts/IndividualsAIContext';
 import { LegalEntitiesAIProvider } from '@/contexts/LegalEntitiesAIContext';
-import { useSidebarState } from '@/hooks/useSidebarState';
+import { useAppState } from '@/hooks/useAppState';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 interface LayoutProps {
@@ -14,8 +14,10 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const { isOpen: sidebarOpen, toggle: toggleSidebar } = useSidebarState(true);
+  const { sidebarCollapsed, setSidebarCollapsed } = useAppState();
   const isMobile = useIsMobile();
+
+  const toggleSidebar = () => setSidebarCollapsed(!sidebarCollapsed);
 
   return (
     <AIProvider>
@@ -23,9 +25,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         <LegalEntitiesAIProvider>
           <div className="h-screen w-screen overflow-hidden bg-logaz-light-gray flex">
             {/* Sidebar */}
-            {(!isMobile || sidebarOpen) && (
+            {(!isMobile || !sidebarCollapsed) && (
               <div className="flex-shrink-0">
-                <Sidebar isOpen={sidebarOpen} />
+                <Sidebar isOpen={!sidebarCollapsed} />
               </div>
             )}
             
