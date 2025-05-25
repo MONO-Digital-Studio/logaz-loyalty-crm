@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { memo } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -10,7 +9,7 @@ import { useWorkspace } from '@/contexts/WorkspaceContext';
 import InsightCard from './InsightCard';
 import ChatInterface from './ChatInterface';
 
-const AIPanel: React.FC = () => {
+const AIPanel: React.FC = memo(() => {
   const { currentWorkspace } = useWorkspace();
   const {
     isPanelOpen,
@@ -149,6 +148,8 @@ const AIPanel: React.FC = () => {
       )}
     </div>
   );
-};
+});
+
+AIPanel.displayName = 'AIPanel';
 
 export default AIPanel;

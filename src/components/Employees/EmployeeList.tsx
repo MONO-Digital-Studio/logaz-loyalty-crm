@@ -1,23 +1,25 @@
 
-import React, { useState } from "react";
+import React, { useState, useMemo, memo } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { employeesData, departments, positions } from "./employeeData";
 import EmployeeTable from "./EmployeeTable";
 import EmployeeFilters from "./EmployeeFilters";
 import AddEmployeeDialog from "./AddEmployeeDialog";
 
-const EmployeeList = () => {
+const EmployeeList = memo(() => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filter, setFilter] = useState<string | null>(null);
 
-  const filteredEmployees = employeesData.filter(
-    (employee) =>
-      (searchQuery === "" || 
-        employee.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        employee.position.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        employee.email.toLowerCase().includes(searchQuery.toLowerCase())) &&
-      (filter === null || filter === "all" || employee.department === filter)
-  );
+  const filteredEmployees = useMemo(() => {
+    return employeesData.filter(
+      (employee) =>
+        (searchQuery === "" || 
+          employee.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          employee.position.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          employee.email.toLowerCase().includes(searchQuery.toLowerCase())) &&
+        (filter === null || filter === "all" || employee.department === filter)
+    );
+  }, [searchQuery, filter]);
 
   return (
     <div className="space-y-6">
@@ -46,6 +48,8 @@ const EmployeeList = () => {
       </Card>
     </div>
   );
-};
+});
+
+EmployeeList.displayName = 'EmployeeList';
 
 export default EmployeeList;
