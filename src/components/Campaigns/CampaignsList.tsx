@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { 
@@ -90,40 +91,40 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
       case "sms":
         return (
           <TableRow>
-            <TableHead className="w-[60px]">ID</TableHead>
-            <TableHead>Название</TableHead>
-            <TableHead>Статус</TableHead>
-            <TableHead>Получатели</TableHead>
-            <TableHead>Open Rate</TableHead>
-            <TableHead>Click Rate</TableHead>
-            <TableHead>Дата отправки</TableHead>
-            <TableHead className="w-[80px]"></TableHead>
+            <TableHead className="w-16 text-center">ID</TableHead>
+            <TableHead className="min-w-[200px]">Название</TableHead>
+            <TableHead className="w-32 text-center">Статус</TableHead>
+            <TableHead className="w-24 text-center">Получатели</TableHead>
+            <TableHead className="w-20 text-center">Open Rate</TableHead>
+            <TableHead className="w-20 text-center">Click Rate</TableHead>
+            <TableHead className="w-32 text-center">Дата отправки</TableHead>
+            <TableHead className="w-16"></TableHead>
           </TableRow>
         );
       case "templates":
         return (
           <TableRow>
-            <TableHead className="w-[60px]">ID</TableHead>
-            <TableHead>Название</TableHead>
-            <TableHead>Канал</TableHead>
-            <TableHead>Статус</TableHead>
-            <TableHead>Используется в</TableHead>
-            <TableHead>Последнее использование</TableHead>
-            <TableHead>Дата создания</TableHead>
-            <TableHead className="w-[80px]"></TableHead>
+            <TableHead className="w-16 text-center">ID</TableHead>
+            <TableHead className="min-w-[200px]">Название</TableHead>
+            <TableHead className="w-24 text-center">Канал</TableHead>
+            <TableHead className="w-32 text-center">Статус</TableHead>
+            <TableHead className="w-32 text-center">Используется в</TableHead>
+            <TableHead className="w-40 text-center">Последнее использование</TableHead>
+            <TableHead className="w-32 text-center">Дата создания</TableHead>
+            <TableHead className="w-16"></TableHead>
           </TableRow>
         );
       case "automated":
         return (
           <TableRow>
-            <TableHead className="w-[60px]">ID</TableHead>
-            <TableHead>Название</TableHead>
-            <TableHead>Канал</TableHead>
-            <TableHead>Статус</TableHead>
-            <TableHead>Получатели</TableHead>
-            <TableHead>Завершаемость</TableHead>
-            <TableHead>Дата создания</TableHead>
-            <TableHead className="w-[80px]"></TableHead>
+            <TableHead className="w-16 text-center">ID</TableHead>
+            <TableHead className="min-w-[200px]">Название</TableHead>
+            <TableHead className="w-24 text-center">Канал</TableHead>
+            <TableHead className="w-32 text-center">Статус</TableHead>
+            <TableHead className="w-24 text-center">Получатели</TableHead>
+            <TableHead className="w-28 text-center">Завершаемость</TableHead>
+            <TableHead className="w-32 text-center">Дата создания</TableHead>
+            <TableHead className="w-16"></TableHead>
           </TableRow>
         );
     }
@@ -135,20 +136,20 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
       className="cursor-pointer hover:bg-muted/50"
       onClick={() => handleEdit(item.id)}
     >
-      <TableCell className="font-mono text-sm text-muted-foreground">
+      <TableCell className="font-mono text-sm text-muted-foreground text-center">
         {item.id}
       </TableCell>
       <TableCell className="font-medium">{item.title}</TableCell>
-      <TableCell>
+      <TableCell className="text-center">
         <Badge className={getStatusColor(item.status)} variant="outline">
           {item.status}
         </Badge>
       </TableCell>
-      <TableCell>{item.recipients}</TableCell>
-      <TableCell>{item.openRate}</TableCell>
-      <TableCell>{item.clickRate}</TableCell>
-      <TableCell>{item.sentDate ? new Date(item.sentDate).toLocaleDateString('ru-RU') : "—"}</TableCell>
-      <TableCell onClick={(e) => e.stopPropagation()}>
+      <TableCell className="text-center">{item.recipients.toLocaleString()}</TableCell>
+      <TableCell className="text-center">{item.openRate}</TableCell>
+      <TableCell className="text-center">{item.clickRate}</TableCell>
+      <TableCell className="text-center">{item.sentDate ? new Date(item.sentDate).toLocaleDateString('ru-RU') : "—"}</TableCell>
+      <TableCell className="text-center" onClick={(e) => e.stopPropagation()}>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
@@ -191,22 +192,22 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
       className="cursor-pointer hover:bg-muted/50"
       onClick={() => handleEdit(item.id)}
     >
-      <TableCell className="font-mono text-sm text-muted-foreground">
+      <TableCell className="font-mono text-sm text-muted-foreground text-center">
         {item.id}
       </TableCell>
       <TableCell className="font-medium">{item.title}</TableCell>
-      <TableCell>
+      <TableCell className="text-center">
         <Badge variant="secondary">{item.channel}</Badge>
       </TableCell>
-      <TableCell>
+      <TableCell className="text-center">
         <Badge className={getStatusColor(item.status)} variant="outline">
           {item.status}
         </Badge>
       </TableCell>
-      <TableCell>{item.usedIn} кампаниях</TableCell>
-      <TableCell>{item.lastUsed ? new Date(item.lastUsed).toLocaleDateString('ru-RU') : "—"}</TableCell>
-      <TableCell>{new Date(item.createdDate).toLocaleDateString('ru-RU')}</TableCell>
-      <TableCell onClick={(e) => e.stopPropagation()}>
+      <TableCell className="text-center">{item.usedIn} кампаниях</TableCell>
+      <TableCell className="text-center">{item.lastUsed ? new Date(item.lastUsed).toLocaleDateString('ru-RU') : "—"}</TableCell>
+      <TableCell className="text-center">{new Date(item.createdDate).toLocaleDateString('ru-RU')}</TableCell>
+      <TableCell className="text-center" onClick={(e) => e.stopPropagation()}>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
@@ -243,22 +244,22 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
       className="cursor-pointer hover:bg-muted/50"
       onClick={() => handleEdit(item.id)}
     >
-      <TableCell className="font-mono text-sm text-muted-foreground">
+      <TableCell className="font-mono text-sm text-muted-foreground text-center">
         {item.id}
       </TableCell>
       <TableCell className="font-medium">{item.title}</TableCell>
-      <TableCell>
+      <TableCell className="text-center">
         <Badge variant="secondary">{item.channel}</Badge>
       </TableCell>
-      <TableCell>
+      <TableCell className="text-center">
         <Badge className={getStatusColor(item.status)} variant="outline">
           {item.status}
         </Badge>
       </TableCell>
-      <TableCell>{item.recipients}</TableCell>
-      <TableCell>{item.completionRate}</TableCell>
-      <TableCell>{new Date(item.createdDate).toLocaleDateString('ru-RU')}</TableCell>
-      <TableCell onClick={(e) => e.stopPropagation()}>
+      <TableCell className="text-center">{item.recipients.toLocaleString()}</TableCell>
+      <TableCell className="text-center">{item.completionRate}</TableCell>
+      <TableCell className="text-center">{new Date(item.createdDate).toLocaleDateString('ru-RU')}</TableCell>
+      <TableCell className="text-center" onClick={(e) => e.stopPropagation()}>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="h-8 w-8 p-0">
@@ -317,41 +318,45 @@ const CampaignsList: React.FC<CampaignsListProps> = ({ campaignType }) => {
   };
 
   return (
-    <Card>
-      <CardContent className="p-6">
-        <div className="flex items-center gap-4 mb-6">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Поиск рассылок..."
-              className="pl-10"
-              value={filters.search}
-              onChange={(e) => updateFilter('search', e.target.value)}
-            />
+    <div className="w-full">
+      <Card>
+        <CardContent className="p-6">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="relative flex-1 max-w-sm">
+              <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Поиск рассылок..."
+                className="pl-10"
+                value={filters.search}
+                onChange={(e) => updateFilter('search', e.target.value)}
+              />
+            </div>
+            <Button variant="outline">Фильтры</Button>
           </div>
-          <Button variant="outline">Фильтры</Button>
-        </div>
 
-        <div className="rounded-md border">
-          <Table>
-            <TableHeader>
-              {renderTableHeaders()}
-            </TableHeader>
-            <TableBody>
-              {filteredCampaigns.length > 0 ? (
-                filteredCampaigns.map((item) => renderTableRow(item))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={8} className="h-24 text-center">
-                    По вашему запросу ничего не найдено.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
-      </CardContent>
-    </Card>
+          <div className="rounded-md border overflow-hidden">
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  {renderTableHeaders()}
+                </TableHeader>
+                <TableBody>
+                  {filteredCampaigns.length > 0 ? (
+                    filteredCampaigns.map((item) => renderTableRow(item))
+                  ) : (
+                    <TableRow>
+                      <TableCell colSpan={8} className="h-24 text-center">
+                        По вашему запросу ничего не найдено.
+                      </TableCell>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
