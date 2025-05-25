@@ -68,4 +68,7 @@ export interface BaseAIState {
   toggleAI: () => void;
   openPanel: () => void;
   closePanel: () => void;
+  addMessage: (message: Omit<ChatMessage, 'id' | 'timestamp'>) => void;
+  clearMessages: () => void;
+  updateMetrics: (newMetrics: Partial<BaseAIMetrics>) => void;
 }

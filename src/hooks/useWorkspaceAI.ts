@@ -17,34 +17,46 @@ export const useWorkspaceAI = () => {
         return {
           isEnabled: true,
           isPanelOpen: individualsAI.isPanelOpen,
-          messages: [],
+          messages: generalAI.chatHistory || [],
           metrics: {
             totalInsights: individualsAI.insights.length,
             criticalAlerts: individualsAI.insights.filter(i => i.priority === 'critical').length,
             efficiency: individualsAI.performance.businessImpact.operationalEfficiency,
             lastUpdate: new Date(),
           },
-          toggleAI: () => {},
+          toggleAI: generalAI.toggleAI,
           openPanel: individualsAI.openPanel,
           closePanel: individualsAI.closePanel,
+          addMessage: generalAI.sendMessage ? (msg) => generalAI.sendMessage(msg.content) : () => {},
+          clearMessages: () => {},
+          updateMetrics: () => {},
         };
       case 'legal-entities':
         return {
           isEnabled: true,
           isPanelOpen: legalEntitiesAI.isPanelOpen,
-          messages: [],
+          messages: generalAI.chatHistory || [],
           metrics: {
             totalInsights: legalEntitiesAI.insights.length,
             criticalAlerts: legalEntitiesAI.insights.filter(i => i.priority === 'critical').length,
             efficiency: legalEntitiesAI.metrics.efficiency,
             lastUpdate: legalEntitiesAI.metrics.lastUpdate,
           },
-          toggleAI: () => {},
+          toggleAI: generalAI.toggleAI,
           openPanel: legalEntitiesAI.openPanel,
           closePanel: legalEntitiesAI.closePanel,
+          addMessage: generalAI.sendMessage ? (msg) => generalAI.sendMessage(msg.content) : () => {},
+          clearMessages: () => {},
+          updateMetrics: () => {},
         };
       default:
-        return generalAI;
+        return {
+          ...generalAI,
+          messages: generalAI.chatHistory || [],
+          addMessage: generalAI.sendMessage ? (msg) => generalAI.sendMessage(msg.content) : () => {},
+          clearMessages: () => {},
+          updateMetrics: () => {},
+        };
     }
   };
 
