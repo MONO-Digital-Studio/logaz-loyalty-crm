@@ -24,14 +24,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <AIProvider>
         <IndividualsAIProvider>
           <LegalEntitiesAIProvider>
-            <div className="min-h-screen bg-logaz-light-gray">
+            <div className="min-h-screen bg-logaz-light-gray flex">
               <Sidebar isOpen={sidebarOpen} />
-              <div className={`flex flex-col min-h-screen transition-all duration-300 ${
-                sidebarOpen ? 'sidebar-open' : 'sidebar-collapsed'
-              }`}>
+              <div className="flex flex-col flex-1 min-h-screen">
                 <TopBar toggleSidebar={toggleSidebar} />
-                <main className="flex-1 p-4 overflow-auto">
-                  {children}
+                <main className="flex-1 p-6 overflow-auto bg-gray-50/50">
+                  <div className="max-w-full mx-auto">
+                    {children}
+                  </div>
                 </main>
               </div>
               <AIPanelsContainer />

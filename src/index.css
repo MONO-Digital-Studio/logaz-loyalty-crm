@@ -93,7 +93,17 @@
   }
   body {
     @apply bg-background text-foreground font-montserrat;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow: hidden;
   }
+  
+  #root {
+    height: 100vh;
+    overflow: hidden;
+  }
+  
   h1, h2, h3, h4, h5, h6 {
     @apply font-syncopate font-bold;
   }
@@ -101,7 +111,7 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
   .stats-card {
-    @apply bg-white rounded-lg p-3 card-shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-logaz-light-gray/40;
+    @apply bg-white rounded-lg p-4 card-shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-logaz-light-gray/40;
   }
   .btn-primary {
     @apply bg-logaz-blue text-white px-4 py-2 rounded hover:bg-opacity-90 transition-colors;
@@ -114,14 +124,5 @@
   }
   .btn-cancel {
     @apply bg-logaz-gray text-logaz-dark-gray px-4 py-2 rounded hover:bg-opacity-90 transition-colors;
-  }
-  
-  /* Отступ для основного контента когда сайдбар открыт */
-  .sidebar-open {
-    margin-left: 16rem; /* 64 * 0.25rem = 16rem (w-64) */
-  }
-  
-  .sidebar-collapsed {
-    margin-left: 5rem; /* 20 * 0.25rem = 5rem (w-20) */
   }
 }

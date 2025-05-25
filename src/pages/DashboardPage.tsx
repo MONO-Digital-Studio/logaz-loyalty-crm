@@ -60,16 +60,16 @@ const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-syncopate font-bold">Аналитика</h1>
-        <div className="flex space-x-2">
+    <div className="space-y-6 w-full">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+        <h1 className="text-3xl font-syncopate font-bold">Аналитика</h1>
+        <div className="flex flex-col sm:flex-row gap-3">
           <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
             <PopoverTrigger asChild>
               <Button 
                 variant="outline"
                 className={cn(
-                  "w-[300px] justify-start text-left font-normal",
+                  "w-full sm:w-[300px] justify-start text-left font-normal",
                   !date && "text-muted-foreground"
                 )}
               >
@@ -132,18 +132,18 @@ const DashboardPage: React.FC = () => {
               </div>
             </PopoverContent>
           </Popover>
-          <button className="btn-primary">Экспорт</button>
+          <button className="btn-primary whitespace-nowrap">Экспорт</button>
         </div>
       </div>
 
       <StatsSummary />
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         <SalesChart />
         <LoyaltyPointsChart />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         <RfmAnalysis />
         <CustomerDemographics />
       </div>

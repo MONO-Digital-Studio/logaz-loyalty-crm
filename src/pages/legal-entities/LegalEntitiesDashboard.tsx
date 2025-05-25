@@ -23,84 +23,84 @@ const LegalEntitiesDashboard: React.FC = () => {
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-6 w-full">
       {/* Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight">Аналитика юридических лиц</h1>
-          <p className="text-muted-foreground text-sm">
+          <h1 className="text-3xl font-bold tracking-tight">Аналитика юридических лиц</h1>
+          <p className="text-muted-foreground">
             Обзор ключевых показателей и метрик корпоративных клиентов
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button onClick={() => navigate('/legal-entities/fuel-cards/create')}>
+        <div className="flex flex-wrap gap-3">
+          <Button onClick={() => navigate('/legal-entities/fuel-cards/create')} className="flex-1 lg:flex-initial">
             <CreditCard className="mr-2 h-4 w-4" />
             Создать карту
           </Button>
-          <Button onClick={() => navigate('/legal-entities/clients/create')}>
+          <Button onClick={() => navigate('/legal-entities/clients/create')} className="flex-1 lg:flex-initial">
             <Plus className="mr-2 h-4 w-4" />
             Новый клиент ЮЛ
           </Button>
         </div>
       </div>
 
-      {/* Metrics Cards */}
-      <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="p-3">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+      {/* Metrics Cards - Responsive Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card className="border-l-4 border-l-logaz-blue">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Общий баланс</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
+            <DollarSign className="h-5 w-5 text-logaz-blue" />
           </CardHeader>
-          <CardContent className="p-0">
-            <div className="text-xl font-bold text-logaz-blue">
+          <CardContent>
+            <div className="text-2xl font-bold text-logaz-blue">
               {formatCurrency(dashboardMetrics.totalBalance)}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-green-600 mt-1">
               +12% с прошлого месяца
             </p>
           </CardContent>
         </Card>
 
-        <Card className="p-3">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+        <Card className="border-l-4 border-l-green-500">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Активные карты</CardTitle>
-            <CreditCard className="h-4 w-4 text-muted-foreground" />
+            <CreditCard className="h-5 w-5 text-green-600" />
           </CardHeader>
-          <CardContent className="p-0">
-            <div className="text-xl font-bold text-green-600">
+          <CardContent>
+            <div className="text-2xl font-bold text-green-600">
               {formatNumber(dashboardMetrics.activeCards)}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground mt-1">
               из {fuelCards.length} выпущенных
             </p>
           </CardContent>
         </Card>
 
-        <Card className="p-3">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+        <Card className="border-l-4 border-l-logaz-orange">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Объем топлива</CardTitle>
-            <Fuel className="h-4 w-4 text-muted-foreground" />
+            <Fuel className="h-5 w-5 text-logaz-orange" />
           </CardHeader>
-          <CardContent className="p-0">
-            <div className="text-xl font-bold text-logaz-orange">
+          <CardContent>
+            <div className="text-2xl font-bold text-logaz-orange">
               {formatNumber(dashboardMetrics.totalFuelVolume)} л
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-muted-foreground mt-1">
               За текущий месяц
             </p>
           </CardContent>
         </Card>
 
-        <Card className="p-3">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+        <Card className="border-l-4 border-l-blue-500">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Транзакции сегодня</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
+            <Activity className="h-5 w-5 text-blue-600" />
           </CardHeader>
-          <CardContent className="p-0">
-            <div className="text-xl font-bold">
+          <CardContent>
+            <div className="text-2xl font-bold text-blue-600">
               {formatNumber(dashboardMetrics.transactionsToday)}
             </div>
-            <p className="text-xs text-muted-foreground">
+            <p className="text-xs text-green-600 mt-1">
               +5% чем вчера
             </p>
           </CardContent>
@@ -109,44 +109,46 @@ const LegalEntitiesDashboard: React.FC = () => {
 
       {/* Warning Cards */}
       {dashboardMetrics.blockedCards > 0 && (
-        <Card className="border-red-200 bg-red-50 p-3">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
+        <Card className="border-l-4 border-l-red-500 bg-red-50">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-red-800">Заблокированные карты</CardTitle>
-            <AlertTriangle className="h-4 w-4 text-red-600" />
+            <AlertTriangle className="h-5 w-5 text-red-600" />
           </CardHeader>
-          <CardContent className="p-0">
-            <div className="text-xl font-bold text-red-600">
+          <CardContent>
+            <div className="text-2xl font-bold text-red-600">
               {dashboardMetrics.blockedCards}
             </div>
-            <p className="text-xs text-red-700">
+            <p className="text-xs text-red-700 mt-1">
               Требуют внимания
             </p>
           </CardContent>
         </Card>
       )}
 
-      {/* Recent Activity */}
-      <div className="grid gap-3 md:grid-cols-2">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Последние клиенты</CardTitle>
+      {/* Recent Activity - Full Width Grid */}
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        <Card className="h-fit">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-xl">Последние клиенты</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="space-y-2">
+            <div className="space-y-3">
               {legalEntities.slice(0, 5).map((entity) => (
-                <div key={entity.id} className="flex items-center space-x-3">
-                  <div className="w-8 h-8 rounded-lg bg-logaz-blue/10 flex items-center justify-center">
-                    <Users className="h-4 w-4 text-logaz-blue" />
+                <div key={entity.id} className="flex items-center justify-between p-3 bg-gray-50/50 rounded-lg hover:bg-gray-100/50 transition-colors">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 rounded-lg bg-logaz-blue/10 flex items-center justify-center">
+                      <Users className="h-5 w-5 text-logaz-blue" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium truncate">
+                        {entity.companyName}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        ИНН: {entity.inn}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm font-medium truncate">
-                      {entity.companyName}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      ИНН: {entity.inn}
-                    </p>
-                  </div>
-                  <div className="text-sm font-medium">
+                  <div className="text-lg font-semibold text-logaz-blue">
                     {formatCurrency(entity.balance)}
                   </div>
                 </div>
@@ -155,29 +157,31 @@ const LegalEntitiesDashboard: React.FC = () => {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg">Топ карты по балансу</CardTitle>
+        <Card className="h-fit">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-xl">Топ карты по балансу</CardTitle>
           </CardHeader>
           <CardContent className="pt-0">
-            <div className="space-y-2">
+            <div className="space-y-3">
               {fuelCards
                 .sort((a, b) => b.balance - a.balance)
                 .slice(0, 5)
                 .map((card) => (
-                  <div key={card.id} className="flex items-center space-x-3">
-                    <div className="w-8 h-8 rounded-lg bg-logaz-orange/10 flex items-center justify-center">
-                      <CreditCard className="h-4 w-4 text-logaz-orange" />
+                  <div key={card.id} className="flex items-center justify-between p-3 bg-gray-50/50 rounded-lg hover:bg-gray-100/50 transition-colors">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 rounded-lg bg-logaz-orange/10 flex items-center justify-center">
+                        <CreditCard className="h-5 w-5 text-logaz-orange" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium">
+                          {card.vehicleNumber}
+                        </p>
+                        <p className="text-sm text-muted-foreground truncate">
+                          {card.driverName}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium">
-                        {card.vehicleNumber}
-                      </p>
-                      <p className="text-xs text-muted-foreground truncate">
-                        {card.driverName}
-                      </p>
-                    </div>
-                    <div className="text-sm font-medium">
+                    <div className="text-lg font-semibold text-logaz-orange">
                       {formatCurrency(card.balance)}
                     </div>
                   </div>
