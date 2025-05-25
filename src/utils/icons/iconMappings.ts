@@ -23,7 +23,7 @@ import {
   Phone,
   TrendingUp,
   Fuel,
-  DollarSign,
+  BadgeRussianRuble,
   UserRound,
   Cog,
   ShieldCheck,
@@ -70,7 +70,7 @@ export const subIconMappings = {
   },
   'le-payments': {
     'le-payments-invoices': Receipt,
-    'le-payments-history': DollarSign
+    'le-payments-history': BadgeRussianRuble
   },
   'le-communications': {
     'le-comm-email': Mail,
