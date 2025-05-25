@@ -10,7 +10,7 @@ import WorkspaceSwitcher from '../workspace-switcher/WorkspaceSwitcher';
 import { getIconForItem, getIconForSubItem } from '../../utils/sidebarIcons';
 import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
-import { Brain, MessageCircle, Sparkles, Building2 } from 'lucide-react';
+import { Brain, MessageCircle, Sparkles } from 'lucide-react';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -56,26 +56,6 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     }
   };
 
-  const getAssistantTitle = () => {
-    switch (currentWorkspace) {
-      case 'individuals':
-        return 'ИИ-Ассистент ФЛ';
-      case 'legal-entities':
-        return 'Корпоративный ИИ';
-      default:
-        return 'ИИ-Ассистент';
-    }
-  };
-
-  const getAssistantIcon = () => {
-    switch (currentWorkspace) {
-      case 'legal-entities':
-        return <Building2 className="w-4 h-4 text-logaz-orange mr-2" />;
-      default:
-        return <Brain className="w-4 h-4 text-logaz-orange mr-2" />;
-    }
-  };
-
   return (
     <aside
       className={`bg-sidebar text-sidebar-foreground transition-all duration-300 overflow-hidden ${
@@ -113,8 +93,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
         <div className="ai-section border-t border-sidebar-border px-4 py-3">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center">
-              {getAssistantIcon()}
-              <span className="text-sm font-medium">{getAssistantTitle()}</span>
+              <Brain className="w-4 h-4 text-logaz-orange mr-2" />
+              <span className="text-sm font-medium">ИИ-ассистент</span>
             </div>
             <Switch checked={isAIEnabled} onCheckedChange={toggleAI} />
           </div>
