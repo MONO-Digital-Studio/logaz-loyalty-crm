@@ -197,18 +197,38 @@ export const legalEntitiesNavigation: NavigationItem[] = [
     ],
   },
   {
-    id: 'le-support',
-    title: 'Техподдержка',
+    id: 'le-contact-center',
+    title: 'Контакт-центр',
     children: [
       {
-        id: 'le-support-tickets',
-        title: 'Обращения',
-        path: '/legal-entities/support/tickets',
+        id: 'le-contact-dialogs',
+        title: 'Диалоги',
+        path: '/legal-entities/contact-center/dialogs',
       },
       {
-        id: 'le-support-create',
-        title: 'Создать обращение',
-        path: '/legal-entities/support/create',
+        id: 'le-contact-agents',
+        title: 'Агенты',
+        path: '/legal-entities/contact-center/agents',
+      },
+      {
+        id: 'le-contact-campaigns',
+        title: 'Рассылки',
+        path: '/legal-entities/contact-center/campaigns',
+      },
+      {
+        id: 'le-contact-stats',
+        title: 'Статистика',
+        path: '/legal-entities/contact-center/stats',
+      },
+      {
+        id: 'le-contact-templates',
+        title: 'Шаблоны',
+        path: '/legal-entities/contact-center/templates',
+      },
+      {
+        id: 'le-contact-analytics',
+        title: 'Аналитика',
+        path: '/legal-entities/contact-center/analytics',
       },
     ],
   },
