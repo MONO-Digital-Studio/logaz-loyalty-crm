@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Syncopate:wght@400;700&display=swap');
 
 @tailwind base;
@@ -92,6 +91,7 @@
     @apply border-border;
     box-sizing: border-box;
   }
+  
   html, body {
     @apply bg-background text-foreground font-montserrat;
     margin: 0;
@@ -112,21 +112,27 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-syncopate font-bold;
   }
+  
   .card-shadow {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
+  
   .stats-card {
     @apply bg-white rounded-lg p-4 card-shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-logaz-light-gray/40 w-full;
   }
+  
   .btn-primary {
     @apply bg-logaz-blue text-white px-4 py-2 rounded hover:bg-opacity-90 transition-colors;
   }
+  
   .btn-secondary {
     @apply bg-white border border-logaz-blue text-logaz-blue px-4 py-2 rounded hover:bg-logaz-blue/5 transition-colors;
   }
+  
   .btn-action {
     @apply bg-logaz-orange text-white px-4 py-2 rounded hover:bg-opacity-90 transition-colors;
   }
+  
   .btn-cancel {
     @apply bg-logaz-gray text-logaz-dark-gray px-4 py-2 rounded hover:bg-opacity-90 transition-colors;
   }

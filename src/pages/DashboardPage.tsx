@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import StatsSummary from '@/components/Dashboard/StatsSummary';
-import { ChartContainer } from '@/components/ui/chart';
 import SalesChart from '@/components/Dashboard/SalesChart';
 import LoyaltyPointsChart from '@/components/Dashboard/LoyaltyPointsChart';
 import RfmAnalysis from '@/components/Dashboard/RfmAnalysis';
@@ -59,8 +58,8 @@ const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="h-full overflow-auto" style={{ width: '100%', padding: '16px', margin: '0', boxSizing: 'border-box' }}>
-      <div className="space-y-4" style={{ width: '100%' }}>
+    <div className="h-full w-full p-6 overflow-auto">
+      <div className="max-w-none w-full space-y-6">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <h1 className="text-3xl font-syncopate font-bold">Аналитика</h1>
           <div className="flex flex-col sm:flex-row gap-3">
@@ -138,12 +137,12 @@ const DashboardPage: React.FC = () => {
 
         <StatsSummary />
 
-        <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4" style={{ width: '100%' }}>
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 w-full">
           <SalesChart />
           <LoyaltyPointsChart />
         </div>
 
-        <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4" style={{ width: '100%' }}>
+        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 w-full">
           <RfmAnalysis />
           <CustomerDemographics />
         </div>
