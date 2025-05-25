@@ -19,7 +19,16 @@ const SidebarAISection: React.FC<SidebarAISectionProps> = ({ isOpen }) => {
 
   const criticalAlerts = getCriticalAlerts();
 
+  const handleToggle = (checked: boolean) => {
+    console.log('Switch toggled:', checked);
+    console.log('Current AI enabled state before toggle:', currentAI.isEnabled);
+    currentAI.toggleAI();
+    console.log('Toggle AI method called');
+  };
+
   if (!isOpen) return null;
+
+  console.log('SidebarAISection render - AI enabled:', currentAI.isEnabled);
 
   return (
     <div className="ai-section border-t border-sidebar-border px-4 py-3">
@@ -28,7 +37,10 @@ const SidebarAISection: React.FC<SidebarAISectionProps> = ({ isOpen }) => {
           <Brain className="w-4 h-4 text-logaz-orange mr-2" />
           <span className="text-sm font-medium">ИИ-ассистент</span>
         </div>
-        <Switch checked={currentAI.isEnabled} onCheckedChange={currentAI.toggleAI} />
+        <Switch 
+          checked={currentAI.isEnabled} 
+          onCheckedChange={handleToggle}
+        />
       </div>
       
       {currentAI.isEnabled && (

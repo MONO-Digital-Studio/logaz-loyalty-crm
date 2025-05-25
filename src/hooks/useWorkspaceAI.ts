@@ -12,10 +12,13 @@ export const useWorkspaceAI = () => {
   const legalEntitiesAI = useLegalEntitiesAI();
 
   const getCurrentAI = (): BaseAIState => {
+    console.log('getCurrentAI called for workspace:', currentWorkspace);
+    console.log('generalAI.isEnabled:', generalAI.isEnabled);
+    
     switch (currentWorkspace) {
       case 'individuals':
         return {
-          isEnabled: true,
+          isEnabled: generalAI.isEnabled,
           isPanelOpen: individualsAI.isPanelOpen,
           messages: generalAI.chatHistory || [],
           metrics: {
@@ -24,7 +27,10 @@ export const useWorkspaceAI = () => {
             efficiency: individualsAI.performance.businessImpact.operationalEfficiency,
             lastUpdate: new Date(),
           },
-          toggleAI: generalAI.toggleAI,
+          toggleAI: () => {
+            console.log('toggleAI called for individuals workspace');
+            generalAI.toggleAI();
+          },
           openPanel: individualsAI.openPanel,
           closePanel: individualsAI.closePanel,
           addMessage: generalAI.sendMessage ? (msg) => generalAI.sendMessage(msg.content) : () => {},
@@ -33,7 +39,7 @@ export const useWorkspaceAI = () => {
         };
       case 'legal-entities':
         return {
-          isEnabled: true,
+          isEnabled: generalAI.isEnabled,
           isPanelOpen: legalEntitiesAI.isPanelOpen,
           messages: generalAI.chatHistory || [],
           metrics: {
@@ -42,7 +48,10 @@ export const useWorkspaceAI = () => {
             efficiency: legalEntitiesAI.metrics.efficiency,
             lastUpdate: legalEntitiesAI.metrics.lastUpdate,
           },
-          toggleAI: generalAI.toggleAI,
+          toggleAI: () => {
+            console.log('toggleAI called for legal-entities workspace');
+            generalAI.toggleAI();
+          },
           openPanel: legalEntitiesAI.openPanel,
           closePanel: legalEntitiesAI.closePanel,
           addMessage: generalAI.sendMessage ? (msg) => generalAI.sendMessage(msg.content) : () => {},
@@ -53,6 +62,10 @@ export const useWorkspaceAI = () => {
         return {
           ...generalAI,
           messages: generalAI.chatHistory || [],
+          toggleAI: () => {
+            console.log('toggleAI called for default workspace');
+            generalAI.toggleAI();
+          },
           addMessage: generalAI.sendMessage ? (msg) => generalAI.sendMessage(msg.content) : () => {},
           clearMessages: () => {},
           updateMetrics: () => {},
