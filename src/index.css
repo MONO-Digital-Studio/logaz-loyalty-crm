@@ -90,20 +90,23 @@
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
-  body {
+  html, body {
     @apply bg-background text-foreground font-montserrat;
     margin: 0;
     padding: 0;
     height: 100vh;
-    overflow: hidden;
     width: 100vw;
+    overflow: hidden;
   }
   
   #root {
     height: 100vh;
-    overflow: hidden;
     width: 100vw;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
   }
   
   h1, h2, h3, h4, h5, h6 {

@@ -24,11 +24,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <AIProvider>
         <IndividualsAIProvider>
           <LegalEntitiesAIProvider>
-            <div className="min-h-screen bg-logaz-light-gray flex w-full">
+            <div className="min-h-screen bg-logaz-light-gray flex w-screen">
               <Sidebar isOpen={sidebarOpen} />
-              <div className="flex flex-col flex-1 min-h-screen w-full">
+              <div className="flex flex-col flex-1 min-h-screen" style={{ width: sidebarOpen ? 'calc(100vw - 256px)' : 'calc(100vw - 80px)' }}>
                 <TopBar toggleSidebar={toggleSidebar} />
-                <main className="flex-1 overflow-auto bg-gray-50/50 w-full">
+                <main className="flex-1 overflow-auto bg-gray-50/50" style={{ width: '100%', padding: '0' }}>
                   {children}
                 </main>
               </div>
