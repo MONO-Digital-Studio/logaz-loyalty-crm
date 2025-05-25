@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { PlusIcon, Send, Mail, Clock } from "lucide-react";
+import { PlusIcon, Send, Mail, Clock, Smartphone, MessageCircle, Phone } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import CampaignsList from "@/components/Campaigns/CampaignsList";
 
@@ -19,7 +19,7 @@ const EmailCampaignsPage = () => {
         <div>
           <h1 className="text-3xl font-bold">Управление рассылками</h1>
           <p className="text-muted-foreground mt-1">
-            Создание и управление email рассылками и автоматизациями
+            Создание и управление рассылками по всем каналам коммуникации
           </p>
         </div>
         <Button 
@@ -31,14 +31,26 @@ const EmailCampaignsPage = () => {
         </Button>
       </div>
 
-      <Tabs defaultValue="campaigns" className="w-full">
+      <Tabs defaultValue="email" className="w-full">
         <TabsList className="mb-4">
-          <TabsTrigger value="campaigns" className="flex items-center gap-2">
-            <Send size={16} />
-            Рассылки
+          <TabsTrigger value="email" className="flex items-center gap-2">
+            <Mail size={16} />
+            Email
+          </TabsTrigger>
+          <TabsTrigger value="push" className="flex items-center gap-2">
+            <Smartphone size={16} />
+            PUSH
+          </TabsTrigger>
+          <TabsTrigger value="telegram" className="flex items-center gap-2">
+            <MessageCircle size={16} />
+            Telegram
+          </TabsTrigger>
+          <TabsTrigger value="sms" className="flex items-center gap-2">
+            <Phone size={16} />
+            SMS
           </TabsTrigger>
           <TabsTrigger value="templates" className="flex items-center gap-2">
-            <Mail size={16} />
+            <Send size={16} />
             Шаблоны
           </TabsTrigger>
           <TabsTrigger value="automated" className="flex items-center gap-2">
@@ -47,8 +59,20 @@ const EmailCampaignsPage = () => {
           </TabsTrigger>
         </TabsList>
 
-        <TabsContent value="campaigns">
-          <CampaignsList campaignType="regular" />
+        <TabsContent value="email">
+          <CampaignsList campaignType="email" />
+        </TabsContent>
+        
+        <TabsContent value="push">
+          <CampaignsList campaignType="push" />
+        </TabsContent>
+        
+        <TabsContent value="telegram">
+          <CampaignsList campaignType="telegram" />
+        </TabsContent>
+        
+        <TabsContent value="sms">
+          <CampaignsList campaignType="sms" />
         </TabsContent>
         
         <TabsContent value="templates">
