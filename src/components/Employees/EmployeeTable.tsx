@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -120,7 +119,6 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
         </TableBody>
       </Table>
 
-      {/* Pagination Controls */}
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-2">
           <span className="text-sm text-muted-foreground">Строк на странице:</span>
