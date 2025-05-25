@@ -60,7 +60,7 @@ const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 w-full">
+    <div className="h-full w-full p-4 space-y-4 overflow-auto">
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
         <h1 className="text-3xl font-syncopate font-bold">Аналитика</h1>
         <div className="flex flex-col sm:flex-row gap-3">
@@ -138,12 +138,12 @@ const DashboardPage: React.FC = () => {
 
       <StatsSummary />
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 w-full">
         <SalesChart />
         <LoyaltyPointsChart />
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 2xl:grid-cols-2 gap-4 w-full">
         <RfmAnalysis />
         <CustomerDemographics />
       </div>
