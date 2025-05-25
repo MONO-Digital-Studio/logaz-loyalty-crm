@@ -60,7 +60,7 @@ const DialogsContainer: React.FC = () => {
   const selectedDialog = mockDialogs.find(d => d.id === selectedDialogId);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 min-h-0">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 h-[calc(100vh-200px)] min-h-[600px]">
       <div className="bg-card rounded-lg border flex flex-col">
         <div className="p-4 border-b">
           <h2 className="text-lg font-semibold">Активные диалоги</h2>
