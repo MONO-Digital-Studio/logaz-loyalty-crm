@@ -468,11 +468,7 @@ test: добавить тесты для ИИ-ассистента
   </a>
 </p>
 
-<p>Сделано с ❤️ и ⚡ используя <a href="https://lovable.dev">Lovable</a></p>
-
 <p>
-  <a href="https://lovable.dev/projects/d6d1444a-0a1f-4a4c-8d6a-91670562961f">🚀 Live Demo</a> •
-  <a href="mailto:support@logaz.com">📧 Поддержка</a> •
   <a href="./PROJECT_DOCUMENTATION.md">📚 Документация</a> •
   <a href="./REFACTORING_REPORT.md">🔧 Рефакторинг</a>
 </p>
