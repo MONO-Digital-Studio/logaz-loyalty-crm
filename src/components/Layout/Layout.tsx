@@ -19,23 +19,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <AIProvider>
       <IndividualsAIProvider>
         <LegalEntitiesAIProvider>
-          <div className="h-screen w-screen overflow-hidden bg-logaz-light-gray">
-            <div 
-              className="grid h-full transition-all duration-300"
-              style={{
-                gridTemplateColumns: sidebarOpen ? '256px 1fr' : '80px 1fr',
-                gridTemplateRows: 'auto 1fr'
-              }}
-            >
-              <Sidebar isOpen={sidebarOpen} />
+          <div className="h-screen w-screen overflow-hidden bg-logaz-light-gray flex">
+            <Sidebar isOpen={sidebarOpen} />
+            
+            <div className="flex-1 flex flex-col min-w-0">
               <TopBar toggleSidebar={toggleSidebar} />
-              <div></div>
-              <main className="overflow-auto bg-gray-50/50 w-full">
-                <div className="w-full max-w-none">
-                  {children}
-                </div>
+              
+              <main className="flex-1 overflow-auto bg-gray-50/50">
+                {children}
               </main>
             </div>
+            
             <AIPanelsContainer />
           </div>
         </LegalEntitiesAIProvider>

@@ -5,7 +5,7 @@ import { Users, CreditCard, TrendingUp, Activity } from 'lucide-react';
 
 const StatsSummary: React.FC = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-4 w-full">
+    <div className="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-4 gap-4">
       <StatsCard 
         title="Всего клиентов" 
         value="2845" 

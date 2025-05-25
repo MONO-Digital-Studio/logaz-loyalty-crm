@@ -59,8 +59,8 @@ const DashboardPage: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full">
-      <div className="w-full h-full px-4 py-6 space-y-6 overflow-y-auto">
+    <div className="h-full flex flex-col">
+      <div className="flex-1 p-6 space-y-6 overflow-y-auto">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <h1 className="text-2xl lg:text-3xl font-syncopate font-bold">Аналитика</h1>
           <div className="flex flex-col sm:flex-row gap-3">
