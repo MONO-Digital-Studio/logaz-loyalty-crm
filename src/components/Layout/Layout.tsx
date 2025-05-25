@@ -2,10 +2,12 @@
 import React from 'react';
 import Sidebar from './Sidebar';
 import TopBar from './TopBar';
+import AIPanel from '../ai-assistant/shared/AIPanel';
 import { 
   SidebarProvider, 
   SidebarInset
 } from '@/components/ui/sidebar';
+import { AIProvider } from '@/contexts/AIContext';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -20,15 +22,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <SidebarProvider defaultOpen={true}>
-      <div className="flex h-screen w-full bg-logaz-light-gray">
-        <Sidebar isOpen={sidebarOpen} />
-        <div className="flex flex-col flex-1 overflow-hidden">
-          <TopBar toggleSidebar={toggleSidebar} />
-          <SidebarInset className="p-4 md:p-6">
-            {children}
-          </SidebarInset>
+      <AIProvider>
+        <div className="flex h-screen w-full bg-logaz-light-gray">
+          <Sidebar isOpen={sidebarOpen} />
+          <div className="flex flex-col flex-1 overflow-hidden">
+            <TopBar toggleSidebar={toggleSidebar} />
+            <SidebarInset className="p-4 md:p-6">
+              {children}
+            </SidebarInset>
+          </div>
+          <AIPanel />
         </div>
-      </div>
+      </AIProvider>
     </SidebarProvider>
   );
 };
