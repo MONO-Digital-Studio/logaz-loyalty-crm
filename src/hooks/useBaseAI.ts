@@ -1,19 +1,12 @@
 
 import { useState, useCallback } from 'react';
-import { ChatMessage, AIMetrics } from '@/types/ai';
+import { ChatMessage, BaseAIMetrics, BaseAIState } from '@/types/ai';
 
-export interface BaseAIState {
-  isEnabled: boolean;
-  isPanelOpen: boolean;
-  messages: ChatMessage[];
-  metrics: AIMetrics;
-}
-
-export const useBaseAI = (initialMetrics: AIMetrics) => {
+export const useBaseAI = (initialMetrics: BaseAIMetrics): BaseAIState => {
   const [isEnabled, setIsEnabled] = useState(true);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [metrics, setMetrics] = useState<AIMetrics>(initialMetrics);
+  const [metrics, setMetrics] = useState<BaseAIMetrics>(initialMetrics);
 
   const toggleAI = useCallback(() => {
     setIsEnabled(prev => !prev);
@@ -40,7 +33,7 @@ export const useBaseAI = (initialMetrics: AIMetrics) => {
     setMessages([]);
   }, []);
 
-  const updateMetrics = useCallback((newMetrics: Partial<AIMetrics>) => {
+  const updateMetrics = useCallback((newMetrics: Partial<BaseAIMetrics>) => {
     setMetrics(prev => ({ ...prev, ...newMetrics, lastUpdate: new Date() }));
   }, []);
 

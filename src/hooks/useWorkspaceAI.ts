@@ -3,6 +3,7 @@ import { useWorkspace } from '@/contexts/WorkspaceContext';
 import { useAI } from '@/contexts/AIContext';
 import { useIndividualsAI } from '@/contexts/IndividualsAIContext';
 import { useLegalEntitiesAI } from '@/contexts/LegalEntitiesAIContext';
+import { BaseAIState } from '@/types/ai';
 
 export const useWorkspaceAI = () => {
   const { currentWorkspace } = useWorkspace();
@@ -10,12 +11,38 @@ export const useWorkspaceAI = () => {
   const individualsAI = useIndividualsAI();
   const legalEntitiesAI = useLegalEntitiesAI();
 
-  const getCurrentAI = () => {
+  const getCurrentAI = (): BaseAIState => {
     switch (currentWorkspace) {
       case 'individuals':
-        return individualsAI;
+        return {
+          isEnabled: true,
+          isPanelOpen: individualsAI.isPanelOpen,
+          messages: [],
+          metrics: {
+            totalInsights: individualsAI.insights.length,
+            criticalAlerts: individualsAI.insights.filter(i => i.priority === 'critical').length,
+            efficiency: individualsAI.performance.businessImpact.operationalEfficiency,
+            lastUpdate: new Date(),
+          },
+          toggleAI: () => {},
+          openPanel: individualsAI.openPanel,
+          closePanel: individualsAI.closePanel,
+        };
       case 'legal-entities':
-        return legalEntitiesAI;
+        return {
+          isEnabled: true,
+          isPanelOpen: legalEntitiesAI.isPanelOpen,
+          messages: [],
+          metrics: {
+            totalInsights: legalEntitiesAI.insights.length,
+            criticalAlerts: legalEntitiesAI.insights.filter(i => i.priority === 'critical').length,
+            efficiency: legalEntitiesAI.metrics.efficiency,
+            lastUpdate: legalEntitiesAI.metrics.lastUpdate,
+          },
+          toggleAI: () => {},
+          openPanel: legalEntitiesAI.openPanel,
+          closePanel: legalEntitiesAI.closePanel,
+        };
       default:
         return generalAI;
     }
@@ -33,10 +60,7 @@ export const useWorkspaceAI = () => {
 
   const getCriticalAlerts = () => {
     const currentAI = getCurrentAI();
-    if ('insights' in currentAI) {
-      return currentAI.insights.filter((insight: any) => insight.priority === 'critical').length;
-    }
-    return currentAI.metrics.criticalAlerts || 0;
+    return currentAI.metrics.criticalAlerts;
   };
 
   return {

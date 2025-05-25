@@ -46,13 +46,26 @@ export interface ChatMessage {
   type: 'user' | 'assistant';
   content: string;
   timestamp: Date;
-  workspace: WorkspaceType;
+  workspace?: WorkspaceType;
 }
 
-export interface AIMetrics {
+export interface BaseAIMetrics {
   totalInsights: number;
   criticalAlerts: number;
-  automatedActions: number;
   efficiency: number;
   lastUpdate: Date;
+}
+
+export interface AIMetrics extends BaseAIMetrics {
+  automatedActions: number;
+}
+
+export interface BaseAIState {
+  isEnabled: boolean;
+  isPanelOpen: boolean;
+  messages: ChatMessage[];
+  metrics: BaseAIMetrics;
+  toggleAI: () => void;
+  openPanel: () => void;
+  closePanel: () => void;
 }

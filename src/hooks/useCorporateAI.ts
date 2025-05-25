@@ -1,7 +1,15 @@
 
 import { useState, useCallback } from 'react';
 import { CorporateInsight, CorporateAIPerformanceMetrics } from '@/types/legal-entities-ai';
+import { BaseAIMetrics } from '@/types/ai';
 import { useBaseAI } from './useBaseAI';
+
+const convertToBaseMetrics = (metrics: CorporateAIPerformanceMetrics): BaseAIMetrics => ({
+  totalInsights: metrics.totalInsights,
+  criticalAlerts: metrics.criticalAlerts,
+  efficiency: metrics.efficiency,
+  lastUpdate: metrics.lastUpdate,
+});
 
 const initialMetrics: CorporateAIPerformanceMetrics = {
   fraudDetectionAccuracy: 94.2,
@@ -19,8 +27,9 @@ const initialMetrics: CorporateAIPerformanceMetrics = {
 };
 
 export const useCorporateAI = () => {
-  const baseAI = useBaseAI(initialMetrics);
+  const baseAI = useBaseAI(convertToBaseMetrics(initialMetrics));
   const [insights, setInsights] = useState<CorporateInsight[]>([]);
+  const [fullMetrics] = useState<CorporateAIPerformanceMetrics>(initialMetrics);
 
   const addInsight = useCallback((insight: Omit<CorporateInsight, 'id' | 'timestamp'>) => {
     const newInsight: CorporateInsight = {
@@ -40,5 +49,6 @@ export const useCorporateAI = () => {
     insights,
     addInsight,
     clearInsights,
+    fullMetrics,
   };
 };
