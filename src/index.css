@@ -101,7 +101,7 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
   .stats-card {
-    @apply bg-white rounded-lg p-4 card-shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-logaz-light-gray/40;
+    @apply bg-white rounded-lg p-3 card-shadow hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-logaz-light-gray/40;
   }
   .btn-primary {
     @apply bg-logaz-blue text-white px-4 py-2 rounded hover:bg-opacity-90 transition-colors;

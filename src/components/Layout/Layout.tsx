@@ -30,7 +30,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 sidebarOpen ? 'sidebar-open' : 'sidebar-collapsed'
               }`}>
                 <TopBar toggleSidebar={toggleSidebar} />
-                <main className="flex-1 p-2 overflow-auto">
+                <main className="flex-1 p-4 overflow-auto">
                   {children}
                 </main>
               </div>
