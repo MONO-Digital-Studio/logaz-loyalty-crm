@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
-import { useWorkspace } from '@/contexts/WorkspaceContext';
-import { getNavigationForWorkspace } from '../../data/navigationData';
+import { useNavigation } from '@/hooks/useNavigation';
 import SidebarNavItem from './SidebarNavItem';
 import SidebarLogo from './SidebarLogo';
 import SidebarAISection from './SidebarAISection';
@@ -13,10 +12,8 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
-  const { currentWorkspace } = useWorkspace();
+  const { navigationItems } = useNavigation();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
-
-  const navigationItems = getNavigationForWorkspace(currentWorkspace);
 
   const toggleItem = (id: string) => {
     setExpandedItems(prev => 
