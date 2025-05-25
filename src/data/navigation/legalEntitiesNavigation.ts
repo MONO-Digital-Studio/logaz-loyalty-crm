@@ -134,22 +134,6 @@ export const legalEntitiesNavigation: NavigationItem[] = [
     ],
   },
   {
-    id: 'le-ai-assistant',
-    title: 'ИИ-ассистент',
-    children: [
-      {
-        id: 'le-ai-activity',
-        title: 'Анализ активности',
-        path: '/legal-entities/ai/activity-analysis',
-      },
-      {
-        id: 'le-ai-predictions',
-        title: 'Прогнозы',
-        path: '/legal-entities/ai/predictions',
-      },
-    ],
-  },
-  {
     id: 'le-settings',
     title: 'Настройки ЮЛ',
     path: '/legal-entities/settings',
