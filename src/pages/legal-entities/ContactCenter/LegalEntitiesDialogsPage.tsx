@@ -1,6 +1,6 @@
 
 import React from 'react';
-import DialogsList from '@/components/ContactCenter/DialogsList';
+import DialogsContainer from '@/components/ContactCenter/DialogsContainer';
 
 const LegalEntitiesDialogsPage: React.FC = () => {
   return (
@@ -9,7 +9,7 @@ const LegalEntitiesDialogsPage: React.FC = () => {
         <h1 className="text-2xl font-semibold">Диалоги с клиентами ЮЛ</h1>
       </div>
       
-      <DialogsList />
+      <DialogsContainer />
     </div>
   );
 };
