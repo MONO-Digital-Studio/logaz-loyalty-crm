@@ -1,8 +1,10 @@
 
 import React, { useState } from 'react';
-import { navigationItems } from '../../data/mockData';
+import { useWorkspace } from '@/contexts/WorkspaceContext';
+import { getNavigationForWorkspace } from '../../data/navigationData';
 import SidebarNavItem from './SidebarNavItem';
 import SidebarFooter from './SidebarFooter';
+import WorkspaceSwitcher from '../workspace-switcher/WorkspaceSwitcher';
 import { getIconForItem, getIconForSubItem } from '../../utils/sidebarIcons';
 
 interface SidebarProps {
@@ -10,7 +12,10 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
+  const { currentWorkspace } = useWorkspace();
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
+
+  const navigationItems = getNavigationForWorkspace(currentWorkspace);
 
   const toggleItem = (id: string) => {
     setExpandedItems(prev => 
@@ -33,6 +38,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
           <h1 className="text-xl font-syncopate font-bold">ЛС</h1>
         )}
       </div>
+
+      {isOpen && <WorkspaceSwitcher />}
 
       <nav className="flex-1 overflow-y-auto py-4">
         <ul className="space-y-1">
