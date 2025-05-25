@@ -157,9 +157,10 @@ const ClientsPage = () => {
   const handleCancel = () => {
     setIsCalendarOpen(false);
   };
-  return <div className="space-y-6">
+  return (
+    <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold">Клиенты</h1>
+        <h1 className="text-2xl md:text-3xl font-bold">Клиенты</h1>
         <div className="flex gap-2">
           <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
             <PopoverTrigger asChild>
@@ -222,6 +223,7 @@ const ClientsPage = () => {
       <div className="w-full">
         <ClientsTable clients={clientsData} />
       </div>
-    </div>;
+    </div>
+  );
 };
 export default ClientsPage;

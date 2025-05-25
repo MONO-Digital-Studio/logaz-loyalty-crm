@@ -44,12 +44,12 @@ const LegalEntitiesClientsPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Клиенты - Юридические лица</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Клиенты - Юридические лица</h1>
+          <p className="text-muted-foreground text-sm">
             Управление корпоративными клиентами и их договорами
           </p>
         </div>
@@ -60,48 +60,48 @@ const LegalEntitiesClientsPage: React.FC = () => {
       </div>
 
       {/* Stats */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+      <div className="grid gap-3 md:grid-cols-4">
+        <Card className="p-4">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
             <CardTitle className="text-sm font-medium">Всего клиентов</CardTitle>
             <Building2 className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{legalEntities.length}</div>
+          <CardContent className="p-0">
+            <div className="text-xl font-bold">{legalEntities.length}</div>
           </CardContent>
         </Card>
         
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <Card className="p-4">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
             <CardTitle className="text-sm font-medium">Активные</CardTitle>
             <Building2 className="h-4 w-4 text-green-600" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-green-600">
+          <CardContent className="p-0">
+            <div className="text-xl font-bold text-green-600">
               {legalEntities.filter(e => e.status === 'active').length}
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <Card className="p-4">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
             <CardTitle className="text-sm font-medium">Общий баланс</CardTitle>
             <Building2 className="h-4 w-4 text-logaz-blue" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-logaz-blue">
+          <CardContent className="p-0">
+            <div className="text-xl font-bold text-logaz-blue">
               {formatCurrency(legalEntities.reduce((sum, e) => sum + e.balance, 0))}
             </div>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <Card className="p-4">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1">
             <CardTitle className="text-sm font-medium">Заблокированные</CardTitle>
             <Building2 className="h-4 w-4 text-red-600" />
           </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-red-600">
+          <CardContent className="p-0">
+            <div className="text-xl font-bold text-red-600">
               {legalEntities.filter(e => e.status === 'blocked').length}
             </div>
           </CardContent>
@@ -110,7 +110,7 @@ const LegalEntitiesClientsPage: React.FC = () => {
 
       {/* Filters */}
       <Card>
-        <CardContent className="pt-6">
+        <CardContent className="pt-4">
           <div className="flex gap-4 flex-wrap">
             <div className="flex-1 min-w-[300px]">
               <div className="relative">
@@ -160,10 +160,10 @@ const LegalEntitiesClientsPage: React.FC = () => {
 
       {/* Table */}
       <Card>
-        <CardHeader>
-          <CardTitle>Список клиентов ({filteredEntities.length})</CardTitle>
+        <CardHeader className="pb-3">
+          <CardTitle className="text-lg">Список клиентов ({filteredEntities.length})</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-0">
           <Table>
             <TableHeader>
               <TableRow>
