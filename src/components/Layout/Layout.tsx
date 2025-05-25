@@ -30,8 +30,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <Sidebar isOpen={sidebarOpen} />
               <TopBar toggleSidebar={toggleSidebar} />
               <div></div>
-              <main className="overflow-auto bg-gray-50/50 min-w-0">
-                {children}
+              <main className="overflow-auto bg-gray-50/50 w-full">
+                <div className="w-full max-w-none">
+                  {children}
+                </div>
               </main>
             </div>
             <AIPanelsContainer />

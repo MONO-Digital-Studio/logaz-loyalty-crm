@@ -24,9 +24,9 @@ const StatsCard: React.FC<StatsCardProps> = ({
   const isPositiveChange = change && change > 0;
 
   return (
-    <div className={`stats-card ${className}`}>
+    <div className={`stats-card w-full ${className}`}>
       <div className="flex items-start justify-between">
-        <div>
+        <div className="flex-1">
           <h3 className="text-gray-500 font-medium text-sm font-montserrat mb-1">{title}</h3>
           <p className="text-2xl font-bold">{value}</p>
           
@@ -50,7 +50,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
         </div>
         
         {icon && (
-          <div className={`p-2 rounded-full ${color} bg-opacity-10`}>
+          <div className={`p-2 rounded-full ${color} bg-opacity-10 flex-shrink-0`}>
             {icon}
           </div>
         )}
