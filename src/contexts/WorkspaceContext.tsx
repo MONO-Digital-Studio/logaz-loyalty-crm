@@ -1,5 +1,6 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { WorkspaceType } from '@/types/legal-entities';
 
 interface WorkspaceContextType {
@@ -25,15 +26,27 @@ interface WorkspaceProviderProps {
 export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({ children }) => {
   const [currentWorkspace, setCurrentWorkspace] = useState<WorkspaceType>('individuals');
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const switchWorkspace = (workspace: WorkspaceType) => {
+    if (workspace === currentWorkspace) return;
+    
     setIsLoading(true);
+    
     // Имитация загрузки данных
     setTimeout(() => {
       setCurrentWorkspace(workspace);
       setIsLoading(false);
+      
       // Сохраняем выбор в localStorage
       localStorage.setItem('selected-workspace', workspace);
+      
+      // Автоматическое перенаправление на аналитику соответствующего пространства
+      if (workspace === 'legal-entities') {
+        navigate('/legal-entities');
+      } else {
+        navigate('/dashboard');
+      }
     }, 300);
   };
 

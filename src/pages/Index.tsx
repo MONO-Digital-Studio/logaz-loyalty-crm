@@ -10,9 +10,9 @@ const Index = () => {
   useEffect(() => {
     // Перенаправляем на соответствующий дашборд в зависимости от рабочего пространства
     if (currentWorkspace === 'legal-entities') {
-      navigate('/legal-entities');
+      navigate('/legal-entities', { replace: true });
     } else {
-      navigate('/dashboard');
+      navigate('/dashboard', { replace: true });
     }
   }, [currentWorkspace, navigate]);
 
