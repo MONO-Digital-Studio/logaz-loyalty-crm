@@ -16,7 +16,7 @@ import {
   mockLegalEntitiesChatHistory,
   mockFleetEfficiency,
   mockCostOptimization
-} from '@/data/legalEntitiesAIData';
+} from '@/data/corporate';
 
 interface LegalEntitiesAIContextType {
   corporateAnalysis: CorporateActivityAnalysis[];

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { memo } from 'react';
 import { AIInsight } from '@/types/ai';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -11,7 +11,7 @@ interface InsightCardProps {
   insight: AIInsight;
 }
 
-const InsightCard: React.FC<InsightCardProps> = ({ insight }) => {
+const InsightCard: React.FC<InsightCardProps> = memo(({ insight }) => {
   const { dismissInsight, executeAction } = useAI();
 
   const getIcon = () => {
@@ -108,6 +108,8 @@ const InsightCard: React.FC<InsightCardProps> = ({ insight }) => {
       </CardContent>
     </Card>
   );
-};
+});
+
+InsightCard.displayName = 'InsightCard';
 
 export default InsightCard;
