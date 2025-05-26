@@ -152,12 +152,6 @@ const AIAssistantPanel: React.FC = () => {
 
           {/* Чат-интерфейс */}
           <div className="h-56 border-t border-gray-200 dark:border-gray-700">
-            <div className="px-4 py-2 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-              <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
-                <Brain className="w-4 h-4 mr-2 text-logaz-orange" />
-                Чат с ИИ-ассистентом
-              </h4>
-            </div>
             <ChatInterface />
           </div>
         </div>
