@@ -28,9 +28,9 @@ const AIAssistantPanel: React.FC = () => {
 
   return (
     <div className={`
-      fixed bottom-6 right-4 bg-white dark:bg-gray-900 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700
+      fixed top-0 right-4 bg-white dark:bg-gray-900 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700
       transition-all duration-300 z-50 flex flex-col
-      ${isMinimized ? 'w-80 h-16' : 'w-96 h-[650px]'}
+      ${isMinimized ? 'w-80 h-16 top-6' : 'w-96 h-screen'}
     `}>
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-logaz-orange to-orange-500 rounded-t-lg text-white">
@@ -151,7 +151,7 @@ const AIAssistantPanel: React.FC = () => {
           </div>
 
           {/* Чат-интерфейс */}
-          <div className="h-56 border-t border-gray-200 dark:border-gray-700">
+          <div className="h-64 border-t border-gray-200 dark:border-gray-700">
             <ChatInterface />
           </div>
         </div>

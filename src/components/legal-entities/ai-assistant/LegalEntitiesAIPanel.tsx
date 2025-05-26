@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -28,9 +27,9 @@ const LegalEntitiesAIPanel: React.FC = () => {
 
   return (
     <div className={`
-      fixed bottom-6 right-4 bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700
+      fixed top-0 right-4 bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700
       transition-all duration-300 z-50 flex flex-col
-      ${isMinimized ? 'w-80 h-16' : 'w-96 h-[650px]'}
+      ${isMinimized ? 'w-80 h-16 top-6' : 'w-96 h-screen'}
     `}>
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-t-lg">
@@ -145,13 +144,7 @@ const LegalEntitiesAIPanel: React.FC = () => {
           </div>
 
           {/* Chat Section */}
-          <div className="h-56 border-t border-gray-200 dark:border-gray-700">
-            <div className="px-4 py-2 bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
-              <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
-                <Building2 className="w-4 h-4 mr-2 text-logaz-blue" />
-                Чат с ИИ-ассистентом
-              </h4>
-            </div>
+          <div className="h-64 border-t border-gray-200 dark:border-gray-700">
             <B2BChatInterface />
           </div>
         </div>
