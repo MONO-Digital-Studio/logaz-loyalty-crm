@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -32,7 +33,6 @@ const AIAssistantPanel: React.FC = () => {
           <Brain className="w-5 h-5 mr-3" />
           <div>
             <h3 className="font-semibold text-sm">ИИ-Ассистент</h3>
-            <p className="text-xs opacity-90">Физические лица</p>
           </div>
           <Badge variant="secondary" className="ml-3 text-xs bg-white/20 text-white border-white/30">
             Beta
