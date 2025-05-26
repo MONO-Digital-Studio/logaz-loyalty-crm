@@ -1,9 +1,10 @@
+
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Building2, Maximize2, Minimize2, X, RefreshCw, TrendingUp, Shield, DollarSign, AlertTriangle } from 'lucide-react';
+import { Building2, Maximize2, Minimize2, X, RefreshCw, TrendingUp, Users, DollarSign, AlertTriangle } from 'lucide-react';
 import { useLegalEntitiesAI } from '@/contexts/LegalEntitiesAIContext';
 import CorporateInsightCard from './insights/CorporateInsightCard';
 import B2BChatInterface from './chat/B2BChatInterface';
@@ -59,9 +60,9 @@ const LegalEntitiesAIPanel: React.FC = () => {
                   <span className="font-medium ml-1">{metrics.efficiency}%</span>
                 </div>
                 <div className="flex items-center">
-                  <Shield className="w-3 h-3 text-blue-500 mr-1" />
-                  <span className="text-gray-600 dark:text-gray-400">Детекция:</span>
-                  <span className="font-medium ml-1">{metrics.fraudDetectionAccuracy}%</span>
+                  <Users className="w-3 h-3 text-blue-500 mr-1" />
+                  <span className="text-gray-600 dark:text-gray-400">Удержание:</span>
+                  <span className="font-medium ml-1">{metrics.retentionImprovement}%</span>
                 </div>
                 <div className="flex items-center">
                   <DollarSign className="w-3 h-3 text-yellow-500 mr-1" />
