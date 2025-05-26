@@ -28,9 +28,9 @@ const LegalEntitiesAIPanel: React.FC = () => {
 
   return (
     <div className={`
-      fixed bottom-4 right-4 bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700
+      fixed bottom-6 right-4 bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700
       transition-all duration-300 z-50 flex flex-col
-      ${isMinimized ? 'w-80 h-16' : 'w-96 h-[600px]'}
+      ${isMinimized ? 'w-80 h-16' : 'w-96 h-[550px]'}
     `}>
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-t-lg">
@@ -145,7 +145,7 @@ const LegalEntitiesAIPanel: React.FC = () => {
           </div>
 
           {/* Chat Section */}
-          <div className="h-48 border-t border-gray-200 dark:border-gray-700">
+          <div className="h-44 border-t border-gray-200 dark:border-gray-700">
             <B2BChatInterface />
           </div>
         </div>
