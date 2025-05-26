@@ -222,7 +222,7 @@ export const mockAIPerformance: AIPerformanceMetrics = {
   }
 };
 
-// Updated mockIndividualsInsights with missing properties
+// Updated mockIndividualsInsights with compatible types
 export const mockIndividualsInsights: IndividualsInsight[] = [
   {
     id: 'ins_001',

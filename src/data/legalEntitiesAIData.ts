@@ -1,4 +1,3 @@
-
 import { 
   CorporateActivityAnalysis, 
   SuspiciousTransaction, 
@@ -282,6 +281,15 @@ export const mockCorporateChatHistory: CorporateChatMessage[] = [
     type: 'assistant',
     content: 'Добро пожаловать в корпоративный ИИ-ассистент ЛОГАЗ SV! Я помогу вам анализировать деятельность юридических лиц, выявлять риски и оптимизировать процессы. Чем могу помочь?',
     timestamp: new Date('2024-11-25T10:00:00')
+  }
+];
+
+export const mockLegalEntitiesChatHistory: LegalEntitiesChatMessage[] = [
+  {
+    id: 'msg_001',
+    type: 'assistant',
+    content: 'Добрый день! Чем могу помочь?',
+    timestamp: new Date(Date.now() - 60000)
   }
 ];
 

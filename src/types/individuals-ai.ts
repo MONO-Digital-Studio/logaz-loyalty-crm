@@ -115,10 +115,10 @@ export interface AIPerformanceMetrics {
   };
 }
 
-// Updated IndividualsInsight interface with missing properties
+// Updated IndividualsInsight interface with compatible types
 export interface IndividualsInsight {
   id: string;
-  type: 'churn_risk' | 'engagement_opportunity' | 'points_expiring' | 'loyalty_upgrade' | 'campaign_optimization';
+  type: 'activity_decrease' | 'points_expiring' | 'vip_upgrade' | 'churn_risk' | 'engagement_opportunity';
   title: string;
   description: string;
   priority: 'low' | 'medium' | 'high' | 'critical';
