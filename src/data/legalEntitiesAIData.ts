@@ -3,10 +3,10 @@ import {
   SuspiciousTransaction, 
   CorporateInsight, 
   CorporateAIPerformanceMetrics,
-  CorporateChatMessage,
   FleetEfficiency,
   CostOptimization
 } from '@/types/legal-entities-ai';
+import { LegalEntitiesChatMessage } from '@/types/individuals-ai';
 
 export const mockCorporateAnalysis: CorporateActivityAnalysis[] = [
   {
@@ -275,7 +275,7 @@ export const mockCorporateAIMetrics: CorporateAIPerformanceMetrics = {
   lastUpdate: new Date()
 };
 
-export const mockCorporateChatHistory: CorporateChatMessage[] = [
+export const mockLegalEntitiesChatHistory: LegalEntitiesChatMessage[] = [
   {
     id: '1',
     type: 'assistant',

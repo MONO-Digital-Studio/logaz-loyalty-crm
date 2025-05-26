@@ -1,3 +1,4 @@
+
 export type IndividualClientAnalysisLevel = 'engaged' | 'at_risk' | 'churning' | 'dormant';
 export type LoyaltyLevel = 'bronze' | 'silver' | 'gold' | 'platinum';
 export type RecommendedActionType = 'personal_offer' | 'point_reminder' | 'birthday_promo' | 'winback_campaign';
@@ -115,7 +116,7 @@ export interface AIPerformanceMetrics {
   };
 }
 
-// Updated IndividualsInsight interface with compatible types
+// Унифицированные типы для всех контекстов
 export interface IndividualsInsight {
   id: string;
   type: 'activity_decrease' | 'points_expiring' | 'vip_upgrade' | 'churn_risk' | 'engagement_opportunity';
@@ -151,12 +152,17 @@ export interface IndividualsPerformanceMetrics {
   };
 }
 
-export interface IndividualsChatMessage {
+// Унифицированный тип чата для всех контекстов
+export interface ChatMessage {
   id: string;
   type: 'user' | 'assistant';
   content: string;
   timestamp: Date;
 }
+
+// Алиасы для обратной совместимости
+export type IndividualsChatMessage = ChatMessage;
+export type LegalEntitiesChatMessage = ChatMessage;
 
 export interface CustomerSegment {
   id: string;

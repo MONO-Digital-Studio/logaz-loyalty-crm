@@ -1,6 +1,6 @@
 
-import { useCallback } from 'react';
-import { toast } from 'sonner';
+import { useCallback, useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
 export interface ErrorHandlerOptions {
   showToast?: boolean;
@@ -8,72 +8,66 @@ export interface ErrorHandlerOptions {
   fallbackMessage?: string;
 }
 
-export interface APIError {
-  message: string;
-  code?: string;
-  status?: number;
-  details?: any;
-}
+export const useErrorHandler = () => {
+  const { toast } = useToast();
+  const [error, setError] = useState<Error | null>(null);
+  const [isError, setIsError] = useState(false);
 
-export function useErrorHandler() {
   const handleError = useCallback((
-    error: Error | APIError | string,
+    error: Error | unknown,
     options: ErrorHandlerOptions = {}
   ) => {
     const {
       showToast = true,
       logError = true,
-      fallbackMessage = 'Произошла неожиданная ошибка'
+      fallbackMessage = 'Произошла ошибка. Попробуйте еще раз.'
     } = options;
 
-    let errorMessage: string;
-    let errorDetails: any = null;
-
-    if (typeof error === 'string') {
-      errorMessage = error;
-    } else if (error instanceof Error) {
-      errorMessage = error.message || fallbackMessage;
-      errorDetails = error;
-    } else if (error && typeof error === 'object' && 'message' in error) {
-      errorMessage = error.message || fallbackMessage;
-      errorDetails = error;
-    } else {
-      errorMessage = fallbackMessage;
-      errorDetails = error;
-    }
+    const errorObj = error instanceof Error ? error : new Error(String(error));
+    
+    setError(errorObj);
+    setIsError(true);
 
     if (logError) {
-      console.error('Error handled:', errorMessage, errorDetails);
+      console.error('Error handled:', errorObj);
     }
 
     if (showToast) {
-      toast.error(errorMessage);
+      toast({
+        title: 'Ошибка',
+        description: errorObj.message || fallbackMessage,
+        variant: 'destructive',
+      });
     }
 
-    return errorMessage;
+    return errorObj;
+  }, [toast]);
+
+  const clearError = useCallback(() => {
+    setError(null);
+    setIsError(false);
   }, []);
 
-  const handleAsyncError = useCallback(async <T>(
-    asyncFn: () => Promise<T>,
-    options: ErrorHandlerOptions = {}
-  ): Promise<T | null> => {
-    try {
-      return await asyncFn();
-    } catch (error) {
-      handleError(error as Error, options);
-      return null;
-    }
-  }, [handleError]);
-
-  const createErrorHandler = useCallback((
-    options: ErrorHandlerOptions = {}
+  const wrapAsync = useCallback(<T extends any[], R>(
+    asyncFn: (...args: T) => Promise<R>,
+    options?: ErrorHandlerOptions
   ) => {
-    return (error: Error | APIError | string) => handleError(error, options);
-  }, [handleError]);
+    return async (...args: T): Promise<R | null> => {
+      try {
+        clearError();
+        return await asyncFn(...args);
+      } catch (error) {
+        handleError(error, options);
+        return null;
+      }
+    };
+  }, [handleError, clearError]);
 
   return {
+    error,
+    isError,
     handleError,
-    handleAsyncError,
-    createErrorHandler,
+    clearError,
+    wrapAsync
   };
-}
+};
