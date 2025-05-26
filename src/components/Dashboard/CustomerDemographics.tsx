@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import {
   BarChart, Bar, PieChart, Pie, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell
@@ -43,7 +41,6 @@ const CustomerDemographics: React.FC = () => {
                 dataKey="percentage"
                 nameKey="gender"
                 label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
-                labelLine={false}
               >
                 {genderData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={index === 0 ? "#3B55A2" : "#FB8607"} />
@@ -60,4 +57,3 @@ const CustomerDemographics: React.FC = () => {
 };
 
 export default CustomerDemographics;
-
