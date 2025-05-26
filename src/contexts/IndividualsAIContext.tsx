@@ -1,34 +1,41 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { IndividualClientAnalysis, ChurnPrediction, LoyaltyInsight, AIPerformanceMetrics } from '@/types/individuals-ai';
-import { mockIndividualAnalyses, mockChurnPredictions, mockLoyaltyInsights, mockAIPerformance } from '@/data/individualsAIData';
+import {
+  IndividualsInsight,
+  IndividualsPerformanceMetrics,
+  IndividualsChatMessage,
+  CustomerSegment,
+  ChurnPrediction,
+  ProductRecommendation,
+  CampaignOptimization
+} from '@/types/individuals-ai';
+import {
+  mockIndividualsInsights,
+  mockIndividualsPerformance,
+  mockIndividualsChatHistory,
+  mockCustomerSegments,
+  mockChurnPredictions,
+  mockProductRecommendations,
+  mockCampaignOptimizations
+} from '@/data/individualsAIData';
 
 interface IndividualsAIContextType {
-  // Данные ИИ
-  clientAnalyses: IndividualClientAnalysis[];
+  insights: IndividualsInsight[];
+  performance: IndividualsPerformanceMetrics;
+  chatHistory: IndividualsChatMessage[];
+  customerSegments: CustomerSegment[];
   churnPredictions: ChurnPrediction[];
-  insights: LoyaltyInsight[];
-  performance: AIPerformanceMetrics;
-  
-  // Состояние
+  productRecommendations: ProductRecommendation[];
+  campaignOptimizations: CampaignOptimization[];
   isLoading: boolean;
   isPanelOpen: boolean;
   isMinimized: boolean;
-  
-  // Методы управления
   openPanel: () => void;
   closePanel: () => void;
   toggleMinimize: () => void;
-  refreshData: () => Promise<void>;
-  
-  // Методы взаимодействия
-  dismissInsight: (insightId: string) => void;
-  executeRecommendation: (clientId: string, actionType: string) => Promise<void>;
-  analyzeClient: (clientId: string) => Promise<IndividualClientAnalysis | null>;
-  
-  // Чат
-  chatHistory: Array<{ id: string; type: 'user' | 'assistant'; content: string; timestamp: Date }>;
   sendMessage: (message: string) => Promise<void>;
+  refreshData: () => void;
+  dismissInsight: (insightId: string) => void;
+  executeAction: (actionType: string, insightId: string) => void;
 }
 
 const IndividualsAIContext = createContext<IndividualsAIContextType | undefined>(undefined);
@@ -46,148 +53,122 @@ interface IndividualsAIProviderProps {
 }
 
 export const IndividualsAIProvider: React.FC<IndividualsAIProviderProps> = ({ children }) => {
-  const [clientAnalyses, setClientAnalyses] = useState<IndividualClientAnalysis[]>([]);
-  const [churnPredictions, setChurnPredictions] = useState<ChurnPrediction[]>([]);
-  const [insights, setInsights] = useState<LoyaltyInsight[]>([]);
-  const [performance] = useState<AIPerformanceMetrics>(mockAIPerformance);
-  
+  const [insights, setInsights] = useState<IndividualsInsight[]>(mockIndividualsInsights);
+  const [performance] = useState<IndividualsPerformanceMetrics>(mockIndividualsPerformance);
+  const [chatHistory, setChatHistory] = useState<IndividualsChatMessage[]>(mockIndividualsChatHistory);
+  const [customerSegments] = useState<CustomerSegment[]>(mockCustomerSegments);
+  const [churnPredictions] = useState<ChurnPrediction[]>(mockChurnPredictions);
+  const [productRecommendations] = useState<ProductRecommendation[]>(mockProductRecommendations);
+  const [campaignOptimizations] = useState<CampaignOptimization[]>(mockCampaignOptimizations);
   const [isLoading, setIsLoading] = useState(false);
-  const [isPanelOpen, setIsPanelOpen] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
-  
-  const [chatHistory, setChatHistory] = useState<Array<{ id: string; type: 'user' | 'assistant'; content: string; timestamp: Date }>>([
-    {
-      id: '1',
-      type: 'assistant',
-      content: 'Добро пожаловать в ИИ-ассистент ЛОГАЗ SV! Я помогу вам анализировать программу лояльности и клиентскую базу. Задайте любой вопрос о ваших клиентах.',
-      timestamp: new Date()
-    }
-  ]);
-
-  useEffect(() => {
-    refreshData();
-  }, []);
-
-  const refreshData = async () => {
-    setIsLoading(true);
-    
-    // Имитация загрузки данных
-    await new Promise(resolve => setTimeout(resolve, 1200));
-    
-    setClientAnalyses(mockIndividualAnalyses);
-    setChurnPredictions(mockChurnPredictions);
-    setInsights(mockLoyaltyInsights);
-    
-    setIsLoading(false);
-  };
+  const [isPanelOpen, setIsPanelOpen] = useState(() => {
+    const saved = localStorage.getItem('individuals-ai-panel-open');
+    return saved ? JSON.parse(saved) : false;
+  });
+  const [isMinimized, setIsMinimized] = useState(() => {
+    const saved = localStorage.getItem('individuals-ai-panel-minimized');
+    return saved ? JSON.parse(saved) : false;
+  });
 
   const openPanel = () => {
     setIsPanelOpen(true);
     setIsMinimized(false);
+    localStorage.setItem('individuals-ai-panel-open', 'true');
+    localStorage.setItem('individuals-ai-panel-minimized', 'false');
   };
 
   const closePanel = () => {
     setIsPanelOpen(false);
+    localStorage.setItem('individuals-ai-panel-open', 'false');
   };
 
   const toggleMinimize = () => {
-    setIsMinimized(!isMinimized);
-  };
-
-  const dismissInsight = (insightId: string) => {
-    setInsights(prev => prev.filter(insight => insight.id !== insightId));
-  };
-
-  const executeRecommendation = async (clientId: string, actionType: string) => {
-    console.log(`Выполняется действие: ${actionType} для клиента: ${clientId}`);
-    
-    // Имитация выполнения действия
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
-    // Добавляем сообщение в чат об успешном выполнении
-    const message = {
-      id: Date.now().toString(),
-      type: 'assistant' as const,
-      content: `Действие "${actionType}" успешно выполнено для клиента ${clientId}. Уведомление отправлено.`,
-      timestamp: new Date()
-    };
-    setChatHistory(prev => [...prev, message]);
-  };
-
-  const analyzeClient = async (clientId: string): Promise<IndividualClientAnalysis | null> => {
-    const analysis = clientAnalyses.find(a => a.clientId === clientId);
-    return analysis || null;
+    const newMinimized = !isMinimized;
+    setIsMinimized(newMinimized);
+    localStorage.setItem('individuals-ai-panel-minimized', JSON.stringify(newMinimized));
   };
 
   const sendMessage = async (message: string) => {
-    const userMessage = {
+    const userMessage: IndividualsChatMessage = {
       id: Date.now().toString(),
-      type: 'user' as const,
+      type: 'user',
       content: message,
       timestamp: new Date()
     };
 
     setChatHistory(prev => [...prev, userMessage]);
 
-    // Имитация ответа ИИ
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    // Симуляция обработки ИИ
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const aiResponse = generateAIResponse(message);
-    const assistantMessage = {
+    const aiResponse: IndividualsChatMessage = {
       id: (Date.now() + 1).toString(),
-      type: 'assistant' as const,
-      content: aiResponse,
+      type: 'assistant',
+      content: generateAIResponse(message),
       timestamp: new Date()
     };
 
-    setChatHistory(prev => [...prev, assistantMessage]);
+    setChatHistory(prev => [...prev, aiResponse]);
   };
 
-  const generateAIResponse = (message: string): string => {
-    const lowerMessage = message.toLowerCase();
+  const generateAIResponse = (userMessage: string): string => {
+    const lowerMessage = userMessage.toLowerCase();
     
     if (lowerMessage.includes('отток') || lowerMessage.includes('риск')) {
-      return 'Анализирую данные по оттоку клиентов... Обнаружено 23 клиента с высоким риском оттока в ближайшие 30 дней. Рекомендую создать персонализированные предложения для удержания этих клиентов.';
+      return 'Анализирую риски оттока клиентов... Обнаружено 247 клиентов с высоким риском (score > 0.8). Рекомендую запустить персонализированную кампаню удержания с предложением кэшбека 5%.';
     }
     
-    if (lowerMessage.includes('баллы') || lowerMessage.includes('сгорают')) {
-      return 'Проверяю статус баллов лояльности... У 89 клиентов истекают баллы в течение 7 дней. Общая сумма: 156,780 баллов. Рекомендую отправить push-уведомления с напоминанием.';
+    if (lowerMessage.includes('сегмент') || lowerMessage.includes('группа')) {
+      return 'Актуальная сегментация: VIP-клиенты (3.2%), Активные покупатели (28.5%), Редкие покупатели (45.3%), Новые клиенты (12.8%), Спящие (10.2%). Рекомендую активировать спящих клиентов через персональные предложения.';
     }
     
-    if (lowerMessage.includes('vip') || lowerMessage.includes('плат')) {
-      return 'Анализ VIP-клиентов показывает снижение активности у 15 платиновых клиентов. Средний период неактивности: 32 дня. Предлагаю запустить персональную кампанию возврата.';
+    if (lowerMessage.includes('рекомендаци') || lowerMessage.includes('товар')) {
+      return 'Топ-3 продукта для cross-sell: Премиум 95 (+15% к среднему чеку), Автомойка (+8% частота визитов), Кофе (+12% лояльность). Точность модели: 84.2%.';
     }
     
-    if (lowerMessage.includes('акци') || lowerMessage.includes('кампани')) {
-      return 'Анализирую эффективность текущих акций... Конверсия по SMS-рассылкам: 12.3%, по push-уведомлениям: 8.7%. Рекомендую увеличить персонализацию предложений.';
+    if (lowerMessage.includes('кампани') || lowerMessage.includes('акци')) {
+      return 'Оптимизация кампаний: SMS-рассылка показывает ROI 340%, Email - 180%, Push - 95%. Рекомендую увеличить SMS-бюджет на 25% и перераспределить из Push-каналов.';
     }
     
-    if (lowerMessage.includes('сегмент') || lowerMessage.includes('rfm')) {
-      return 'RFM-анализ показывает: Чемпионы - 23%, Верные клиенты - 31%, Под угрозой - 18%, Требуют внимания - 28%. Рекомендую сосредоточиться на сегменте "Под угрозой".';
-    }
-    
-    return 'Анализирую ваш запрос... На основе данных программы лояльности подготавливаю персонализированные рекомендации для оптимизации работы с клиентами.';
+    return 'Понял ваш запрос. Анализирую поведение клиентов... На основе данных за последние 30 дней могу предоставить инсайты по сегментации, рискам оттока, продуктовым рекомендациям и оптимизации кампаний. Что вас интересует больше всего?';
+  };
+
+  const refreshData = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  };
+
+  const dismissInsight = (insightId: string) => {
+    setInsights(prev => prev.filter(insight => insight.id !== insightId));
+  };
+
+  const executeAction = (actionType: string, insightId: string) => {
+    console.log(`Executing action: ${actionType} for insight: ${insightId}`);
+    // Здесь будет логика выполнения действий
   };
 
   return (
     <IndividualsAIContext.Provider
       value={{
-        clientAnalyses,
-        churnPredictions,
         insights,
         performance,
+        chatHistory,
+        customerSegments,
+        churnPredictions,
+        productRecommendations,
+        campaignOptimizations,
         isLoading,
         isPanelOpen,
         isMinimized,
         openPanel,
         closePanel,
         toggleMinimize,
+        sendMessage,
         refreshData,
         dismissInsight,
-        executeRecommendation,
-        analyzeClient,
-        chatHistory,
-        sendMessage,
+        executeAction,
       }}
     >
       {children}

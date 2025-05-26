@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import {
   CorporateActivityAnalysis,
@@ -62,20 +61,31 @@ export const LegalEntitiesAIProvider: React.FC<LegalEntitiesAIProviderProps> = (
   const [fleetEfficiency] = useState<FleetEfficiency[]>(mockFleetEfficiency);
   const [costOptimization] = useState<CostOptimization[]>(mockCostOptimization);
   const [isLoading, setIsLoading] = useState(false);
-  const [isPanelOpen, setIsPanelOpen] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [isPanelOpen, setIsPanelOpen] = useState(() => {
+    const saved = localStorage.getItem('legal-entities-ai-panel-open');
+    return saved ? JSON.parse(saved) : false;
+  });
+  const [isMinimized, setIsMinimized] = useState(() => {
+    const saved = localStorage.getItem('legal-entities-ai-panel-minimized');
+    return saved ? JSON.parse(saved) : false;
+  });
 
   const openPanel = () => {
     setIsPanelOpen(true);
     setIsMinimized(false);
+    localStorage.setItem('legal-entities-ai-panel-open', 'true');
+    localStorage.setItem('legal-entities-ai-panel-minimized', 'false');
   };
 
   const closePanel = () => {
     setIsPanelOpen(false);
+    localStorage.setItem('legal-entities-ai-panel-open', 'false');
   };
 
   const toggleMinimize = () => {
-    setIsMinimized(!isMinimized);
+    const newMinimized = !isMinimized;
+    setIsMinimized(newMinimized);
+    localStorage.setItem('legal-entities-ai-panel-minimized', JSON.stringify(newMinimized));
   };
 
   const sendMessage = async (message: string) => {
