@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   BarChart, Bar, PieChart, Pie, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell
@@ -16,7 +17,12 @@ const CustomerDemographics: React.FC = () => {
               <XAxis dataKey="age" />
               <YAxis />
               <Tooltip />
-              <Bar dataKey="percentage" fill="#3B55A2" radius={[4, 4, 0, 0]} />
+              <Bar 
+                dataKey="percentage" 
+                fill="#3B55A2" 
+                radius={[4, 4, 0, 0]}
+                label={{ position: 'center', fill: 'white', fontSize: 12, formatter: (value: number) => `${value}%` }}
+              />
             </BarChart>
           </ResponsiveContainer>
         </div>
@@ -35,7 +41,7 @@ const CustomerDemographics: React.FC = () => {
                 outerRadius={80}
                 dataKey="percentage"
                 nameKey="gender"
-                label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
               >
                 {genderData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={index === 0 ? "#3B55A2" : "#FB8607"} />
