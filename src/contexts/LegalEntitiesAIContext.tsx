@@ -13,7 +13,7 @@ import {
   mockSuspiciousTransactions,
   mockCorporateInsights,
   mockCorporateAIMetrics,
-  mockCorporateChatHistory,
+  mockLegalEntitiesChatHistory,
   mockFleetEfficiency,
   mockCostOptimization
 } from '@/data/legalEntitiesAIData';
@@ -57,7 +57,7 @@ export const LegalEntitiesAIProvider: React.FC<LegalEntitiesAIProviderProps> = (
   const [suspiciousTransactions] = useState<SuspiciousTransaction[]>(mockSuspiciousTransactions);
   const [insights, setInsights] = useState<CorporateInsight[]>(mockCorporateInsights);
   const [metrics] = useState<CorporateAIPerformanceMetrics>(mockCorporateAIMetrics);
-  const [chatHistory, setChatHistory] = useState<CorporateChatMessage[]>(mockCorporateChatHistory);
+  const [chatHistory, setChatHistory] = useState<CorporateChatMessage[]>(mockLegalEntitiesChatHistory);
   const [fleetEfficiency] = useState<FleetEfficiency[]>(mockFleetEfficiency);
   const [costOptimization] = useState<CostOptimization[]>(mockCostOptimization);
   const [isLoading, setIsLoading] = useState(false);
