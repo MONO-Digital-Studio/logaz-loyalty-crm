@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import StatsSummary from '@/components/Dashboard/StatsSummary';
-import SalesChart from '@/components/Dashboard/SalesChart';
-import LoyaltyPointsChart from '@/components/Dashboard/LoyaltyPointsChart';
+import { OptimizedSalesChart, OptimizedLoyaltyChart } from '@/components/Dashboard/charts';
 import RfmAnalysis from '@/components/Dashboard/RfmAnalysis';
 import PerformanceMetrics from '@/components/Dashboard/PerformanceMetrics';
 import { Button } from '@/components/ui/button';
@@ -157,8 +156,8 @@ const DashboardPage: React.FC = () => {
         <StatsSummary />
 
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          <SalesChart />
-          <LoyaltyPointsChart />
+          <OptimizedSalesChart />
+          <OptimizedLoyaltyChart />
         </div>
 
         <PerformanceMetrics />
