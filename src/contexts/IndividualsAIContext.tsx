@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import {
   IndividualsInsight,
@@ -115,7 +116,7 @@ export const IndividualsAIProvider: React.FC<IndividualsAIProviderProps> = ({ ch
     const lowerMessage = userMessage.toLowerCase();
     
     if (lowerMessage.includes('отток') || lowerMessage.includes('риск')) {
-      return 'Анализирую риски оттока клиентов... Обнаружено 247 клиентов с высоким риском (score > 0.8). Рекомендую запустить персонализированную кампаню удержания с предложением кэшбека 5%.';
+      return 'Анализирую риски оттока клиентов... Обнаружено 247 клиентов с высоким риском (score > 0.8). Рекомендую запустить персонализированную кампанию удержания с предложением кэшбека 5%.';
     }
     
     if (lowerMessage.includes('сегмент') || lowerMessage.includes('группа')) {

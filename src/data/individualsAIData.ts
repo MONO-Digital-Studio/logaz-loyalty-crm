@@ -1,5 +1,5 @@
 
-import { IndividualClientAnalysis, ChurnPrediction, LoyaltyInsight, AIPerformanceMetrics } from '@/types/individuals-ai';
+import { IndividualClientAnalysis, ChurnPrediction, LoyaltyInsight, AIPerformanceMetrics, IndividualsInsight, IndividualsPerformanceMetrics, IndividualsChatMessage, CustomerSegment, ProductRecommendation, CampaignOptimization } from '@/types/individuals-ai';
 
 export const mockIndividualAnalyses: IndividualClientAnalysis[] = [
   {
@@ -222,3 +222,125 @@ export const mockAIPerformance: AIPerformanceMetrics = {
     operationalEfficiency: 67.8
   }
 };
+
+// Новые экспорты для IndividualsAIContext
+export const mockIndividualsInsights: IndividualsInsight[] = [
+  {
+    id: 'ins_001',
+    type: 'churn_risk',
+    title: 'Высокий риск оттока клиентов',
+    description: '247 клиентов с риском оттока выше 80%',
+    priority: 'critical',
+    timestamp: new Date(),
+    actionRequired: true,
+    suggestedActions: ['Запустить retention кампанию', 'Персональные предложения']
+  },
+  {
+    id: 'ins_002',
+    type: 'points_expiring',
+    title: 'Истекают бонусные баллы',
+    description: 'У 156 клиентов истекают баллы в течение недели',
+    priority: 'high',
+    timestamp: new Date(),
+    actionRequired: true,
+    suggestedActions: ['Отправить уведомления', 'Создать срочную акцию']
+  }
+];
+
+export const mockIndividualsPerformance: IndividualsPerformanceMetrics = {
+  businessImpact: {
+    operationalEfficiency: 67.8,
+    revenueIncrease: 23.4,
+    retentionImprovement: 15.7
+  },
+  predictionAccuracy: {
+    churnPrediction: 87.3,
+    campaignPerformance: 82.1,
+    personalizedOffers: 91.5
+  },
+  automationEfficiency: {
+    triggersProcessed: 1247,
+    responseTime: 0.3,
+    falsePositives: 4.2
+  }
+};
+
+export const mockIndividualsChatHistory: IndividualsChatMessage[] = [
+  {
+    id: 'msg_001',
+    type: 'assistant',
+    content: 'Привет! Я ваш ИИ-помощник для работы с клиентами. Могу помочь с анализом рисков оттока, сегментацией и рекомендациями.',
+    timestamp: new Date(Date.now() - 60000)
+  }
+];
+
+export const mockCustomerSegments: CustomerSegment[] = [
+  {
+    id: 'seg_001',
+    name: 'VIP-клиенты',
+    description: 'Высокоценные клиенты с platinum статусом',
+    count: 1250,
+    percentage: 3.2,
+    averageSpend: 5200,
+    averageVisits: 15.3,
+    churnRate: 2.1
+  },
+  {
+    id: 'seg_002',
+    name: 'Активные покупатели',
+    description: 'Регулярные клиенты с gold/silver статусом',
+    count: 11100,
+    percentage: 28.5,
+    averageSpend: 2800,
+    averageVisits: 8.7,
+    churnRate: 8.5
+  },
+  {
+    id: 'seg_003',
+    name: 'Редкие покупатели',
+    description: 'Клиенты с низкой активностью',
+    count: 17650,
+    percentage: 45.3,
+    averageSpend: 1200,
+    averageVisits: 2.1,
+    churnRate: 25.3
+  }
+];
+
+export const mockProductRecommendations: ProductRecommendation[] = [
+  {
+    id: 'rec_001',
+    productName: 'Премиум 95',
+    targetSegment: 'VIP-клиенты',
+    confidence: 84.2,
+    expectedUplift: 15.3,
+    reasoning: 'Высокий доход сегмента позволяет продвигать премиум топливо'
+  },
+  {
+    id: 'rec_002',
+    productName: 'Автомойка',
+    targetSegment: 'Активные покупатели',
+    confidence: 76.8,
+    expectedUplift: 8.1,
+    reasoning: 'Частые визиты создают возможность для cross-sell услуг'
+  }
+];
+
+export const mockCampaignOptimizations: CampaignOptimization[] = [
+  {
+    id: 'camp_001',
+    campaignType: 'Retention',
+    channel: 'sms',
+    currentPerformance: 12.5,
+    optimizedPerformance: 18.7,
+    recommendation: 'Персонализировать сообщения по сегментам'
+  },
+  {
+    id: 'camp_002',
+    campaignType: 'Cross-sell',
+    channel: 'push',
+    currentPerformance: 6.2,
+    optimizedPerformance: 9.8,
+    recommendation: 'Оптимизировать время отправки уведомлений'
+  }
+];

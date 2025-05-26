@@ -115,3 +115,69 @@ export interface AIPerformanceMetrics {
     operationalEfficiency: number;
   };
 }
+
+// Новые типы для IndividualsAIContext
+export interface IndividualsInsight {
+  id: string;
+  type: 'churn_risk' | 'engagement_opportunity' | 'points_expiring' | 'loyalty_upgrade' | 'campaign_optimization';
+  title: string;
+  description: string;
+  priority: 'low' | 'medium' | 'high' | 'critical';
+  timestamp: Date;
+  actionRequired: boolean;
+  suggestedActions: string[];
+}
+
+export interface IndividualsPerformanceMetrics {
+  businessImpact: {
+    operationalEfficiency: number;
+    revenueIncrease: number;
+    retentionImprovement: number;
+  };
+  predictionAccuracy: {
+    churnPrediction: number;
+    campaignPerformance: number;
+    personalizedOffers: number;
+  };
+  automationEfficiency: {
+    triggersProcessed: number;
+    responseTime: number;
+    falsePositives: number;
+  };
+}
+
+export interface IndividualsChatMessage {
+  id: string;
+  type: 'user' | 'assistant';
+  content: string;
+  timestamp: Date;
+}
+
+export interface CustomerSegment {
+  id: string;
+  name: string;
+  description: string;
+  count: number;
+  percentage: number;
+  averageSpend: number;
+  averageVisits: number;
+  churnRate: number;
+}
+
+export interface ProductRecommendation {
+  id: string;
+  productName: string;
+  targetSegment: string;
+  confidence: number;
+  expectedUplift: number;
+  reasoning: string;
+}
+
+export interface CampaignOptimization {
+  id: string;
+  campaignType: string;
+  channel: CommunicationChannel;
+  currentPerformance: number;
+  optimizedPerformance: number;
+  recommendation: string;
+}
