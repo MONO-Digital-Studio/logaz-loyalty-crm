@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   BarChart, Bar, PieChart, Pie, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell
@@ -7,7 +6,7 @@ import { demographicData, genderData } from '@/data/mockData';
 
 const CustomerDemographics: React.FC = () => {
   return (
-    <div className="grid grid-cols-1 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div className="stats-card p-6">
         <h3 className="text-lg font-semibold mb-4 font-montserrat">Портрет клиента: возраст</h3>
         <div style={{ width: '100%', height: 200 }}>
