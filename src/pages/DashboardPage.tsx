@@ -9,10 +9,12 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Calendar } from '@/components/ui/calendar';
 import { addDays, format } from 'date-fns';
 import { ru } from 'date-fns/locale';
-import { CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
+import { CalendarIcon, ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useDashboardData } from '@/hooks/useDashboardData';
 
 const DashboardPage: React.FC = () => {
+  const { loading, refreshData } = useDashboardData();
   const today = new Date();
   const [date, setDate] = useState<{
     from: Date;
@@ -55,6 +57,17 @@ const DashboardPage: React.FC = () => {
   const handleCancel = () => {
     setIsCalendarOpen(false);
   };
+
+  if (loading) {
+    return (
+      <div className="h-full flex items-center justify-center">
+        <div className="flex items-center gap-2">
+          <RefreshCw className="w-6 h-6 animate-spin" />
+          <span>Загрузка данных...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-full overflow-auto">
@@ -130,6 +143,13 @@ const DashboardPage: React.FC = () => {
                 </div>
               </PopoverContent>
             </Popover>
+            <button 
+              className="btn-primary whitespace-nowrap text-sm px-3 py-2 flex items-center gap-2"
+              onClick={refreshData}
+            >
+              <RefreshCw className="w-4 h-4" />
+              Обновить
+            </button>
             <button className="btn-primary whitespace-nowrap text-sm px-3 py-2">Экспорт</button>
           </div>
         </div>
