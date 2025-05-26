@@ -142,12 +142,12 @@ const DashboardPage: React.FC = () => {
           <LoyaltyPointsChart />
         </div>
 
+        <PerformanceMetrics />
+
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
           <RfmAnalysis />
           <CustomerDemographics />
         </div>
-        
-        <PerformanceMetrics />
       </div>
     </div>
   );
