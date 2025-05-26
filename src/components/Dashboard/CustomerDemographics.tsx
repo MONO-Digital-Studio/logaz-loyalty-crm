@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import {
   BarChart, Bar, PieChart, Pie, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell
@@ -40,9 +41,10 @@ const CustomerDemographics: React.FC = () => {
                 outerRadius={80}
                 dataKey="percentage"
                 nameKey="gender"
+                labelLine={false}
                 label={({ cx, cy, midAngle, innerRadius, outerRadius, percent }) => {
                   const RADIAN = Math.PI / 180;
-                  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+                  const radius = innerRadius + (outerRadius - innerRadius) * 0.6;
                   const x = cx + radius * Math.cos(-midAngle * RADIAN);
                   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
@@ -51,9 +53,9 @@ const CustomerDemographics: React.FC = () => {
                       x={x} 
                       y={y} 
                       fill="white" 
-                      textAnchor={x > cx ? 'start' : 'end'} 
+                      textAnchor="middle" 
                       dominantBaseline="central"
-                      fontSize={14}
+                      fontSize={16}
                       fontWeight="bold"
                     >
                       {`${(percent * 100).toFixed(0)}%`}
@@ -76,3 +78,4 @@ const CustomerDemographics: React.FC = () => {
 };
 
 export default CustomerDemographics;
+
