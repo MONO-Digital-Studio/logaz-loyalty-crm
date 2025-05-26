@@ -3,11 +3,13 @@ import { Button } from "@/components/ui/button";
 import { FileText, CalendarIcon, ChevronLeft, ChevronRight } from "lucide-react";
 import ClientStats from "@/components/Clients/ClientStats";
 import ClientsTable from "@/components/Clients/ClientsTable";
+import CustomerDemographics from "@/components/Dashboard/CustomerDemographics";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { addDays, format } from "date-fns";
 import { ru } from "date-fns/locale";
 import { cn } from "@/lib/utils";
+
 const clientsData = [{
   id: "1",
   name: "Иванов Иван Иванович",
@@ -223,6 +225,8 @@ const ClientsPage = () => {
       <div className="w-full">
         <ClientsTable clients={clientsData} />
       </div>
+
+      <CustomerDemographics />
     </div>
   );
 };

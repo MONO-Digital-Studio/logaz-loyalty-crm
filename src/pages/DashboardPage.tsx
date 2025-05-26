@@ -3,7 +3,6 @@ import StatsSummary from '@/components/Dashboard/StatsSummary';
 import SalesChart from '@/components/Dashboard/SalesChart';
 import LoyaltyPointsChart from '@/components/Dashboard/LoyaltyPointsChart';
 import RfmAnalysis from '@/components/Dashboard/RfmAnalysis';
-import CustomerDemographics from '@/components/Dashboard/CustomerDemographics';
 import PerformanceMetrics from '@/components/Dashboard/PerformanceMetrics';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -144,10 +143,7 @@ const DashboardPage: React.FC = () => {
 
         <PerformanceMetrics />
 
-        <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-          <RfmAnalysis />
-          <CustomerDemographics />
-        </div>
+        <RfmAnalysis />
       </div>
     </div>
   );
