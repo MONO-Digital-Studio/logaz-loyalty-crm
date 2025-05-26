@@ -284,15 +284,6 @@ export const mockCorporateChatHistory: CorporateChatMessage[] = [
   }
 ];
 
-export const mockLegalEntitiesChatHistory: LegalEntitiesChatMessage[] = [
-  {
-    id: 'msg_001',
-    type: 'assistant',
-    content: 'Добрый день! Чем могу помочь?',
-    timestamp: new Date(Date.now() - 60000)
-  }
-];
-
 export const mockFleetEfficiency: FleetEfficiency[] = [
   {
     companyId: '1',
