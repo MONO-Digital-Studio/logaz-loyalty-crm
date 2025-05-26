@@ -1,4 +1,3 @@
-
 import { IndividualClientAnalysis, ChurnPrediction, LoyaltyInsight, AIPerformanceMetrics, IndividualsInsight, IndividualsPerformanceMetrics, IndividualsChatMessage, CustomerSegment, ProductRecommendation, CampaignOptimization } from '@/types/individuals-ai';
 
 export const mockIndividualAnalyses: IndividualClientAnalysis[] = [
@@ -223,7 +222,7 @@ export const mockAIPerformance: AIPerformanceMetrics = {
   }
 };
 
-// Новые экспорты для IndividualsAIContext
+// Updated mockIndividualsInsights with missing properties
 export const mockIndividualsInsights: IndividualsInsight[] = [
   {
     id: 'ins_001',
@@ -233,7 +232,13 @@ export const mockIndividualsInsights: IndividualsInsight[] = [
     priority: 'critical',
     timestamp: new Date(),
     actionRequired: true,
-    suggestedActions: ['Запустить retention кампанию', 'Персональные предложения']
+    suggestedActions: ['Запустить retention кампанию', 'Персональные предложения'],
+    affectedClients: 247,
+    impact: {
+      revenue: -350000,
+      retention: -15,
+      satisfaction: -10
+    }
   },
   {
     id: 'ins_002',
@@ -243,7 +248,13 @@ export const mockIndividualsInsights: IndividualsInsight[] = [
     priority: 'high',
     timestamp: new Date(),
     actionRequired: true,
-    suggestedActions: ['Отправить уведомления', 'Создать срочную акцию']
+    suggestedActions: ['Отправить уведомления', 'Создать срочную акцию'],
+    affectedClients: 156,
+    impact: {
+      revenue: 78000,
+      retention: 5,
+      satisfaction: 3
+    }
   }
 ];
 

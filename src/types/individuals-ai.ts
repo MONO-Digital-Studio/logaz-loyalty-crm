@@ -1,4 +1,3 @@
-
 export type IndividualClientAnalysisLevel = 'engaged' | 'at_risk' | 'churning' | 'dormant';
 export type LoyaltyLevel = 'bronze' | 'silver' | 'gold' | 'platinum';
 export type RecommendedActionType = 'personal_offer' | 'point_reminder' | 'birthday_promo' | 'winback_campaign';
@@ -116,7 +115,7 @@ export interface AIPerformanceMetrics {
   };
 }
 
-// Новые типы для IndividualsAIContext
+// Updated IndividualsInsight interface with missing properties
 export interface IndividualsInsight {
   id: string;
   type: 'churn_risk' | 'engagement_opportunity' | 'points_expiring' | 'loyalty_upgrade' | 'campaign_optimization';
@@ -126,6 +125,12 @@ export interface IndividualsInsight {
   timestamp: Date;
   actionRequired: boolean;
   suggestedActions: string[];
+  affectedClients: number;
+  impact: {
+    revenue: number;
+    retention: number;
+    satisfaction: number;
+  };
 }
 
 export interface IndividualsPerformanceMetrics {
