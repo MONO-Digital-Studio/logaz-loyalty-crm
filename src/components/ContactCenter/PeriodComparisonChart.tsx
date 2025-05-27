@@ -69,9 +69,9 @@ const PeriodComparisonChart: React.FC<PeriodComparisonChartProps> = ({
                         style={{ color: entry.color }}
                       >
                         {entry.name}: {entry.value}
-                        {entry.dataKey?.includes('Chats') ? ' диалогов' : 
-                         entry.dataKey?.includes('ResponseTime') ? ' сек' : 
-                         entry.dataKey?.includes('Satisfaction') ? '/5.0' : ''}
+                        {String(entry.dataKey).includes('Chats') ? ' диалогов' : 
+                         String(entry.dataKey).includes('ResponseTime') ? ' сек' : 
+                         String(entry.dataKey).includes('Satisfaction') ? '/5.0' : ''}
                       </p>
                     ))}
                   </div>
