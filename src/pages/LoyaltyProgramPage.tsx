@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useCallback } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -9,20 +10,13 @@ import { Textarea } from "@/components/ui/textarea";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { Save, Settings, Users, Building2, Plus } from 'lucide-react';
+import { Save, Settings, Users, Plus } from 'lucide-react';
 import { useLoyaltySettings } from '@/hooks/useLoyaltySettings';
 import LoyaltyLevelCard from '@/components/LoyaltyProgram/LoyaltyLevelCard';
 import BonusSettingsForm from '@/components/LoyaltyProgram/BonusSettingsForm';
 import LoyaltyPreview from '@/components/LoyaltyProgram/LoyaltyPreview';
 import LoyaltySettingsError from '@/components/ErrorBoundary/LoyaltySettingsError';
 import { ErrorBoundary } from '@/components/ErrorBoundary/ErrorBoundary';
-
-const loyaltyLevelsData = [
-  { id: 1, name: "Стандарт", pointsPerRub: 0.5, minAmount: 0, maxAmount: 10000, color: "#3B55A2" },
-  { id: 2, name: "Серебряный", pointsPerRub: 1, minAmount: 10000, maxAmount: 30000, color: "#CCCCCC" },
-  { id: 3, name: "Золотой", pointsPerRub: 1.5, minAmount: 30000, maxAmount: 100000, color: "#FB8607" },
-  { id: 4, name: "Платиновый", pointsPerRub: 2, minAmount: 100000, maxAmount: null, color: "#333333" },
-];
 
 const loyaltyActivityData = [
   { month: 'Янв', начислено: 42500, использовано: 31200, сгорело: 2800 },
@@ -107,14 +101,10 @@ const LoyaltyProgramPage = () => {
         </div>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid grid-cols-4 mb-4">
+          <TabsList className="grid grid-cols-3 mb-4">
             <TabsTrigger value="individuals" className="flex items-center space-x-2">
               <Users className="w-4 h-4" />
               <span>Физические лица</span>
-            </TabsTrigger>
-            <TabsTrigger value="legal-entities" className="flex items-center space-x-2">
-              <Building2 className="w-4 h-4" />
-              <span>Юридические лица</span>
             </TabsTrigger>
             <TabsTrigger value="loyalty-index">Индекс лояльности</TabsTrigger>
             <TabsTrigger value="referral">Реферальная программа</TabsTrigger>
@@ -274,53 +264,6 @@ const LoyaltyProgramPage = () => {
                     <Bar dataKey="сгорело" fill="#F44336" />
                   </BarChart>
                 </ResponsiveContainer>
-              </CardContent>
-            </Card>
-          </TabsContent>
-
-          <TabsContent value="legal-entities" className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Уровни начисления баллов для юридических лиц</CardTitle>
-                <CardDescription>
-                  Настройте уровни лояльности корпоративных клиентов и соответствующие им начисления баллов
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>Название уровня</TableHead>
-                      <TableHead>Баллов за рубль</TableHead>
-                      <TableHead>Мин. сумма покупок</TableHead>
-                      <TableHead>Макс. сумма покупок</TableHead>
-                      <TableHead>Действия</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {loyaltyLevelsData.map((level) => (
-                      <TableRow key={level.id}>
-                        <TableCell className="font-medium">
-                          <div className="flex items-center">
-                            <div className="w-3 h-3 rounded-full mr-2" style={{ backgroundColor: level.color }}></div>
-                            {level.name}
-                          </div>
-                        </TableCell>
-                        <TableCell>{level.pointsPerRub}</TableCell>
-                        <TableCell>{level.minAmount.toLocaleString()} ₽</TableCell>
-                        <TableCell>{level.maxAmount ? `${level.maxAmount.toLocaleString()} ₽` : "∞"}</TableCell>
-                        <TableCell>
-                          <Button variant="ghost" size="sm">
-                            Изменить
-                          </Button>
-                        </TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-                <Button variant="outline" className="mt-4">
-                  Добавить уровень
-                </Button>
               </CardContent>
             </Card>
           </TabsContent>
