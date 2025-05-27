@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useCallback } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -17,28 +16,71 @@ import BonusSettingsForm from '@/components/LoyaltyProgram/BonusSettingsForm';
 import LoyaltyPreview from '@/components/LoyaltyProgram/LoyaltyPreview';
 import LoyaltySettingsError from '@/components/ErrorBoundary/LoyaltySettingsError';
 import { ErrorBoundary } from '@/components/ErrorBoundary/ErrorBoundary';
-
-const loyaltyActivityData = [
-  { month: 'Янв', начислено: 42500, использовано: 31200, сгорело: 2800 },
-  { month: 'Фев', начислено: 58900, использовано: 35600, сгорело: 1200 },
-  { month: 'Мар', начислено: 45700, использовано: 38900, сгорело: 1500 },
-  { month: 'Апр', начислено: 62300, использовано: 41200, сгорело: 3100 },
-  { month: 'Май', начислено: 55800, использовано: 43800, сгорело: 2600 },
-  { month: 'Июн', начислено: 67900, использовано: 48500, сгорело: 1800 },
-];
-
-const referralData = [
-  { id: 1, referrer: "Иванов Алексей", phone: "+7 (905) 123-45-67", referrals: 12, revenue: 128500 },
-  { id: 2, referrer: "Петрова Елена", phone: "+7 (912) 345-67-89", referrals: 9, revenue: 94300 },
-  { id: 3, referrer: "Сидоров Дмитрий", phone: "+7 (921) 987-65-43", referrals: 8, revenue: 86700 },
-  { id: 4, referrer: "Козлова Мария", phone: "+7 (916) 765-43-21", referrals: 7, revenue: 74200 },
-  { id: 5, referrer: "Николаев Игорь", phone: "+7 (903) 567-89-12", referrals: 6, revenue: 65800 },
-];
-
+const loyaltyActivityData = [{
+  month: 'Янв',
+  начислено: 42500,
+  использовано: 31200,
+  сгорело: 2800
+}, {
+  month: 'Фев',
+  начислено: 58900,
+  использовано: 35600,
+  сгорело: 1200
+}, {
+  month: 'Мар',
+  начислено: 45700,
+  использовано: 38900,
+  сгорело: 1500
+}, {
+  month: 'Апр',
+  начислено: 62300,
+  использовано: 41200,
+  сгорело: 3100
+}, {
+  month: 'Май',
+  начислено: 55800,
+  использовано: 43800,
+  сгорело: 2600
+}, {
+  month: 'Июн',
+  начислено: 67900,
+  использовано: 48500,
+  сгорело: 1800
+}];
+const referralData = [{
+  id: 1,
+  referrer: "Иванов Алексей",
+  phone: "+7 (905) 123-45-67",
+  referrals: 12,
+  revenue: 128500
+}, {
+  id: 2,
+  referrer: "Петрова Елена",
+  phone: "+7 (912) 345-67-89",
+  referrals: 9,
+  revenue: 94300
+}, {
+  id: 3,
+  referrer: "Сидоров Дмитрий",
+  phone: "+7 (921) 987-65-43",
+  referrals: 8,
+  revenue: 86700
+}, {
+  id: 4,
+  referrer: "Козлова Мария",
+  phone: "+7 (916) 765-43-21",
+  referrals: 7,
+  revenue: 74200
+}, {
+  id: 5,
+  referrer: "Николаев Игорь",
+  phone: "+7 (903) 567-89-12",
+  referrals: 6,
+  revenue: 65800
+}];
 const LoyaltyProgramPage = () => {
   const [activeTab, setActiveTab] = useState("individuals");
   const [editingLevels, setEditingLevels] = useState<Record<string, boolean>>({});
-  
   const {
     loyaltySettings,
     setLoyaltySettings,
@@ -53,17 +95,14 @@ const LoyaltyProgramPage = () => {
     addBonusRule,
     removeBonusRule
   } = useLoyaltySettings();
-
   useEffect(() => {
     document.title = "Программа лояльности | ЛОГАЗ SV";
   }, []);
-
   const handleSaveSettings = useCallback(async () => {
     if (levelValidation.isValid) {
       await saveLoyaltySettings();
     }
   }, [levelValidation.isValid, saveLoyaltySettings]);
-
   const handleAddNewLevel = useCallback(() => {
     const maxPoints = Math.max(...loyaltySettings.levels.map(l => l.maxPoints || 0));
     addLevel({
@@ -76,25 +115,17 @@ const LoyaltyProgramPage = () => {
       isActive: true
     });
   }, [loyaltySettings.levels, addLevel]);
-
   const toggleLevelEdit = useCallback((levelId: string) => {
     setEditingLevels(prev => ({
       ...prev,
       [levelId]: !prev[levelId]
     }));
   }, []);
-
-  return (
-    <ErrorBoundary fallback={<LoyaltySettingsError />}>
+  return <ErrorBoundary fallback={<LoyaltySettingsError />}>
       <div className="space-y-6">
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-bold">Программа лояльности</h1>
-          <Button 
-            variant="default" 
-            className="bg-logaz-blue"
-            onClick={handleSaveSettings}
-            disabled={isLoading || !hasChanges || !levelValidation.isValid}
-          >
+          <Button variant="default" className="bg-logaz-blue" onClick={handleSaveSettings} disabled={isLoading || !hasChanges || !levelValidation.isValid}>
             <Save className="w-4 h-4 mr-2" />
             {isLoading ? 'Сохранение...' : 'Сохранить изменения'}
           </Button>
@@ -104,7 +135,7 @@ const LoyaltyProgramPage = () => {
           <TabsList className="grid grid-cols-3 mb-4">
             <TabsTrigger value="individuals" className="flex items-center space-x-2">
               <Users className="w-4 h-4" />
-              <span>Физические лица</span>
+              <span>Настройки программы</span>
             </TabsTrigger>
             <TabsTrigger value="loyalty-index">Индекс лояльности</TabsTrigger>
             <TabsTrigger value="referral">Реферальная программа</TabsTrigger>
@@ -124,65 +155,45 @@ const LoyaltyProgramPage = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex items-center space-x-2">
-                  <Switch
-                    checked={loyaltySettings.isActive}
-                    onCheckedChange={(checked) => 
-                      setLoyaltySettings(prev => ({ ...prev, isActive: checked }))
-                    }
-                  />
+                  <Switch checked={loyaltySettings.isActive} onCheckedChange={checked => setLoyaltySettings(prev => ({
+                  ...prev,
+                  isActive: checked
+                }))} />
                   <Label>Программа лояльности активна</Label>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="program-name">Название программы</Label>
-                    <Input
-                      id="program-name"
-                      value={loyaltySettings.programName}
-                      onChange={(e) => 
-                        setLoyaltySettings(prev => ({ ...prev, programName: e.target.value }))
-                      }
-                    />
+                    <Input id="program-name" value={loyaltySettings.programName} onChange={e => setLoyaltySettings(prev => ({
+                    ...prev,
+                    programName: e.target.value
+                  }))} />
                   </div>
                   
                   <div>
                     <Label htmlFor="points-expiration">Срок действия баллов (дни)</Label>
-                    <Input
-                      id="points-expiration"
-                      type="number"
-                      value={loyaltySettings.pointsExpirationDays}
-                      onChange={(e) => 
-                        setLoyaltySettings(prev => ({ 
-                          ...prev, 
-                          pointsExpirationDays: parseInt(e.target.value) || 365 
-                        }))
-                      }
-                    />
+                    <Input id="points-expiration" type="number" value={loyaltySettings.pointsExpirationDays} onChange={e => setLoyaltySettings(prev => ({
+                    ...prev,
+                    pointsExpirationDays: parseInt(e.target.value) || 365
+                  }))} />
                   </div>
                 </div>
 
                 <div>
                   <Label htmlFor="program-description">Описание программы</Label>
-                  <Textarea
-                    id="program-description"
-                    value={loyaltySettings.programDescription}
-                    onChange={(e) => 
-                      setLoyaltySettings(prev => ({ ...prev, programDescription: e.target.value }))
-                    }
-                    rows={3}
-                  />
+                  <Textarea id="program-description" value={loyaltySettings.programDescription} onChange={e => setLoyaltySettings(prev => ({
+                  ...prev,
+                  programDescription: e.target.value
+                }))} rows={3} />
                 </div>
 
-                {!levelValidation.isValid && (
-                  <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
+                {!levelValidation.isValid && <div className="p-3 bg-red-50 border border-red-200 rounded-lg">
                     <p className="text-red-800 font-medium">Ошибки конфигурации:</p>
                     <ul className="mt-1 text-red-700 text-sm">
-                      {levelValidation.errors.map((error, index) => (
-                        <li key={index}>• {error}</li>
-                      ))}
+                      {levelValidation.errors.map((error, index) => <li key={index}>• {error}</li>)}
                     </ul>
-                  </div>
-                )}
+                  </div>}
               </CardContent>
             </Card>
 
@@ -196,11 +207,7 @@ const LoyaltyProgramPage = () => {
                       Настройка уровней и условий начисления баллов
                     </CardDescription>
                   </div>
-                  <Button 
-                    variant="outline" 
-                    onClick={handleAddNewLevel}
-                    size="sm"
-                  >
+                  <Button variant="outline" onClick={handleAddNewLevel} size="sm">
                     <Plus className="w-4 h-4 mr-2" />
                     Добавить уровень
                   </Button>
@@ -208,19 +215,7 @@ const LoyaltyProgramPage = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  {loyaltySettings.levels
-                    .sort((a, b) => a.minPoints - b.minPoints)
-                    .map((level) => (
-                      <LoyaltyLevelCard
-                        key={level.id}
-                        level={level}
-                        onUpdate={updateLevel}
-                        onRemove={removeLevel}
-                        canRemove={loyaltySettings.levels.length > 1}
-                        isEditing={editingLevels[level.id]}
-                        onToggleEdit={() => toggleLevelEdit(level.id)}
-                      />
-                    ))}
+                  {loyaltySettings.levels.sort((a, b) => a.minPoints - b.minPoints).map(level => <LoyaltyLevelCard key={level.id} level={level} onUpdate={updateLevel} onRemove={removeLevel} canRemove={loyaltySettings.levels.length > 1} isEditing={editingLevels[level.id]} onToggleEdit={() => toggleLevelEdit(level.id)} />)}
                 </div>
               </CardContent>
             </Card>
@@ -229,12 +224,7 @@ const LoyaltyProgramPage = () => {
               {/* Дополнительные бонусы */}
               <Card>
                 <CardContent className="pt-6">
-                  <BonusSettingsForm
-                    bonusRules={loyaltySettings.bonusRules}
-                    onUpdateRule={updateBonusRule}
-                    onAddRule={addBonusRule}
-                    onRemoveRule={removeBonusRule}
-                  />
+                  <BonusSettingsForm bonusRules={loyaltySettings.bonusRules} onUpdateRule={updateBonusRule} onAddRule={addBonusRule} onRemoveRule={removeBonusRule} />
                 </CardContent>
               </Card>
 
@@ -250,10 +240,12 @@ const LoyaltyProgramPage = () => {
               </CardHeader>
               <CardContent>
                 <ResponsiveContainer width="100%" height={300}>
-                  <BarChart
-                    data={loyaltyActivityData}
-                    margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-                  >
+                  <BarChart data={loyaltyActivityData} margin={{
+                  top: 20,
+                  right: 30,
+                  left: 20,
+                  bottom: 5
+                }}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="month" />
                     <YAxis />
@@ -293,16 +285,25 @@ const LoyaltyProgramPage = () => {
                 <div>
                   <h3 className="font-medium mb-2">Динамика NPS</h3>
                   <ResponsiveContainer width="100%" height={250}>
-                    <BarChart
-                      data={[
-                        { month: 'Янв', nps: 62 },
-                        { month: 'Фев', nps: 65 },
-                        { month: 'Мар', nps: 63 },
-                        { month: 'Апр', nps: 67 },
-                        { month: 'Май', nps: 65 },
-                        { month: 'Июн', nps: 68 },
-                      ]}
-                    >
+                    <BarChart data={[{
+                    month: 'Янв',
+                    nps: 62
+                  }, {
+                    month: 'Фев',
+                    nps: 65
+                  }, {
+                    month: 'Мар',
+                    nps: 63
+                  }, {
+                    month: 'Апр',
+                    nps: 67
+                  }, {
+                    month: 'Май',
+                    nps: 65
+                  }, {
+                    month: 'Июн',
+                    nps: 68
+                  }]}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="month" />
                       <YAxis domain={[0, 100]} />
@@ -351,14 +352,12 @@ const LoyaltyProgramPage = () => {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {referralData.map((item) => (
-                        <TableRow key={item.id}>
+                      {referralData.map(item => <TableRow key={item.id}>
                           <TableCell className="font-medium">{item.referrer}</TableCell>
                           <TableCell>{item.phone}</TableCell>
                           <TableCell>{item.referrals}</TableCell>
                           <TableCell>{item.revenue.toLocaleString()} ₽</TableCell>
-                        </TableRow>
-                      ))}
+                        </TableRow>)}
                     </TableBody>
                   </Table>
                 </div>
@@ -372,8 +371,6 @@ const LoyaltyProgramPage = () => {
           </TabsContent>
         </Tabs>
       </div>
-    </ErrorBoundary>
-  );
+    </ErrorBoundary>;
 };
-
 export default LoyaltyProgramPage;
