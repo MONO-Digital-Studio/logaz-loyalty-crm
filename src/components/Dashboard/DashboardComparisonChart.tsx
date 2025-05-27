@@ -46,11 +46,11 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
       <div className="mb-4">
         <h4 className="text-lg font-semibold mb-1">Динамика ключевых показателей</h4>
         <p className="text-sm text-gray-600">
-          Сравнение {getComparisonLabel(comparisonType)} по выручке и баллам лояльности
+          Сравнение {getComparisonLabel(comparisonType)} по выручке, топливу и баллам лояльности
         </p>
       </div>
       
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height={500}>
         <ComposedChart
           data={data}
           margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
@@ -77,7 +77,10 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
                         style={{ color: entry.color }}
                       >
                         {entry.name}: {
-                          String(entry.dataKey).includes('Revenue') ? 
+                          String(entry.dataKey).includes('Revenue') || 
+                          String(entry.dataKey).includes('Propane') ||
+                          String(entry.dataKey).includes('Methane') ||
+                          String(entry.dataKey).includes('AI') ? 
                             formatCurrency(Number(entry.value)) : 
                             `${entry.value} баллов`
                         }
@@ -106,6 +109,36 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
             name="Выручка (предыдущий)" 
             fill="#3B55A2" 
             opacity={0.4}
+          />
+          
+          {/* Столбчатые диаграммы для топлива */}
+          <Bar 
+            yAxisId="left"
+            dataKey="currentPropane" 
+            name="Пропан (текущий)" 
+            fill="#FB8607" 
+            opacity={0.8}
+          />
+          <Bar 
+            yAxisId="left"
+            dataKey="currentMethane" 
+            name="Метан (текущий)" 
+            fill="#2563EB" 
+            opacity={0.8}
+          />
+          <Bar 
+            yAxisId="left"
+            dataKey="currentAI92" 
+            name="АИ-92 (текущий)" 
+            fill="#EAB308" 
+            opacity={0.8}
+          />
+          <Bar 
+            yAxisId="left"
+            dataKey="currentAI95" 
+            name="АИ-95 (текущий)" 
+            fill="#DC2626" 
+            opacity={0.8}
           />
           
           {/* Линии для баллов лояльности */}
