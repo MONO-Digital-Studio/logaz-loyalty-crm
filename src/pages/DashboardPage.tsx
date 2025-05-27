@@ -11,6 +11,7 @@ import { ru } from 'date-fns/locale';
 import { CalendarIcon, ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useDashboardData } from '@/hooks/useDashboardData';
+import DashboardPeriodComparison from '@/components/Dashboard/DashboardPeriodComparison';
 
 const DashboardPage: React.FC = () => {
   const { loading, refreshData } = useDashboardData();
@@ -161,6 +162,8 @@ const DashboardPage: React.FC = () => {
         </div>
 
         <PerformanceMetrics />
+
+        <DashboardPeriodComparison />
 
         <RfmAnalysis />
       </div>
