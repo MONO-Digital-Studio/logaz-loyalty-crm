@@ -7,7 +7,7 @@ import { Switch } from '@/components/ui/switch';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { Trash2, Plus, Calendar, Gift, TrendingUp, Users } from 'lucide-react';
+import { Trash2, Plus, Calendar, Gift, TrendingUp, Users, RotateCcw, UserPlus, Bell } from 'lucide-react';
 import { BonusRule } from '@/types/loyalty-individuals';
 
 interface BonusSettingsFormProps {
@@ -22,7 +22,10 @@ const bonusTypeIcons = {
   anniversary: Gift,
   seasonal: Calendar,
   volume: TrendingUp,
-  frequency: Users
+  frequency: Users,
+  auto_return: RotateCcw,
+  registration: UserPlus,
+  expiration_reminder: Bell
 };
 
 const bonusTypeLabels = {
@@ -30,7 +33,10 @@ const bonusTypeLabels = {
   anniversary: 'Годовщина',
   seasonal: 'Сезонная акция',
   volume: 'Объем покупок',
-  frequency: 'Частота посещений'
+  frequency: 'Частота посещений',
+  auto_return: 'Автовозврат клиентов',
+  registration: 'Баллы за регистрацию',
+  expiration_reminder: 'Напоминание о сгорании'
 };
 
 const BonusSettingsForm: React.FC<BonusSettingsFormProps> = React.memo(({
@@ -135,12 +141,20 @@ const BonusSettingsForm: React.FC<BonusSettingsFormProps> = React.memo(({
                 </div>
                 
                 <div>
-                  <Label>Множитель</Label>
+                  <Label>
+                    {rule.type === 'registration' ? 'Количество баллов' : 'Множитель'}
+                  </Label>
                   <Input
                     type="number"
-                    step="0.1"
-                    value={rule.multiplier}
-                    onChange={(e) => handleUpdateRule(rule.id, 'multiplier', parseFloat(e.target.value) || 1)}
+                    step={rule.type === 'registration' ? '1' : '0.1'}
+                    value={rule.type === 'registration' ? (rule.conditions.minAmount || 0) : rule.multiplier}
+                    onChange={(e) => {
+                      if (rule.type === 'registration') {
+                        handleUpdateCondition(rule.id, 'minAmount', parseInt(e.target.value) || 0);
+                      } else {
+                        handleUpdateRule(rule.id, 'multiplier', parseFloat(e.target.value) || 1);
+                      }
+                    }}
                   />
                 </div>
               </div>
@@ -173,6 +187,30 @@ const BonusSettingsForm: React.FC<BonusSettingsFormProps> = React.memo(({
                     type="number"
                     value={rule.conditions.minFrequency || ''}
                     onChange={(e) => handleUpdateCondition(rule.id, 'minFrequency', parseInt(e.target.value) || 1)}
+                  />
+                </div>
+              )}
+
+              {rule.type === 'auto_return' && (
+                <div>
+                  <Label>Количество дней неактивности</Label>
+                  <Input
+                    type="number"
+                    value={rule.conditions.daysInactive || 30}
+                    onChange={(e) => handleUpdateCondition(rule.id, 'daysInactive', parseInt(e.target.value) || 30)}
+                    placeholder="Дни"
+                  />
+                </div>
+              )}
+
+              {rule.type === 'expiration_reminder' && (
+                <div>
+                  <Label>За сколько дней до сгорания напоминать</Label>
+                  <Input
+                    type="number"
+                    value={rule.conditions.daysBefore || 7}
+                    onChange={(e) => handleUpdateCondition(rule.id, 'daysBefore', parseInt(e.target.value) || 7)}
+                    placeholder="Дни"
                   />
                 </div>
               )}
@@ -255,12 +293,23 @@ const BonusSettingsForm: React.FC<BonusSettingsFormProps> = React.memo(({
             </div>
 
             <div>
-              <Label>Множитель</Label>
+              <Label>
+                {newRule.type === 'registration' ? 'Количество баллов' : 'Множитель'}
+              </Label>
               <Input
                 type="number"
-                step="0.1"
-                value={newRule.multiplier}
-                onChange={(e) => setNewRule(prev => ({ ...prev, multiplier: parseFloat(e.target.value) || 1 }))}
+                step={newRule.type === 'registration' ? '1' : '0.1'}
+                value={newRule.type === 'registration' ? (newRule.conditions.minAmount || 500) : newRule.multiplier}
+                onChange={(e) => {
+                  if (newRule.type === 'registration') {
+                    setNewRule(prev => ({
+                      ...prev,
+                      conditions: { ...prev.conditions, minAmount: parseInt(e.target.value) || 500 }
+                    }));
+                  } else {
+                    setNewRule(prev => ({ ...prev, multiplier: parseFloat(e.target.value) || 1 }));
+                  }
+                }}
               />
             </div>
 

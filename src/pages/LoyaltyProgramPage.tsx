@@ -56,7 +56,8 @@ const LoyaltyProgramPage = () => {
     addLevel,
     removeLevel,
     updateBonusRule,
-    addBonusRule
+    addBonusRule,
+    removeBonusRule
   } = useLoyaltySettings();
 
   useEffect(() => {
@@ -242,6 +243,7 @@ const LoyaltyProgramPage = () => {
                     bonusRules={loyaltySettings.bonusRules}
                     onUpdateRule={updateBonusRule}
                     onAddRule={addBonusRule}
+                    onRemoveRule={removeBonusRule}
                   />
                 </CardContent>
               </Card>

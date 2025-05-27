@@ -14,11 +14,13 @@ export interface BonusRule {
   id: string;
   name: string;
   description: string;
-  type: 'birthday' | 'anniversary' | 'seasonal' | 'volume' | 'frequency';
+  type: 'birthday' | 'anniversary' | 'seasonal' | 'volume' | 'frequency' | 'auto_return' | 'registration' | 'expiration_reminder';
   multiplier: number;
   conditions: {
     minAmount?: number;
     minFrequency?: number;
+    daysBefore?: number;
+    daysInactive?: number;
     dateRange?: {
       start: string;
       end: string;

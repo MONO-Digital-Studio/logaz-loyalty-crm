@@ -1,4 +1,3 @@
-
 import { useState, useCallback, useMemo } from 'react';
 import { useOptimizedState } from './useOptimizedState';
 import { useDebouncedCallback } from './useDebounced';
@@ -64,6 +63,39 @@ const defaultBonusRules: BonusRule[] = [
     type: 'anniversary',
     multiplier: 1.5,
     conditions: {},
+    isActive: true
+  },
+  {
+    id: '3',
+    name: 'Автовозврат клиентов',
+    description: 'Бонусные баллы для клиентов, которые не посещали АЗС более 30 дней',
+    type: 'auto_return',
+    multiplier: 1.5,
+    conditions: {
+      daysInactive: 30
+    },
+    isActive: true
+  },
+  {
+    id: '4',
+    name: 'Баллы за регистрацию',
+    description: 'Приветственные баллы новым клиентам при регистрации',
+    type: 'registration',
+    multiplier: 0, // Фиксированное количество баллов
+    conditions: {
+      minAmount: 500 // 500 баллов за регистрацию
+    },
+    isActive: true
+  },
+  {
+    id: '5',
+    name: 'Напоминание о сгорании баллов',
+    description: 'Дополнительные баллы при активации после напоминания о сгорании',
+    type: 'expiration_reminder',
+    multiplier: 1.2,
+    conditions: {
+      daysBefore: 7 // За 7 дней до сгорания
+    },
     isActive: true
   }
 ];
@@ -210,6 +242,13 @@ export const useLoyaltySettings = () => {
     }));
   }, [loyaltySettings]);
 
+  const removeBonusRule = useCallback((ruleId: string) => {
+    loyaltySettings.setValue(prev => ({
+      ...prev,
+      bonusRules: prev.bonusRules.filter(rule => rule.id !== ruleId)
+    }));
+  }, [loyaltySettings]);
+
   const levelValidation = useMemo(() => {
     const levels = loyaltySettings.value.levels;
     const errors: string[] = [];
@@ -239,6 +278,7 @@ export const useLoyaltySettings = () => {
     removeLevel,
     updateBonusRule,
     addBonusRule,
+    removeBonusRule,
     resetSettings: loyaltySettings.reset
   };
 };
