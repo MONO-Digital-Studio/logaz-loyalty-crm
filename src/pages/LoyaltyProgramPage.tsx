@@ -42,6 +42,10 @@ const LoyaltyProgramPage = () => {
     }
   }, [levelValidation.isValid, saveLoyaltySettings]);
 
+  const handleUpdateSettings = useCallback((updates: Partial<IndividualsLoyaltySettings>) => {
+    setLoyaltySettings(prev => ({ ...prev, ...updates }));
+  }, [setLoyaltySettings]);
+
   return (
     <ErrorBoundary fallback={<LoyaltySettingsError />}>
       <div className="space-y-6">
@@ -71,7 +75,7 @@ const LoyaltyProgramPage = () => {
           <TabsContent value="individuals" className="space-y-6">
             <LoyaltyGeneralSettings
               settings={loyaltySettings}
-              onUpdateSettings={setLoyaltySettings}
+              onUpdateSettings={handleUpdateSettings}
               validationErrors={levelValidation.errors}
             />
 
