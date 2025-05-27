@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -25,7 +26,7 @@ const AIAssistantPanel: React.FC = () => {
   return <div className={`
       fixed top-0 right-4 bg-white dark:bg-gray-900 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700
       transition-all duration-300 z-50 flex flex-col
-      ${isMinimized ? 'w-80 h-16 top-6' : 'w-96 h-screen'}
+      ${isMinimized ? 'w-80 h-16 top-6' : 'w-192 h-screen'}
     `}>
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-logaz-orange to-orange-500 rounded-t-lg text-white">
@@ -93,7 +94,6 @@ const AIAssistantPanel: React.FC = () => {
               </div>
             </div>}
 
-          {/* Основные инсайты */}
           <div className="flex-1 flex flex-col overflow-hidden">
             <div className="px-4 py-2 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
               <h4 className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -115,7 +115,6 @@ const AIAssistantPanel: React.FC = () => {
             </ScrollArea>
           </div>
 
-          {/* Чат-интерфейс */}
           <div className="h-64 border-t border-gray-200 dark:border-gray-700">
             <ChatInterface />
           </div>
@@ -123,3 +122,4 @@ const AIAssistantPanel: React.FC = () => {
     </div>;
 };
 export default AIAssistantPanel;
+

@@ -1,3 +1,4 @@
+
 import React, { memo } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -33,7 +34,7 @@ const AIPanel: React.FC = memo(() => {
     <div className={`
       fixed bottom-4 right-4 bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700
       transition-all duration-300 z-50 flex flex-col
-      ${isMinimized ? 'w-80 h-16' : 'w-96 h-[600px]'}
+      ${isMinimized ? 'w-80 h-16' : 'w-192 h-[600px]'}
     `}>
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-t-lg">
