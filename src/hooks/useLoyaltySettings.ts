@@ -91,7 +91,7 @@ const defaultBonusRules: BonusRule[] = [
   {
     id: '5',
     name: 'Сервисные баллы',
-    description: 'Дополнительные баллы при активации после напоминания о сгорании',
+    description: 'Баллы на ремонт и обслуживание ГБО',
     type: 'expiration_reminder',
     multiplier: 1.2,
     conditions: {
