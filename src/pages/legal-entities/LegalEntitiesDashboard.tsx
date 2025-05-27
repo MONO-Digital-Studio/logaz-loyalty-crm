@@ -1,33 +1,31 @@
-
 import React from 'react';
 import { useLegalEntities } from '@/contexts/LegalEntitiesContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus, CreditCard, Users, Fuel, DollarSign, Activity, AlertTriangle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-
 const LegalEntitiesDashboard: React.FC = () => {
-  const { dashboardMetrics, legalEntities, fuelCards } = useLegalEntities();
+  const {
+    dashboardMetrics,
+    legalEntities,
+    fuelCards
+  } = useLegalEntities();
   const navigate = useNavigate();
-
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('ru-RU', {
       style: 'currency',
       currency: 'RUB',
-      minimumFractionDigits: 0,
+      minimumFractionDigits: 0
     }).format(amount);
   };
-
   const formatNumber = (num: number) => {
     return new Intl.NumberFormat('ru-RU').format(num);
   };
-
-  return (
-    <div className="space-y-6 w-full">
+  return <div className="space-y-6 w-full">
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Аналитика юридических лиц</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Корпоративные клиенты</h1>
           <p className="text-muted-foreground">
             Обзор ключевых показателей и метрик корпоративных клиентов
           </p>
@@ -108,8 +106,7 @@ const LegalEntitiesDashboard: React.FC = () => {
       </div>
 
       {/* Warning Cards */}
-      {dashboardMetrics.blockedCards > 0 && (
-        <Card className="border-l-4 border-l-red-500 bg-red-50">
+      {dashboardMetrics.blockedCards > 0 && <Card className="border-l-4 border-l-red-500 bg-red-50">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-red-800">Заблокированные карты</CardTitle>
             <AlertTriangle className="h-5 w-5 text-red-600" />
@@ -122,8 +119,7 @@ const LegalEntitiesDashboard: React.FC = () => {
               Требуют внимания
             </p>
           </CardContent>
-        </Card>
-      )}
+        </Card>}
 
       {/* Recent Activity - Full Width Grid */}
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
@@ -133,8 +129,7 @@ const LegalEntitiesDashboard: React.FC = () => {
           </CardHeader>
           <CardContent className="pt-0">
             <div className="space-y-3">
-              {legalEntities.slice(0, 5).map((entity) => (
-                <div key={entity.id} className="flex items-center justify-between p-3 bg-gray-50/50 rounded-lg hover:bg-gray-100/50 transition-colors">
+              {legalEntities.slice(0, 5).map(entity => <div key={entity.id} className="flex items-center justify-between p-3 bg-gray-50/50 rounded-lg hover:bg-gray-100/50 transition-colors">
                   <div className="flex items-center space-x-3">
                     <div className="w-10 h-10 rounded-lg bg-logaz-blue/10 flex items-center justify-center">
                       <Users className="h-5 w-5 text-logaz-blue" />
@@ -151,8 +146,7 @@ const LegalEntitiesDashboard: React.FC = () => {
                   <div className="text-lg font-semibold text-logaz-blue">
                     {formatCurrency(entity.balance)}
                   </div>
-                </div>
-              ))}
+                </div>)}
             </div>
           </CardContent>
         </Card>
@@ -163,11 +157,7 @@ const LegalEntitiesDashboard: React.FC = () => {
           </CardHeader>
           <CardContent className="pt-0">
             <div className="space-y-3">
-              {fuelCards
-                .sort((a, b) => b.balance - a.balance)
-                .slice(0, 5)
-                .map((card) => (
-                  <div key={card.id} className="flex items-center justify-between p-3 bg-gray-50/50 rounded-lg hover:bg-gray-100/50 transition-colors">
+              {fuelCards.sort((a, b) => b.balance - a.balance).slice(0, 5).map(card => <div key={card.id} className="flex items-center justify-between p-3 bg-gray-50/50 rounded-lg hover:bg-gray-100/50 transition-colors">
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 rounded-lg bg-logaz-orange/10 flex items-center justify-center">
                         <CreditCard className="h-5 w-5 text-logaz-orange" />
@@ -184,14 +174,11 @@ const LegalEntitiesDashboard: React.FC = () => {
                     <div className="text-lg font-semibold text-logaz-orange">
                       {formatCurrency(card.balance)}
                     </div>
-                  </div>
-                ))}
+                  </div>)}
             </div>
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default LegalEntitiesDashboard;
