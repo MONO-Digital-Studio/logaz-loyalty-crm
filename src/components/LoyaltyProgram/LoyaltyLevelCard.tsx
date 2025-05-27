@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -100,7 +99,7 @@ const LoyaltyLevelCard: React.FC<LoyaltyLevelCardProps> = React.memo(({
       <CardContent className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <Label htmlFor={`min-points-${level.id}`}>Минимум баллов</Label>
+            <Label htmlFor={`min-points-${level.id}`}>Минимум покупок, рублей</Label>
             {isEditing ? (
               <Input
                 id={`min-points-${level.id}`}
