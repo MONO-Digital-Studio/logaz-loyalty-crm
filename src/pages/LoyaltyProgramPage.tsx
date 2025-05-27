@@ -252,46 +252,6 @@ const LoyaltyProgramPage = () => {
               <LoyaltyPreview settings={loyaltySettings} />
             </div>
 
-            {/* Дополнительные механики */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Дополнительные механики</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="flex justify-between items-center p-3 border rounded-lg">
-                  <div>
-                    <h3 className="font-medium">Автовозврат клиентов</h3>
-                    <p className="text-sm text-gray-500">Напоминание клиентам, которые не посещали АЗС более 30 дней</p>
-                  </div>
-                  <Button variant="outline">Настроить</Button>
-                </div>
-                
-                <div className="flex justify-between items-center p-3 border rounded-lg">
-                  <div>
-                    <h3 className="font-medium">Баллы за регистрацию</h3>
-                    <p className="text-sm text-gray-500">Начисление приветственных баллов новым клиентам</p>
-                  </div>
-                  <Button variant="outline">Настроить</Button>
-                </div>
-                
-                <div className="flex justify-between items-center p-3 border rounded-lg">
-                  <div>
-                    <h3 className="font-medium">Поздравления с днем рождения</h3>
-                    <p className="text-sm text-gray-500">Автоматические поздравления и бонусы в день рождения</p>
-                  </div>
-                  <Button variant="outline">Настроить</Button>
-                </div>
-                
-                <div className="flex justify-between items-center p-3 border rounded-lg">
-                  <div>
-                    <h3 className="font-medium">Напоминание о сгорании баллов</h3>
-                    <p className="text-sm text-gray-500">Уведомления о скором сгорании неиспользованных баллов</p>
-                  </div>
-                  <Button variant="outline">Настроить</Button>
-                </div>
-              </CardContent>
-            </Card>
-
             {/* Статистика баллов */}
             <Card>
               <CardHeader>
@@ -365,7 +325,6 @@ const LoyaltyProgramPage = () => {
             </Card>
           </TabsContent>
 
-          {/* ... keep existing code for loyalty-index and referral tabs */}
           <TabsContent value="loyalty-index">
             <Card>
               <CardHeader>
