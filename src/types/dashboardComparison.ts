@@ -49,7 +49,7 @@ export interface MetricGroup {
   description: string;
   icon: React.ReactNode;
   metrics: {
-    key: keyof DashboardComparisonData;
+    key: Exclude<keyof DashboardComparisonData, 'type'>;
     title: string;
     icon: React.ReactNode;
     formatter: (value: number) => string;
