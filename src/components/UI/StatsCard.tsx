@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface StatsCardProps {
   title: string;
@@ -10,6 +11,7 @@ interface StatsCardProps {
   icon?: React.ReactNode;
   color?: string;
   className?: string;
+  tooltip?: string;
 }
 
 const StatsCard: React.FC<StatsCardProps> = ({
@@ -20,10 +22,11 @@ const StatsCard: React.FC<StatsCardProps> = ({
   icon,
   color = 'bg-logaz-blue',
   className = '',
+  tooltip,
 }) => {
   const isPositiveChange = change && change > 0;
 
-  return (
+  const cardContent = (
     <div className={`stats-card w-full ${className}`}>
       <div className="flex items-start justify-between w-full">
         <div className="flex-1 min-w-0 w-full">
@@ -61,6 +64,23 @@ const StatsCard: React.FC<StatsCardProps> = ({
       </div>
     </div>
   );
+
+  if (tooltip) {
+    return (
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            {cardContent}
+          </TooltipTrigger>
+          <TooltipContent side="top" className="max-w-xs">
+            <p className="text-sm">{tooltip}</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    );
+  }
+
+  return cardContent;
 };
 
 export default StatsCard;
