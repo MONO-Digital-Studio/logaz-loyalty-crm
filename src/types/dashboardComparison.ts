@@ -19,4 +19,4 @@ export interface DashboardChartComparisonData {
   previousPointsSpent: number;
 }
 
-export { ComparisonType };
+export type { ComparisonType };
