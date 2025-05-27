@@ -1,7 +1,7 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { 
   BarChart, 
   Bar, 
@@ -18,8 +18,12 @@ import {
   Cell
 } from 'recharts';
 import StatsCard from '@/components/UI/StatsCard';
-import { MessageSquareText, Clock, Users, BarChart3 } from 'lucide-react';
+import PeriodComparisonCard from './PeriodComparisonCard';
+import PeriodComparisonChart from './PeriodComparisonChart';
+import { MessageSquareText, Clock, Users, BarChart3, TrendingUp } from 'lucide-react';
 import { AnalyticsData, AgentStats, ChannelDistribution } from '@/types/contactCenter';
+import { ComparisonType } from '@/types/periodComparison';
+import { usePeriodComparison } from '@/hooks/usePeriodComparison';
 
 // Моковые данные для аналитики
 const periodData: AnalyticsData[] = [
@@ -125,11 +129,27 @@ const COLORS = ['#3B55A2', '#FB8607', '#4CAF50', '#F44336', '#9C27B0'];
 const AnalyticsDashboard: React.FC = () => {
   const [periodTab, setPeriodTab] = useState('month');
   
+  // Новый хук для сравнения периодов
+  const {
+    comparisonType,
+    setComparisonType,
+    comparisonData,
+    chartData,
+    isLoading: comparisonLoading
+  } = usePeriodComparison(periodData);
+  
   // Форматирование данных для графиков
   const formattedPeriodData = periodData.map(item => ({
     ...item,
     period: `${item.periodStart.toLocaleDateString('ru-RU', { month: 'short' })}`
   }));
+  
+  const formatters = {
+    totalChats: (value: number) => value.toString(),
+    responseTime: (value: number) => `${value} сек`,
+    satisfactionScore: (value: number) => `${value.toFixed(1)}/5.0`,
+    avgChatDuration: (value: number) => `${value.toFixed(1)} мин`
+  };
   
   return (
     <div className="space-y-6">
@@ -180,6 +200,81 @@ const AnalyticsDashboard: React.FC = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Новая секция сравнения периодов */}
+      <section className="mt-8">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-6 gap-4">
+          <h3 className="text-xl font-semibold">Сравнение периодов</h3>
+          <Select value={comparisonType} onValueChange={(value: ComparisonType) => setComparisonType(value)}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Выберите период" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="D/D">День к дню (D/D)</SelectItem>
+              <SelectItem value="W/W">Неделя к неделе (W/W)</SelectItem>
+              <SelectItem value="M/M">Месяц к месяцу (M/M)</SelectItem>
+              <SelectItem value="Q/Q">Квартал к кварталу (Q/Q)</SelectItem>
+              <SelectItem value="Y/Y">Год к году (Y/Y)</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        
+        {comparisonLoading ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+            {[...Array(4)].map((_, i) => (
+              <Card key={i} className="animate-pulse">
+                <CardContent className="p-4">
+                  <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        ) : comparisonData ? (
+          <>
+            {/* Карточки с ключевыми изменениями */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+              <PeriodComparisonCard
+                data={comparisonData.totalChats}
+                title="Количество диалогов"
+                icon={<MessageSquareText size={20} className="text-logaz-blue" />}
+                formatter={formatters.totalChats}
+              />
+              <PeriodComparisonCard
+                data={comparisonData.responseTime}
+                title="Время ответа"
+                icon={<Clock size={20} className="text-logaz-orange" />}
+                formatter={formatters.responseTime}
+              />
+              <PeriodComparisonCard
+                data={comparisonData.satisfactionScore}
+                title="Удовлетворенность"
+                icon={<BarChart3 size={20} className="text-logaz-green" />}
+                formatter={formatters.satisfactionScore}
+              />
+              <PeriodComparisonCard
+                data={comparisonData.avgChatDuration}
+                title="Время диалога"
+                icon={<TrendingUp size={20} className="text-purple-600" />}
+                formatter={formatters.avgChatDuration}
+              />
+            </div>
+            
+            {/* Основной график сравнения */}
+            <Card className="p-6">
+              <PeriodComparisonChart
+                data={chartData}
+                comparisonType={comparisonType}
+              />
+            </Card>
+          </>
+        ) : (
+          <div className="text-center py-8 text-gray-500">
+            <p>Данные для сравнения недоступны</p>
+          </div>
+        )}
+      </section>
 
       {/* Вкладки периода для графиков */}
       <Tabs defaultValue="month" onValueChange={setPeriodTab}>
