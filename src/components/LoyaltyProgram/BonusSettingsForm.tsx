@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -198,18 +197,6 @@ const BonusSettingsForm: React.FC<BonusSettingsFormProps> = React.memo(({
                     type="number"
                     value={rule.conditions.daysInactive || 30}
                     onChange={(e) => handleUpdateCondition(rule.id, 'daysInactive', parseInt(e.target.value) || 30)}
-                    placeholder="Дни"
-                  />
-                </div>
-              )}
-
-              {rule.type === 'expiration_reminder' && (
-                <div>
-                  <Label>За сколько дней до сгорания напоминать</Label>
-                  <Input
-                    type="number"
-                    value={rule.conditions.daysBefore || 7}
-                    onChange={(e) => handleUpdateCondition(rule.id, 'daysBefore', parseInt(e.target.value) || 7)}
                     placeholder="Дни"
                   />
                 </div>
