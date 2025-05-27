@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -7,6 +8,7 @@ import { Building2, Maximize2, Minimize2, X, RefreshCw, TrendingUp, Users, Dolla
 import { useLegalEntitiesAI } from '@/contexts/LegalEntitiesAIContext';
 import CorporateInsightCard from './insights/CorporateInsightCard';
 import B2BChatInterface from './chat/B2BChatInterface';
+
 const LegalEntitiesAIPanel: React.FC = () => {
   const {
     isPanelOpen,
@@ -18,13 +20,16 @@ const LegalEntitiesAIPanel: React.FC = () => {
     toggleMinimize,
     refreshInsights
   } = useLegalEntitiesAI();
+
   if (!isPanelOpen) return null;
+
   const criticalInsights = insights.filter(i => i.priority === 'critical');
   const highInsights = insights.filter(i => i.priority === 'high');
+
   return <div className={`
       fixed top-0 right-4 bg-white dark:bg-gray-900 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700
       transition-all duration-300 z-50 flex flex-col
-      ${isMinimized ? 'w-80 h-16 top-6' : 'w-192 h-screen'}
+      ${isMinimized ? 'w-80 h-16 top-6' : 'w-144 h-screen'}
     `}>
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-t-lg">
@@ -112,4 +117,5 @@ const LegalEntitiesAIPanel: React.FC = () => {
         </div>}
     </div>;
 };
+
 export default LegalEntitiesAIPanel;

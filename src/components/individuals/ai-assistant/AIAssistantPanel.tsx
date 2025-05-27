@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,6 +8,7 @@ import { Brain, RefreshCw, Minimize2, Maximize2, X, TrendingUp, Users, AlertTria
 import { useIndividualsAI } from '@/contexts/IndividualsAIContext';
 import InsightCard from './insights/InsightCard';
 import ChatInterface from './chat/ChatInterface';
+
 const AIAssistantPanel: React.FC = () => {
   const {
     insights,
@@ -20,13 +20,16 @@ const AIAssistantPanel: React.FC = () => {
     toggleMinimize,
     refreshData
   } = useIndividualsAI();
+
   if (!isPanelOpen) return null;
+
   const criticalInsights = insights.filter(i => i.priority === 'critical');
   const highPriorityInsights = insights.filter(i => i.priority === 'high');
+
   return <div className={`
       fixed top-0 right-4 bg-white dark:bg-gray-900 rounded-lg shadow-2xl border border-gray-200 dark:border-gray-700
       transition-all duration-300 z-50 flex flex-col
-      ${isMinimized ? 'w-80 h-16 top-6' : 'w-192 h-screen'}
+      ${isMinimized ? 'w-80 h-16 top-6' : 'w-144 h-screen'}
     `}>
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gradient-to-r from-logaz-orange to-orange-500 rounded-t-lg text-white">
@@ -121,5 +124,5 @@ const AIAssistantPanel: React.FC = () => {
         </div>}
     </div>;
 };
-export default AIAssistantPanel;
 
+export default AIAssistantPanel;
