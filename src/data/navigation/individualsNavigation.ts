@@ -4,7 +4,7 @@ import { NavigationItem } from '@/types/navigation';
 export const individualsNavigation: NavigationItem[] = [
   {
     id: 'dashboard',
-    title: 'Аналитика',
+    title: 'Дашборд',
     path: '/',
   },
   {

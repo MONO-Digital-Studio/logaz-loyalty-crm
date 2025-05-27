@@ -4,7 +4,7 @@ import { NavigationItem } from '@/types/navigation';
 export const legalEntitiesNavigation: NavigationItem[] = [
   {
     id: 'le-dashboard',
-    title: 'Аналитика',
+    title: 'Дашборд',
     path: '/legal-entities',
   },
   {
