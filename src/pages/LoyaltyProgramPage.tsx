@@ -249,6 +249,71 @@ const LoyaltyProgramPage = () => {
               {/* Калькулятор и предпросмотр */}
               <LoyaltyPreview settings={loyaltySettings} />
             </div>
+
+            {/* Дополнительные механики */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Дополнительные механики</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex justify-between items-center p-3 border rounded-lg">
+                  <div>
+                    <h3 className="font-medium">Автовозврат клиентов</h3>
+                    <p className="text-sm text-gray-500">Напоминание клиентам, которые не посещали АЗС более 30 дней</p>
+                  </div>
+                  <Button variant="outline">Настроить</Button>
+                </div>
+                
+                <div className="flex justify-between items-center p-3 border rounded-lg">
+                  <div>
+                    <h3 className="font-medium">Баллы за регистрацию</h3>
+                    <p className="text-sm text-gray-500">Начисление приветственных баллов новым клиентам</p>
+                  </div>
+                  <Button variant="outline">Настроить</Button>
+                </div>
+                
+                <div className="flex justify-between items-center p-3 border rounded-lg">
+                  <div>
+                    <h3 className="font-medium">Поздравления с днем рождения</h3>
+                    <p className="text-sm text-gray-500">Автоматические поздравления и бонусы в день рождения</p>
+                  </div>
+                  <Button variant="outline">Настроить</Button>
+                </div>
+                
+                <div className="flex justify-between items-center p-3 border rounded-lg">
+                  <div>
+                    <h3 className="font-medium">Напоминание о сгорании баллов</h3>
+                    <p className="text-sm text-gray-500">Уведомления о скором сгорании неиспользованных баллов</p>
+                  </div>
+                  <Button variant="outline">Настроить</Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Статистика баллов */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Статистика баллов</CardTitle>
+                <CardDescription>Активность по начислению и использованию баллов за 6 месяцев</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <ResponsiveContainer width="100%" height={300}>
+                  <BarChart
+                    data={loyaltyActivityData}
+                    margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <XAxis dataKey="month" />
+                    <YAxis />
+                    <Tooltip />
+                    <Legend />
+                    <Bar dataKey="начислено" fill="#3B55A2" />
+                    <Bar dataKey="использовано" fill="#FB8607" />
+                    <Bar dataKey="сгорело" fill="#F44336" />
+                  </BarChart>
+                </ResponsiveContainer>
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="legal-entities" className="space-y-6">
@@ -296,72 +361,6 @@ const LoyaltyProgramPage = () => {
                 </Button>
               </CardContent>
             </Card>
-
-            {/* ... keep existing code for legal entities additional mechanics and statistics */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Дополнительные механики</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex justify-between items-center p-3 border rounded-lg">
-                    <div>
-                      <h3 className="font-medium">Автовозврат клиентов</h3>
-                      <p className="text-sm text-gray-500">Напоминание клиентам, которые не посещали АЗС более 30 дней</p>
-                    </div>
-                    <Button variant="outline">Настроить</Button>
-                  </div>
-                  
-                  <div className="flex justify-between items-center p-3 border rounded-lg">
-                    <div>
-                      <h3 className="font-medium">Баллы за регистрацию</h3>
-                      <p className="text-sm text-gray-500">Начисление приветственных баллов новым клиентам</p>
-                    </div>
-                    <Button variant="outline">Настроить</Button>
-                  </div>
-                  
-                  <div className="flex justify-between items-center p-3 border rounded-lg">
-                    <div>
-                      <h3 className="font-medium">Поздравления с днем рождения</h3>
-                      <p className="text-sm text-gray-500">Автоматические поздравления и бонусы в день рождения</p>
-                    </div>
-                    <Button variant="outline">Настроить</Button>
-                  </div>
-                  
-                  <div className="flex justify-between items-center p-3 border rounded-lg">
-                    <div>
-                      <h3 className="font-medium">Напоминание о сгорании баллов</h3>
-                      <p className="text-sm text-gray-500">Уведомления о скором сгорании неиспользованных баллов</p>
-                    </div>
-                    <Button variant="outline">Настроить</Button>
-                  </div>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardHeader>
-                  <CardTitle>Статистика баллов</CardTitle>
-                  <CardDescription>Активность по начислению и использованию баллов за 6 месяцев</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={300}>
-                    <BarChart
-                      data={loyaltyActivityData}
-                      margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
-                    >
-                      <CartesianGrid strokeDasharray="3 3" />
-                      <XAxis dataKey="month" />
-                      <YAxis />
-                      <Tooltip />
-                      <Legend />
-                      <Bar dataKey="начислено" fill="#3B55A2" />
-                      <Bar dataKey="использовано" fill="#FB8607" />
-                      <Bar dataKey="сгорело" fill="#F44336" />
-                    </BarChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-            </div>
           </TabsContent>
 
           {/* ... keep existing code for loyalty-index and referral tabs */}
