@@ -113,7 +113,7 @@ const LoyaltyLevelCard: React.FC<LoyaltyLevelCardProps> = React.memo(({
           </div>
           
           <div>
-            <Label htmlFor={`max-points-${level.id}`}>Максимум баллов</Label>
+            <Label htmlFor={`max-points-${level.id}`}>Максимум покупок, рублей</Label>
             {isEditing ? (
               <Input
                 id={`max-points-${level.id}`}
