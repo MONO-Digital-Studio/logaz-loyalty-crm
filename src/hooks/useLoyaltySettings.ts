@@ -1,3 +1,4 @@
+
 import { useState, useCallback, useMemo } from 'react';
 import { useOptimizedState } from './useOptimizedState';
 import { useDebouncedCallback } from './useDebounced';
@@ -89,7 +90,7 @@ const defaultBonusRules: BonusRule[] = [
   },
   {
     id: '5',
-    name: 'Напоминание о сгорании баллов',
+    name: 'Сервисные баллы',
     description: 'Дополнительные баллы при активации после напоминания о сгорании',
     type: 'expiration_reminder',
     multiplier: 1.2,

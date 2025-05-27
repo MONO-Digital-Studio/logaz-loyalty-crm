@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -36,7 +35,7 @@ const bonusTypeLabels = {
   frequency: 'Частота посещений',
   auto_return: 'Автовозврат клиентов',
   registration: 'Баллы за регистрацию',
-  expiration_reminder: 'Напоминание о сгорании'
+  expiration_reminder: 'Сервисные баллы'
 };
 
 const BonusSettingsForm: React.FC<BonusSettingsFormProps> = React.memo(({
