@@ -17,6 +17,7 @@
   <a href="https://lovable.dev/projects/d6d1444a-0a1f-4a4c-8d6a-91670562961f">🚀 Live Demo</a> •
   <a href="#ключевые-функции">✨ Функции</a> •
   <a href="#технологический-стек">🛠️ Технологии</a> •
+  <a href="#дизайн-система">🎨 Дизайн</a> •
   <a href="#быстрый-старт">🏃‍♂️ Быстрый старт</a> •
   <a href="./PROJECT_DOCUMENTATION.md">📚 Полная документация</a>
 </p>
@@ -98,6 +99,208 @@
 
 ---
 
+## 🎨 Дизайн-система
+
+### 🌈 Цветовая палитра
+
+Система использует тщательно подобранную цветовую схему, отражающую фирменный стиль ЛОГАЗА:
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0;">
+  
+  <div style="text-align: center; padding: 15px; border-radius: 8px; background: #f8f9fa; border: 1px solid #e9ecef;">
+    <div style="width: 100%; height: 60px; background: linear-gradient(135deg, #3B55A2 0%, #4A6BB3 100%); border-radius: 6px; margin-bottom: 10px; box-shadow: 0 4px 6px rgba(59, 85, 162, 0.1);"></div>
+    <strong>Основной синий</strong><br>
+    <code>#3B55A2</code><br>
+    <small>Кнопки, активные элементы, логотип</small>
+  </div>
+
+  <div style="text-align: center; padding: 15px; border-radius: 8px; background: #f8f9fa; border: 1px solid #e9ecef;">
+    <div style="width: 100%; height: 60px; background: linear-gradient(135deg, #FB8607 0%, #FF9728 100%); border-radius: 6px; margin-bottom: 10px; box-shadow: 0 4px 6px rgba(251, 134, 7, 0.1);"></div>
+    <strong>Акцентный оранжевый</strong><br>
+    <code>#FB8607</code><br>
+    <small>Уведомления, важные элементы</small>
+  </div>
+
+  <div style="text-align: center; padding: 15px; border-radius: 8px; background: #f8f9fa; border: 1px solid #e9ecef;">
+    <div style="width: 100%; height: 60px; background: linear-gradient(135deg, #4CAF50 0%, #66BB6A 100%); border-radius: 6px; margin-bottom: 10px; box-shadow: 0 4px 6px rgba(76, 175, 80, 0.1);"></div>
+    <strong>Успех</strong><br>
+    <code>#4CAF50</code><br>
+    <small>Успешные операции, подтверждения</small>
+  </div>
+
+  <div style="text-align: center; padding: 15px; border-radius: 8px; background: #f8f9fa; border: 1px solid #e9ecef;">
+    <div style="width: 100%; height: 60px; background: linear-gradient(135deg, #F44336 0%, #EF5350 100%); border-radius: 6px; margin-bottom: 10px; box-shadow: 0 4px 6px rgba(244, 67, 54, 0.1);"></div>
+    <strong>Ошибка</strong><br>
+    <code>#F44336</code><br>
+    <small>Ошибки, критические уведомления</small>
+  </div>
+
+  <div style="text-align: center; padding: 15px; border-radius: 8px; background: #f8f9fa; border: 1px solid #e9ecef;">
+    <div style="width: 100%; height: 60px; background: linear-gradient(135deg, #F5F5F5 0%, #FAFAFA 100%); border-radius: 6px; margin-bottom: 10px; border: 1px solid #e0e0e0;"></div>
+    <strong>Фоновый светлый</strong><br>
+    <code>#F5F5F5</code><br>
+    <small>Основной фон приложения</small>
+  </div>
+
+  <div style="text-align: center; padding: 15px; border-radius: 8px; background: #f8f9fa; border: 1px solid #e9ecef;">
+    <div style="width: 100%; height: 60px; background: linear-gradient(135deg, #333333 0%, #424242 100%); border-radius: 6px; margin-bottom: 10px; box-shadow: 0 4px 6px rgba(51, 51, 51, 0.1);"></div>
+    <strong>Текстовый темный</strong><br>
+    <code>#333333</code><br>
+    <small>Основной текст, заголовки</small>
+  </div>
+
+</div>
+
+### ✨ Типографика
+
+Система использует современные, читаемые шрифты для оптимального пользовательского опыта:
+
+<table>
+  <tr>
+    <td width="30%" style="padding: 15px; background: #f8f9fa; border-radius: 8px; margin: 5px;">
+      <div style="font-family: 'Montserrat', sans-serif; font-size: 24px; font-weight: 700; color: #333;">Montserrat</div>
+      <div style="font-family: 'Montserrat', sans-serif; font-size: 16px; color: #666; margin-top: 5px;">Основной шрифт</div>
+      <small style="color: #999;">Заголовки, кнопки, навигация</small>
+    </td>
+    <td width="30%" style="padding: 15px; background: #f8f9fa; border-radius: 8px; margin: 5px;">
+      <div style="font-family: 'Syncopate', sans-serif; font-size: 20px; font-weight: 700; color: #3B55A2;">SYNCOPATE</div>
+      <div style="font-family: 'Montserrat', sans-serif; font-size: 16px; color: #666; margin-top: 5px;">Акцентный шрифт</div>
+      <small style="color: #999;">Логотип, специальные заголовки</small>
+    </td>
+    <td width="40%" style="padding: 15px; background: #f8f9fa; border-radius: 8px; margin: 5px;">
+      <div style="font-family: system-ui, sans-serif; font-size: 16px; color: #333; line-height: 1.5;">System UI Fallback</div>
+      <div style="font-family: 'Montserrat', sans-serif; font-size: 16px; color: #666; margin-top: 5px;">Резервный шрифт</div>
+      <small style="color: #999;">Автоматический fallback для системы</small>
+    </td>
+  </tr>
+</table>
+
+### 🔘 Компоненты интерфейса
+
+#### Кнопки
+
+<table>
+  <tr>
+    <td width="25%" style="padding: 15px; text-align: center;">
+      <div style="background: #3B55A2; color: white; padding: 10px 20px; border-radius: 6px; font-weight: 500; display: inline-block; box-shadow: 0 2px 4px rgba(59, 85, 162, 0.1); transition: all 0.2s;">Основная</div>
+      <br><small>Primary Button</small>
+    </td>
+    <td width="25%" style="padding: 15px; text-align: center;">
+      <div style="background: transparent; color: #3B55A2; padding: 10px 20px; border-radius: 6px; font-weight: 500; display: inline-block; border: 1px solid #3B55A2; transition: all 0.2s;">Вторичная</div>
+      <br><small>Secondary Button</small>
+    </td>
+    <td width="25%" style="padding: 15px; text-align: center;">
+      <div style="background: #F44336; color: white; padding: 10px 20px; border-radius: 6px; font-weight: 500; display: inline-block; box-shadow: 0 2px 4px rgba(244, 67, 54, 0.1); transition: all 0.2s;">Удалить</div>
+      <br><small>Destructive Button</small>
+    </td>
+    <td width="25%" style="padding: 15px; text-align: center;">
+      <div style="background: transparent; color: #666; padding: 10px 20px; border-radius: 6px; font-weight: 500; display: inline-block; transition: all 0.2s;">Призрак</div>
+      <br><small>Ghost Button</small>
+    </td>
+  </tr>
+</table>
+
+#### Карточки и контейнеры
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+  
+  <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e9ecef;">
+    <h4 style="margin: 0 0 10px; color: #333;">Стандартная карточка</h4>
+    <p style="margin: 0; color: #666; font-size: 14px;">Используется для группировки контента с минимальной тенью</p>
+  </div>
+
+  <div style="background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border: 1px solid #e9ecef;">
+    <h4 style="margin: 0 0 10px; color: #333;">Приподнятая карточка</h4>
+    <p style="margin: 0; color: #666; font-size: 14px;">Для важного контента с более заметной тенью</p>
+  </div>
+
+</div>
+
+#### Формы и элементы ввода
+
+<table>
+  <tr>
+    <td width="50%" style="padding: 15px;">
+      <div style="margin-bottom: 10px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Текстовое поле</label>
+        <div style="width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; background: white; color: #333;">Введите текст...</div>
+      </div>
+    </td>
+    <td width="50%" style="padding: 15px;">
+      <div style="margin-bottom: 10px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: 500; color: #333;">Выпадающий список</label>
+        <div style="width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; background: white; color: #333; position: relative;">Выберите опцию ▼</div>
+      </div>
+    </td>
+  </tr>
+</table>
+
+### 🎭 UX/UI Принципы
+
+#### 📱 Адаптивный дизайн
+
+<table>
+  <tr>
+    <td width="33%" style="text-align: center; padding: 20px;">
+      <div style="width: 40px; height: 60px; background: #3B55A2; border-radius: 6px; margin: 0 auto 10px; position: relative;">
+        <div style="width: 30px; height: 20px; background: white; border-radius: 2px; position: absolute; top: 8px; left: 5px;"></div>
+      </div>
+      <h4>Мобильные устройства</h4>
+      <p style="font-size: 14px; color: #666;">320px - 768px<br>Touch-оптимизация</p>
+    </td>
+    <td width="33%" style="text-align: center; padding: 20px;">
+      <div style="width: 60px; height: 45px; background: #3B55A2; border-radius: 6px; margin: 0 auto 10px; position: relative;">
+        <div style="width: 50px; height: 30px; background: white; border-radius: 2px; position: absolute; top: 7px; left: 5px;"></div>
+      </div>
+      <h4>Планшеты</h4>
+      <p style="font-size: 14px; color: #666;">768px - 1024px<br>Гибридный интерфейс</p>
+    </td>
+    <td width="33%" style="text-align: center; padding: 20px;">
+      <div style="width: 80px; height: 50px; background: #3B55A2; border-radius: 6px; margin: 0 auto 10px; position: relative;">
+        <div style="width: 70px; height: 40px; background: white; border-radius: 2px; position: absolute; top: 5px; left: 5px;"></div>
+      </div>
+      <h4>Десктоп</h4>
+      <p style="font-size: 14px; color: #666;">1024px+<br>Полная функциональность</p>
+    </td>
+  </tr>
+</table>
+
+#### 🎯 Принципы взаимодействия
+
+- **🔍 Понятность** - Каждый элемент интерфейса имеет четкое назначение
+- **⚡ Скорость** - Оптимизированные переходы и загрузка данных
+- **🎨 Согласованность** - Единый стиль во всех компонентах
+- **♿ Доступность** - Поддержка screen readers и keyboard navigation
+- **📱 Touch-friendly** - Оптимизация для сенсорных устройств
+- **🧭 Интуитивность** - Логичная навигация и иерархия
+
+#### 🌊 Анимации и переходы
+
+<table>
+  <tr>
+    <td width="50%">
+      <h4>🎬 Типы анимаций</h4>
+      <ul style="font-size: 14px; color: #666;">
+        <li><strong>Fade</strong> - Плавное появление/исчезновение (300ms)</li>
+        <li><strong>Slide</strong> - Скольжение элементов (300ms)</li>
+        <li><strong>Scale</strong> - Масштабирование при hover (200ms)</li>
+        <li><strong>Accordion</strong> - Раскрытие/сворачивание (200ms)</li>
+      </ul>
+    </td>
+    <td width="50%">
+      <h4>⚙️ Принципы анимации</h4>
+      <ul style="font-size: 14px; color: #666;">
+        <li><strong>Естественность</strong> - Easing функции для реалистичности</li>
+        <li><strong>Производительность</strong> - GPU-ускоренные transform</li>
+        <li><strong>Уместность</strong> - Анимации поддерживают UX, не отвлекают</li>
+        <li><strong>Отзывчивость</strong> - Быстрые feedback анимации</li>
+      </ul>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## 🛠️ Технологический стек
 
 <div align="center">
@@ -147,27 +350,6 @@
 │  └─────────────────┘    └─────────────────┘                │
 └─────────────────────────────────────────────────────────────┘
 ```
-
-### 🎨 Дизайн-система
-
-<div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-  <div style="text-align: center;">
-    <div style="width: 80px; height: 40px; background-color: #3B55A2; border-radius: 5px; margin: 0 auto;"></div>
-    <p><strong>Основной</strong><br>#3B55A2</p>
-  </div>
-  <div style="text-align: center;">
-    <div style="width: 80px; height: 40px; background-color: #FB8607; border-radius: 5px; margin: 0 auto;"></div>
-    <p><strong>Акцентный</strong><br>#FB8607</p>
-  </div>
-  <div style="text-align: center;">
-    <div style="width: 80px; height: 40px; background-color: #F5F5F5; border-radius: 5px; border: 1px solid #ddd; margin: 0 auto;"></div>
-    <p><strong>Фоновый</strong><br>#F5F5F5</p>
-  </div>
-  <div style="text-align: center;">
-    <div style="width: 80px; height: 40px; background-color: #333333; border-radius: 5px; margin: 0 auto;"></div>
-    <p><strong>Текстовый</strong><br>#333333</p>
-  </div>
-</div>
 
 ---
 
