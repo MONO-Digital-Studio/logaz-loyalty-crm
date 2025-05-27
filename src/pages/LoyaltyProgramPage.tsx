@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Save, Users } from 'lucide-react';
 import { useLoyaltySettings } from '@/hooks/useLoyaltySettings';
+import { IndividualsLoyaltySettings } from '@/types/loyalty-individuals';
 import LoyaltyPreview from '@/components/LoyaltyProgram/LoyaltyPreview';
 import LoyaltySettingsError from '@/components/ErrorBoundary/LoyaltySettingsError';
 import { ErrorBoundary } from '@/components/ErrorBoundary/ErrorBoundary';
