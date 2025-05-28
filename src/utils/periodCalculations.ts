@@ -1,3 +1,4 @@
+
 import { format, subDays, subWeeks, subMonths, subQuarters, subYears, startOfDay, startOfWeek, startOfMonth, startOfQuarter, startOfYear } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { ComparisonType, PeriodComparison } from '@/types/periodComparison';
@@ -6,19 +7,20 @@ import { AnalyticsData } from '@/types/contactCenter';
 export const getPreviousPeriodDate = (date: Date, type: ComparisonType): Date => {
   const currentDate = new Date(date);
   
+  // Для всех типов сравнения возвращаем аналогичный период прошлого года
   switch (type) {
     case 'D/D':
-      return subDays(currentDate, 1);
+      return subYears(currentDate, 1);
     case 'W/W':
-      return subWeeks(currentDate, 1);
+      return subYears(currentDate, 1);
     case 'M/M':
-      return subMonths(currentDate, 1);
+      return subYears(currentDate, 1);
     case 'Q/Q':
-      return subQuarters(currentDate, 1);
+      return subYears(currentDate, 1);
     case 'Y/Y':
       return subYears(currentDate, 1);
     default:
-      return subMonths(currentDate, 1);
+      return subYears(currentDate, 1);
   }
 };
 
