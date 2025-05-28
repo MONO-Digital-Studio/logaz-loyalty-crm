@@ -3,6 +3,7 @@ import React from 'react';
 import {
   ComposedChart,
   Bar,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -40,18 +41,48 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
     }).format(value);
   };
 
+  // Вычисляем линию тренда для выручки
+  const calculateTrendLine = () => {
+    if (data.length < 2) return data;
+    
+    const n = data.length;
+    let sumX = 0;
+    let sumY = 0;
+    let sumXY = 0;
+    let sumXX = 0;
+    
+    data.forEach((item, index) => {
+      const x = index;
+      const y = item.currentRevenue;
+      sumX += x;
+      sumY += y;
+      sumXY += x * y;
+      sumXX += x * x;
+    });
+    
+    const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+    const intercept = (sumY - slope * sumX) / n;
+    
+    return data.map((item, index) => ({
+      ...item,
+      trendLine: intercept + slope * index
+    }));
+  };
+
+  const dataWithTrend = calculateTrendLine();
+
   return (
     <div className="w-full">
       <div className="mb-4">
         <h4 className="text-lg font-semibold mb-1">Динамика ключевых показателей</h4>
         <p className="text-sm text-gray-600">
-          Сравнение {getComparisonLabel(comparisonType)} по выручке и топливу
+          Сравнение {getComparisonLabel(comparisonType)} по выручке и топливу с трендом
         </p>
       </div>
       
       <ResponsiveContainer width="100%" height={500}>
         <ComposedChart
-          data={data}
+          data={dataWithTrend}
           margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
@@ -74,7 +105,11 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
                         className="text-sm"
                         style={{ color: entry.color }}
                       >
-                        {entry.name}: {formatCurrency(Number(entry.value))}
+                        {entry.name}: {
+                          entry.name === 'Линия тренда' 
+                            ? formatCurrency(Number(entry.value))
+                            : formatCurrency(Number(entry.value))
+                        }
                       </p>
                     ))}
                   </div>
@@ -124,6 +159,17 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
             name="АИ-95 (текущий)" 
             fill="#DC2626" 
             opacity={0.8}
+          />
+          
+          {/* Линия тренда */}
+          <Line 
+            type="monotone" 
+            dataKey="trendLine" 
+            name="Линия тренда" 
+            stroke="#FF6B6B" 
+            strokeWidth={3}
+            strokeDasharray="8 4"
+            dot={false}
           />
         </ComposedChart>
       </ResponsiveContainer>
