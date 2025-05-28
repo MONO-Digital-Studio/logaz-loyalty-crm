@@ -41,19 +41,17 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
     }).format(value);
   };
 
-  // Вычисляем линию тренда для выручки
-  const calculateTrendLine = () => {
-    if (data.length < 2) return data;
+  // Функция для вычисления линии тренда
+  const calculateTrend = (values: number[]) => {
+    if (values.length < 2) return values;
     
-    const n = data.length;
+    const n = values.length;
     let sumX = 0;
     let sumY = 0;
     let sumXY = 0;
     let sumXX = 0;
     
-    data.forEach((item, index) => {
-      const x = index;
-      const y = item.currentRevenue;
+    values.forEach((y, x) => {
       sumX += x;
       sumY += y;
       sumXY += x * y;
@@ -63,26 +61,49 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
     const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
     const intercept = (sumY - slope * sumX) / n;
     
+    return values.map((_, index) => intercept + slope * index);
+  };
+
+  // Вычисляем линии тренда для всех показателей
+  const calculateAllTrends = () => {
+    if (data.length < 2) return data;
+    
+    const revenueValues = data.map(item => item.currentRevenue);
+    const propaneValues = data.map(item => item.currentPropane);
+    const methaneValues = data.map(item => item.currentMethane);
+    const ai92Values = data.map(item => item.currentAI92);
+    const ai95Values = data.map(item => item.currentAI95);
+    
+    const revenueTrend = calculateTrend(revenueValues);
+    const propaneTrend = calculateTrend(propaneValues);
+    const methaneTrend = calculateTrend(methaneValues);
+    const ai92Trend = calculateTrend(ai92Values);
+    const ai95Trend = calculateTrend(ai95Values);
+    
     return data.map((item, index) => ({
       ...item,
-      trendLine: intercept + slope * index
+      revenueTrend: revenueTrend[index],
+      propaneTrend: propaneTrend[index],
+      methaneTrend: methaneTrend[index],
+      ai92Trend: ai92Trend[index],
+      ai95Trend: ai95Trend[index]
     }));
   };
 
-  const dataWithTrend = calculateTrendLine();
+  const dataWithTrends = calculateAllTrends();
 
   return (
     <div className="w-full">
       <div className="mb-4">
         <h4 className="text-lg font-semibold mb-1">Динамика ключевых показателей</h4>
         <p className="text-sm text-gray-600">
-          Сравнение {getComparisonLabel(comparisonType)} по выручке и топливу с трендом
+          Сравнение {getComparisonLabel(comparisonType)} по выручке и топливу с линиями тренда
         </p>
       </div>
       
       <ResponsiveContainer width="100%" height={500}>
         <ComposedChart
-          data={dataWithTrend}
+          data={dataWithTrends}
           margin={{ top: 20, right: 30, left: 20, bottom: 5 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
@@ -105,11 +126,7 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
                         className="text-sm"
                         style={{ color: entry.color }}
                       >
-                        {entry.name}: {
-                          entry.name === 'Линия тренда' 
-                            ? formatCurrency(Number(entry.value))
-                            : formatCurrency(Number(entry.value))
-                        }
+                        {entry.name}: {formatCurrency(Number(entry.value))}
                       </p>
                     ))}
                   </div>
@@ -161,14 +178,50 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
             opacity={0.8}
           />
           
-          {/* Линия тренда */}
+          {/* Линии тренда для каждого показателя */}
           <Line 
             type="monotone" 
-            dataKey="trendLine" 
-            name="Линия тренда" 
-            stroke="#FF6B6B" 
-            strokeWidth={3}
-            strokeDasharray="8 4"
+            dataKey="revenueTrend" 
+            name="Тренд выручки" 
+            stroke="#1E40AF" 
+            strokeWidth={2}
+            strokeDasharray="5 3"
+            dot={false}
+          />
+          <Line 
+            type="monotone" 
+            dataKey="propaneTrend" 
+            name="Тренд пропана" 
+            stroke="#EA580C" 
+            strokeWidth={2}
+            strokeDasharray="5 3"
+            dot={false}
+          />
+          <Line 
+            type="monotone" 
+            dataKey="methaneTrend" 
+            name="Тренд метана" 
+            stroke="#1D4ED8" 
+            strokeWidth={2}
+            strokeDasharray="5 3"
+            dot={false}
+          />
+          <Line 
+            type="monotone" 
+            dataKey="ai92Trend" 
+            name="Тренд АИ-92" 
+            stroke="#CA8A04" 
+            strokeWidth={2}
+            strokeDasharray="5 3"
+            dot={false}
+          />
+          <Line 
+            type="monotone" 
+            dataKey="ai95Trend" 
+            name="Тренд АИ-95" 
+            stroke="#B91C1C" 
+            strokeWidth={2}
+            strokeDasharray="5 3"
             dot={false}
           />
         </ComposedChart>
