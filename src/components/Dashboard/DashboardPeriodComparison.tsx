@@ -193,9 +193,6 @@ const DashboardPeriodComparison: React.FC = () => {
         <CardHeader className="pb-4">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div>
-              <p className="text-sm text-gray-600 mt-1">
-                Комплексный анализ ключевых показателей бизнеса
-              </p>
             </div>
             <Select value={comparisonType} onValueChange={(value) => setComparisonType(value as ComparisonType)}>
               <SelectTrigger className="w-full lg:w-48">
