@@ -33,39 +33,57 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
 
   // Функция для получения текущего и предыдущего периода для легенды
   const getPeriodLabels = (type: ComparisonType) => {
+    // Базовая дата - 01.01.2023
+    const baseDate = new Date('2023-01-01');
     const currentDate = new Date();
-    const previousDate = new Date();
-    previousDate.setFullYear(currentDate.getFullYear() - 1);
-
+    
     switch (type) {
-      case 'M/M':
-        return {
-          current: format(currentDate, 'LLL yy', { locale: ru }),
-          previous: format(previousDate, 'LLL yy', { locale: ru })
-        };
-      case 'Q/Q':
-        const currentQuarter = Math.ceil((currentDate.getMonth() + 1) / 3);
-        const previousQuarter = Math.ceil((previousDate.getMonth() + 1) / 3);
-        return {
-          current: `${currentQuarter}кв.${format(currentDate, 'yy')}`,
-          previous: `${previousQuarter}кв.${format(previousDate, 'yy')}`
-        };
-      case 'Y/Y':
-        return {
-          current: format(currentDate, 'yy'),
-          previous: format(previousDate, 'yy')
-        };
       case 'D/D':
+        // Для дней используем текущую дату
+        const previousDayDate = new Date();
+        previousDayDate.setFullYear(currentDate.getFullYear() - 1);
         return {
           current: format(currentDate, 'dd.MM.yy', { locale: ru }),
-          previous: format(previousDate, 'dd.MM.yy', { locale: ru })
+          previous: format(previousDayDate, 'dd.MM.yy', { locale: ru })
         };
       case 'W/W':
+        // Для недель используем актуальные даты с 2023 года
         const currentWeek = Math.ceil((currentDate.getTime() - new Date(currentDate.getFullYear(), 0, 1).getTime()) / (7 * 24 * 60 * 60 * 1000));
-        const previousWeek = Math.ceil((previousDate.getTime() - new Date(previousDate.getFullYear(), 0, 1).getTime()) / (7 * 24 * 60 * 60 * 1000));
+        const previousWeekDate = new Date(currentDate);
+        previousWeekDate.setFullYear(currentDate.getFullYear() - 1);
+        const previousWeek = Math.ceil((previousWeekDate.getTime() - new Date(previousWeekDate.getFullYear(), 0, 1).getTime()) / (7 * 24 * 60 * 60 * 1000));
         return {
           current: `${currentWeek}нед.${format(currentDate, 'yy')}`,
-          previous: `${previousWeek}нед.${format(previousDate, 'yy')}`
+          previous: `${previousWeek}нед.${format(previousWeekDate, 'yy')}`
+        };
+      case 'M/M':
+        // Для месяцев используем актуальные даты с 2023 года
+        const currentMonthDate = new Date();
+        const previousMonthDate = new Date(currentMonthDate);
+        previousMonthDate.setFullYear(currentMonthDate.getFullYear() - 1);
+        return {
+          current: format(currentMonthDate, 'LLL yy', { locale: ru }),
+          previous: format(previousMonthDate, 'LLL yy', { locale: ru })
+        };
+      case 'Q/Q':
+        // Для кварталов используем актуальные даты с 2023 года
+        const currentQuarterDate = new Date();
+        const currentQuarter = Math.ceil((currentQuarterDate.getMonth() + 1) / 3);
+        const previousQuarterDate = new Date(currentQuarterDate);
+        previousQuarterDate.setFullYear(currentQuarterDate.getFullYear() - 1);
+        const previousQuarter = Math.ceil((previousQuarterDate.getMonth() + 1) / 3);
+        return {
+          current: `${currentQuarter}кв.${format(currentQuarterDate, 'yy')}`,
+          previous: `${previousQuarter}кв.${format(previousQuarterDate, 'yy')}`
+        };
+      case 'Y/Y':
+        // Для годов используем актуальные даты с 2023 года
+        const currentYearDate = new Date();
+        const previousYearDate = new Date(currentYearDate);
+        previousYearDate.setFullYear(currentYearDate.getFullYear() - 1);
+        return {
+          current: format(currentYearDate, 'yy'),
+          previous: format(previousYearDate, 'yy')
         };
       default:
         return {
