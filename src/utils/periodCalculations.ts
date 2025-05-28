@@ -23,6 +23,8 @@ export const getPreviousPeriodDate = (date: Date, type: ComparisonType): Date =>
 };
 
 export const formatPeriodLabel = (date: Date, type: ComparisonType): string => {
+  const previousDate = getPreviousPeriodDate(date, type);
+  
   switch (type) {
     case 'D/D':
       return format(date, 'dd.MM.yyyy', { locale: ru });
@@ -30,11 +32,21 @@ export const formatPeriodLabel = (date: Date, type: ComparisonType): string => {
       const weekNumber = Math.ceil((date.getTime() - new Date(date.getFullYear(), 0, 1).getTime()) / (7 * 24 * 60 * 60 * 1000));
       return `Неделя ${weekNumber}, ${date.getFullYear()}`;
     case 'M/M':
-      return format(date, 'LLL yyyy', { locale: ru });
+      const currentMonth = format(date, 'LLL', { locale: ru }).toLowerCase();
+      const currentYear = format(date, 'yy');
+      const previousMonth = format(previousDate, 'LLL', { locale: ru }).toLowerCase();
+      const previousYear = format(previousDate, 'yy');
+      return `${currentMonth}${currentYear} к ${previousMonth}${previousYear}`;
     case 'Q/Q':
-      return `Q${Math.ceil((date.getMonth() + 1) / 3)} ${date.getFullYear()}`;
+      const currentQuarter = Math.ceil((date.getMonth() + 1) / 3);
+      const currentQYear = format(date, 'yy');
+      const previousQuarter = Math.ceil((previousDate.getMonth() + 1) / 3);
+      const previousQYear = format(previousDate, 'yy');
+      return `${currentQuarter}кв.${currentQYear} к ${previousQuarter}кв.${previousQYear}`;
     case 'Y/Y':
-      return date.getFullYear().toString();
+      const currentFullYear = format(date, 'yy');
+      const previousFullYear = format(previousDate, 'yy');
+      return `${currentFullYear} к ${previousFullYear}`;
     default:
       return format(date, 'LLL yyyy', { locale: ru });
   }
