@@ -103,6 +103,55 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
     }).format(value);
   };
 
+  // Функция для сортировки данных по периоду
+  const sortDataByPeriod = (data: DashboardChartComparisonData[]) => {
+    return [...data].sort((a, b) => {
+      // Извлекаем дату из строки периода для правильной сортировки
+      const parseDate = (periodStr: string) => {
+        // Обрабатываем разные форматы периодов
+        if (periodStr.includes('нед.')) {
+          // Формат: "22нед.24"
+          const match = periodStr.match(/(\d+)нед\.(\d+)/);
+          if (match) {
+            const week = parseInt(match[1]);
+            const year = parseInt('20' + match[2]);
+            return new Date(year, 0, week * 7);
+          }
+        } else if (periodStr.includes('кв.')) {
+          // Формат: "2кв.24"
+          const match = periodStr.match(/(\d+)кв\.(\d+)/);
+          if (match) {
+            const quarter = parseInt(match[1]);
+            const year = parseInt('20' + match[2]);
+            return new Date(year, (quarter - 1) * 3, 1);
+          }
+        } else if (periodStr.match(/^\d{2}$/)) {
+          // Формат года: "24"
+          const year = parseInt('20' + periodStr);
+          return new Date(year, 0, 1);
+        } else if (periodStr.match(/\w{3}\s\d{2}/)) {
+          // Формат месяца: "мар 24"
+          const [month, year] = periodStr.split(' ');
+          const monthNames = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+          const monthIndex = monthNames.indexOf(month);
+          const fullYear = parseInt('20' + year);
+          return new Date(fullYear, monthIndex, 1);
+        } else if (periodStr.match(/\d{2}\.\d{2}\.\d{2}/)) {
+          // Формат даты: "01.01.24"
+          const [day, month, year] = periodStr.split('.');
+          const fullYear = parseInt('20' + year);
+          return new Date(fullYear, parseInt(month) - 1, parseInt(day));
+        }
+        
+        return new Date();
+      };
+
+      const dateA = parseDate(a.period);
+      const dateB = parseDate(b.period);
+      return dateA.getTime() - dateB.getTime();
+    });
+  };
+
   // Функция для вычисления линии тренда
   const calculateTrend = (values: number[]) => {
     if (values.length < 2) return values;
@@ -123,19 +172,19 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
   };
 
   // Вычисляем линии тренда для всех показателей
-  const calculateAllTrends = () => {
-    if (data.length < 2) return data;
-    const revenueValues = data.map(item => item.currentRevenue);
-    const propaneValues = data.map(item => item.currentPropane);
-    const methaneValues = data.map(item => item.currentMethane);
-    const ai92Values = data.map(item => item.currentAI92);
-    const ai95Values = data.map(item => item.currentAI95);
+  const calculateAllTrends = (sortedData: DashboardChartComparisonData[]) => {
+    if (sortedData.length < 2) return sortedData;
+    const revenueValues = sortedData.map(item => item.currentRevenue);
+    const propaneValues = sortedData.map(item => item.currentPropane);
+    const methaneValues = sortedData.map(item => item.currentMethane);
+    const ai92Values = sortedData.map(item => item.currentAI92);
+    const ai95Values = sortedData.map(item => item.currentAI95);
     const revenueTrend = calculateTrend(revenueValues);
     const propaneTrend = calculateTrend(propaneValues);
     const methaneTrend = calculateTrend(methaneValues);
     const ai92Trend = calculateTrend(ai92Values);
     const ai95Trend = calculateTrend(ai95Values);
-    return data.map((item, index) => ({
+    return sortedData.map((item, index) => ({
       ...item,
       revenueTrend: revenueTrend[index],
       propaneTrend: propaneTrend[index],
@@ -145,10 +194,12 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
     }));
   };
 
-  const dataWithTrends = calculateAllTrends();
+  // Сортируем данные и вычисляем тренды
+  const sortedData = sortDataByPeriod(data);
+  const dataWithTrends = calculateAllTrends(sortedData);
+
   return (
     <div className="w-full">
-      
       <ResponsiveContainer width="100%" height={500}>
         <ComposedChart data={dataWithTrends} margin={{
         top: 20,
