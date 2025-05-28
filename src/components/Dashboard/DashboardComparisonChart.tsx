@@ -1,6 +1,9 @@
+
 import React from 'react';
 import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { DashboardChartComparisonData, ComparisonType } from '@/types/dashboardComparison';
+import { format } from 'date-fns';
+import { ru } from 'date-fns/locale';
 
 interface DashboardComparisonChartProps {
   data: DashboardChartComparisonData[];
@@ -27,6 +30,52 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
         return 'период к периоду';
     }
   };
+
+  // Функция для получения текущего и предыдущего периода для легенды
+  const getPeriodLabels = (type: ComparisonType) => {
+    const currentDate = new Date();
+    const previousDate = new Date();
+    previousDate.setFullYear(currentDate.getFullYear() - 1);
+
+    switch (type) {
+      case 'M/M':
+        return {
+          current: format(currentDate, 'LLL yy', { locale: ru }),
+          previous: format(previousDate, 'LLL yy', { locale: ru })
+        };
+      case 'Q/Q':
+        const currentQuarter = Math.ceil((currentDate.getMonth() + 1) / 3);
+        const previousQuarter = Math.ceil((previousDate.getMonth() + 1) / 3);
+        return {
+          current: `${currentQuarter}кв.${format(currentDate, 'yy')}`,
+          previous: `${previousQuarter}кв.${format(previousDate, 'yy')}`
+        };
+      case 'Y/Y':
+        return {
+          current: format(currentDate, 'yy'),
+          previous: format(previousDate, 'yy')
+        };
+      case 'D/D':
+        return {
+          current: format(currentDate, 'dd.MM.yy', { locale: ru }),
+          previous: format(previousDate, 'dd.MM.yy', { locale: ru })
+        };
+      case 'W/W':
+        const currentWeek = Math.ceil((currentDate.getTime() - new Date(currentDate.getFullYear(), 0, 1).getTime()) / (7 * 24 * 60 * 60 * 1000));
+        const previousWeek = Math.ceil((previousDate.getTime() - new Date(previousDate.getFullYear(), 0, 1).getTime()) / (7 * 24 * 60 * 60 * 1000));
+        return {
+          current: `${currentWeek}нед.${format(currentDate, 'yy')}`,
+          previous: `${previousWeek}нед.${format(previousDate, 'yy')}`
+        };
+      default:
+        return {
+          current: 'текущий',
+          previous: 'предыдущий'
+        };
+    }
+  };
+
+  const periodLabels = getPeriodLabels(comparisonType);
 
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('ru-RU', {
@@ -116,14 +165,14 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
           <Legend />
           
           {/* Столбчатые диаграммы для выручки */}
-          <Bar dataKey="currentRevenue" name="Выручка (текущий)" fill="#3B55A2" opacity={0.8} />
-          <Bar dataKey="previousRevenue" name="Выручка (предыдущий)" fill="#3B55A2" opacity={0.4} />
+          <Bar dataKey="currentRevenue" name={`Выручка (${periodLabels.current})`} fill="#3B55A2" opacity={0.8} />
+          <Bar dataKey="previousRevenue" name={`Выручка (${periodLabels.previous})`} fill="#3B55A2" opacity={0.4} />
           
           {/* Столбчатые диаграммы для топлива */}
-          <Bar dataKey="currentPropane" name="Пропан (текущий)" fill="#FB8607" opacity={0.8} />
-          <Bar dataKey="currentMethane" name="Метан (текущий)" fill="#2563EB" opacity={0.8} />
-          <Bar dataKey="currentAI92" name="АИ-92 (текущий)" fill="#EAB308" opacity={0.8} />
-          <Bar dataKey="currentAI95" name="АИ-95 (текущий)" fill="#DC2626" opacity={0.8} />
+          <Bar dataKey="currentPropane" name={`Пропан (${periodLabels.current})`} fill="#FB8607" opacity={0.8} />
+          <Bar dataKey="currentMethane" name={`Метан (${periodLabels.current})`} fill="#2563EB" opacity={0.8} />
+          <Bar dataKey="currentAI92" name={`АИ-92 (${periodLabels.current})`} fill="#EAB308" opacity={0.8} />
+          <Bar dataKey="currentAI95" name={`АИ-95 (${periodLabels.current})`} fill="#DC2626" opacity={0.8} />
           
           {/* Линии тренда для каждого показателя */}
           <Line type="monotone" dataKey="revenueTrend" name="Тренд выручки" stroke="#1E40AF" strokeWidth={2} strokeDasharray="5 3" dot={false} />
