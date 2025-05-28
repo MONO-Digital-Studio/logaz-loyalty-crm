@@ -1,4 +1,3 @@
-
 import { format, subDays, subWeeks, subMonths, subQuarters, subYears, startOfDay, startOfWeek, startOfMonth, startOfQuarter, startOfYear } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { ComparisonType, PeriodComparison } from '@/types/periodComparison';
@@ -28,15 +27,16 @@ export const formatPeriodLabel = (date: Date, type: ComparisonType): string => {
     case 'D/D':
       return format(date, 'dd.MM.yyyy', { locale: ru });
     case 'W/W':
-      return `Неделя ${format(date, 'w')}`;
+      const weekNumber = Math.ceil((date.getTime() - new Date(date.getFullYear(), 0, 1).getTime()) / (7 * 24 * 60 * 60 * 1000));
+      return `Неделя ${weekNumber}, ${date.getFullYear()}`;
     case 'M/M':
-      return format(date, 'LLLL yyyy', { locale: ru });
+      return format(date, 'LLL yyyy', { locale: ru });
     case 'Q/Q':
       return `Q${Math.ceil((date.getMonth() + 1) / 3)} ${date.getFullYear()}`;
     case 'Y/Y':
       return date.getFullYear().toString();
     default:
-      return format(date, 'LLLL yyyy', { locale: ru });
+      return format(date, 'LLL yyyy', { locale: ru });
   }
 };
 
