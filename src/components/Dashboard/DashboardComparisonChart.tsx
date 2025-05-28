@@ -81,11 +81,6 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
   const dataWithTrends = calculateAllTrends();
   return (
     <div className="w-full">
-      <div className="mb-4">
-        <p className="text-sm text-gray-600">
-          Сравнение {getComparisonLabel(comparisonType)} по выручке и топливу с линиями тренда
-        </p>
-      </div>
       
       <ResponsiveContainer width="100%" height={500}>
         <ComposedChart data={dataWithTrends} margin={{
