@@ -1,4 +1,3 @@
-
 import { useMemo, useState } from 'react';
 import { ComparisonType } from '@/types/periodComparison';
 import { DashboardComparisonData, DashboardChartComparisonData } from '@/types/dashboardComparison';
@@ -160,8 +159,12 @@ export const useDashboardPeriodComparison = () => {
   const chartData = useMemo((): DashboardChartComparisonData[] => {
     if (!monthlySales || monthlySales.length === 0) return [];
 
-    return monthlySales.slice(-6).map((current, index) => {
-      const currentLoyalty = loyaltyStats[index] || { pointsEarned: 0, pointsSpent: 0 };
+    // Сортируем исходные данные по дате и берем последние 6 периодов
+    const sortedSales = [...monthlySales].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    const recentSales = sortedSales.slice(-6);
+
+    return recentSales.map((current, index) => {
+      const currentLoyalty = loyaltyStats[loyaltyStats.length - 6 + index] || { pointsEarned: 0, pointsSpent: 0 };
       
       return {
         period: formatPeriodLabel(new Date(current.date), comparisonType),
