@@ -59,6 +59,23 @@ const DashboardPeriodComparison: React.FC = () => {
     return value.toFixed(1);
   };
 
+  const getComparisonLabel = (type: ComparisonType) => {
+    switch (type) {
+      case 'D/D':
+        return 'день к дню';
+      case 'W/W':
+        return 'неделя к неделе';
+      case 'M/M':
+        return 'месяц к месяцу';
+      case 'Q/Q':
+        return 'квартал к кварталу';
+      case 'Y/Y':
+        return 'год к году';
+      default:
+        return 'период к периоду';
+    }
+  };
+
   const metricGroups: MetricGroup[] = [
     {
       title: 'Финансовые показатели',
@@ -194,6 +211,9 @@ const DashboardPeriodComparison: React.FC = () => {
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div>
               <h3 className="text-lg font-semibold mb-1">Динамика реализации, рублей</h3>
+              <p className="text-sm text-gray-600">
+                Сравнение {getComparisonLabel(comparisonType)} по выручке и топливу с линиями тренда
+              </p>
             </div>
             <Select value={comparisonType} onValueChange={(value) => setComparisonType(value as ComparisonType)}>
               <SelectTrigger className="w-full lg:w-48">
