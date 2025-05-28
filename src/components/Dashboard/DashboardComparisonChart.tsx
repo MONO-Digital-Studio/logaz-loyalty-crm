@@ -1,10 +1,12 @@
 import React from 'react';
 import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { DashboardChartComparisonData, ComparisonType } from '@/types/dashboardComparison';
+
 interface DashboardComparisonChartProps {
   data: DashboardChartComparisonData[];
   comparisonType: ComparisonType;
 }
+
 const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
   data,
   comparisonType
@@ -25,6 +27,7 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
         return 'период к периоду';
     }
   };
+
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('ru-RU', {
       style: 'currency',
@@ -74,10 +77,11 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
       ai95Trend: ai95Trend[index]
     }));
   };
+
   const dataWithTrends = calculateAllTrends();
-  return <div className="w-full">
+  return (
+    <div className="w-full">
       <div className="mb-4">
-        <h3 className="text-lg font-semibold mb-1">Динамика реализации, рублей</h3>
         <p className="text-sm text-gray-600">
           Сравнение {getComparisonLabel(comparisonType)} по выручке и топливу с линиями тренда
         </p>
@@ -134,6 +138,8 @@ const DashboardComparisonChart: React.FC<DashboardComparisonChartProps> = ({
           <Line type="monotone" dataKey="ai95Trend" name="Тренд АИ-95" stroke="#B91C1C" strokeWidth={2} strokeDasharray="5 3" dot={false} />
         </ComposedChart>
       </ResponsiveContainer>
-    </div>;
+    </div>
+  );
 };
+
 export default DashboardComparisonChart;
