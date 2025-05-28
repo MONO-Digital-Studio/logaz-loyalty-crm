@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -194,9 +193,6 @@ const DashboardPeriodComparison: React.FC = () => {
         <CardHeader className="pb-4">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             <div>
-              <CardTitle className="text-xl font-semibold font-montserrat">
-                Сравнение периодов
-              </CardTitle>
               <p className="text-sm text-gray-600 mt-1">
                 Комплексный анализ ключевых показателей бизнеса
               </p>
