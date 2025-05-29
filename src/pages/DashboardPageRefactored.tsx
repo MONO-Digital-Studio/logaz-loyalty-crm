@@ -10,11 +10,8 @@ import CustomerDynamicsChart from '@/components/Dashboard/CustomerDynamicsChart'
 import VolumeTable from '@/components/Dashboard/VolumeTable';
 import CustomerAnalytics from '@/components/Dashboard/CustomerAnalytics';
 import DashboardPeriodComparison from '@/components/Dashboard/DashboardPeriodComparison';
-import { useDashboardState } from '@/components/Dashboard/hooks/useDashboardState';
 
 const DashboardPageRefactored: React.FC = () => {
-  const { state } = useDashboardState();
-
   return (
     <DashboardLayout
       header={<DashboardHeader />}

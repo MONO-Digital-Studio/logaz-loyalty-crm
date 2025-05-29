@@ -10,7 +10,7 @@ import { ErrorBoundary } from '@/components/ErrorBoundary/ErrorBoundary';
 
 // Individual pages
 import Index from '@/pages/Index';
-import DashboardPage from '@/pages/DashboardPage';
+import DashboardPageRefactored from '@/pages/DashboardPageRefactored';
 import LoyaltyProgramPage from '@/pages/LoyaltyProgramPage';
 import ContentPage from '@/pages/ContentPage';
 import ContentEditorPage from '@/pages/ContentEditorPage';
@@ -69,15 +69,8 @@ function App() {
                     <Routes>
                       {/* Individual workspace routes */}
                       <Route path="/" element={<Index />} />
-                      <Route path="/dashboard" element={<DashboardPage />} />
+                      <Route path="/dashboard" element={<DashboardPageRefactored />} />
                       <Route path="/loyalty" element={<LoyaltyProgramPage />} />
-                      <Route path="/content" element={<ContentPage />} />
-                      <Route path="/content/editor" element={<ContentEditorPage />} />
-                      <Route path="/content/editor/:id" element={<ContentEditorPage />} />
-                      <Route path="/crm" element={<CrmPage />} />
-                      <Route path="/crm/clients" element={<ClientsPage />} />
-                      <Route path="/crm/clients/:id" element={<ClientDetailsPage />} />
-                      <Route path="/crm/audiences" element={<AudiencesPage />} />
                       
                       {/* Contact Center routes */}
                       <Route path="/contact-center" element={<ContactCenterPage />} />
