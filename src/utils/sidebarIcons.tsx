@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { 
   LayoutDashboard, 
@@ -17,7 +16,6 @@ import {
   Bot,
   BarChart3,
   Mail,
-  FileTemplate,
   List
 } from 'lucide-react';
 
@@ -65,7 +63,7 @@ export const getIconForSubItem = (parentId: string, childId: string) => {
       if (childId === 'agents') return <Bot size={16} />;
       if (childId === 'campaigns') return <Mail size={16} />;
       if (childId === 'stats') return <BarChart3 size={16} />;
-      if (childId === 'templates') return <FileTemplate size={16} />;
+      if (childId === 'templates') return <FileText size={16} />;
       if (childId === 'analytics') return <BarChart3 size={16} />;
       break;
     case 'employees':
