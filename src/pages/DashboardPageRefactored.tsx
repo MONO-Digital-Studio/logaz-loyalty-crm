@@ -1,9 +1,13 @@
 
 import React from 'react';
 import KPIOverview from '@/components/Dashboard/KPIOverview';
+import { OptimizedSalesChart, OptimizedLoyaltyChart, OptimizedDemographicsCharts } from '@/components/Dashboard/charts';
+import SalesStructureChart from '@/components/Dashboard/SalesStructureChart';
+import AvgTicketChart from '@/components/Dashboard/AvgTicketChart';
+import CustomerDynamicsChart from '@/components/Dashboard/CustomerDynamicsChart';
 
 const DashboardPageRefactored: React.FC = () => {
-  console.log('DashboardPageRefactored rendering - with KPI');
+  console.log('DashboardPageRefactored rendering - full dashboard');
   
   return (
     <div className="min-h-screen bg-gray-50 p-6">
@@ -13,7 +17,7 @@ const DashboardPageRefactored: React.FC = () => {
         {/* Debug info */}
         <div className="bg-green-50 p-4 rounded-lg mb-6">
           <p className="text-green-800">
-            ✅ Базовая страница работает. Добавляем KPI компоненты...
+            ✅ Полный дашборд с KPI и графиками
           </p>
         </div>
         
@@ -22,12 +26,20 @@ const DashboardPageRefactored: React.FC = () => {
           <KPIOverview />
         </div>
         
-        {/* Placeholder for future components */}
-        <div className="bg-white p-6 rounded-lg shadow-sm border">
-          <h2 className="text-xl font-semibold mb-4">Следующие компоненты</h2>
-          <p className="text-gray-700">
-            Графики и аналитика будут добавлены далее...
-          </p>
+        {/* Charts Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <OptimizedSalesChart />
+          <SalesStructureChart />
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <AvgTicketChart />
+          <CustomerDynamicsChart />
+        </div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <OptimizedLoyaltyChart />
+          <OptimizedDemographicsCharts />
         </div>
       </div>
     </div>
