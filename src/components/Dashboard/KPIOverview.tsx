@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { DollarSign, CreditCard, Users, Fuel, UserCheck, TrendingDown } from 'lucide-react';
+import { BadgeRussianRuble, CreditCard, Users, Fuel, UserCheck, TrendingDown } from 'lucide-react';
 import KPICard from './KPICard';
 import { useDashboardData } from '@/hooks/useDashboardData';
 import { formatCurrency, formatNumber, formatPercent } from '@/utils/dashboardFormatters';
@@ -27,7 +26,7 @@ const KPIOverview: React.FC = () => {
       <KPICard
         title="Продажи"
         data={data.kpiData.totalSales}
-        icon={DollarSign}
+        icon={BadgeRussianRuble}
         formatter={formatCurrency}
         borderColor="border-l-logaz-blue"
       />
