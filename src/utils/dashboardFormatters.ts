@@ -1,33 +1,21 @@
 
-// Форматирование валюты в российских рублях
 export const formatCurrency = (value: number): string => {
   return new Intl.NumberFormat('ru-RU', {
     style: 'currency',
     currency: 'RUB',
-    maximumFractionDigits: 0
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(value);
 };
 
-// Форматирование чисел с разделителями тысяч
 export const formatNumber = (value: number): string => {
-  return new Intl.NumberFormat('ru-RU').format(value);
+  return new Intl.NumberFormat('ru-RU').format(Math.round(value));
 };
 
-// Форматирование процентов
 export const formatPercent = (value: number): string => {
-  return new Intl.NumberFormat('ru-RU', {
-    style: 'percent',
-    minimumFractionDigits: 1,
-    maximumFractionDigits: 1
-  }).format(value / 100);
+  return `${value.toFixed(1)}%`;
 };
 
-// Форматирование дат
-export const formatDate = (date: Date): string => {
-  return new Intl.DateTimeFormat('ru-RU').format(date);
-};
-
-// Форматирование времени
 export const formatTime = (date: Date): string => {
   return new Intl.DateTimeFormat('ru-RU', {
     hour: '2-digit',
@@ -35,19 +23,21 @@ export const formatTime = (date: Date): string => {
   }).format(date);
 };
 
-// Форматирование изменений с индикаторами
-export const formatChange = (value: number): { text: string; color: string; icon: string } => {
-  const isPositive = value > 0;
-  const isNeutral = Math.abs(value) < 0.1;
+export const formatChange = (change: number) => {
+  const isPositive = change > 0;
+  const color = isPositive ? 'text-green-600' : 'text-red-600';
+  const icon = isPositive ? '↗' : '↘';
+  const text = `${isPositive ? '+' : ''}${change.toFixed(1)}%`;
   
-  return {
-    text: `${isPositive ? '+' : ''}${formatPercent(Math.abs(value))}`,
-    color: isNeutral ? 'text-yellow-600' : isPositive ? 'text-green-600' : 'text-red-600',
-    icon: isNeutral ? '→' : isPositive ? '↗' : '↘'
-  };
+  return { color, icon, text };
 };
 
-// Форматирование объема с единицами измерения
-export const formatVolume = (value: number, unit: string): string => {
-  return `${formatNumber(value)} ${unit}`;
+export const calculateGrowth = (current: number, previous: number): number => {
+  if (previous === 0) return 0;
+  return ((current - previous) / previous) * 100;
+};
+
+export const formatGrowth = (growth: number): string => {
+  const sign = growth > 0 ? '+' : '';
+  return `${sign}${growth.toFixed(1)}%`;
 };

@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -71,6 +72,13 @@ function App() {
                       <Route path="/" element={<Index />} />
                       <Route path="/dashboard" element={<DashboardPageRefactored />} />
                       <Route path="/loyalty" element={<LoyaltyProgramPage />} />
+                      <Route path="/content" element={<ContentPage />} />
+                      <Route path="/content/editor" element={<ContentEditorPage />} />
+                      <Route path="/content/editor/:id" element={<ContentEditorPage />} />
+                      <Route path="/crm" element={<CrmPage />} />
+                      <Route path="/crm/clients" element={<ClientsPage />} />
+                      <Route path="/crm/clients/:id" element={<ClientDetailsPage />} />
+                      <Route path="/crm/audiences" element={<AudiencesPage />} />
                       
                       {/* Contact Center routes */}
                       <Route path="/contact-center" element={<ContactCenterPage />} />

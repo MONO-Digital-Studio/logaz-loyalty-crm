@@ -1,7 +1,6 @@
 
 import { useState, useCallback } from 'react';
-
-type ComparisonType = 'D/D' | 'W/W' | 'M/M' | 'Q/Q' | 'Y/Y';
+import { ComparisonType } from '@/components/Dashboard/constants/dashboardConfig';
 
 interface DashboardState {
   selectedPeriod: string;

@@ -1,5 +1,5 @@
 
-import { ComparisonType } from '@/types/dashboardComparison';
+export type ComparisonType = 'D/D' | 'W/W' | 'M/M' | 'Q/Q' | 'Y/Y';
 
 export const DASHBOARD_CONSTANTS = {
   CHART_HEIGHT: 350,
