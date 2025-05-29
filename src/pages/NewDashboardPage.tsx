@@ -8,6 +8,7 @@ import AvgTicketChart from '@/components/Dashboard/AvgTicketChart';
 import CustomerDynamicsChart from '@/components/Dashboard/CustomerDynamicsChart';
 import VolumeTable from '@/components/Dashboard/VolumeTable';
 import CustomerAnalytics from '@/components/Dashboard/CustomerAnalytics';
+import DashboardPeriodComparison from '@/components/Dashboard/DashboardPeriodComparison';
 
 const NewDashboardPage: React.FC = () => {
   return (
@@ -18,6 +19,9 @@ const NewDashboardPage: React.FC = () => {
 
         {/* KPI Overview */}
         <KPIOverview />
+
+        {/* Period Comparison Section */}
+        <DashboardPeriodComparison />
 
         {/* Main Charts Grid (2x2) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
