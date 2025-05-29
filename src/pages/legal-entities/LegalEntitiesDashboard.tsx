@@ -1,181 +1,61 @@
+
 import React from 'react';
-import { useLegalEntities } from '@/contexts/LegalEntitiesContext';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Plus, CreditCard, Users, Fuel, DollarSign, Activity, AlertTriangle } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
-const LegalEntitiesDashboard: React.FC = () => {
-  const {
-    dashboardMetrics,
-    legalEntities,
-    fuelCards
-  } = useLegalEntities();
-  const navigate = useNavigate();
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat('ru-RU', {
-      style: 'currency',
-      currency: 'RUB',
-      minimumFractionDigits: 0
-    }).format(amount);
-  };
-  const formatNumber = (num: number) => {
-    return new Intl.NumberFormat('ru-RU').format(num);
-  };
-  return <div className="space-y-6 w-full">
-      {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Корпоративные клиенты</h1>
+import DashboardLayout from '@/components/Dashboard/layouts/DashboardLayout';
+import Layout from '@/components/Layout/Layout';
+
+const LegalEntitiesDashboard = () => {
+  return (
+    <Layout>
+      <DashboardLayout>
+        <div className="space-y-6">
+          <div>
+            <h1 className="text-3xl font-bold">Дашборд для юридических лиц</h1>
+            <p className="text-muted-foreground mt-1">
+              Управление корпоративными клиентами и топливными картами
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white p-6 rounded-lg shadow">
+              <h3 className="text-lg font-semibold mb-2">Активные клиенты</h3>
+              <p className="text-3xl font-bold text-logaz-blue">247</p>
+              <p className="text-sm text-green-600">↗ +12% за месяц</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow">
+              <h3 className="text-lg font-semibold mb-2">Топливные карты</h3>
+              <p className="text-3xl font-bold text-logaz-blue">1,584</p>
+              <p className="text-sm text-green-600">↗ +8% за месяц</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow">
+              <h3 className="text-lg font-semibold mb-2">Оборот за месяц</h3>
+              <p className="text-3xl font-bold text-logaz-blue">₽12.5М</p>
+              <p className="text-sm text-green-600">↗ +15% за месяц</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow">
+              <h3 className="text-lg font-semibold mb-2">Средний чек</h3>
+              <p className="text-3xl font-bold text-logaz-blue">₽8,450</p>
+              <p className="text-sm text-red-600">↘ -3% за месяц</p>
+            </div>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow">
+            <h3 className="text-xl font-semibold mb-4">Быстрые действия</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <button className="p-4 border border-logaz-blue text-logaz-blue rounded-lg hover:bg-logaz-blue hover:text-white transition-colors">
+                Добавить клиента
+              </button>
+              <button className="p-4 border border-logaz-blue text-logaz-blue rounded-lg hover:bg-logaz-blue hover:text-white transition-colors">
+                Выпустить карту
+              </button>
+              <button className="p-4 border border-logaz-blue text-logaz-blue rounded-lg hover:bg-logaz-blue hover:text-white transition-colors">
+                Сформировать отчет
+              </button>
+            </div>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-3">
-          <Button onClick={() => navigate('/legal-entities/fuel-cards/create')} className="flex-1 lg:flex-initial">
-            <CreditCard className="mr-2 h-4 w-4" />
-            Создать карту
-          </Button>
-          <Button onClick={() => navigate('/legal-entities/clients/create')} className="flex-1 lg:flex-initial">
-            <Plus className="mr-2 h-4 w-4" />
-            Новый клиент ЮЛ
-          </Button>
-        </div>
-      </div>
-
-      {/* Metrics Cards - Responsive Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <Card className="border-l-4 border-l-logaz-blue">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Общий баланс</CardTitle>
-            <DollarSign className="h-5 w-5 text-logaz-blue" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-logaz-blue">
-              {formatCurrency(dashboardMetrics.totalBalance)}
-            </div>
-            <p className="text-xs text-green-600 mt-1">
-              +12% с прошлого месяца
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="border-l-4 border-l-green-500">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Активные карты</CardTitle>
-            <CreditCard className="h-5 w-5 text-green-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-green-600">
-              {formatNumber(dashboardMetrics.activeCards)}
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              из {fuelCards.length} выпущенных
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="border-l-4 border-l-logaz-orange">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Объем топлива</CardTitle>
-            <Fuel className="h-5 w-5 text-logaz-orange" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-logaz-orange">
-              {formatNumber(dashboardMetrics.totalFuelVolume)} л
-            </div>
-            <p className="text-xs text-muted-foreground mt-1">
-              За текущий месяц
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card className="border-l-4 border-l-blue-500">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Транзакции сегодня</CardTitle>
-            <Activity className="h-5 w-5 text-blue-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-blue-600">
-              {formatNumber(dashboardMetrics.transactionsToday)}
-            </div>
-            <p className="text-xs text-green-600 mt-1">
-              +5% чем вчера
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Warning Cards */}
-      {dashboardMetrics.blockedCards > 0 && <Card className="border-l-4 border-l-red-500 bg-red-50">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-red-800">Заблокированные карты</CardTitle>
-            <AlertTriangle className="h-5 w-5 text-red-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-red-600">
-              {dashboardMetrics.blockedCards}
-            </div>
-            <p className="text-xs text-red-700 mt-1">
-              Требуют внимания
-            </p>
-          </CardContent>
-        </Card>}
-
-      {/* Recent Activity - Full Width Grid */}
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <Card className="h-fit">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-xl">Последние клиенты</CardTitle>
-          </CardHeader>
-          <CardContent className="pt-0">
-            <div className="space-y-3">
-              {legalEntities.slice(0, 5).map(entity => <div key={entity.id} className="flex items-center justify-between p-3 bg-gray-50/50 rounded-lg hover:bg-gray-100/50 transition-colors">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 rounded-lg bg-logaz-blue/10 flex items-center justify-center">
-                      <Users className="h-5 w-5 text-logaz-blue" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-medium truncate">
-                        {entity.companyName}
-                      </p>
-                      <p className="text-sm text-muted-foreground">
-                        ИНН: {entity.inn}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="text-lg font-semibold text-logaz-blue">
-                    {formatCurrency(entity.balance)}
-                  </div>
-                </div>)}
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className="h-fit">
-          <CardHeader className="pb-3">
-            <CardTitle className="text-xl">Топ карты по балансу</CardTitle>
-          </CardHeader>
-          <CardContent className="pt-0">
-            <div className="space-y-3">
-              {fuelCards.sort((a, b) => b.balance - a.balance).slice(0, 5).map(card => <div key={card.id} className="flex items-center justify-between p-3 bg-gray-50/50 rounded-lg hover:bg-gray-100/50 transition-colors">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 rounded-lg bg-logaz-orange/10 flex items-center justify-center">
-                        <CreditCard className="h-5 w-5 text-logaz-orange" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-medium">
-                          {card.vehicleNumber}
-                        </p>
-                        <p className="text-sm text-muted-foreground truncate">
-                          {card.driverName}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="text-lg font-semibold text-logaz-orange">
-                      {formatCurrency(card.balance)}
-                    </div>
-                  </div>)}
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </div>;
+      </DashboardLayout>
+    </Layout>
+  );
 };
+
 export default LegalEntitiesDashboard;

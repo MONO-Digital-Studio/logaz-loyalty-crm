@@ -1,16 +1,26 @@
 
 import React from 'react';
-import AnalyticsDashboard from '@/components/ContactCenter/AnalyticsDashboard';
+import Layout from '@/components/Layout/Layout';
 
-const LegalEntitiesAnalyticsPage: React.FC = () => {
+const LegalEntitiesAnalyticsPage = () => {
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
-        <h1 className="text-2xl lg:text-3xl font-syncopate font-bold">Аналитика контакт-центра ЮЛ</h1>
+    <Layout>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold">Аналитика ЮЛ</h1>
+          <p className="text-muted-foreground mt-1">
+            Аналитика и отчеты по корпоративным клиентам
+          </p>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-xl font-semibold mb-4">Аналитические отчеты</h3>
+          <p className="text-muted-foreground">
+            Здесь будет отображаться детальная аналитика по ЮЛ
+          </p>
+        </div>
       </div>
-      
-      <AnalyticsDashboard />
-    </div>
+    </Layout>
   );
 };
 

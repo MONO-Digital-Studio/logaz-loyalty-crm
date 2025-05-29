@@ -4,6 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import EmployeeList from "../components/Employees/EmployeeList";
 import EmployeeStructure from "../components/Employees/EmployeeStructure";
+import Layout from "../components/Layout/Layout";
 
 const EmployeesPage = () => {
   const location = useLocation();
@@ -23,34 +24,36 @@ const EmployeesPage = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Сотрудники</h1>
-        <p className="text-muted-foreground mt-1">
-          Управление сотрудниками и организационной структурой
-        </p>
+    <Layout>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold">Сотрудники</h1>
+          <p className="text-muted-foreground mt-1">
+            Управление сотрудниками и организационной структурой
+          </p>
+        </div>
+
+        <Tabs 
+          defaultValue={currentTab} 
+          value={currentTab} 
+          className="w-full"
+          onValueChange={handleTabChange}
+        >
+          <TabsList className="mb-4">
+            <TabsTrigger value="list">Сотрудники</TabsTrigger>
+            <TabsTrigger value="structure">Структура</TabsTrigger>
+          </TabsList>
+
+          <TabsContent value="list">
+            <EmployeeList />
+          </TabsContent>
+
+          <TabsContent value="structure">
+            <EmployeeStructure />
+          </TabsContent>
+        </Tabs>
       </div>
-
-      <Tabs 
-        defaultValue={currentTab} 
-        value={currentTab} 
-        className="w-full"
-        onValueChange={handleTabChange}
-      >
-        <TabsList className="mb-4">
-          <TabsTrigger value="list">Сотрудники</TabsTrigger>
-          <TabsTrigger value="structure">Структура</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="list">
-          <EmployeeList />
-        </TabsContent>
-
-        <TabsContent value="structure">
-          <EmployeeStructure />
-        </TabsContent>
-      </Tabs>
-    </div>
+    </Layout>
   );
 };
 

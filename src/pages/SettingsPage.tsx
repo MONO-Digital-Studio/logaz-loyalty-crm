@@ -9,6 +9,7 @@ import CompanySettings from "../components/Settings/CompanySettings";
 import DisplaySettings from "../components/Settings/DisplaySettings";
 import PaymentSettings from "../components/Settings/PaymentSettings";
 import UserAccessSettings from "../components/Settings/UserAccessSettings";
+import Layout from "../components/Layout/Layout";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const SettingsPage = () => {
@@ -55,65 +56,67 @@ const SettingsPage = () => {
   };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold">Настройки</h1>
-        <p className="text-muted-foreground mt-1">
-          Управление настройками приложения и учетной записью
-        </p>
-      </div>
-
-      <Tabs 
-        defaultValue={currentTab} 
-        value={currentTab} 
-        className="w-full"
-        onValueChange={handleTabChange}
-      >
-        <TabsList className="mb-4 flex flex-wrap gap-2">
-          <TabsTrigger value="profile">Профиль</TabsTrigger>
-          <TabsTrigger value="security">Безопасность</TabsTrigger>
-          <TabsTrigger value="notifications">Уведомления</TabsTrigger>
-          <TabsTrigger value="company">Компания</TabsTrigger>
-          <TabsTrigger value="display">Отображение</TabsTrigger>
-          <TabsTrigger value="payments">Платежи</TabsTrigger>
-          <TabsTrigger value="access">Доступ</TabsTrigger>
-        </TabsList>
-
-        {/* Show subtabs only for the active section */}
-        <div className="mb-6">
-          {getSubtabs()}
+    <Layout>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold">Настройки</h1>
+          <p className="text-muted-foreground mt-1">
+            Управление настройками приложения и учетной записью
+          </p>
         </div>
 
-        {/* Display the content for the selected main tab */}
-        <TabsContent value="profile">
-          <ProfileSettings />
-        </TabsContent>
+        <Tabs 
+          defaultValue={currentTab} 
+          value={currentTab} 
+          className="w-full"
+          onValueChange={handleTabChange}
+        >
+          <TabsList className="mb-4 flex flex-wrap gap-2">
+            <TabsTrigger value="profile">Профиль</TabsTrigger>
+            <TabsTrigger value="security">Безопасность</TabsTrigger>
+            <TabsTrigger value="notifications">Уведомления</TabsTrigger>
+            <TabsTrigger value="company">Компания</TabsTrigger>
+            <TabsTrigger value="display">Отображение</TabsTrigger>
+            <TabsTrigger value="payments">Платежи</TabsTrigger>
+            <TabsTrigger value="access">Доступ</TabsTrigger>
+          </TabsList>
 
-        <TabsContent value="security">
-          <SecuritySettings />
-        </TabsContent>
+          {/* Show subtabs only for the active section */}
+          <div className="mb-6">
+            {getSubtabs()}
+          </div>
 
-        <TabsContent value="notifications">
-          <NotificationSettings />
-        </TabsContent>
+          {/* Display the content for the selected main tab */}
+          <TabsContent value="profile">
+            <ProfileSettings />
+          </TabsContent>
 
-        <TabsContent value="company">
-          <CompanySettings />
-        </TabsContent>
+          <TabsContent value="security">
+            <SecuritySettings />
+          </TabsContent>
 
-        <TabsContent value="display">
-          <DisplaySettings />
-        </TabsContent>
+          <TabsContent value="notifications">
+            <NotificationSettings />
+          </TabsContent>
 
-        <TabsContent value="payments">
-          <PaymentSettings />
-        </TabsContent>
+          <TabsContent value="company">
+            <CompanySettings />
+          </TabsContent>
 
-        <TabsContent value="access">
-          <UserAccessSettings />
-        </TabsContent>
-      </Tabs>
-    </div>
+          <TabsContent value="display">
+            <DisplaySettings />
+          </TabsContent>
+
+          <TabsContent value="payments">
+            <PaymentSettings />
+          </TabsContent>
+
+          <TabsContent value="access">
+            <UserAccessSettings />
+          </TabsContent>
+        </Tabs>
+      </div>
+    </Layout>
   );
 };
 

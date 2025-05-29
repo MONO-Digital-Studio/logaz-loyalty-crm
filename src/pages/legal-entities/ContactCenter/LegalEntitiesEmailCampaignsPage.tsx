@@ -1,64 +1,26 @@
 
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
-import CampaignsList from "@/components/Campaigns/CampaignsList";
+import React from 'react';
+import Layout from '@/components/Layout/Layout';
 
-const LegalEntitiesEmailCampaignsPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState("email");
-  const navigate = useNavigate();
-
-  const handleCreateCampaign = () => {
-    navigate("/legal-entities/contact-center/campaigns/editor");
-  };
-
+const LegalEntitiesEmailCampaignsPage = () => {
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
-        <h1 className="text-2xl lg:text-3xl font-syncopate font-bold">Управление рассылками ЮЛ</h1>
-        <Button onClick={handleCreateCampaign} className="bg-logaz-blue">
-          <Plus className="h-4 w-4 mr-2" />
-          Создать рассылку
-        </Button>
+    <Layout>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold">Email кампании ЮЛ</h1>
+          <p className="text-muted-foreground mt-1">
+            Управление email кампаниями для корпоративных клиентов
+          </p>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-xl font-semibold mb-4">Активные кампании</h3>
+          <p className="text-muted-foreground">
+            Здесь будет отображаться список email кампаний для ЮЛ
+          </p>
+        </div>
       </div>
-
-      <Tabs defaultValue="email" onValueChange={setActiveTab} className="w-full">
-        <TabsList className="mb-6">
-          <TabsTrigger value="email">Email рассылки</TabsTrigger>
-          <TabsTrigger value="push">PUSH уведомления</TabsTrigger>
-          <TabsTrigger value="telegram">Telegram</TabsTrigger>
-          <TabsTrigger value="sms">SMS</TabsTrigger>
-          <TabsTrigger value="templates">Шаблоны</TabsTrigger>
-          <TabsTrigger value="automated">Автоматические</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="email">
-          <CampaignsList campaignType="email" />
-        </TabsContent>
-
-        <TabsContent value="push">
-          <CampaignsList campaignType="push" />
-        </TabsContent>
-
-        <TabsContent value="telegram">
-          <CampaignsList campaignType="telegram" />
-        </TabsContent>
-
-        <TabsContent value="sms">
-          <CampaignsList campaignType="sms" />
-        </TabsContent>
-
-        <TabsContent value="templates">
-          <CampaignsList campaignType="templates" />
-        </TabsContent>
-
-        <TabsContent value="automated">
-          <CampaignsList campaignType="automated" />
-        </TabsContent>
-      </Tabs>
-    </div>
+    </Layout>
   );
 };
 

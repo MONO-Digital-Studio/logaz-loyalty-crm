@@ -1,16 +1,26 @@
 
 import React from 'react';
-import TemplatesList from '@/components/ContactCenter/TemplatesList';
+import Layout from '@/components/Layout/Layout';
 
-const LegalEntitiesTemplatesPage: React.FC = () => {
+const LegalEntitiesTemplatesPage = () => {
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
-        <h1 className="text-2xl lg:text-3xl font-syncopate font-bold">Шаблоны ответов для ЮЛ</h1>
+    <Layout>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold">Шаблоны ЮЛ</h1>
+          <p className="text-muted-foreground mt-1">
+            Управление шаблонами сообщений для корпоративных клиентов
+          </p>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-xl font-semibold mb-4">Шаблоны сообщений</h3>
+          <p className="text-muted-foreground">
+            Здесь будет отображаться список шаблонов для ЮЛ
+          </p>
+        </div>
       </div>
-      
-      <TemplatesList />
-    </div>
+    </Layout>
   );
 };
 

@@ -1,16 +1,26 @@
 
 import React from 'react';
-import DialogsContainer from '@/components/ContactCenter/DialogsContainer';
+import Layout from '@/components/Layout/Layout';
 
-const LegalEntitiesDialogsPage: React.FC = () => {
+const LegalEntitiesDialogsPage = () => {
   return (
-    <div className="p-4 lg:p-6 space-y-6 min-h-full">
-      <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center lg:justify-between">
-        <h1 className="text-2xl lg:text-3xl font-syncopate font-bold">Диалоги с клиентами ЮЛ</h1>
+    <Layout>
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold">Диалоги ЮЛ</h1>
+          <p className="text-muted-foreground mt-1">
+            Управление диалогами с корпоративными клиентами
+          </p>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-xl font-semibold mb-4">Активные диалоги</h3>
+          <p className="text-muted-foreground">
+            Здесь будет отображаться список диалогов с корпоративными клиентами
+          </p>
+        </div>
       </div>
-      
-      <DialogsContainer />
-    </div>
+    </Layout>
   );
 };
 
