@@ -1,4 +1,5 @@
 
+
 import React, { memo } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import BaseChart from './BaseChart';
@@ -33,9 +34,9 @@ const OptimizedSalesStructureChart: React.FC = memo(() => {
     return null;
   };
 
-  const renderCustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percentage }: any) => {
+  const renderCustomLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, payload }: any) => {
     const RADIAN = Math.PI / 180;
-    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.6;
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
@@ -46,16 +47,16 @@ const OptimizedSalesStructureChart: React.FC = memo(() => {
         fill="white" 
         textAnchor={x > cx ? 'start' : 'end'} 
         dominantBaseline="central"
-        fontSize={12}
+        fontSize={14}
         fontWeight="bold"
       >
-        {`${(percentage * 100).toFixed(1)}%`}
+        {`${payload.percentage}%`}
       </text>
     );
   };
 
   return (
-    <BaseChart title="Структура продаж" subtitle="Доли видов топлива">
+    <BaseChart title="Структура продаж" subtitle="Доли видов топлива" height={480}>
       <ResponsiveContainer>
         <PieChart>
           <Pie
@@ -64,8 +65,8 @@ const OptimizedSalesStructureChart: React.FC = memo(() => {
             cy="50%"
             labelLine={false}
             label={renderCustomLabel}
-            outerRadius={100}
-            innerRadius={40}
+            outerRadius={160}
+            innerRadius={60}
             fill="#8884d8"
             dataKey="value"
           >
@@ -91,3 +92,4 @@ const OptimizedSalesStructureChart: React.FC = memo(() => {
 OptimizedSalesStructureChart.displayName = 'OptimizedSalesStructureChart';
 
 export default OptimizedSalesStructureChart;
+
