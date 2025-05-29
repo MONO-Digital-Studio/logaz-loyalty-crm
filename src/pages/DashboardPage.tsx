@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { OptimizedSalesChart, VolumeChart } from '@/components/Dashboard/charts';
+import VolumeTable from '@/components/Dashboard/VolumeTable';
 import RfmAnalysis from '@/components/Dashboard/RfmAnalysis';
 import PerformanceMetrics from '@/components/Dashboard/PerformanceMetrics';
 import KPIOverview from '@/components/Dashboard/KPIOverview';
@@ -161,17 +162,13 @@ const DashboardPage: React.FC = () => {
 
         <OptimizedSalesChart />
 
+        <VolumeTable />
+
+        <VolumeChart />
+
         <PerformanceMetrics />
 
         <DashboardPeriodComparison />
-
-        {/* Volume Analysis Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <VolumeChart />
-          <div>
-            {/* Placeholder for VolumeTable - will be added when component is imported */}
-          </div>
-        </div>
 
         <RfmAnalysis />
       </div>
