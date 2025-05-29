@@ -15,14 +15,11 @@ const HandbookViewer: React.FC<HandbookViewerProps> = ({ onEdit, editable = fals
   const [handbookContent, setHandbookContent] = useState('');
 
   useEffect(() => {
-    // В реальном приложении здесь будет загрузка содержимого из файла
-    // Пока используем статичный контент для демонстрации
     loadHandbookContent();
   }, []);
 
   const loadHandbookContent = async () => {
     try {
-      // Имитация загрузки markdown файла
       const content = `# Справочник терминов
 
 Данный справочник содержит определения основных терминов и понятий, используемых в системе аналитики АЗС.
@@ -98,7 +95,7 @@ const HandbookViewer: React.FC<HandbookViewerProps> = ({ onEdit, editable = fals
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <BookOpen className="h-5 w-5 text-logaz-blue" />
+            <BookOpen className="h-5 w-5 text-blue-600" />
             <CardTitle className="text-lg font-semibold">Справочник терминов</CardTitle>
           </div>
           {editable && (
