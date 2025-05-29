@@ -75,14 +75,12 @@ const SalesStructureChart: React.FC = () => {
           </PieChart>
         </ResponsiveContainer>
         
-        {/* Центральное значение */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="text-center">
-            <div className="text-lg font-bold text-gray-900">
-              {formatCurrency(totalSales)}
-            </div>
-            <div className="text-xs text-gray-500">Общая сумма</div>
+        {/* Информация об общей сумме под диаграммой */}
+        <div className="mt-4 text-center">
+          <div className="text-lg font-bold text-gray-900">
+            {formatCurrency(totalSales)}
           </div>
+          <div className="text-xs text-gray-500">Общая сумма</div>
         </div>
       </CardContent>
     </Card>
