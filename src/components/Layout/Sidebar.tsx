@@ -30,7 +30,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   return (
     <aside
       className={`bg-sidebar text-sidebar-foreground transition-all duration-300 flex flex-col h-full ${
-        isOpen ? 'w-64' : 'w-20'
+        isOpen ? 'w-72' : 'w-20'
       }`}
     >
       <SidebarLogo isOpen={isOpen} />
