@@ -63,6 +63,8 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  console.log('App: Component is rendering');
+  
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">

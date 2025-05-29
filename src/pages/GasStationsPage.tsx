@@ -9,7 +9,11 @@ import { formatCurrency, formatNumber } from '@/utils/dashboardFormatters';
 import { Fuel, Receipt, Users, Gift } from 'lucide-react';
 
 const GasStationsPage: React.FC = () => {
+  console.log('GasStationsPage: Component is rendering');
+  
   const { data, totals, loading } = useGasStationsData();
+
+  console.log('GasStationsPage: Data loaded', { data: data.length, totals, loading });
 
   return (
     <Layout>

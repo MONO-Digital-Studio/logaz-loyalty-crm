@@ -28,7 +28,11 @@ export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({ children }
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  console.log('WorkspaceProvider: Current workspace is', currentWorkspace);
+
   const switchWorkspace = (workspace: WorkspaceType) => {
+    console.log('WorkspaceProvider: Switching from', currentWorkspace, 'to', workspace);
+    
     if (workspace === currentWorkspace) return;
     
     setIsLoading(true);
@@ -40,6 +44,7 @@ export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({ children }
       
       // Сохраняем выбор в localStorage
       localStorage.setItem('selected-workspace', workspace);
+      console.log('WorkspaceProvider: Workspace switched to', workspace);
       
       // Автоматическое перенаправление на аналитику соответствующего пространства
       if (workspace === 'legal-entities') {
@@ -53,6 +58,8 @@ export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({ children }
   useEffect(() => {
     // Восстанавливаем выбранное рабочее пространство из localStorage
     const savedWorkspace = localStorage.getItem('selected-workspace') as WorkspaceType;
+    console.log('WorkspaceProvider: Restored workspace from localStorage:', savedWorkspace);
+    
     if (savedWorkspace) {
       setCurrentWorkspace(savedWorkspace);
     }

@@ -7,11 +7,17 @@ const Index = () => {
   const navigate = useNavigate();
   const { currentWorkspace } = useWorkspace();
 
+  console.log('Index: Current workspace is', currentWorkspace);
+
   useEffect(() => {
+    console.log('Index: useEffect triggered with workspace', currentWorkspace);
+    
     // Перенаправляем на соответствующий дашборд в зависимости от рабочего пространства
     if (currentWorkspace === 'legal-entities') {
+      console.log('Index: Redirecting to /legal-entities');
       navigate('/legal-entities', { replace: true });
     } else {
+      console.log('Index: Redirecting to /dashboard');
       navigate('/dashboard', { replace: true });
     }
   }, [currentWorkspace, navigate]);
