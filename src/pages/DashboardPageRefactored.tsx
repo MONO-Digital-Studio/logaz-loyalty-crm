@@ -10,7 +10,7 @@ const DashboardPageRefactored: React.FC = () => {
   console.log('DashboardPageRefactored rendering - full dashboard');
   
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <div className="min-h-screen bg-gray-50 p-6 relative">
       <div className="max-w-7xl mx-auto">
         <h1 className="text-3xl font-bold text-gray-900 mb-6">Dashboard</h1>
         
@@ -28,20 +28,54 @@ const DashboardPageRefactored: React.FC = () => {
         
         {/* Charts Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <OptimizedSalesChart />
-          <SalesStructureChart />
+          <div className="relative">
+            <OptimizedSalesChart />
+          </div>
+          <div className="relative">
+            <SalesStructureChart />
+          </div>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <AvgTicketChart />
-          <CustomerDynamicsChart />
+          <div className="relative">
+            <AvgTicketChart />
+          </div>
+          <div className="relative">
+            <CustomerDynamicsChart />
+          </div>
         </div>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <OptimizedLoyaltyChart />
-          <OptimizedDemographicsCharts />
+          <div className="relative">
+            <OptimizedLoyaltyChart />
+          </div>
+          <div className="relative">
+            <OptimizedDemographicsCharts />
+          </div>
         </div>
       </div>
+      
+      {/* CSS для скрытия застрявших tooltip'ов */}
+      <style jsx>{`
+        .recharts-tooltip-wrapper {
+          pointer-events: none !important;
+        }
+        
+        .recharts-tooltip-wrapper:not(:hover) {
+          opacity: 0 !important;
+          visibility: hidden !important;
+        }
+        
+        /* Скрыть все возможные застрявшие tooltip'ы */
+        [data-tooltip]:not(:hover) {
+          opacity: 0 !important;
+        }
+        
+        /* Принудительно скрыть элементы с текстом о сумме, если они вне контекста */
+        div:not(.recharts-tooltip-wrapper):not(.stats-card) {
+          position: relative !important;
+        }
+      `}</style>
     </div>
   );
 };
