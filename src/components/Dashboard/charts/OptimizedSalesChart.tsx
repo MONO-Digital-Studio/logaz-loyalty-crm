@@ -3,6 +3,8 @@ import React, { memo, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import BaseChart from './BaseChart';
 import { useDashboardData } from '@/hooks/useDashboardData';
+import { CHART_CONFIG, createCustomTooltip } from '../config/chartConfig';
+import { formatCurrency } from '@/utils/dashboardFormatters';
 
 const OptimizedSalesChart: React.FC = memo(() => {
   const { data } = useDashboardData();
@@ -14,22 +16,23 @@ const OptimizedSalesChart: React.FC = memo(() => {
     })), [data.monthlySales]
   );
 
+  const CustomTooltip = createCustomTooltip(formatCurrency);
+
   return (
-    <BaseChart title="Динамика продаж">
+    <BaseChart title="Динамика продаж" subtitle="Выручка по периодам">
       <ResponsiveContainer>
-        <LineChart data={chartData}>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis dataKey="date" />
-          <YAxis />
-          <Tooltip />
+        <LineChart data={chartData} margin={CHART_CONFIG.MARGINS}>
+          <CartesianGrid {...CHART_CONFIG.GRID_CONFIG} vertical={false} />
+          <XAxis dataKey="date" {...CHART_CONFIG.AXIS_CONFIG} />
+          <YAxis {...CHART_CONFIG.AXIS_CONFIG} />
+          <Tooltip content={<CustomTooltip />} />
           <Legend />
           <Line
             type="monotone"
             dataKey="revenue"
-            stroke="#3B55A2"
-            strokeWidth={2}
-            dot={{ r: 3 }}
-            activeDot={{ r: 5 }}
+            stroke={CHART_CONFIG.COLORS.primary}
+            {...CHART_CONFIG.LINE_CONFIG}
+            name="Выручка"
           />
         </LineChart>
       </ResponsiveContainer>
