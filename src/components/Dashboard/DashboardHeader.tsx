@@ -5,7 +5,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { CalendarIcon, RefreshCw, Download } from 'lucide-react';
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuCheckboxItem, 
+  DropdownMenuTrigger 
+} from '@/components/ui/dropdown-menu';
+import { Checkbox } from '@/components/ui/checkbox';
+import { CalendarIcon, RefreshCw, Download, ChevronDown } from 'lucide-react';
 import { useDashboardStore } from '@/stores/dashboardStore';
 import { formatTime } from '@/utils/dashboardFormatters';
 import { periodOptions, comparisonOptions, stationOptions } from '@/data/dashboardMockData';
@@ -38,6 +45,39 @@ const DashboardHeader: React.FC = () => {
   const handleExport = () => {
     console.log('Экспорт данных...');
     // Здесь будет логика экспорта
+  };
+
+  const handleStationChange = (stationValue: string, checked: boolean) => {
+    const currentStations = filters.stations || [];
+    
+    if (stationValue === 'all') {
+      if (checked) {
+        setFilters({ stations: ['all'] });
+      } else {
+        setFilters({ stations: [] });
+      }
+    } else {
+      let newStations;
+      if (checked) {
+        // Убираем "all" если выбираем конкретную станцию
+        newStations = currentStations.filter(s => s !== 'all').concat(stationValue);
+      } else {
+        newStations = currentStations.filter(s => s !== stationValue);
+      }
+      setFilters({ stations: newStations });
+    }
+  };
+
+  const getSelectedStationsLabel = () => {
+    const selectedStations = filters.stations || [];
+    if (selectedStations.includes('all') || selectedStations.length === 0) {
+      return 'Все станции';
+    }
+    if (selectedStations.length === 1) {
+      const station = stationOptions.find(opt => opt.value === selectedStations[0]);
+      return station?.label || 'Станция';
+    }
+    return `Выбрано: ${selectedStations.length}`;
   };
 
   return (
@@ -104,22 +144,33 @@ const DashboardHeader: React.FC = () => {
               </PopoverContent>
             </Popover>
 
-            {/* Станция */}
-            <Select 
-              value={filters.stations[0] || 'all'} 
-              onValueChange={(value) => setFilters({ stations: [value] })}
-            >
-              <SelectTrigger className="w-36">
-                <SelectValue placeholder="Станция" />
-              </SelectTrigger>
-              <SelectContent>
+            {/* Станция с чекбоксами */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="w-36 justify-between"
+                >
+                  {getSelectedStationsLabel()}
+                  <ChevronDown className="h-4 w-4 opacity-50" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 bg-white">
                 {stationOptions.map(option => (
-                  <SelectItem key={option.value} value={option.value}>
+                  <DropdownMenuCheckboxItem
+                    key={option.value}
+                    checked={
+                      option.value === 'all' 
+                        ? filters.stations.includes('all') || filters.stations.length === 0
+                        : filters.stations.includes(option.value)
+                    }
+                    onCheckedChange={(checked) => handleStationChange(option.value, checked)}
+                  >
                     {option.label}
-                  </SelectItem>
+                  </DropdownMenuCheckboxItem>
                 ))}
-              </SelectContent>
-            </Select>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Правая группа - Кнопка Экспорт, Обновление */}
