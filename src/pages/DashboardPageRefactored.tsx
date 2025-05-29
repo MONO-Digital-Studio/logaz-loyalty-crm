@@ -22,7 +22,6 @@ const DashboardPageRefactored: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-6">Dashboard</h1>
         
         {/* Debug info */}
         <div className="bg-green-50 p-4 rounded-lg mb-6">
