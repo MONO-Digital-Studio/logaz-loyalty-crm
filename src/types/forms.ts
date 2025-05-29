@@ -1,37 +1,4 @@
 
-export interface FormFieldProps {
-  label: string;
-  name: string;
-  required?: boolean;
-  disabled?: boolean;
-  placeholder?: string;
-  helperText?: string;
-  error?: string;
-}
-
-export interface SelectOption {
-  value: string;
-  label: string;
-  disabled?: boolean;
-}
-
-export interface FormSelectProps extends FormFieldProps {
-  options: SelectOption[];
-  multiple?: boolean;
-}
-
-export interface FormInputProps extends FormFieldProps {
-  type?: 'text' | 'email' | 'tel' | 'password' | 'number';
-  maxLength?: number;
-  minLength?: number;
-  pattern?: string;
-}
-
-export interface FormTextareaProps extends FormFieldProps {
-  rows?: number;
-  maxLength?: number;
-}
-
 export interface FormValidationRule {
   required?: boolean;
   minLength?: number;
@@ -40,17 +7,28 @@ export interface FormValidationRule {
   custom?: (value: any) => string | null;
 }
 
-export interface FormField {
+export interface FormField<T = any> {
   name: string;
   label: string;
-  type: 'text' | 'email' | 'tel' | 'select' | 'textarea';
-  validation?: FormValidationRule;
-  options?: SelectOption[];
+  type: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'textarea' | 'select' | 'checkbox' | 'radio';
   placeholder?: string;
+  required?: boolean;
+  validation?: FormValidationRule;
+  options?: Array<{ value: T; label: string }>;
+  disabled?: boolean;
+  defaultValue?: T;
 }
 
-export interface FormConfig {
-  fields: FormField[];
-  submitLabel?: string;
-  cancelLabel?: string;
+export interface FormState<T extends Record<string, any>> {
+  values: T;
+  errors: Record<keyof T, string>;
+  touched: Record<keyof T, boolean>;
+  isValid: boolean;
+  isSubmitting: boolean;
+}
+
+export interface FormConfig<T extends Record<string, any>> {
+  initialValues: T;
+  validationRules?: Partial<Record<keyof T, FormValidationRule>>;
+  onSubmit: (values: T) => Promise<void> | void;
 }

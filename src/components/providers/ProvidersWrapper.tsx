@@ -9,6 +9,7 @@ import { AIProvider } from "@/contexts/AIContext";
 import { IndividualsAIProvider } from "@/contexts/IndividualsAIContext";
 import { LegalEntitiesAIProvider } from "@/contexts/LegalEntitiesAIContext";
 import { LegalEntitiesProvider } from "@/contexts/LegalEntitiesContext";
+import GlobalErrorBoundary from "@/components/ErrorBoundary/GlobalErrorBoundary";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,24 +26,26 @@ interface ProvidersWrapperProps {
 
 const ProvidersWrapper: React.FC<ProvidersWrapperProps> = ({ children }) => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-        <TooltipProvider>
-          <WorkspaceProvider>
-            <AIProvider>
-              <IndividualsAIProvider>
-                <LegalEntitiesAIProvider>
-                  <LegalEntitiesProvider>
-                    {children}
-                    <Toaster />
-                  </LegalEntitiesProvider>
-                </LegalEntitiesAIProvider>
-              </IndividualsAIProvider>
-            </AIProvider>
-          </WorkspaceProvider>
-        </TooltipProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <GlobalErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+          <TooltipProvider>
+            <WorkspaceProvider>
+              <AIProvider>
+                <IndividualsAIProvider>
+                  <LegalEntitiesAIProvider>
+                    <LegalEntitiesProvider>
+                      {children}
+                      <Toaster />
+                    </LegalEntitiesProvider>
+                  </LegalEntitiesAIProvider>
+                </IndividualsAIProvider>
+              </AIProvider>
+            </WorkspaceProvider>
+          </TooltipProvider>
+        </ThemeProvider>
+      </QueryClientProvider>
+    </GlobalErrorBoundary>
   );
 };
 

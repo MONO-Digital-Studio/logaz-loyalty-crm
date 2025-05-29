@@ -2,6 +2,7 @@
 import React from 'react';
 import { BadgeRussianRuble, CreditCard, Users, Fuel, UserCheck, TrendingDown } from 'lucide-react';
 import MetricCard from '@/components/shared/MetricCard';
+import { ErrorBoundary } from '@/components/ErrorBoundary/ErrorBoundary';
 import { useDashboardData } from '@/hooks/useDashboardData';
 import { formatCurrency, formatNumber, formatPercent } from '@/utils/dashboardFormatters';
 
@@ -73,19 +74,21 @@ const KPIOverview: React.FC = () => {
   ];
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-      {kpiMetrics.map((metric, index) => (
-        <MetricCard
-          key={metric.title}
-          title={metric.title}
-          value={metric.value}
-          suffix={metric.suffix}
-          change={metric.change}
-          icon={metric.icon}
-          loading={loading}
-        />
-      ))}
-    </div>
+    <ErrorBoundary>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+        {kpiMetrics.map((metric, index) => (
+          <MetricCard
+            key={metric.title}
+            title={metric.title}
+            value={metric.value}
+            suffix={metric.suffix}
+            change={metric.change}
+            icon={metric.icon}
+            loading={loading}
+          />
+        ))}
+      </div>
+    </ErrorBoundary>
   );
 };
 
