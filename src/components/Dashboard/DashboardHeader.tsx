@@ -46,7 +46,7 @@ const DashboardHeader: React.FC = () => {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-gray-900"></h1>
-                <p className="text-sm text-gray-500">CRM Dashboard</p>
+                <p className="text-sm text-gray-500"></p>
               </div>
             </div>
           </div>
