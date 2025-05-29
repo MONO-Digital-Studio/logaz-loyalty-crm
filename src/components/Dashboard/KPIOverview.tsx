@@ -2,15 +2,31 @@
 import React from 'react';
 import { DollarSign, CreditCard, Users, Fuel, UserCheck, TrendingDown } from 'lucide-react';
 import KPICard from './KPICard';
-import { mockKPIData } from '@/data/dashboardMockData';
+import { useDashboardData } from '@/hooks/useDashboardData';
 import { formatCurrency, formatNumber, formatPercent } from '@/utils/dashboardFormatters';
 
 const KPIOverview: React.FC = () => {
+  const { data, loading } = useDashboardData();
+
+  if (loading) {
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+        {[...Array(6)].map((_, i) => (
+          <div key={i} className="bg-white border border-gray-200 rounded-lg p-4 animate-pulse">
+            <div className="h-4 bg-gray-200 rounded mb-2"></div>
+            <div className="h-8 bg-gray-200 rounded mb-1"></div>
+            <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
       <KPICard
         title="Продажи"
-        data={mockKPIData.totalSales}
+        data={data.kpiData.totalSales}
         icon={DollarSign}
         formatter={formatCurrency}
         borderColor="border-l-logaz-blue"
@@ -18,7 +34,7 @@ const KPIOverview: React.FC = () => {
       
       <KPICard
         title="Реализация"
-        data={mockKPIData.totalVolume}
+        data={data.kpiData.totalVolume}
         icon={Fuel}
         formatter={formatNumber}
         suffix=" т/м³"
@@ -27,7 +43,7 @@ const KPIOverview: React.FC = () => {
       
       <KPICard
         title="Средний чек"
-        data={mockKPIData.avgTicket}
+        data={data.kpiData.avgTicket}
         icon={CreditCard}
         formatter={formatCurrency}
         borderColor="border-l-green-500"
@@ -35,7 +51,7 @@ const KPIOverview: React.FC = () => {
       
       <KPICard
         title="Всего клиентов"
-        data={mockKPIData.totalCustomers}
+        data={data.kpiData.totalCustomers}
         icon={UserCheck}
         formatter={formatNumber}
         borderColor="border-l-purple-500"
@@ -43,7 +59,7 @@ const KPIOverview: React.FC = () => {
       
       <KPICard
         title="Активные клиенты"
-        data={mockKPIData.activeCustomers}
+        data={data.kpiData.activeCustomers}
         icon={Users}
         formatter={formatNumber}
         borderColor="border-l-blue-500"
@@ -51,7 +67,7 @@ const KPIOverview: React.FC = () => {
       
       <KPICard
         title="Отток клиентов"
-        data={mockKPIData.churnRate}
+        data={data.kpiData.churnRate}
         icon={TrendingDown}
         formatter={(value) => formatPercent(value)}
         borderColor="border-l-red-500"
