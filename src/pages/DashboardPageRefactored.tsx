@@ -56,7 +56,7 @@ const DashboardPageRefactored: React.FC = () => {
       </div>
       
       {/* CSS для скрытия застрявших tooltip'ов */}
-      <style jsx>{`
+      <style>{`
         .recharts-tooltip-wrapper {
           pointer-events: none !important;
         }
