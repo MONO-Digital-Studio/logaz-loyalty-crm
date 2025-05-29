@@ -1,5 +1,4 @@
 
-
 import React, { memo } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from 'recharts';
 import BaseChart from './BaseChart';
@@ -16,8 +15,6 @@ const OptimizedSalesStructureChart: React.FC = memo(() => {
     { name: 'АИ-95', value: 750000, percentage: 21 },
     { name: 'Пропан', value: 570000, percentage: 16 },
   ];
-  
-  const totalSales = mockSalesStructure.reduce((sum, item) => sum + item.value, 0);
 
   const CustomTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
@@ -78,13 +75,6 @@ const OptimizedSalesStructureChart: React.FC = memo(() => {
           <Legend />
         </PieChart>
       </ResponsiveContainer>
-      
-      <div className="mt-4 text-center">
-        <div className="text-lg font-bold text-gray-900">
-          {formatCurrency(totalSales)}
-        </div>
-        <div className="text-xs text-gray-500">Общая сумма</div>
-      </div>
     </BaseChart>
   );
 });
@@ -92,4 +82,3 @@ const OptimizedSalesStructureChart: React.FC = memo(() => {
 OptimizedSalesStructureChart.displayName = 'OptimizedSalesStructureChart';
 
 export default OptimizedSalesStructureChart;
-
