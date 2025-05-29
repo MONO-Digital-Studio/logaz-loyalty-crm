@@ -11,7 +11,6 @@ import {
 } from '@/components/Dashboard/charts';
 import VolumeTable from '@/components/Dashboard/VolumeTable';
 import CustomerAnalytics from '@/components/Dashboard/CustomerAnalytics';
-import RfmAnalysis from '@/components/Dashboard/RfmAnalysis';
 import PerformanceMetrics from '@/components/Dashboard/PerformanceMetrics';
 
 const DashboardPageRefactored: React.FC = () => {
@@ -63,9 +62,8 @@ const DashboardPageRefactored: React.FC = () => {
         </div>
 
         {/* Analytics Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div className="mb-6">
           <CustomerAnalytics />
-          <RfmAnalysis />
         </div>
       </div>
     </div>

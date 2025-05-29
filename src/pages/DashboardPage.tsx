@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { OptimizedSalesChart, VolumeChart, OptimizedSalesStructureChart, OptimizedAvgTicketChart } from '@/components/Dashboard/charts';
 import VolumeTable from '@/components/Dashboard/VolumeTable';
-import RfmAnalysis from '@/components/Dashboard/RfmAnalysis';
 import PerformanceMetrics from '@/components/Dashboard/PerformanceMetrics';
 import KPIOverview from '@/components/Dashboard/KPIOverview';
 import { Button } from '@/components/ui/button';
@@ -175,8 +174,6 @@ const DashboardPage: React.FC = () => {
         <PerformanceMetrics />
 
         <DashboardPeriodComparison />
-
-        <RfmAnalysis />
       </div>
     </div>;
 };
