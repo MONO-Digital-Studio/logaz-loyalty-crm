@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -41,9 +42,6 @@ const DashboardHeader: React.FC = () => {
           {/* Логотип и заголовок */}
           <div className="flex items-center gap-3">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-logaz-blue flex items-center justify-center">
-                <span className="text-white font-bold text-sm">Л</span>
-              </div>
               <div>
                 <h1 className="text-xl font-bold text-gray-900"></h1>
                 <p className="text-sm text-gray-500"></p>
