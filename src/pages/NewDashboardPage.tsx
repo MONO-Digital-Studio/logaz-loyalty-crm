@@ -1,4 +1,3 @@
-
 import React from 'react';
 import DashboardHeader from '@/components/Dashboard/DashboardHeader';
 import KPIOverview from '@/components/Dashboard/KPIOverview';
@@ -6,7 +5,8 @@ import {
   OptimizedSalesChart,
   OptimizedSalesStructureChart, 
   OptimizedAvgTicketChart, 
-  OptimizedCustomerDynamicsChart 
+  OptimizedCustomerDynamicsChart,
+  VolumeChart
 } from '@/components/Dashboard/charts';
 import VolumeTable from '@/components/Dashboard/VolumeTable';
 import CustomerAnalytics from '@/components/Dashboard/CustomerAnalytics';
@@ -35,9 +35,14 @@ const NewDashboardPage: React.FC = () => {
           <OptimizedCustomerDynamicsChart />
         </div>
 
-        {/* Trend Charts Grid (2x2) */}
+        {/* Volume Analysis Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <VolumeChart />
           <VolumeTable />
+        </div>
+
+        {/* Customer Analytics Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <CustomerAnalytics />
         </div>
       </div>
