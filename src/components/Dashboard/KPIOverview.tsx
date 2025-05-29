@@ -1,76 +1,90 @@
+
 import React from 'react';
 import { BadgeRussianRuble, CreditCard, Users, Fuel, UserCheck, TrendingDown } from 'lucide-react';
-import KPICard from './KPICard';
+import MetricCard from '@/components/shared/MetricCard';
 import { useDashboardData } from '@/hooks/useDashboardData';
 import { formatCurrency, formatNumber, formatPercent } from '@/utils/dashboardFormatters';
 
 const KPIOverview: React.FC = () => {
   const { data, loading } = useDashboardData();
 
-  if (loading) {
-    return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-        {[...Array(6)].map((_, i) => (
-          <div key={i} className="bg-white border border-gray-200 rounded-lg p-4 animate-pulse">
-            <div className="h-4 bg-gray-200 rounded mb-2"></div>
-            <div className="h-8 bg-gray-200 rounded mb-1"></div>
-            <div className="h-3 bg-gray-200 rounded w-1/2"></div>
-          </div>
-        ))}
-      </div>
-    );
-  }
+  const kpiMetrics = [
+    {
+      title: 'Продажи',
+      value: formatCurrency(data.kpiData.totalSales.current),
+      change: {
+        value: data.kpiData.totalSales.change,
+        isPositive: data.kpiData.totalSales.change > 0,
+        text: `${data.kpiData.totalSales.change > 0 ? '+' : ''}${data.kpiData.totalSales.change.toFixed(1)}%`
+      },
+      icon: BadgeRussianRuble
+    },
+    {
+      title: 'Реализация',
+      value: formatNumber(data.kpiData.totalVolume.current),
+      suffix: ' т/м³',
+      change: {
+        value: data.kpiData.totalVolume.change,
+        isPositive: data.kpiData.totalVolume.change > 0,
+        text: `${data.kpiData.totalVolume.change > 0 ? '+' : ''}${data.kpiData.totalVolume.change.toFixed(1)}%`
+      },
+      icon: Fuel
+    },
+    {
+      title: 'Средний чек',
+      value: formatCurrency(data.kpiData.avgTicket.current),
+      change: {
+        value: data.kpiData.avgTicket.change,
+        isPositive: data.kpiData.avgTicket.change > 0,
+        text: `${data.kpiData.avgTicket.change > 0 ? '+' : ''}${data.kpiData.avgTicket.change.toFixed(1)}%`
+      },
+      icon: CreditCard
+    },
+    {
+      title: 'Всего клиентов',
+      value: formatNumber(data.kpiData.totalCustomers.current),
+      change: {
+        value: data.kpiData.totalCustomers.change,
+        isPositive: data.kpiData.totalCustomers.change > 0,
+        text: `${data.kpiData.totalCustomers.change > 0 ? '+' : ''}${data.kpiData.totalCustomers.change.toFixed(1)}%`
+      },
+      icon: UserCheck
+    },
+    {
+      title: 'Активные клиенты',
+      value: formatNumber(data.kpiData.activeCustomers.current),
+      change: {
+        value: data.kpiData.activeCustomers.change,
+        isPositive: data.kpiData.activeCustomers.change > 0,
+        text: `${data.kpiData.activeCustomers.change > 0 ? '+' : ''}${data.kpiData.activeCustomers.change.toFixed(1)}%`
+      },
+      icon: Users
+    },
+    {
+      title: 'Отток клиентов',
+      value: formatPercent(data.kpiData.churnRate.current),
+      change: {
+        value: data.kpiData.churnRate.change,
+        isPositive: data.kpiData.churnRate.change < 0, // Для оттока меньше = лучше
+        text: `${data.kpiData.churnRate.change > 0 ? '+' : ''}${data.kpiData.churnRate.change.toFixed(1)}%`
+      },
+      icon: TrendingDown
+    }
+  ];
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
-      <KPICard
-        title="Продажи"
-        data={data.kpiData.totalSales}
-        icon={BadgeRussianRuble}
-        formatter={formatCurrency}
-        borderColor="border-l-logaz-blue"
-      />
-      
-      <KPICard
-        title="Реализация"
-        data={data.kpiData.totalVolume}
-        icon={Fuel}
-        formatter={formatNumber}
-        suffix=" т/м³"
-        borderColor="border-l-logaz-orange"
-      />
-      
-      <KPICard
-        title="Средний чек"
-        data={data.kpiData.avgTicket}
-        icon={CreditCard}
-        formatter={formatCurrency}
-        borderColor="border-l-green-500"
-      />
-      
-      <KPICard
-        title="Всего клиентов"
-        data={data.kpiData.totalCustomers}
-        icon={UserCheck}
-        formatter={formatNumber}
-        borderColor="border-l-purple-500"
-      />
-      
-      <KPICard
-        title="Активные клиенты"
-        data={data.kpiData.activeCustomers}
-        icon={Users}
-        formatter={formatNumber}
-        borderColor="border-l-blue-500"
-      />
-      
-      <KPICard
-        title="Отток клиентов"
-        data={data.kpiData.churnRate}
-        icon={TrendingDown}
-        formatter={(value) => formatPercent(value)}
-        borderColor="border-l-red-500"
-      />
+      {kpiMetrics.map((metric, index) => (
+        <MetricCard
+          key={metric.title}
+          title={metric.title}
+          value={metric.value}
+          suffix={metric.suffix}
+          change={metric.change}
+          icon={metric.icon}
+          loading={loading}
+        />
+      ))}
     </div>
   );
 };

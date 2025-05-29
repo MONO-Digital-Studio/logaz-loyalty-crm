@@ -1,6 +1,5 @@
 
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { WorkspaceType } from '@/types/legal-entities';
 
 interface WorkspaceContextType {
@@ -26,7 +25,6 @@ interface WorkspaceProviderProps {
 export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({ children }) => {
   const [currentWorkspace, setCurrentWorkspace] = useState<WorkspaceType>('individuals');
   const [isLoading, setIsLoading] = useState(false);
-  const navigate = useNavigate();
 
   console.log('WorkspaceProvider: Current workspace is', currentWorkspace);
 
@@ -37,7 +35,7 @@ export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({ children }
     
     setIsLoading(true);
     
-    // Имитация загрузки данных
+    // Имитация загрузки данных без навигации
     setTimeout(() => {
       setCurrentWorkspace(workspace);
       setIsLoading(false);
@@ -45,14 +43,7 @@ export const WorkspaceProvider: React.FC<WorkspaceProviderProps> = ({ children }
       // Сохраняем выбор в localStorage
       localStorage.setItem('selected-workspace', workspace);
       console.log('WorkspaceProvider: Workspace switched to', workspace);
-      
-      // Автоматическое перенаправление на аналитику соответствующего пространства
-      if (workspace === 'legal-entities') {
-        navigate('/legal-entities');
-      } else {
-        navigate('/dashboard');
-      }
-    }, 300);
+    }, 200); // Уменьшили время загрузки
   };
 
   useEffect(() => {

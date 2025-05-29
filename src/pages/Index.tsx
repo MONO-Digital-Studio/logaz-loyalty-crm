@@ -1,26 +1,19 @@
 
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useWorkspace } from '@/contexts/WorkspaceContext';
+import { useWorkspaceNavigation } from '@/hooks/useWorkspaceNavigation';
 
 const Index = () => {
-  const navigate = useNavigate();
-  const { currentWorkspace } = useWorkspace();
+  const { getWorkspaceDefaultRoute } = useWorkspaceNavigation();
 
-  console.log('Index: Current workspace is', currentWorkspace);
+  console.log('Index: Current workspace navigation');
 
   useEffect(() => {
-    console.log('Index: useEffect triggered with workspace', currentWorkspace);
+    const defaultRoute = getWorkspaceDefaultRoute();
+    console.log('Index: Redirecting to', defaultRoute);
     
-    // Перенаправляем на соответствующий дашборд в зависимости от рабочего пространства
-    if (currentWorkspace === 'legal-entities') {
-      console.log('Index: Redirecting to /legal-entities');
-      navigate('/legal-entities', { replace: true });
-    } else {
-      console.log('Index: Redirecting to /dashboard');
-      navigate('/dashboard', { replace: true });
-    }
-  }, [currentWorkspace, navigate]);
+    // Используем replace для замены текущей записи в истории
+    window.location.replace(defaultRoute);
+  }, [getWorkspaceDefaultRoute]);
 
   // Показываем загрузочный экран пока происходит перенаправление
   return (

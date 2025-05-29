@@ -1,15 +1,15 @@
 
 import React from 'react';
-import { useWorkspace } from '@/contexts/WorkspaceContext';
+import { useWorkspaceNavigation } from '@/hooks/useWorkspaceNavigation';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Users, Building2 } from 'lucide-react';
 import { WorkspaceType } from '@/types/legal-entities';
 
 const WorkspaceSwitcher: React.FC = () => {
-  const { currentWorkspace, switchWorkspace, isLoading } = useWorkspace();
+  const { currentWorkspace, navigateToWorkspace } = useWorkspaceNavigation();
 
   const handleWorkspaceChange = (value: WorkspaceType) => {
-    switchWorkspace(value);
+    navigateToWorkspace(value);
   };
 
   const getWorkspaceName = (workspace: WorkspaceType) => {
@@ -18,7 +18,7 @@ const WorkspaceSwitcher: React.FC = () => {
 
   return (
     <div className="workspace-switcher mb-6 p-4 border-b border-sidebar-border">
-      <Select value={currentWorkspace} onValueChange={handleWorkspaceChange} disabled={isLoading}>
+      <Select value={currentWorkspace} onValueChange={handleWorkspaceChange}>
         <SelectTrigger className="w-full bg-sidebar-accent/50 border-sidebar-border">
           <SelectValue placeholder="Выберите рабочее пространство">
             {getWorkspaceName(currentWorkspace)}
@@ -39,12 +39,6 @@ const WorkspaceSwitcher: React.FC = () => {
           </SelectItem>
         </SelectContent>
       </Select>
-      
-      {isLoading && (
-        <div className="mt-2 text-xs text-sidebar-foreground/70 animate-pulse">
-          Переключение рабочего пространства...
-        </div>
-      )}
     </div>
   );
 };
