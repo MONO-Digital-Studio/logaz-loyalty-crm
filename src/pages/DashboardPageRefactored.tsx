@@ -22,13 +22,6 @@ const DashboardPageRefactored: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 p-6">
       <div className="max-w-7xl mx-auto">
-        
-        {/* Debug info */}
-        <div className="bg-green-50 p-4 rounded-lg mb-6">
-          <p className="text-green-800">
-            ✅ Оптимизированный дашборд с мемоизированными компонентами
-          </p>
-        </div>
 
         {/* Dashboard Header with filters */}
         <div className="mb-6">
