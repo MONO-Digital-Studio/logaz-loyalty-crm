@@ -8,21 +8,40 @@ import { formatNumber } from '@/utils/dashboardFormatters';
 const OptimizedCustomerDynamicsChart: React.FC = memo(() => {
   const { data } = useDashboardData();
   
-  const mockCustomerData = [
-    { date: '1', total: 25000, active: 18500, new: 450, sleeping: 4200, churned: 180 },
-    { date: '2', total: 25200, active: 18800, new: 380, sleeping: 4100, churned: 190 },
-    { date: '3', total: 25400, active: 19100, new: 520, sleeping: 3950, churned: 200 },
-    { date: '4', total: 25650, active: 19300, new: 410, sleeping: 3800, churned: 210 },
-    { date: '5', total: 25900, active: 19600, new: 480, sleeping: 3650, churned: 195 },
-    { date: '6', total: 26150, active: 19850, new: 390, sleeping: 3500, churned: 185 },
-    { date: '7', total: 26400, active: 20100, new: 510, sleeping: 3350, churned: 175 },
-  ];
+  // Генерируем данные за последние 7 дней с реальными датами
+  const generateDateData = () => {
+    const today = new Date();
+    const data = [];
+    
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      
+      data.push({
+        date: date.toISOString().split('T')[0], // Формат YYYY-MM-DD
+        displayDate: date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' }), // Формат DD.MM для отображения
+        total: 25000 + (6 - i) * 66 + Math.floor(Math.random() * 100),
+        active: 18500 + (6 - i) * 50 + Math.floor(Math.random() * 80),
+        new: 380 + Math.floor(Math.random() * 140),
+        sleeping: 4200 - (6 - i) * 25 + Math.floor(Math.random() * 50),
+        churned: 175 + Math.floor(Math.random() * 35)
+      });
+    }
+    
+    return data;
+  };
+
+  const mockCustomerData = generateDateData();
 
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
+      // Найдем полную дату для отображения в tooltip
+      const dataPoint = mockCustomerData.find(item => item.date === label);
+      const displayDate = dataPoint ? dataPoint.displayDate : label;
+      
       return (
         <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
-          <p className="font-medium mb-2">День {label}</p>
+          <p className="font-medium mb-2">{displayDate}</p>
           {payload.map((entry: any, index: number) => (
             <p key={index} className="text-sm" style={{ color: entry.color }}>
               {entry.name}: {formatNumber(Math.round(entry.value))}
@@ -43,6 +62,11 @@ const OptimizedCustomerDynamicsChart: React.FC = memo(() => {
             dataKey="date" 
             tick={{ fontSize: 12 }}
             stroke="#666"
+            tickFormatter={(value) => {
+              // Форматируем дату для отображения на оси X
+              const date = new Date(value);
+              return date.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit' });
+            }}
           />
           <YAxis 
             tick={{ fontSize: 12 }}
