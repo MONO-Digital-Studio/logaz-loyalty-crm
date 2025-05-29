@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -37,7 +38,7 @@ const DashboardHeader: React.FC = () => {
 
   return (
     <Card className="bg-white border border-gray-200 shadow-sm">
-      <CardContent className="p-4">
+      <CardContent className="p-4 justify-between">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           {/* Логотип и заголовок */}
           <div className="flex items-center gap-3">
@@ -142,3 +143,4 @@ const DashboardHeader: React.FC = () => {
 };
 
 export default DashboardHeader;
+
