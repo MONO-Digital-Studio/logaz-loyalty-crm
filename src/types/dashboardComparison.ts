@@ -47,11 +47,11 @@ export interface DashboardChartComparisonData {
 export interface MetricGroup {
   title: string;
   description: string;
-  icon: React.ReactNode;
+  icon: () => React.ReactNode;
   metrics: {
     key: Exclude<keyof DashboardComparisonData, 'type'>;
     title: string;
-    icon: React.ReactNode;
+    icon: () => React.ReactNode;
     formatter: (value: number) => string;
   }[];
 }

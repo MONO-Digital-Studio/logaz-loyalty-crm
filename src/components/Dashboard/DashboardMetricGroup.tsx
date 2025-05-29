@@ -14,7 +14,7 @@ const DashboardMetricGroup: React.FC<DashboardMetricGroupProps> = ({ group, data
     <Card className="stats-card">
       <CardHeader className="pb-3">
         <div className="flex items-center gap-3">
-          {group.icon}
+          {group.icon()}
           <div>
             <CardTitle className="text-lg font-semibold font-montserrat">
               {group.title}
@@ -32,7 +32,7 @@ const DashboardMetricGroup: React.FC<DashboardMetricGroupProps> = ({ group, data
               key={metric.key}
               data={data[metric.key]}
               title={metric.title}
-              icon={metric.icon}
+              icon={metric.icon()}
               formatter={metric.formatter}
             />
           ))}
