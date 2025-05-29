@@ -1,12 +1,9 @@
 
-
 import React from 'react';
 import DashboardHeader from '@/components/Dashboard/DashboardHeader';
 import KPIOverview from '@/components/Dashboard/KPIOverview';
 import { 
   OptimizedSalesChart, 
-  OptimizedLoyaltyChart, 
-  OptimizedDemographicsCharts,
   OptimizedSalesStructureChart,
   OptimizedAvgTicketChart,
   OptimizedCustomerDynamicsChart,
@@ -60,15 +57,9 @@ const DashboardPageRefactored: React.FC = () => {
           <PerformanceMetrics />
         </div>
         
-        {/* Charts Grid - Customer Dynamics and Loyalty */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <OptimizedCustomerDynamicsChart />
-          <OptimizedLoyaltyChart />
-        </div>
-        
-        {/* Demographics Charts - Full Width */}
+        {/* Customer Dynamics Chart */}
         <div className="mb-6">
-          <OptimizedDemographicsCharts />
+          <OptimizedCustomerDynamicsChart />
         </div>
 
         {/* Analytics Section */}
