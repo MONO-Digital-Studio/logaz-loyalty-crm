@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { OptimizedSalesChart, VolumeChart } from '@/components/Dashboard/charts';
+import { OptimizedSalesChart, VolumeChart, OptimizedSalesStructureChart, OptimizedAvgTicketChart } from '@/components/Dashboard/charts';
 import VolumeTable from '@/components/Dashboard/VolumeTable';
 import RfmAnalysis from '@/components/Dashboard/RfmAnalysis';
 import PerformanceMetrics from '@/components/Dashboard/PerformanceMetrics';
@@ -165,6 +165,12 @@ const DashboardPage: React.FC = () => {
         <VolumeTable />
 
         <VolumeChart />
+
+        {/* Charts Grid - Structure and Ticket under Volume Chart */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <OptimizedSalesStructureChart />
+          <OptimizedAvgTicketChart />
+        </div>
 
         <PerformanceMetrics />
 

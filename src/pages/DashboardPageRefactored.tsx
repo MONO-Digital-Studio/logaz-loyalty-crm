@@ -1,4 +1,5 @@
 
+
 import React from 'react';
 import DashboardHeader from '@/components/Dashboard/DashboardHeader';
 import KPIOverview from '@/components/Dashboard/KPIOverview';
@@ -48,15 +49,15 @@ const DashboardPageRefactored: React.FC = () => {
           <VolumeChart />
         </div>
 
-        {/* Performance Metrics */}
-        <div className="mb-6">
-          <PerformanceMetrics />
-        </div>
-        
-        {/* Charts Grid - Structure and Ticket */}
+        {/* Charts Grid - Structure and Ticket under Volume Chart */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <OptimizedSalesStructureChart />
           <OptimizedAvgTicketChart />
+        </div>
+
+        {/* Performance Metrics */}
+        <div className="mb-6">
+          <PerformanceMetrics />
         </div>
         
         {/* Charts Grid - Customer Dynamics and Loyalty */}
