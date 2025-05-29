@@ -32,3 +32,40 @@ export interface FormConfig<T extends Record<string, any>> {
   validationRules?: Partial<Record<keyof T, FormValidationRule>>;
   onSubmit: (values: T) => Promise<void> | void;
 }
+
+// Базовые пропсы для всех компонентов формы
+interface BaseFormFieldProps {
+  label: string;
+  required?: boolean;
+  error?: string;
+  helperText?: string;
+}
+
+// Типы для специфичных компонентов форм
+export interface FormInputProps extends BaseFormFieldProps {
+  type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url';
+  placeholder?: string;
+  disabled?: boolean;
+  autoComplete?: string;
+  maxLength?: number;
+  minLength?: number;
+}
+
+export interface FormTextareaProps extends BaseFormFieldProps {
+  placeholder?: string;
+  disabled?: boolean;
+  rows?: number;
+  maxLength?: number;
+  minLength?: number;
+  resize?: 'none' | 'both' | 'horizontal' | 'vertical';
+}
+
+export interface FormSelectProps extends BaseFormFieldProps {
+  placeholder?: string;
+  disabled?: boolean;
+  options: Array<{
+    value: string;
+    label: string;
+    disabled?: boolean;
+  }>;
+}
