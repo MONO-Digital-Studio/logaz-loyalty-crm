@@ -1,54 +1,31 @@
 
 import React from 'react';
-import DashboardLayout from '@/components/Dashboard/layouts/DashboardLayout';
-import DashboardHeader from '@/components/Dashboard/DashboardHeader';
-import KPIOverview from '@/components/Dashboard/KPIOverview';
-import SalesChart from '@/components/Dashboard/SalesChart';
-import SalesStructureChart from '@/components/Dashboard/SalesStructureChart';
-import AvgTicketChart from '@/components/Dashboard/AvgTicketChart';
-import CustomerDynamicsChart from '@/components/Dashboard/CustomerDynamicsChart';
-import VolumeTable from '@/components/Dashboard/VolumeTable';
-import CustomerAnalytics from '@/components/Dashboard/CustomerAnalytics';
-import DashboardPeriodComparison from '@/components/Dashboard/DashboardPeriodComparison';
-import TestComponent from '@/components/Dashboard/TestComponent';
 
 const DashboardPageRefactored: React.FC = () => {
-  console.log('DashboardPageRefactored rendering...');
+  console.log('DashboardPageRefactored rendering - simplified version');
   
   return (
-    <DashboardLayout
-      header={<DashboardHeader />}
-      className="dashboard-page"
-    >
-      {/* Test Component */}
-      <div className="mb-6">
-        <TestComponent />
+    <div className="min-h-screen bg-gray-50 p-6">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">Dashboard Debug</h1>
+        
+        <div className="bg-white p-6 rounded-lg shadow-sm border">
+          <h2 className="text-xl font-semibold mb-4">Тестовый компонент</h2>
+          <p className="text-gray-700">
+            Если вы видите этот текст, значит страница дашборда работает.
+          </p>
+          <p className="text-sm text-gray-500 mt-2">
+            Текущий роут: /dashboard
+          </p>
+        </div>
+        
+        <div className="mt-6 bg-blue-50 p-4 rounded-lg">
+          <p className="text-blue-800">
+            Проверьте консоль браузера на наличие ошибок JavaScript.
+          </p>
+        </div>
       </div>
-
-      {/* KPI Overview */}
-      <div className="mb-6">
-        <KPIOverview />
-      </div>
-
-      {/* Period Comparison Section */}
-      <div className="mb-6">
-        <DashboardPeriodComparison />
-      </div>
-
-      {/* Main Charts Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <SalesChart />
-        <SalesStructureChart />
-        <AvgTicketChart />
-        <CustomerDynamicsChart />
-      </div>
-
-      {/* Analytics Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <VolumeTable />
-        <CustomerAnalytics />
-      </div>
-    </DashboardLayout>
+    </div>
   );
 };
 
