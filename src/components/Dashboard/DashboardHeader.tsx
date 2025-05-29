@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -46,7 +45,7 @@ const DashboardHeader: React.FC = () => {
                 <span className="text-white font-bold text-sm">Л</span>
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">ЛОГАЗ SV</h1>
+                <h1 className="text-xl font-bold text-gray-900"></h1>
                 <p className="text-sm text-gray-500">CRM Dashboard</p>
               </div>
             </div>
