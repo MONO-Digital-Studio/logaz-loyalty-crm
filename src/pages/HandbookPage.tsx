@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Layout } from '@/components/Layout/Layout';
+import Layout from '@/components/Layout/Layout';
 import HandbookViewer from '@/components/Handbook/HandbookViewer';
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
