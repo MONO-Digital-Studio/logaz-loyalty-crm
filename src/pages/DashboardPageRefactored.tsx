@@ -5,6 +5,11 @@ import { OptimizedSalesChart, OptimizedLoyaltyChart, OptimizedDemographicsCharts
 import SalesStructureChart from '@/components/Dashboard/SalesStructureChart';
 import AvgTicketChart from '@/components/Dashboard/AvgTicketChart';
 import CustomerDynamicsChart from '@/components/Dashboard/CustomerDynamicsChart';
+import VolumeTable from '@/components/Dashboard/VolumeTable';
+import CustomerAnalytics from '@/components/Dashboard/CustomerAnalytics';
+import RfmAnalysis from '@/components/Dashboard/RfmAnalysis';
+import PerformanceMetrics from '@/components/Dashboard/PerformanceMetrics';
+import StatsSummary from '@/components/Dashboard/StatsSummary';
 
 const DashboardPageRefactored: React.FC = () => {
   console.log('DashboardPageRefactored rendering - full dashboard');
@@ -25,8 +30,18 @@ const DashboardPageRefactored: React.FC = () => {
         <div className="mb-6">
           <KPIOverview />
         </div>
+
+        {/* Stats Summary */}
+        <div className="mb-6">
+          <StatsSummary />
+        </div>
+
+        {/* Performance Metrics */}
+        <div className="mb-6">
+          <PerformanceMetrics />
+        </div>
         
-        {/* Charts Grid */}
+        {/* Charts Grid - Sales and Structure */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="relative">
             <OptimizedSalesChart />
@@ -36,6 +51,7 @@ const DashboardPageRefactored: React.FC = () => {
           </div>
         </div>
         
+        {/* Charts Grid - Ticket and Customer Dynamics */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="relative">
             <AvgTicketChart />
@@ -45,6 +61,7 @@ const DashboardPageRefactored: React.FC = () => {
           </div>
         </div>
         
+        {/* Charts Grid - Loyalty and Demographics */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <div className="relative">
             <OptimizedLoyaltyChart />
@@ -52,6 +69,21 @@ const DashboardPageRefactored: React.FC = () => {
           <div className="relative">
             <OptimizedDemographicsCharts />
           </div>
+        </div>
+
+        {/* Analytics Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <div className="relative">
+            <CustomerAnalytics />
+          </div>
+          <div className="relative">
+            <RfmAnalysis />
+          </div>
+        </div>
+
+        {/* Volume Table - Full Width */}
+        <div className="mb-6">
+          <VolumeTable />
         </div>
       </div>
       
