@@ -1,5 +1,6 @@
 
 import React from 'react';
+import Layout from '@/components/Layout/Layout';
 import DashboardHeader from '@/components/Dashboard/DashboardHeader';
 import KPIOverview from '@/components/Dashboard/KPIOverview';
 import { 
@@ -17,7 +18,7 @@ const DashboardPageRefactored: React.FC = () => {
   console.log('DashboardPageRefactored rendering - optimized dashboard');
   
   return (
-    <div className="min-h-screen bg-gray-50 p-6">
+    <Layout>
       <div className="max-w-7xl mx-auto">
 
         {/* Dashboard Header with filters */}
@@ -66,7 +67,7 @@ const DashboardPageRefactored: React.FC = () => {
           <CustomerAnalytics />
         </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 

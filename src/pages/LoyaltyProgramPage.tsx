@@ -1,5 +1,6 @@
 
 import { useEffect, useState, useCallback } from "react";
+import Layout from '@/components/Layout/Layout';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Save, Users } from 'lucide-react';
@@ -48,71 +49,73 @@ const LoyaltyProgramPage = () => {
   }, [setLoyaltySettings]);
 
   return (
-    <ErrorBoundary fallback={<LoyaltySettingsError />}>
-      <div className="space-y-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold">Программа лояльности</h1>
-          <Button
-            variant="default"
-            className="bg-logaz-blue"
-            onClick={handleSaveSettings}
-            disabled={isLoading || !hasChanges || !levelValidation.isValid}
-          >
-            <Save className="w-4 h-4 mr-2" />
-            {isLoading ? 'Сохранение...' : 'Сохранить изменения'}
-          </Button>
-        </div>
+    <Layout>
+      <ErrorBoundary fallback={<LoyaltySettingsError />}>
+        <div className="space-y-6">
+          <div className="flex justify-between items-center">
+            <h1 className="text-3xl font-bold">Программа лояльности</h1>
+            <Button
+              variant="default"
+              className="bg-logaz-blue"
+              onClick={handleSaveSettings}
+              disabled={isLoading || !hasChanges || !levelValidation.isValid}
+            >
+              <Save className="w-4 h-4 mr-2" />
+              {isLoading ? 'Сохранение...' : 'Сохранить изменения'}
+            </Button>
+          </div>
 
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid grid-cols-3 mb-4">
-            <TabsTrigger value="individuals" className="flex items-center space-x-2">
-              <Users className="w-4 h-4" />
-              <span>Настройки программы</span>
-            </TabsTrigger>
-            <TabsTrigger value="loyalty-index">Индекс лояльности</TabsTrigger>
-            <TabsTrigger value="referral">Реферальная программа</TabsTrigger>
-          </TabsList>
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <TabsList className="grid grid-cols-3 mb-4">
+              <TabsTrigger value="individuals" className="flex items-center space-x-2">
+                <Users className="w-4 h-4" />
+                <span>Настройки программы</span>
+              </TabsTrigger>
+              <TabsTrigger value="loyalty-index">Индекс лояльности</TabsTrigger>
+              <TabsTrigger value="referral">Реферальная программа</TabsTrigger>
+            </TabsList>
 
-          <TabsContent value="individuals" className="space-y-6">
-            <LoyaltyGeneralSettings
-              settings={loyaltySettings}
-              onUpdateSettings={handleUpdateSettings}
-              validationErrors={levelValidation.errors}
-            />
+            <TabsContent value="individuals" className="space-y-6">
+              <LoyaltyGeneralSettings
+                settings={loyaltySettings}
+                onUpdateSettings={handleUpdateSettings}
+                validationErrors={levelValidation.errors}
+              />
 
-            <LoyaltyLevelsSection
-              levels={loyaltySettings.levels}
-              onUpdateLevel={updateLevel}
-              onAddLevel={addLevel}
-              onRemoveLevel={removeLevel}
-            />
+              <LoyaltyLevelsSection
+                levels={loyaltySettings.levels}
+                onUpdateLevel={updateLevel}
+                onAddLevel={addLevel}
+                onRemoveLevel={removeLevel}
+              />
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="space-y-6">
-                <BonusSettingsForm
-                  bonusRules={loyaltySettings.bonusRules}
-                  onUpdateRule={updateBonusRule}
-                  onAddRule={addBonusRule}
-                  onRemoveRule={removeBonusRule}
-                />
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="space-y-6">
+                  <BonusSettingsForm
+                    bonusRules={loyaltySettings.bonusRules}
+                    onUpdateRule={updateBonusRule}
+                    onAddRule={addBonusRule}
+                    onRemoveRule={removeBonusRule}
+                  />
+                </div>
+
+                <LoyaltyPreview settings={loyaltySettings} />
               </div>
 
-              <LoyaltyPreview settings={loyaltySettings} />
-            </div>
+              <LoyaltyStatistics />
+            </TabsContent>
 
-            <LoyaltyStatistics />
-          </TabsContent>
+            <TabsContent value="loyalty-index">
+              <LoyaltyNPSSection />
+            </TabsContent>
 
-          <TabsContent value="loyalty-index">
-            <LoyaltyNPSSection />
-          </TabsContent>
-
-          <TabsContent value="referral">
-            <ReferralProgramSection />
-          </TabsContent>
-        </Tabs>
-      </div>
-    </ErrorBoundary>
+            <TabsContent value="referral">
+              <ReferralProgramSection />
+            </TabsContent>
+          </Tabs>
+        </div>
+      </ErrorBoundary>
+    </Layout>
   );
 };
 
