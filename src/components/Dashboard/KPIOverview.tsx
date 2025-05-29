@@ -17,22 +17,6 @@ const KPIOverview: React.FC = () => {
       />
       
       <KPICard
-        title="Средний чек"
-        data={mockKPIData.avgTicket}
-        icon={CreditCard}
-        formatter={formatCurrency}
-        borderColor="border-l-green-500"
-      />
-      
-      <KPICard
-        title="Активные клиенты"
-        data={mockKPIData.activeCustomers}
-        icon={Users}
-        formatter={formatNumber}
-        borderColor="border-l-blue-500"
-      />
-      
-      <KPICard
         title="Общий объем"
         data={mockKPIData.totalVolume}
         icon={Fuel}
@@ -42,11 +26,27 @@ const KPIOverview: React.FC = () => {
       />
       
       <KPICard
+        title="Средний чек"
+        data={mockKPIData.avgTicket}
+        icon={CreditCard}
+        formatter={formatCurrency}
+        borderColor="border-l-green-500"
+      />
+      
+      <KPICard
         title="Всего клиентов"
         data={mockKPIData.totalCustomers}
         icon={UserCheck}
         formatter={formatNumber}
         borderColor="border-l-purple-500"
+      />
+      
+      <KPICard
+        title="Активные клиенты"
+        data={mockKPIData.activeCustomers}
+        icon={Users}
+        formatter={formatNumber}
+        borderColor="border-l-blue-500"
       />
       
       <KPICard
