@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Users, UserPlus, ChevronRight, CalendarIcon, ChevronLeft } from 'lucide-react';
-import RfmAnalysis from '@/components/Dashboard/RfmAnalysis';
 import ClientStats from '@/components/Clients/ClientStats';
 import { BarChart } from '@/components/ui/charts';
 import CustomerSegments from '@/components/Clients/CustomerSegments';
@@ -27,7 +26,6 @@ const CrmPage: React.FC = () => {
   
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   
-  // Предопределенные периоды
   const predefinedPeriods = [
     { name: 'Сегодня', getValue: () => ({ from: today, to: today }) },
     { name: 'Вчера', getValue: () => ({ from: addDays(today, -1), to: addDays(today, -1) }) },
@@ -163,8 +161,29 @@ const CrmPage: React.FC = () => {
       />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <RfmAnalysis />
         <CustomerSegments data={segmentData} />
+        
+        <Card>
+          <CardHeader>
+            <CardTitle>Частота покупок</CardTitle>
+          </CardHeader>
+          <CardContent className="h-[300px]">
+            <BarChart 
+              data={[
+                { name: '1 раз', purchases: 35 },
+                { name: '2-5 раз', purchases: 42 },
+                { name: '6-10 раз', purchases: 18 },
+                { name: '11+ раз', purchases: 5 }
+              ]}
+              index="name"
+              categories={["purchases"]}
+              colors={["#3B55A2"]}
+              valueFormatter={(value) => `${value}%`}
+              showXAxis={true}
+              showYAxis={true}
+            />
+          </CardContent>
+        </Card>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
