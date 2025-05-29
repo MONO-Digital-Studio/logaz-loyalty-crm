@@ -1,5 +1,6 @@
 
 import React from 'react';
+import DashboardHeader from '@/components/Dashboard/DashboardHeader';
 import KPIOverview from '@/components/Dashboard/KPIOverview';
 import { OptimizedSalesChart, OptimizedLoyaltyChart, OptimizedDemographicsCharts } from '@/components/Dashboard/charts';
 import SalesStructureChart from '@/components/Dashboard/SalesStructureChart';
@@ -24,6 +25,11 @@ const DashboardPageRefactored: React.FC = () => {
           <p className="text-green-800">
             ✅ Полный дашборд с KPI и графиками
           </p>
+        </div>
+
+        {/* Dashboard Header with filters */}
+        <div className="mb-6">
+          <DashboardHeader />
         </div>
         
         {/* KPI Overview */}
