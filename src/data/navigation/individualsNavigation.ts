@@ -5,17 +5,33 @@ export const individualsNavigation: NavigationItem[] = [
   {
     id: 'dashboard',
     title: 'Дашборд',
-    path: '/',
+    path: '/dashboard'
+  },
+  {
+    id: 'gas-stations',
+    title: 'Заправочные станции',
+    path: '/gas-stations'
   },
   {
     id: 'loyalty',
     title: 'Программа лояльности',
-    path: '/loyalty',
+    path: '/loyalty'
   },
   {
     id: 'content',
     title: 'Контент',
-    path: '/content',
+    children: [
+      {
+        id: 'content-list',
+        title: 'Список контента',
+        path: '/content'
+      },
+      {
+        id: 'content-editor',
+        title: 'Редактор контента',
+        path: '/content/editor'
+      }
+    ]
   },
   {
     id: 'crm',
@@ -24,80 +40,80 @@ export const individualsNavigation: NavigationItem[] = [
       {
         id: 'clients',
         title: 'Клиенты',
-        path: '/crm/clients',
+        path: '/crm/clients'
       },
       {
         id: 'audiences',
         title: 'Аудитории',
-        path: '/crm/audiences',
-      },
-    ],
+        path: '/crm/audiences'
+      }
+    ]
   },
   {
-    id: 'contact_center',
+    id: 'contact-center',
     title: 'Контакт-центр',
     children: [
       {
         id: 'dialogs',
         title: 'Диалоги',
-        path: '/contact-center/dialogs',
+        path: '/contact-center/dialogs'
       },
       {
         id: 'agents',
         title: 'Агенты',
-        path: '/contact-center/agents',
+        path: '/contact-center/agents'
       },
       {
         id: 'campaigns',
-        title: 'Рассылки',
-        path: '/contact-center/campaigns',
+        title: 'Кампании',
+        path: '/contact-center/campaigns'
       },
       {
         id: 'stats',
         title: 'Статистика',
-        path: '/contact-center/stats',
+        path: '/contact-center/stats'
       },
       {
         id: 'templates',
         title: 'Шаблоны',
-        path: '/contact-center/templates',
+        path: '/contact-center/templates'
       },
       {
         id: 'analytics',
         title: 'Аналитика',
-        path: '/contact-center/analytics',
-      },
-    ],
+        path: '/contact-center/analytics'
+      }
+    ]
   },
   {
     id: 'products',
-    title: 'Товары и категории',
-    path: '/products',
+    title: 'Товары',
+    path: '/products'
   },
   {
     id: 'employees',
     title: 'Сотрудники',
     children: [
       {
-        id: 'list',
+        id: 'employees-list',
         title: 'Список сотрудников',
-        path: '/employees/list',
+        path: '/employees/list'
       },
       {
-        id: 'structure',
-        title: 'Организационная структура',
-        path: '/employees/structure',
-      },
-    ],
+        id: 'employees-structure',
+        title: 'Структура',
+        path: '/employees/structure'
+      }
+    ]
   },
   {
     id: 'settings',
     title: 'Настройки',
-    path: '/settings',
+    path: '/settings'
   },
   {
     id: 'system',
     title: 'Система',
-    path: '/system',
-  },
+    path: '/system'
+  }
 ];

@@ -14,6 +14,7 @@ import { LegalEntitiesProvider } from "@/contexts/LegalEntitiesContext";
 // Individual pages
 import Index from '@/pages/Index';
 import DashboardPageRefactored from '@/pages/DashboardPageRefactored';
+import GasStationsPage from '@/pages/GasStationsPage';
 import LoyaltyProgramPage from '@/pages/LoyaltyProgramPage';
 import ContentPage from '@/pages/ContentPage';
 import ContentEditorPage from '@/pages/ContentEditorPage';
@@ -77,6 +78,7 @@ function App() {
                           {/* Individual workspace routes */}
                           <Route path="/" element={<Index />} />
                           <Route path="/dashboard" element={<DashboardPageRefactored />} />
+                          <Route path="/gas-stations" element={<GasStationsPage />} />
                           <Route path="/loyalty" element={<LoyaltyProgramPage />} />
                           <Route path="/content" element={<ContentPage />} />
                           <Route path="/content/editor" element={<ContentEditorPage />} />
