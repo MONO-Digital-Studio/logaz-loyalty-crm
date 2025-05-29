@@ -14,7 +14,6 @@ import VolumeTable from '@/components/Dashboard/VolumeTable';
 import CustomerAnalytics from '@/components/Dashboard/CustomerAnalytics';
 import RfmAnalysis from '@/components/Dashboard/RfmAnalysis';
 import PerformanceMetrics from '@/components/Dashboard/PerformanceMetrics';
-import StatsSummary from '@/components/Dashboard/StatsSummary';
 
 const DashboardPageRefactored: React.FC = () => {
   console.log('DashboardPageRefactored rendering - optimized dashboard');
@@ -31,11 +30,6 @@ const DashboardPageRefactored: React.FC = () => {
         {/* KPI Overview */}
         <div className="mb-6">
           <KPIOverview />
-        </div>
-
-        {/* Stats Summary */}
-        <div className="mb-6">
-          <StatsSummary />
         </div>
 
         {/* Performance Metrics */}

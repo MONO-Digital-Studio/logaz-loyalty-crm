@@ -1,11 +1,9 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Users, UserPlus, ChevronRight, CalendarIcon, ChevronLeft } from 'lucide-react';
 import RfmAnalysis from '@/components/Dashboard/RfmAnalysis';
-import StatsSummary from '@/components/Dashboard/StatsSummary';
 import ClientStats from '@/components/Clients/ClientStats';
 import { BarChart } from '@/components/ui/charts';
 import CustomerSegments from '@/components/Clients/CustomerSegments';
