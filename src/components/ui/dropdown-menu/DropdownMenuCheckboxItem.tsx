@@ -19,11 +19,11 @@ const DropdownMenuCheckboxItem = React.forwardRef<
   >
     <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <DropdownMenuPrimitive.ItemIndicator>
-        <div className="h-4 w-4 rounded-sm border-2 border-blue-500 bg-blue-500 flex items-center justify-center">
+        <div className="h-4 w-4 rounded border-2 border-blue-500 bg-blue-500 flex items-center justify-center">
           <Check className="h-3 w-3 text-white" />
         </div>
       </DropdownMenuPrimitive.ItemIndicator>
-      <div className="h-4 w-4 rounded-sm border-2 border-blue-500 bg-white flex-shrink-0 peer-data-[state=checked]:hidden" />
+      <div className="h-4 w-4 rounded border-2 border-gray-300 bg-white data-[state=checked]:hidden" />
     </span>
     {children}
   </DropdownMenuPrimitive.CheckboxItem>
