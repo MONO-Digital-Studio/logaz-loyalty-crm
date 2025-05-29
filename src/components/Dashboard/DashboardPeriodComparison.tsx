@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -20,7 +21,8 @@ import { useDashboardPeriodComparison } from '@/hooks/useDashboardPeriodComparis
 import { ComparisonType } from '@/types/periodComparison';
 import { MetricGroup } from '@/types/dashboardComparison';
 import DashboardMetricGroup from './DashboardMetricGroup';
-import DashboardComparisonChart from './DashboardComparisonChart';
+import DashboardComparisonChart from './charts/DashboardComparisonChart';
+import { getComparisonLabel } from '@/utils/chartDataUtils';
 
 const DashboardPeriodComparison: React.FC = () => {
   const { 
