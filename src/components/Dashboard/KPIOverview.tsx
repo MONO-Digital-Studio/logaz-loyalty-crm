@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { DollarSign, CreditCard, Users, Fuel, Award, TrendingDown } from 'lucide-react';
+import { DollarSign, CreditCard, Users, Fuel, UserCheck, TrendingDown } from 'lucide-react';
 import KPICard from './KPICard';
 import { mockKPIData } from '@/data/dashboardMockData';
 import { formatCurrency, formatNumber, formatPercent } from '@/utils/dashboardFormatters';
@@ -42,11 +42,11 @@ const KPIOverview: React.FC = () => {
       />
       
       <KPICard
-        title="NPS"
-        data={mockKPIData.nps}
-        icon={Award}
+        title="Всего клиентов"
+        data={mockKPIData.totalCustomers}
+        icon={UserCheck}
         formatter={formatNumber}
-        borderColor="border-l-yellow-500"
+        borderColor="border-l-purple-500"
       />
       
       <KPICard

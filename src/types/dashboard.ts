@@ -10,7 +10,7 @@ export interface DashboardKPIData {
   avgTicket: DashboardKPI;
   activeCustomers: DashboardKPI;
   totalVolume: DashboardKPI;
-  nps: DashboardKPI;
+  totalCustomers: DashboardKPI;
   churnRate: DashboardKPI;
 }
 

@@ -1,4 +1,3 @@
-
 import { 
   DashboardKPIData, 
   SalesDataPoint, 
@@ -12,12 +11,36 @@ import {
 } from '@/types/dashboard';
 
 export const mockKPIData: DashboardKPIData = {
-  totalSales: { current: 2456789, previous: 2189234, change: 12.5 },
-  avgTicket: { current: 1247, previous: 1208, change: 3.2 },
-  activeCustomers: { current: 1234, previous: 1260, change: -2.1 },
-  totalVolume: { current: 147.2, previous: 135.4, change: 8.7 },
-  nps: { current: 72, previous: 67, change: 5 },
-  churnRate: { current: 3.2, previous: 4.0, change: -0.8 }
+  totalSales: {
+    current: 2847650,
+    previous: 2534780,
+    change: 12.3
+  },
+  avgTicket: {
+    current: 1250,
+    previous: 1180,
+    change: 5.9
+  },
+  activeCustomers: {
+    current: 1847,
+    previous: 1723,
+    change: 7.2
+  },
+  totalVolume: {
+    current: 45678,
+    previous: 42450,
+    change: 7.6
+  },
+  totalCustomers: {
+    current: 3245,
+    previous: 3120,
+    change: 4.0
+  },
+  churnRate: {
+    current: 3.2,
+    previous: 4.1,
+    change: -21.9
+  }
 };
 
 export const mockSalesData: SalesDataPoint[] = [
