@@ -1,13 +1,13 @@
 
 import React from 'react';
-import { DollarSign, CreditCard, Users, Fuel, UserCheck, TrendingDown } from 'lucide-react';
+import { DollarSign, Fuel, TrendingDown } from 'lucide-react';
 import KPICard from './KPICard';
 import { mockKPIData } from '@/data/dashboardMockData';
 import { formatCurrency, formatNumber, formatPercent } from '@/utils/dashboardFormatters';
 
 const KPIOverview: React.FC = () => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       <KPICard
         title="Продажи"
         data={mockKPIData.totalSales}
@@ -23,30 +23,6 @@ const KPIOverview: React.FC = () => {
         formatter={formatNumber}
         suffix=" т/м³"
         borderColor="border-l-logaz-orange"
-      />
-      
-      <KPICard
-        title="Средний чек"
-        data={mockKPIData.avgTicket}
-        icon={CreditCard}
-        formatter={formatCurrency}
-        borderColor="border-l-green-500"
-      />
-      
-      <KPICard
-        title="Всего клиентов"
-        data={mockKPIData.totalCustomers}
-        icon={UserCheck}
-        formatter={formatNumber}
-        borderColor="border-l-purple-500"
-      />
-      
-      <KPICard
-        title="Активные клиенты"
-        data={mockKPIData.activeCustomers}
-        icon={Users}
-        formatter={formatNumber}
-        borderColor="border-l-blue-500"
       />
       
       <KPICard
