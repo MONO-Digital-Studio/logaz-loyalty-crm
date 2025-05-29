@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { DollarSign, Fuel, TrendingDown } from 'lucide-react';
+import { Fuel, TrendingDown } from 'lucide-react';
 import KPICard from './KPICard';
 import { mockKPIData } from '@/data/dashboardMockData';
 import { formatCurrency, formatNumber, formatPercent } from '@/utils/dashboardFormatters';
@@ -11,7 +11,7 @@ const KPIOverview: React.FC = () => {
       <KPICard
         title="Продажи"
         data={mockKPIData.totalSales}
-        icon={DollarSign}
+        icon={Fuel}
         formatter={formatCurrency}
         borderColor="border-l-logaz-blue"
       />
