@@ -15,7 +15,7 @@ interface OptimizedSearchBarProps<T> {
   showStats?: boolean;
 }
 
-const OptimizedSearchBar = memo(<T extends Record<string, any>>({
+function OptimizedSearchBarComponent<T extends Record<string, any>>({
   data,
   searchFields,
   onResultsChange,
@@ -23,7 +23,7 @@ const OptimizedSearchBar = memo(<T extends Record<string, any>>({
   debounceDelay = 300,
   minSearchLength = 1,
   showStats = true
-}: OptimizedSearchBarProps<T>) => {
+}: OptimizedSearchBarProps<T>)  {
   const {
     searchTerm,
     setSearchTerm,
@@ -75,8 +75,12 @@ const OptimizedSearchBar = memo(<T extends Record<string, any>>({
       )}
     </div>
   );
-}) as <T extends Record<string, any>>(props: OptimizedSearchBarProps<T>) => JSX.Element;
+}
 
+// Создаем мемоизированный компонент правильно, чтобы TypeScript мог определить типы
+const OptimizedSearchBar = memo(OptimizedSearchBarComponent) as typeof OptimizedSearchBarComponent;
+
+// Теперь можно безопасно установить displayName
 OptimizedSearchBar.displayName = 'OptimizedSearchBar';
 
 export default OptimizedSearchBar;
