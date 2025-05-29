@@ -5,7 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { CalendarIcon, RefreshCw } from 'lucide-react';
+import { CalendarIcon, RefreshCw, Download } from 'lucide-react';
 import { useDashboardStore } from '@/stores/dashboardStore';
 import { formatTime } from '@/utils/dashboardFormatters';
 import { periodOptions, comparisonOptions, stationOptions } from '@/data/dashboardMockData';
@@ -35,14 +35,19 @@ const DashboardHeader: React.FC = () => {
     setDatePickerOpen(false);
   };
 
+  const handleExport = () => {
+    console.log('Экспорт данных...');
+    // Здесь будет логика экспорта
+  };
+
   return (
     <Card className="bg-white border border-gray-200 shadow-sm">
       <CardContent className="p-6">
-        {/* Одна строка с равномерным распределением элементов */}
-        <div className="flex items-center justify-between gap-4">
+        {/* Одна строка с равномерным распределением всех элементов */}
+        <div className="flex items-center justify-between gap-3 w-full">
           
           {/* Левая группа - Сравнение */}
-          <div className="flex items-center">
+          <div className="flex-shrink-0">
             <Select value={filters.comparison} onValueChange={(value: any) => setFilters({ comparison: value })}>
               <SelectTrigger className="w-44">
                 <SelectValue placeholder="Сравнить с" />
@@ -58,7 +63,7 @@ const DashboardHeader: React.FC = () => {
           </div>
 
           {/* Центральная группа - Период, Дата и Станция */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 flex-1 justify-center">
             {/* Период */}
             <Select value={filters.period} onValueChange={(value: any) => setFilters({ period: value })}>
               <SelectTrigger className="w-32">
@@ -117,17 +122,31 @@ const DashboardHeader: React.FC = () => {
             </Select>
           </div>
 
-          {/* Правая группа - Обновление */}
-          <div className="flex items-center gap-2 text-sm text-gray-500">
-            <span>Обновлено: {formatTime(lastUpdate)}</span>
+          {/* Правая группа - Кнопка Экспорт, Обновление */}
+          <div className="flex items-center gap-3 flex-shrink-0">
+            {/* Кнопка Экспорт */}
             <Button
-              variant="ghost"
+              variant="outline"
               size="sm"
-              onClick={handleRefresh}
-              className="h-8 w-8 p-0"
+              onClick={handleExport}
+              className="gap-2"
             >
-              <RefreshCw className="h-4 w-4" />
+              <Download className="h-4 w-4" />
+              Экспорт
             </Button>
+
+            {/* Информация об обновлении */}
+            <div className="flex items-center gap-2 text-sm text-gray-500">
+              <span>Обновлено: {formatTime(lastUpdate)}</span>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleRefresh}
+                className="h-8 w-8 p-0"
+              >
+                <RefreshCw className="h-4 w-4" />
+              </Button>
+            </div>
           </div>
         </div>
       </CardContent>
