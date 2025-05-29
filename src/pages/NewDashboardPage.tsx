@@ -2,10 +2,12 @@
 import React from 'react';
 import DashboardHeader from '@/components/Dashboard/DashboardHeader';
 import KPIOverview from '@/components/Dashboard/KPIOverview';
-import SalesChart from '@/components/Dashboard/SalesChart';
-import SalesStructureChart from '@/components/Dashboard/SalesStructureChart';
-import AvgTicketChart from '@/components/Dashboard/AvgTicketChart';
-import CustomerDynamicsChart from '@/components/Dashboard/CustomerDynamicsChart';
+import { 
+  OptimizedSalesChart,
+  OptimizedSalesStructureChart, 
+  OptimizedAvgTicketChart, 
+  OptimizedCustomerDynamicsChart 
+} from '@/components/Dashboard/charts';
 import VolumeTable from '@/components/Dashboard/VolumeTable';
 import CustomerAnalytics from '@/components/Dashboard/CustomerAnalytics';
 import DashboardPeriodComparison from '@/components/Dashboard/DashboardPeriodComparison';
@@ -25,10 +27,10 @@ const NewDashboardPage: React.FC = () => {
 
         {/* Main Charts Grid (2x2) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <SalesChart />
-          <SalesStructureChart />
-          <AvgTicketChart />
-          <CustomerDynamicsChart />
+          <OptimizedSalesChart />
+          <OptimizedSalesStructureChart />
+          <OptimizedAvgTicketChart />
+          <OptimizedCustomerDynamicsChart />
         </div>
 
         {/* Trend Charts Grid (2x2) */}

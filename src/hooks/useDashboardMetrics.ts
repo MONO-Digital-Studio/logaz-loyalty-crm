@@ -34,11 +34,16 @@ export const useDashboardMetrics = () => {
   }, [data.loyaltyStats]);
 
   const customerMetrics = useMemo(() => {
-    const totalCustomers = data.demographicData.reduce((sum, item) => sum + item.count, 0);
-    const averageAge = data.demographicData.reduce((sum, item) => sum + (item.count * parseInt(item.age)), 0) / totalCustomers;
+    // Исправляем расчет для данных демографии - используем percentage вместо count
+    const totalCustomers = data.demographicData.reduce((sum, item) => sum + item.percentage, 0);
+    const weightedAgeSum = data.demographicData.reduce((sum, item) => {
+      const ageValue = parseInt(item.age.replace(/[^\d]/g, '')) || 0; // Извлекаем числовое значение из строки возраста
+      return sum + (item.percentage * ageValue);
+    }, 0);
+    const averageAge = totalCustomers > 0 ? weightedAgeSum / totalCustomers : 0;
     
     return {
-      totalCustomers,
+      totalCustomers: Math.round(totalCustomers),
       averageAge: Number(averageAge.toFixed(1))
     };
   }, [data.demographicData]);

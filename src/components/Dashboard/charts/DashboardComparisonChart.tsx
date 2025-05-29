@@ -8,14 +8,20 @@ import {
   calculateAllTrends 
 } from '@/utils/chartDataUtils';
 import ComparisonChartTooltip from './ComparisonChartTooltip';
-import { 
-  chartMargins, 
-  chartHeight, 
-  axisSettings, 
-  chartColors, 
-  barOpacity, 
-  trendLineSettings 
-} from './chartConfig';
+
+// Конфигурация графиков
+const chartMargins = { top: 20, right: 30, left: 20, bottom: 5 };
+const chartHeight = 350;
+const axisSettings = { tick: { fontSize: 12 }, interval: 0 };
+const chartColors = {
+  revenue: { current: '#3B55A2', previous: '#94a3b8', trend: '#1e40af' },
+  propane: { current: '#FB8607', previous: '#fed7aa', trend: '#ea580c' },
+  methane: { current: '#2563EB', previous: '#93c5fd', trend: '#1d4ed8' },
+  ai92: { current: '#EAB308', previous: '#fde047', trend: '#ca8a04' },
+  ai95: { current: '#DC2626', previous: '#fca5a5', trend: '#b91c1c' }
+};
+const barOpacity = { current: 0.8, previous: 0.6 };
+const trendLineSettings = { strokeWidth: 2, strokeDasharray: '5 5', dot: false };
 
 interface DashboardComparisonChartProps {
   data: DashboardChartComparisonData[];
