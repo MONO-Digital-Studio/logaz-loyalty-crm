@@ -32,26 +32,30 @@ const DashboardPageRefactored: React.FC = () => {
           <KPIOverview />
         </div>
 
+        {/* Sales Chart - Full Width */}
+        <div className="mb-6">
+          <OptimizedSalesChart />
+        </div>
+
         {/* Performance Metrics */}
         <div className="mb-6">
           <PerformanceMetrics />
         </div>
         
-        {/* Charts Grid - Sales and Structure */}
+        {/* Charts Grid - Structure and Ticket */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-          <OptimizedSalesChart />
           <OptimizedSalesStructureChart />
-        </div>
-        
-        {/* Charts Grid - Ticket and Customer Dynamics */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
           <OptimizedAvgTicketChart />
-          <OptimizedCustomerDynamicsChart />
         </div>
         
-        {/* Charts Grid - Loyalty and Demographics */}
+        {/* Charts Grid - Customer Dynamics and Loyalty */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          <OptimizedCustomerDynamicsChart />
           <OptimizedLoyaltyChart />
+        </div>
+        
+        {/* Demographics Charts - Full Width */}
+        <div className="mb-6">
           <OptimizedDemographicsCharts />
         </div>
 

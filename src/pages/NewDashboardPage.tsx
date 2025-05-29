@@ -22,12 +22,14 @@ const NewDashboardPage: React.FC = () => {
         {/* KPI Overview */}
         <KPIOverview />
 
+        {/* Sales Chart - Full Width */}
+        <OptimizedSalesChart />
+
         {/* Period Comparison Section */}
         <DashboardPeriodComparison />
 
         {/* Main Charts Grid (2x2) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <OptimizedSalesChart />
           <OptimizedSalesStructureChart />
           <OptimizedAvgTicketChart />
           <OptimizedCustomerDynamicsChart />

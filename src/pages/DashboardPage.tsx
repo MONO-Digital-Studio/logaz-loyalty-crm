@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { OptimizedSalesChart } from '@/components/Dashboard/charts';
 import RfmAnalysis from '@/components/Dashboard/RfmAnalysis';
 import PerformanceMetrics from '@/components/Dashboard/PerformanceMetrics';
+import KPIOverview from '@/components/Dashboard/KPIOverview';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
@@ -155,6 +156,8 @@ const DashboardPage: React.FC = () => {
             <button className="btn-primary whitespace-nowrap text-sm px-3 py-2">Экспорт</button>
           </div>
         </div>
+
+        <KPIOverview />
 
         <OptimizedSalesChart />
 
