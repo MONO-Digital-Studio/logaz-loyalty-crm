@@ -77,10 +77,9 @@ function OptimizedSearchBarComponent<T extends Record<string, any>>({
   );
 }
 
-// Создаем мемоизированный компонент правильно, чтобы TypeScript мог определить типы
-const OptimizedSearchBar = memo(OptimizedSearchBarComponent) as typeof OptimizedSearchBarComponent;
-
-// Теперь можно безопасно установить displayName
-OptimizedSearchBar.displayName = 'OptimizedSearchBar';
+// Создаем мемоизированный компонент с правильной типизацией
+const OptimizedSearchBar = memo(OptimizedSearchBarComponent) as <T extends Record<string, any>>(
+  props: OptimizedSearchBarProps<T>
+) => React.ReactElement;
 
 export default OptimizedSearchBar;
